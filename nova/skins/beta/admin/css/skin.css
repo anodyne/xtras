@@ -399,7 +399,9 @@ ul.square { list-style: square; }
 ul.none, ol.none { list-style: none; }
 ol.roman { list-style: upper-roman; }
 
-#list li {
+#list-grid { list-style-type: none; }
+
+#list li, #list-grid li {
 	font-weight: bold;
 	font-size: 90%;
 }

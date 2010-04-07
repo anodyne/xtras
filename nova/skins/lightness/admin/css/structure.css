@@ -231,6 +231,18 @@ ul.padding1, ol.padding1 { padding: .5em 1em; }
 	width: 350px;
 }
 
+#list-grid {
+	margin: 0;
+	padding: 0;
+}
+#list-grid li {
+	margin: 3px 3px 3px 0;
+	padding: 3px 3px 3px 0;
+	float: left;
+	width: 150px;
+	height: 150px;
+}
+
 #accordion ul {
 	margin: 0 1em;
 	padding: 0 1em;

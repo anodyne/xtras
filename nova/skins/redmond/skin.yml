@@ -1,7 +1,7 @@
 skin: Redmond
 location: redmond
 credits: The Redmond skin was created by Anodyne Productions. Edits are permissible provided the original credits remain intact.
-version: 1.0
+version: 2.0
 sections:
   -
     type: main

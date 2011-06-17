@@ -119,7 +119,7 @@ a.login-text:hover { border-bottom: 1px solid !important; }
 .nav-main ul li a {
 	display: block;
 	margin: 0;
-	padding: 0;
+	padding: 0 12px;
 	
 	text-decoration: none;
 	color: #3d3c5b;
@@ -130,7 +130,6 @@ a.login-text:hover { border-bottom: 1px solid !important; }
 	-moz-border-radius: 3px;
 	-webkit-border-radius: 3px;
 }
-.nav-main ul li a span { padding: 12px; }
 .nav-main ul li a:hover,
 .nav-main ul li a.active {
 	background: #d0e5f5 url('../images/gradient-soft.png') repeat-x 0 0;

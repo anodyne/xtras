@@ -273,7 +273,7 @@ kbd {
 | TABLES
 |---------------------------------------------------------------
 */
-tr.alt td { background-color: #ededed; }
+tr.alt td, .alt { background-color: #ededed; }
 tr.light_gray { background-color: #ddd; }
 
 th {

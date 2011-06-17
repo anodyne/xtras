@@ -82,6 +82,7 @@ body {
 }
 .menu .nav-main ul li a {
 	display: block;
+	padding: 0 12px;
 	
 	text-decoration: none;
 	color: #888;
@@ -89,7 +90,6 @@ body {
 	border: 0;
 	font-variant: small-caps;
 }
-.menu .nav-main ul li a span { padding: 12px; }
 .menu .nav-main ul li a:hover {
 	color: #ccc;
 	border: 0;

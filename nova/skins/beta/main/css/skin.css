@@ -78,6 +78,7 @@ body {
 }
 #menu .nav-main ul li a {
 	display: block;
+	padding: 0 12px;
 	
 	text-decoration: none;
 	color: #444;
@@ -86,7 +87,6 @@ body {
 	border-right: 1px solid transparent;
 	border-bottom: none;
 }
-#menu .nav-main ul li a span { padding: 12px; }
 #menu .nav-main ul li a:hover,
 #menu .nav-main ul li a.active {
 	background: #b2b2b2 url('../images/menu-bg-active.png') repeat-x top left;

@@ -1,7 +1,7 @@
 skin: Lightness
 location: lightness
 credits: The Lightness skin was created by Anodyne Productions and is loosely based on the jQuery UI Lightness theme created by the jQuery UI team. Edits are permissible provided the original credits remain intact.
-version: 1.0
+version: 2.0
 sections:
   -
     type: main

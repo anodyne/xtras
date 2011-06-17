@@ -110,6 +110,7 @@ body {
 }
 #menu .nav-main ul li a {
 	display: block;
+	padding: 0 12px;
 	
 	text-decoration: none;
 	color: #888;
@@ -122,7 +123,6 @@ body {
 	-webkit-border-top-left-radius: 4px;
 	-webkit-border-top-right-radius: 4px;
 }
-#menu .nav-main ul li a span { padding: 12px; }
 #menu .nav-main ul li a:hover,
 #menu .nav-main ul li a.active {
 	background: #f8b953 url('../images/gradient-menu-active.png') repeat-x top left;

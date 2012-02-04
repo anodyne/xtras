@@ -1,0 +1,17 @@
+# General
+*~
+*.bak
+
+# Windows-specific ignores
+Thumbs.db
+Desktop.ini
+
+# Mac-specific ignores
+.DS_Store
+Icon?
+._*
+.Spotlight-V100
+.Trashes
+*.tmproj
+*.tmproject
+tmtags

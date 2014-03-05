@@ -1,10 +1,9 @@
-<?php namespace Xtras\Providers;
+<?php namespace Xtras;
 
 use Route;
-use ItemType;
 use Illuminate\Support\ServiceProvider;
 
-class XtrasProvider extends ServiceProvider {
+class XtrasRoutingServiceProvider extends ServiceProvider {
 
 	public function register()
 	{
@@ -14,7 +13,6 @@ class XtrasProvider extends ServiceProvider {
 	public function boot()
 	{
 		$this->defineRoutes();
-		$this->setupBindings();
 	}
 
 	protected function defineRoutes()
@@ -86,15 +84,6 @@ class XtrasProvider extends ServiceProvider {
 			'as' => 'user.profile',
 			'uses' => 'Xtras\Controllers\UserController@show'
 		));
-	}
-
-	protected function setupBindings()
-	{
-		// Get the class aliases
-		$a = $this->app['config']->get('app.aliases');
-
-		$this->app->bind($a['XtraRepositoryInterface'], $a['XtraRepository']);
-		$this->app->bind($a['UserRepositoryInterface'], $a['UserRepository']);
 	}
 
 }

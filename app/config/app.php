@@ -114,7 +114,8 @@ return array(
 		'Illuminate\View\ViewServiceProvider',
 		'Illuminate\Workbench\WorkbenchServiceProvider',
 
-		'Xtras\Providers\XtrasProvider',
+		'Xtras\XtrasServiceProvider',
+		'Xtras\XtrasRoutingServiceProvider',
 
 	),
 

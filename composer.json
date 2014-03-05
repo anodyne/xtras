@@ -1,24 +1,32 @@
 {
 	"require": {
-		"laravel/framework": "4.*",
-		"aws/aws-sdk-php": "2.*"
+		"laravel/framework": "4.1.*",
+		"aws/aws-sdk-php": "2.5.*",
+		"dflydev/markdown": "1.*",
+		"ikimea/browser": "1.*"
+	},
+
+	"require-dev": {
+		"raveren/kint": "dev-master",
+		"fzaninotto/faker": "1.*"
 	},
 	
 	"autoload": {
 		"classmap": [
-			"app/database/migrations",
-			"app/database/seeds"
+			"Xtras/database/migrations",
+			"Xtras/database/seeds"
 		],
-
-		"psr-0": {
-			"Xtras\\": "app/"
+		
+		"psr-4": {
+			"Xtras\\": "Xtras"
 		}
 	},
 	
 	"config": {
-		"preferred-install": "dist"
+		"preferred-install": "dist",
+		"process-timeout": 500
 	},
-	
+
 	"minimum-stability": "dev",
 	"prefer-stable": true
 }

@@ -1,14 +1,15 @@
 {
 	"require": {
 		"laravel/framework": "4.1.*",
-		"aws/aws-sdk-php": "2.5.*",
-		"dflydev/markdown": "1.*",
-		"ikimea/browser": "1.*"
+		"league/flysystem": "*",
+		"aws/aws-sdk-php": "~2.0",
+		"dflydev/markdown": "~1.0",
+		"ikimea/browser": "~1.0"
 	},
 
 	"require-dev": {
 		"raveren/kint": "dev-master",
-		"fzaninotto/faker": "1.*"
+		"fzaninotto/faker": "~1.0"
 	},
 	
 	"autoload": {

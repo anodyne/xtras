@@ -7,14 +7,14 @@ return array(
 		'mysql' => array(
 			'database'  => 'anodyne_xtras',
 			'username'  => 'root',
-			'password'  => 'root',
+			'password'  => 'mysql',
 			'prefix'    => 'xtras_',
 		),
 
 		'anodyneUsers' => array(
 			'database'  => 'anodyne_users',
 			'username'  => 'root',
-			'password'  => 'root',
+			'password'  => 'mysql',
 		),
 
 	),

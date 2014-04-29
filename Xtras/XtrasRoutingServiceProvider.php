@@ -15,21 +15,30 @@ class XtrasRoutingServiceProvider extends ServiceProvider {
 		$this->defineRoutes();
 	}
 
+	protected function notes()
+	{
+		// When a user hits a route with a slug, we need to do a little
+		// work to figure out if there's more than one items with that slug.
+		// If there are, we need to show a list of those items instead of just
+		// the item the user requested.
+	}
+
 	protected function defineRoutes()
 	{
 		/**
-		 * Log In and Register
+		 * Log In, Register. Password reset
 		 */
-		Route::get('login', array(
-			'as'	=> 'login',
-			'uses'	=> 'Xtras\Controllers\Login@getLogin'
-		));
-		Route::post('login', 'Xtras\Controllers\Login@postLogin');
+		Route::get('login', 'Xtras\Controllers\MainController@index');
+		Route::post('login', 'Xtras\Controllers\MainController@doLogin');
+		Route::get('logout', array(
+			'as'	=> 'logout',
+			'uses'	=> 'Xtras\Controllers\MainController@logout'));
 		Route::get('register', array(
 			'as'	=> 'register',
-			'uses'	=> 'Xtras\Controllers\Login@getRegister'
+			'uses'	=> 'Xtras\Controllers\MainController@register'
 		));
-		Route::post('register', 'Xtras\Controllers\Login@postRegister');
+		Route::post('register', 'Xtras\Controllers\MainController@doRegistration');
+		Route::controller('password', 'Xtras\Controllers\RemindersController');
 
 		/**
 		 * Xtras
@@ -38,51 +47,38 @@ class XtrasRoutingServiceProvider extends ServiceProvider {
 		{
 			Route::get('/', array(
 				'as'	=> 'home',
-				'uses'	=> 'Xtras\Controllers\Home@getIndex'
+				'uses'	=> 'Xtras\Controllers\MainController@index'
 			));
 
-			Route::get('skin/{name}', array(
-				'as'	=> 'skin',
-				'uses'	=> 'Xtras\Controllers\Items@getItem'
+			Route::get('item/{name}', array(
+				'as'	=> 'item',
+				'uses'	=> 'Xtras\Controllers\ItemController@show'
 			));
+
 			Route::get('skins', array(
 				'as'	=> 'skins',
-				'uses'	=> 'Xtras\Controllers\Items@getItems'
-			));
-
-			Route::get('rank/{name}', array(
-				'as'	=> 'rank',
-				'uses'	=> 'Xtras\Controllers\Items@getItem'
+				'uses'	=> 'Xtras\Controllers\ItemController@index'
 			));
 			Route::get('ranks', array(
 				'as'	=> 'ranks',
-				'uses'	=> 'Xtras\Controllers\Items@getItems'
-			));
-
-			Route::get('mod/{name}', array(
-				'as'	=> 'mod',
-				'uses'	=> 'Xtras\Controllers\Items@getItem'
+				'uses'	=> 'Xtras\Controllers\ItemController@index'
 			));
 			Route::get('mods', array(
 				'as'	=> 'mods',
-				'uses'	=> 'Xtras\Controllers\Items@getItems'
+				'uses'	=> 'Xtras\Controllers\ItemController@index'
 			));
 
 			Route::get('account', array(
 				'as'	=> 'account',
 				'uses'	=> 'Xtras\Controllers\User@getAccount'
 			));
-			Route::get('profile/{name}', array(
-				'as'	=> 'profile',
-				'uses'	=> 'Xtras\Controllers\User@getProfile'
-			));
 		});
 
 		Route::resource('user', 'Xtras\Controllers\UserController');
 
-		Route::get('profile/{id}', array(
-			'as' => 'user.profile',
-			'uses' => 'Xtras\Controllers\UserController@show'
+		Route::get('profile/{name}', array(
+			'as'	=> 'profile',
+			'uses'	=> 'Xtras\Controllers\UserController@show'
 		));
 	}
 

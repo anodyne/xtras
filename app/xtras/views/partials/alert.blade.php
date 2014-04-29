@@ -1,1 +1,0 @@
-<p class="alert {{ (isset($class)) ? $class : '' }}">{{ $content }}</p>

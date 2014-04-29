@@ -1,12 +1,9 @@
-# Windows-specific ignores
-Thumbs.db
-Desktop.ini
-
-# Mac-specific ignores
 .DS_Store
+
+.env.local.php
+.env.php
+bootstrap/compiled.php
+vendor
 
 *.sublime-project
 *.sublime-workspace
-
-/vendor
-/bootstrap/compiled.php

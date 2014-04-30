@@ -6,7 +6,8 @@
 		"dflydev/markdown": "~1.0",
 		"ikimea/browser": "~1.0",
 		"league/fractal": "*",
-		"laracasts/presenter": "*"
+		"laracasts/presenter": "*",
+		"dingo/api": "*"
 	},
 
 	"require-dev": {

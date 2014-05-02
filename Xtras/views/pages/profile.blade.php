@@ -24,40 +24,48 @@
 	@if ($user->items->count() > 0)
 		<h2>Xtras</h2>
 
-		@if ($user->present()->itemsSkins->count() > 0)
-			<h3>Skins</h3>
+		<ul class="nav nav-pills">
+			<li class="active"><a href="#skins" data-toggle="pill">Skins</a></li>
+			<li><a href="#mods" data-toggle="pill">MODs</a></li>
+			<li><a href="#ranks" data-toggle="pill">Rank Sets</a></li>
+		</ul>
 
-			<div class="row">
-			@foreach ($user->present()->itemsSkins as $item)
-				<div class="col-lg-6">
-					{{ View::make('partials.media')->withItem($item) }}<br>
-				</div>
-			@endforeach
+		<div class="tab-content">
+			<div id="skins" class="active tab-pane">
+				@if ($user->present()->itemsSkins->count() > 0)
+					<div class="row">
+					@foreach ($user->present()->itemsSkins as $item)
+						<div class="col-lg-6">
+							{{ View::make('partials.media')->withItem($item) }}<br>
+						</div>
+					@endforeach
+					</div>
+				@endif
 			</div>
-		@endif
 
-		@if ($user->present()->itemsRanks->count() > 0)
-			<h3>Rank Sets</h3>
-
-			<div class="row">
-			@foreach ($user->present()->itemsRanks as $item)
-				<div class="col-lg-6">
-					{{ View::make('partials.media')->withItem($item) }}<br>
-				</div>
-			@endforeach
+			<div id="mods" class="tab-pane">
+				@if ($user->present()->itemsMods->count() > 0)
+					<div class="row">
+					@foreach ($user->present()->itemsMods as $item)
+						<div class="col-lg-6">
+							{{ View::make('partials.media')->withItem($item) }}<br>
+						</div>
+					@endforeach
+					</div>
+				@endif
 			</div>
-		@endif
 
-		@if ($user->present()->itemsMods->count() > 0)
-			<h3>MODs</h3>
-
-			<div class="row">
-			@foreach ($user->present()->itemsMods as $item)
-				<div class="col-lg-6">
-					{{ View::make('partials.media')->withItem($item) }}<br>
-				</div>
-			@endforeach
+			<div id="ranks" class="tab-pane">
+				@if ($user->present()->itemsRanks->count() > 0)
+					<div class="row">
+					@foreach ($user->present()->itemsRanks as $item)
+						<div class="col-lg-6">
+							{{ View::make('partials.media')->withItem($item) }}<br>
+						</div>
+					@endforeach
+					</div>
+				@endif
 			</div>
-		@endif
+		</div>
 	@endif
 @stop

@@ -2,7 +2,10 @@
 	<a class="pull-left" href="#"><img class="media-object img-circle" src="http://placehold.it/150x150"></a>
 	<div class="media-body">
 		<h3 class="media-heading">{{ $item->present()->name }}</h3>
-		<p>{{ $item->present()->typeAsLabel }}</p>
+		<p>
+			{{ $item->present()->typeAsLabel }}
+			{{ $item->present()->productAsLabel }}
+		</p>
 
 		<div class="text-sm">{{ $item->present()->descriptionTruncated }}</div>
 

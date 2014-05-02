@@ -49,6 +49,13 @@ class ItemPresenter extends Presenter {
 		return $this->entity->product->name;
 	}
 
+	public function productAsLabel()
+	{
+		return View::make('partials.label')
+			->withClass('default')
+			->withContent($this->entity->product->name);
+	}
+
 	public function rating()
 	{
 		if ($this->entity->ratings->count() > 0)

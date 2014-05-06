@@ -25,11 +25,6 @@ class ItemRepository implements ItemRepositoryContract {
 		return ItemModel::find($id);
 	}
 
-	public function findBySlug($slug)
-	{
-		return ItemModel::where('slug', $slug)->first();
-	}
-
 	public function getRecentlyAdded($number)
 	{
 		return ItemModel::orderDesc('created_at')->take($number)->get();

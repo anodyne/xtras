@@ -50,7 +50,7 @@ class XtrasRoutingServiceProvider extends ServiceProvider {
 				'uses'	=> 'Xtras\Controllers\MainController@index'
 			));
 
-			Route::get('item/{name}', array(
+			Route::get('item/{id}', array(
 				'as'	=> 'item',
 				'uses'	=> 'Xtras\Controllers\ItemController@show'
 			));

@@ -30,10 +30,10 @@ class ItemController extends BaseController {
 		//
 	}
 
-	public function show($name)
+	public function show($id)
 	{
-		// Get the item by its slug
-		$item = $this->items->findBySlug($name);
+		// Get the item by its ID
+		$item = $this->items->find($id);
 
 		if ($item)
 		{

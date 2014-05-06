@@ -3,7 +3,7 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "c09ce7bcbfbc2407092bb3253245cd5e",
+    "hash": "dc2a1b91db2f2770f265eedcf912b8ec",
     "packages": [
         {
             "name": "aws/aws-sdk-php",
@@ -215,20 +215,21 @@
         },
         {
             "name": "dingo/api",
-            "version": "v0.1.1",
+            "version": "v0.2.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/dingo/api.git",
-                "reference": "12054a22303b497d67ec693d849099cec640c5fc"
+                "reference": "63d2b7854f1fb2593d895ad89ad1275caef7e21e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/dingo/api/zipball/12054a22303b497d67ec693d849099cec640c5fc",
-                "reference": "12054a22303b497d67ec693d849099cec640c5fc",
+                "url": "https://api.github.com/repos/dingo/api/zipball/63d2b7854f1fb2593d895ad89ad1275caef7e21e",
+                "reference": "63d2b7854f1fb2593d895ad89ad1275caef7e21e",
                 "shasum": ""
             },
             "require": {
                 "illuminate/support": "4.1.*",
+                "league/fractal": "~0.7",
                 "php": ">=5.4.0"
             },
             "require-dev": {
@@ -236,6 +237,7 @@
                 "illuminate/auth": "4.1.*",
                 "illuminate/database": "4.1.*",
                 "illuminate/events": "4.1.*",
+                "illuminate/pagination": "4.1.*",
                 "illuminate/routing": "4.1.*",
                 "lucadegasperi/oauth2-server-laravel": "1.0.*",
                 "mockery/mockery": "~0.9",
@@ -246,6 +248,11 @@
                 "league/fractal": "Easily output complex, flexible, RESTful data structures."
             },
             "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "0.2-dev"
+                }
+            },
             "autoload": {
                 "psr-4": {
                     "Dingo\\Api\\": "src"
@@ -270,7 +277,7 @@
                 "laravel",
                 "restful"
             ],
-            "time": "2014-04-28 13:13:45"
+            "time": "2014-05-04 02:43:45"
         },
         {
             "name": "filp/whoops",
@@ -715,16 +722,16 @@
         },
         {
             "name": "league/flysystem",
-            "version": "0.4.1",
+            "version": "0.4.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/thephpleague/flysystem.git",
-                "reference": "51b92a5e6978a076e86889d49dbf5650b2bedd44"
+                "reference": "ecb6e267d1773cbce4d949de689f35b601352e50"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/thephpleague/flysystem/zipball/51b92a5e6978a076e86889d49dbf5650b2bedd44",
-                "reference": "51b92a5e6978a076e86889d49dbf5650b2bedd44",
+                "url": "https://api.github.com/repos/thephpleague/flysystem/zipball/ecb6e267d1773cbce4d949de689f35b601352e50",
+                "reference": "ecb6e267d1773cbce4d949de689f35b601352e50",
                 "shasum": ""
             },
             "require-dev": {
@@ -773,7 +780,7 @@
                 "s3",
                 "sftp"
             ],
-            "time": "2014-04-24 08:31:08"
+            "time": "2014-04-30 10:33:27"
         },
         {
             "name": "league/fractal",

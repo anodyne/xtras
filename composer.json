@@ -5,7 +5,6 @@
 		"aws/aws-sdk-php": "~2.0",
 		"dflydev/markdown": "~1.0",
 		"ikimea/browser": "~1.0",
-		"league/fractal": "*",
 		"laracasts/presenter": "*",
 		"dingo/api": "*"
 	},
@@ -22,7 +21,9 @@
 		],
 		
 		"psr-4": {
-			"Xtras\\": "Xtras"
+			"Xtras\\": "Xtras\\Web",
+			"Xtras\\Api\\": "Xtras\\Api",
+			"Xtras\\Extensions\\": "Xtras\\Extensions"
 		}
 	},
 	

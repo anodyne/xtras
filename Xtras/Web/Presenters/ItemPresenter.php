@@ -14,6 +14,11 @@ class ItemPresenter extends Presenter {
 		return HTML::link("profile/{$this->entity->user->slug}", $this->entity->user->name);
 	}
 
+	public function commentsCount()
+	{
+		return "({$this->entity->comments->count()})";
+	}
+
 	public function created()
 	{
 		return $this->entity->created_at->format('d F Y');

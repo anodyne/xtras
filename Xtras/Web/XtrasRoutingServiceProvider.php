@@ -28,7 +28,9 @@ class XtrasRoutingServiceProvider extends ServiceProvider {
 		/**
 		 * Log In, Register. Password reset
 		 */
-		Route::get('login', 'Xtras\Controllers\MainController@index');
+		Route::get('login', [
+			'as'	=> 'login',
+			'uses'	=> 'Xtras\Controllers\MainController@login']);
 		Route::post('login', 'Xtras\Controllers\MainController@doLogin');
 		Route::get('logout', array(
 			'as'	=> 'logout',
@@ -68,10 +70,21 @@ class XtrasRoutingServiceProvider extends ServiceProvider {
 				'uses'	=> 'Xtras\Controllers\ItemController@index'
 			));
 
-			Route::get('account', array(
+			Route::get('account/{slug}', array(
 				'as'	=> 'account',
 				'uses'	=> 'Xtras\Controllers\User@getAccount'
 			));
+			Route::get('account/{slug}/xtras', [
+				'as'	=> 'xtras',
+				'uses'	=> 'Xtras\Controllers\UserController@xtras']);
+
+			Route::get('search', [
+				'as'	=> 'search',
+				'uses'	=> 'Xtras\Controllers\SearchController@index']);
+			Route::post('search', 'Xtras\Controllers\SearchController@doSearch');
+			Route::get('results', [
+				'as'	=> 'results',
+				'uses'	=> 'Xtras\Controllers\SearchController@results']);
 		});
 
 		Route::resource('user', 'Xtras\Controllers\UserController');

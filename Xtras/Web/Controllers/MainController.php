@@ -30,6 +30,11 @@ class MainController extends BaseController {
 			->withUpdated($this->items->getRecentlyUpdated(5));
 	}
 
+	public function login()
+	{
+		return View::make('pages.login');
+	}
+
 	public function doLogin()
 	{
 		$validator = Validator::make(Input::all(), array(

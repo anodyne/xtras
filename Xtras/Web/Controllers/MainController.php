@@ -46,7 +46,8 @@ class MainController extends BaseController {
 
 		if ( ! $validator->passes())
 		{
-			Session::flash('loginMessage', "Your information couldn't be validated. Please correct the issues and try again.");
+			Session::flash('flashStatus', 'danger');
+			Session::flash('flashMessage', "Your information couldn't be validated. Please correct the issues and try again.");
 
 			return Redirect::back()->withInput()->withErrors($validator->errors());
 		}
@@ -66,7 +67,8 @@ class MainController extends BaseController {
 			}
 		}
 
-		Session::flash('loginMessage', "Either your email address or password were incorrect. Please try again.");
+		Session::flash('flashStatus', 'danger');
+		Session::flash('flashMessage', "Either your email address or password were incorrect. Please try again.");
 
 		return Redirect::back()->withInput();
 	}

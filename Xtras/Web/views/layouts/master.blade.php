@@ -31,6 +31,21 @@
 			<div class="container">
 				<ul class="pull-right">
 					<li><a href="#">Contact</a></li>
+
+					@if (Auth::check())
+						<li class="dropdown">
+							<a href="#" data-toggle="dropdown" class="dropdown-toggle"><span class="icn-size-16 user-icon">{{ $_icons['user'] }}</span> {{ Auth::user()->present()->name }} <span class="caret"></span></a>
+							<ul class="dropdown-menu dropdown-menu-right dd">
+								<li><a href="{{ URL::route('xtras', [$_currentUser->slug]) }}">My Xtras</a></li>
+								<li><a href="#">Create New Xtra</a></li>
+								<li class="divider"></li>
+								<li><a href="{{ URL::route('profile', [$_currentUser->slug]) }}">My Profile</a></li>
+								<li><a href="{{ URL::route('account', [$_currentUser->slug]) }}">Edit My Profile</a></li>
+								<li class="divider"></li>
+								<li><a href="{{ URL::route('logout') }}">Logout</a></li>
+							</ul>
+						</li>
+					@endif
 				</ul>
 
 				<ul>
@@ -47,22 +62,23 @@
 		<header>
 			<div class="container">
 				<div class="row">
-					<div class="col-lg-3">
+					<div class="col-md-3 col-lg-3">
 						<div class="brand">AnodyneXtras</div>
 					</div>
 
 					@if (Auth::check())
-						<div class="col-lg-5">
+						<div class="col-md-5 col-lg-5">
 							<nav class="nav-sub">
 								<ul>
 									<li><a href="#">Skins</a></li>
-									<li><a href="#">Ranks</a></li>
 									<li><a href="#">MODs</a></li>
+									<li><a href="#">Ranks</a></li>
+									<li><a href="{{ URL::route('xtras', [$_currentUser->slug]) }}">My Xtras</a></li>
 								</ul>
 							</nav>
 						</div>
 
-						<div class="col-lg-4">
+						<div class="col-md-4 col-lg-4">
 							<div class="header-search">
 								<div class="input-group">
 									{{ Form::text('search', null, array('placeholder' => 'Search Xtras', 'class' => 'input-sm form-control search-field')) }}

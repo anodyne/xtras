@@ -65,7 +65,7 @@ return array(
 	|
 	*/
 
-	'key' => 'QKNr4S3GBcSdPij9OeRBx6I1Tkk6RdDh',
+	'key' => $_ENV['APP_KEY'],
 
 	/*
 	|--------------------------------------------------------------------------
@@ -183,11 +183,6 @@ return array(
 		'Markdown'	=> 'Xtras\Facades\Markdown',
 		'Model'		=> 'Xtras\Extensions\Laravel\Database\Eloquent\Model',
 		
-		/**
-		 * Exceptions
-		 */
-		'UserNameTakenException' => 'Xtras\Exceptions\UserNameTakenException',
-
 		/**
 		 * Models
 		 */

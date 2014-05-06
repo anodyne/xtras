@@ -15,7 +15,7 @@ return array(
 	|
 	*/
 
-	'default' => 'sync',
+	'default' => 'iron',
 
 	/*
 	|--------------------------------------------------------------------------
@@ -50,9 +50,9 @@ return array(
 
 		'iron' => array(
 			'driver'  => 'iron',
-			'project' => 'your-project-id',
-			'token'   => 'your-token',
-			'queue'   => 'your-queue-name',
+			'project' => $_ENV['QUEUE_IRON_PROJECT'],
+			'token'   => $_ENV['QUEUE_IRON_TOKEN'],
+			'queue'   => $_ENV['QUEUE_IRON_NAME'],
 		),
 
 	),

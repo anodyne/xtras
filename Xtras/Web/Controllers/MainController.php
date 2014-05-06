@@ -25,16 +25,9 @@ class MainController extends BaseController {
 
 	public function index()
 	{
-		if (Auth::check())
-		{
-			return View::make('pages.main')
-				->withNew($this->items->getRecentlyAdded(5))
-				->withUpdated($this->items->getRecentlyUpdated(5));
-		}
-		else
-		{
-			return View::make('pages.login');
-		}
+		return View::make('pages.main')
+			->withNew($this->items->getRecentlyAdded(5))
+			->withUpdated($this->items->getRecentlyUpdated(5));
 	}
 
 	public function doLogin()
@@ -107,7 +100,8 @@ class MainController extends BaseController {
 		if ( ! $validator->passes())
 		{
 			// Flash the session
-			Session::flash('registerMessage', "Your information couldn't be validated. Please correct the issues and try again.");
+			Session::flash('flashStatus', 'danger');
+			Session::flash('flashMessage', "Your information couldn't be validated. Please correct the issues and try again.");
 
 			return Redirect::route('register')
 				->withInput()
@@ -118,8 +112,8 @@ class MainController extends BaseController {
 		if (Input::get('confirm') != Session::get('confirmNumber'))
 		{
 			return Redirect::route('register')
-				->with('message', "Registration failed due to incorrect anti-spam confirmation number.")
-				->with('messageStatus', 'danger');
+				->with('flashMessage', "Registration failed due to incorrect anti-spam confirmation number.")
+				->with('flashStatus', 'danger');
 		}
 
 		// Create the user
@@ -134,14 +128,15 @@ class MainController extends BaseController {
 			Event::fire('user.registered', array($user, Input::all()));
 
 			return Redirect::route('home')
-				->with('message', "Welcome to the Brian Jacobs Golf scheduler! An email has been sent with the log in information you entered during registration. If you don't see the email, make sure to check your spam folder. From the scheduler, you can book lessons with a Brian Jacobs Golf instructor and enroll in any of our programs. Get started today by booking a lesson or enrolling in a program!")
-				->with('messageStatus', 'success');
+				->with('flashMessage', "Welcome to AnodyneXtras!")
+				->with('flashStatus', 'success');
 		}
 		else
 		{
 			return Redirect::route('register')
 				->withInput()
-				->with('registerMessage', "There was an error creating your account. Please try again!");
+				->with('flashMessage', "There was an error creating your account. Please try again!")
+				->with('flashStatus', 'danger');
 		}
 	}
 

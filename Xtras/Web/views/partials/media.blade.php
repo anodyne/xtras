@@ -9,21 +9,6 @@
 
 		<div class="text-sm">{{ $item->present()->descriptionTruncated }}</div>
 
-		<div class="visible-xs visible-sm">
-			<p><a href="{{ URL::route('item', array($item->slug)) }}" class="btn btn-lg btn-block btn-default">More Info</a></p>
-
-			<p><a href="{{ URL::route('profile', array($item->user->slug)) }}" class="btn btn-lg btn-block btn-default">Author Profile</a></p>
-		</div>
-
-		<div class="visible-md visible-lg">
-			<div class="btn-toolbar">
-				<div class="btn-group">
-					<a href="{{ URL::route('item', array($item->slug)) }}" class="btn btn-default">More Info</a>
-				</div>
-				<div class="btn-group">
-					<a href="{{ URL::route('profile', array($item->user->slug)) }}" class="btn btn-default">Author Profile</a>
-				</div>
-			</div>
-		</div>
+		{{ partial('btn-toolbar', ['data' => [0 => [['link' => URL::route('item', array($item->id)), 'text' => 'More Info', 'class' => 'btn btn-default']], 1 => [['link' => URL::route('profile', array($item->user->slug)), 'text' => 'Author Profile', 'class' => 'btn btn-default']]]]) }}
 	</div>
 </div>

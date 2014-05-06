@@ -41,6 +41,11 @@ class UserPresenter extends Presenter {
 		});
 	}
 
+	public function name()
+	{
+		return $this->entity->name;
+	}
+
 	public function siteBtn()
 	{
 		if ( ! empty($this->entity->url))

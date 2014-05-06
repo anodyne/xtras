@@ -151,6 +151,14 @@ header {
 section {
 	margin-top: @spacing;
 
+	a {
+		color: @color-primary;
+
+		&:hover {
+			color: @color-primary-bright;
+		}
+	}
+
 	h1 {
 		font-family: @font-titles;
 		font-weight: 700;
@@ -162,6 +170,15 @@ section {
 		font-weight: 500;
 		font-style: italic;
 		color: desaturate(@color-primary, 50%);
+	}
+}
+
+form {
+	label {
+		font-weight: 600;
+		font-family: @font-special;
+		color: @color-gray-dark;
+		font-size: @font-size;
 	}
 }
 
@@ -349,5 +366,69 @@ dl {
 				.rounded(@border-radius);
 			}
 		}
+	}
+}
+
+.nav-tabs {
+	> li > a {
+		color: @color-primary;
+
+		.border-radius(@border-radius, @border-radius, 0, 0);
+	}
+
+	> li > a,
+	> li > a:hover,
+	> li > a:focus,
+	> li > a:active {
+		outline: none;
+	}
+
+	> li.active > a,
+	> li.active > a:hover,
+	> li.active > a:focus {
+		border-bottom-color: @color-body;
+
+		.gradient(@color-white, @color-body);
+	}
+
+	> li.active > a,
+	> li.active > a:hover,
+	> li.active > a:focus,
+	> li.active > a:active {
+		outline: none;
+	}
+}
+
+.nav-pills {
+	> li > a {
+		color: @color-primary;
+
+		.rounded(@border-radius);
+	}
+
+	> li > a,
+	> li > a:hover,
+	> li > a:focus,
+	> li > a:active {
+		outline: none;
+	}
+
+	> li.active > a,
+	> li.active > a:hover,
+	> li.active > a:focus {
+		background-color: @color-primary-bright;
+	}
+
+	> li.active > a,
+	> li.active > a:hover,
+	> li.active > a:focus,
+	> li.active > a:active {
+		outline: none;
+	}
+}
+
+.tab-content, .pill-content {
+	.tab-pane, .pill-pane {
+		padding: @spacing;
 	}
 }

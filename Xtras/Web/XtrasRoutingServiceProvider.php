@@ -72,11 +72,13 @@ class XtrasRoutingServiceProvider extends ServiceProvider {
 
 			Route::get('account/{slug}', array(
 				'as'	=> 'account',
-				'uses'	=> 'Xtras\Controllers\User@getAccount'
+				'uses'	=> 'Xtras\Controllers\UserController@edit'
 			));
 			Route::get('account/{slug}/xtras', [
 				'as'	=> 'xtras',
 				'uses'	=> 'Xtras\Controllers\UserController@xtras']);
+			
+			Route::resource('account', 'Xtras\Controllers\UserController');
 
 			Route::get('search', [
 				'as'	=> 'search',
@@ -86,8 +88,6 @@ class XtrasRoutingServiceProvider extends ServiceProvider {
 				'as'	=> 'results',
 				'uses'	=> 'Xtras\Controllers\SearchController@results']);
 		});
-
-		Route::resource('user', 'Xtras\Controllers\UserController');
 
 		Route::get('profile/{name}', array(
 			'as'	=> 'profile',

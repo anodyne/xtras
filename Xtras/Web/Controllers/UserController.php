@@ -36,16 +36,21 @@ class UserController extends BaseController {
 
 		if ($user)
 		{
-			return View::make('pages.profile')
-				->withUser($user);
+			return View::make('pages.user.show')->withUser($user);
 		}
 
-		// TODO: no user found
+		return $this->errorNotFound('No profile exists with that name!');
 	}
 
-	public function edit($id)
+	public function edit($name)
 	{
-		//
+		// Get the user from the slug
+		$user = $this->users->findBySlug($name);
+
+		if ($user)
+		{
+			return View::make('pages.user.edit')->withUser($user);
+		}
 	}
 
 	public function update($id)

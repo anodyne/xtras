@@ -37,7 +37,7 @@ class ItemController extends BaseController {
 
 		if ($item)
 		{
-			return View::make('pages.items.show')->withItem($item);
+			return View::make('pages.item.show')->withItem($item);
 		}
 
 		// TODO: couldn't find the item

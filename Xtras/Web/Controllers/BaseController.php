@@ -18,13 +18,23 @@ abstract class BaseController extends Controller {
 		$this->request		= Request::instance();
 	}
 
-	protected function unauthorized($message = false)
+	protected function errorUnauthorized($message = false)
 	{
 		Log::error("{$this->currentUser->name} attempted to access {$this->request->fullUrl()}");
 
 		if ($message)
 		{
-			return View::make('pages.admin.error')->withError($message);
+			return View::make('pages.error')->withError($message)->withType('danger');
+		}
+	}
+
+	protected function errorNotFound($message = false)
+	{
+		Log::error("{$this->currentUser->name} attempted to reach {$this->request->fullUrl()}");
+
+		if ($message)
+		{
+			return View::make('pages.error')->withError($message)->withType('warning');
 		}
 	}
 

@@ -215,16 +215,16 @@
         },
         {
             "name": "dingo/api",
-            "version": "v0.2.4",
+            "version": "v0.3.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/dingo/api.git",
-                "reference": "63d2b7854f1fb2593d895ad89ad1275caef7e21e"
+                "reference": "de5d1dfa3d779ece8dee60390107f5cef48425dd"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/dingo/api/zipball/63d2b7854f1fb2593d895ad89ad1275caef7e21e",
-                "reference": "63d2b7854f1fb2593d895ad89ad1275caef7e21e",
+                "url": "https://api.github.com/repos/dingo/api/zipball/de5d1dfa3d779ece8dee60390107f5cef48425dd",
+                "reference": "de5d1dfa3d779ece8dee60390107f5cef48425dd",
                 "shasum": ""
             },
             "require": {
@@ -244,13 +244,13 @@
                 "phpunit/phpunit": "~4.0"
             },
             "suggest": {
-                "dingo/oauth2-server-laravel": "Allows OAuth 2.0 authentication to protect your API.",
-                "league/fractal": "Easily output complex, flexible, RESTful data structures."
+                "dingo/oauth2-server-laravel": "Use the Dingo OAuth 2.0 server to protect your API.",
+                "lucadegasperi/oauth2-server-laravel": "Use the League OAuth 2.0 server to protect your API."
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "0.2-dev"
+                    "dev-master": "0.3-dev"
                 }
             },
             "autoload": {
@@ -277,7 +277,7 @@
                 "laravel",
                 "restful"
             ],
-            "time": "2014-05-04 02:43:45"
+            "time": "2014-05-08 12:19:31"
         },
         {
             "name": "filp/whoops",
@@ -332,16 +332,16 @@
         },
         {
             "name": "guzzle/guzzle",
-            "version": "v3.9.0",
+            "version": "v3.9.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/guzzle/guzzle3.git",
-                "reference": "e4d12d7d6acccf75a5e504114e2df9195e494108"
+                "reference": "92d9934f2fca1da15178c91239576ae26e505e60"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/guzzle/guzzle3/zipball/e4d12d7d6acccf75a5e504114e2df9195e494108",
-                "reference": "e4d12d7d6acccf75a5e504114e2df9195e494108",
+                "url": "https://api.github.com/repos/guzzle/guzzle3/zipball/92d9934f2fca1da15178c91239576ae26e505e60",
+                "reference": "92d9934f2fca1da15178c91239576ae26e505e60",
                 "shasum": ""
             },
             "require": {
@@ -420,7 +420,7 @@
                 "rest",
                 "web service"
             ],
-            "time": "2014-04-23 21:43:40"
+            "time": "2014-05-07 17:04:22"
         },
         {
             "name": "ikimea/browser",
@@ -722,22 +722,22 @@
         },
         {
             "name": "league/flysystem",
-            "version": "0.4.2",
+            "version": "0.4.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/thephpleague/flysystem.git",
-                "reference": "ecb6e267d1773cbce4d949de689f35b601352e50"
+                "reference": "513d46e18f71276f4bd5ab5f9e486ec32d80d4c5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/thephpleague/flysystem/zipball/ecb6e267d1773cbce4d949de689f35b601352e50",
-                "reference": "ecb6e267d1773cbce4d949de689f35b601352e50",
+                "url": "https://api.github.com/repos/thephpleague/flysystem/zipball/513d46e18f71276f4bd5ab5f9e486ec32d80d4c5",
+                "reference": "513d46e18f71276f4bd5ab5f9e486ec32d80d4c5",
                 "shasum": ""
             },
             "require-dev": {
                 "aws/aws-sdk-php": "~2.5",
                 "dropbox/dropbox-sdk": "~1.1.1",
-                "league/phpunit-coverage-listener": "~1.0",
+                "league/phpunit-coverage-listener": "~1.1",
                 "mockery/mockery": "~0.9",
                 "phpseclib/phpseclib": "~0.3.5",
                 "phpunit/phpunit": "~4.0",
@@ -754,6 +754,11 @@
                 "sabre/dav": "Enables WebDav support"
             },
             "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "0.4-dev"
+                }
+            },
             "autoload": {
                 "psr-4": {
                     "League\\Flysystem\\": "src/"
@@ -780,7 +785,7 @@
                 "s3",
                 "sftp"
             ],
-            "time": "2014-04-30 10:33:27"
+            "time": "2014-05-08 16:04:49"
         },
         {
             "name": "league/fractal",
@@ -1271,25 +1276,28 @@
         },
         {
             "name": "swiftmailer/swiftmailer",
-            "version": "v5.1.0",
+            "version": "v5.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/swiftmailer/swiftmailer.git",
-                "reference": "748c01c1144713ac0118396935d10b6ceec91b68"
+                "reference": "043e336b871f17a117f76ef8e190eddfc04c8d48"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/swiftmailer/swiftmailer/zipball/748c01c1144713ac0118396935d10b6ceec91b68",
-                "reference": "748c01c1144713ac0118396935d10b6ceec91b68",
+                "url": "https://api.github.com/repos/swiftmailer/swiftmailer/zipball/043e336b871f17a117f76ef8e190eddfc04c8d48",
+                "reference": "043e336b871f17a117f76ef8e190eddfc04c8d48",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.2.4"
             },
+            "require-dev": {
+                "mockery/mockery": "~0.9.1"
+            },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "5.1-dev"
+                    "dev-master": "5.2-dev"
                 }
             },
             "autoload": {
@@ -1318,7 +1326,7 @@
                 "mail",
                 "mailer"
             ],
-            "time": "2014-03-18 09:03:27"
+            "time": "2014-05-08 08:11:19"
         },
         {
             "name": "symfony/browser-kit",

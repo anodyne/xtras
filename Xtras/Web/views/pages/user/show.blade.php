@@ -14,7 +14,7 @@
 
 		@if ($user->id == $_currentUser->id)
 			<div class="btn-group">
-				<a href="#" class="btn btn-default">Edit My Account</a>
+				<a href="{{ URL::route('account.edit', [$user->slug]) }}" class="btn btn-default">Edit My Account</a>
 			</div>
 		@endif
 	</div>

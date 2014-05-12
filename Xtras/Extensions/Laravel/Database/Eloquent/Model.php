@@ -11,23 +11,11 @@ class Model extends EloquentModel {
 	|--------------------------------------------------------------------------
 	*/
 
-	protected $dates = [];
-
 	public function __construct(array $attributes = [])
 	{
 		$attributes = $this->scrubInputData($attributes);
 
 		parent::__construct($attributes);
-	}
-
-	/**
-	 * Get the attributes that should be converted to dates.
-	 *
-	 * @return array
-	 */
-	public function getDates()
-	{
-		return $this->dates;
 	}
 
 	/**

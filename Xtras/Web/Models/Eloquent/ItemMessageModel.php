@@ -2,12 +2,12 @@
 
 use Model;
 use Laracasts\Presenter\PresentableTrait;
+use Illuminate\Database\Eloquent\SoftDeletingTrait;
 
 class ItemMessageModel extends Model {
 
 	use PresentableTrait;
-
-	protected $softDelete = true;
+	use SoftDeletingTrait;
 
 	protected $table = 'items_messages';
 

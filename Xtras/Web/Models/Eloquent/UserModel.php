@@ -6,12 +6,12 @@ use Str,
 use Illuminate\Auth\UserInterface,
 	Illuminate\Auth\Reminders\RemindableInterface;
 use Laracasts\Presenter\PresentableTrait;
+use Illuminate\Database\Eloquent\SoftDeletingTrait;
 
 class UserModel extends Model implements UserInterface, RemindableInterface {
 
 	use PresentableTrait;
-
-	protected $softDelete = true;
+	use SoftDeletingTrait;
 
 	protected $connection = 'anodyneUsers';
 	
@@ -21,6 +21,8 @@ class UserModel extends Model implements UserInterface, RemindableInterface {
 		'remember_token'];
 
 	protected $hidden = ['password', 'remember_token'];
+
+	protected $dates = ['created_at', 'updated_at', 'deleted_at'];
 
 	protected $presenter = 'Xtras\Presenters\UserPresenter';
 

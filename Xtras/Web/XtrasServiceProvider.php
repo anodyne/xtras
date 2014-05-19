@@ -4,12 +4,12 @@ use App,
 	Auth,
 	View,
 	Config;
+use Parsedown;
 use Aws\S3\S3Client;
 use Ikimea\Browser\Browser;
 use League\Flysystem\Filesystem,
 	League\Flysystem\Adapter\AwsS3,
 	League\Flysystem\Adapter\Local;
-use dflydev\markdown\MarkdownParser;
 use Illuminate\Support\ServiceProvider;
 
 class XtrasServiceProvider extends ServiceProvider {
@@ -103,7 +103,7 @@ class XtrasServiceProvider extends ServiceProvider {
 	{
 		$this->app['markdown'] = $this->app->share(function($app)
 		{
-			return new Services\MarkdownService(new MarkdownParser);
+			return new Services\MarkdownService(new Parsedown);
 		});
 	}
 

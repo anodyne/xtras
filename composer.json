@@ -1,11 +1,12 @@
 {
 	"require": {
 		"laravel/framework": "4.2.*",
-		"league/flysystem": "*",
+		"league/flysystem": "~0.4",
 		"aws/aws-sdk-php": "~2.0",
-		"dflydev/markdown": "~1.0",
+		"erusev/parsedown": "~1.0",
 		"ikimea/browser": "~1.0",
-		"laracasts/presenter": "*"
+		"laracasts/presenter": "~0.1",
+		"guzzlehttp/guzzle": "~4.0"
 	},
 
 	"require-dev": {

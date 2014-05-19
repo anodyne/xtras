@@ -3,13 +3,17 @@
 use Str,
 	Hash,
 	Model;
-use Illuminate\Auth\UserInterface,
+use Illuminate\Auth\UserTrait,
+	Illuminate\Auth\UserInterface,
+	Illuminate\Auth\Reminders\RemindableTrait,
 	Illuminate\Auth\Reminders\RemindableInterface;
 use Laracasts\Presenter\PresentableTrait;
 use Illuminate\Database\Eloquent\SoftDeletingTrait;
 
 class UserModel extends Model implements UserInterface, RemindableInterface {
 
+	use UserTrait;
+	use RemindableTrait;
 	use PresentableTrait;
 	use SoftDeletingTrait;
 
@@ -84,63 +88,6 @@ class UserModel extends Model implements UserInterface, RemindableInterface {
 		{
 			$user->slug = Str::lower(Str::slug($user->name));
 		});
-	}
-
-	/*
-	|--------------------------------------------------------------------------
-	| UserInterface Implementation
-	|--------------------------------------------------------------------------
-	*/
-
-	/**
-	 * Get the unique identifier for the user.
-	 *
-	 * @return mixed
-	 */
-	public function getAuthIdentifier()
-	{
-		return $this->getKey();
-	}
-
-	/**
-	 * Get the password for the user.
-	 *
-	 * @return string
-	 */
-	public function getAuthPassword()
-	{
-		return $this->password;
-	}
-
-	public function getRememberToken()
-	{
-		return $this->remember_token;
-	}
-
-	public function setRememberToken($value)
-	{
-		$this->remember_token = $value;
-	}
-
-	public function getRememberTokenName()
-	{
-		return 'remember_token';
-	}
-
-	/*
-	|--------------------------------------------------------------------------
-	| RemindableInterface Implementation
-	|--------------------------------------------------------------------------
-	*/
-
-	/**
-	 * Get the e-mail address where password reminders are sent.
-	 *
-	 * @return string
-	 */
-	public function getReminderEmail()
-	{
-		return $this->email;
 	}
 
 }

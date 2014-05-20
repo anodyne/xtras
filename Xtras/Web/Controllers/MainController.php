@@ -145,4 +145,32 @@ class MainController extends BaseController {
 		}
 	}
 
+	public function policies($type = false)
+	{
+		switch ($type)
+		{
+			case 'browsers':
+				$view = 'pages.policies.browsers';
+			break;
+
+			case 'dmca':
+				$view = 'pages.policies.dmca';
+			break;
+
+			case 'privacy':
+				$view = 'pages.policies.privacy';
+			break;
+
+			case 'terms':
+				$view = 'pages.policies.terms';
+			break;
+
+			default:
+				$view = 'pages.policies.index';
+			break;
+		}
+
+		return View::make($view);
+	}
+
 }

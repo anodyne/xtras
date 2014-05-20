@@ -93,6 +93,10 @@ class XtrasRoutingServiceProvider extends ServiceProvider {
 			'as'	=> 'profile',
 			'uses'	=> 'Xtras\Controllers\UserController@show'
 		));
+
+		Route::get('policies/{type?}', array(
+			'as'	=> 'policies',
+			'uses'	=> 'Xtras\Controllers\MainController@policies'));
 	}
 
 }

@@ -63,7 +63,7 @@
 			<div class="container">
 				<div class="row">
 					<div class="col-md-3 col-lg-3">
-						<div class="brand">AnodyneXtras</div>
+						<a href="{{ URL::route('home') }}" class="brand">AnodyneXtras</a>
 					</div>
 
 					@if (Auth::check())
@@ -100,6 +100,39 @@
 				@yield('content')
 			</div>
 		</section>
+
+		<footer>
+			<div class="container">
+				<div class="row">
+					<div class="col-md-6 col-lg-8">
+						<h2>AnodyneXtras</h2>
+
+						<p class="text-muted">Every game is unique in its own right. It has its own players, characters, mission, and driving force. Why shouldn't each game be able to accurately reflect its distinctiveness through its look and feel and functionality? We don't think that should be a hinderance and we've created AnodyneXtras as a one-stop-shop for skins, MODs, and rank sets for Nova so you can make your copy of Nova as unique as the game being played on it.</p>
+
+						<p class="text-muted">&copy; {{ Date::now()->year }} Anodyne Productions</p>
+					</div>
+					<div class="col-md-3 col-lg-2">
+						<ul class="list-unstyled">
+							<li><a href="{{ URL::route('home') }}">Home</a></li>
+
+							@if (Auth::check())
+								<li><a href="{{ URL::route('xtras') }}">My Xtras</a></li>
+								<li><a href="{{ URL::route('skins') }}">Skins</a></li>
+								<li><a href="{{ URL::route('ranks') }}">Ranks</a></li>
+								<li><a href="{{ URL::route('mods') }}">MODs</a></li>
+							@endif
+						</ul>
+					</div>
+					<div class="col-md-3 col-lg-2">
+						<ul class="list-unstyled">
+							<li><a href="{{ URL::route('policies') }}">Site Policies</a></li>
+							<li><a href="#">Contact</a></li>
+							<li><a href="http://anodyne-productions.com">Anodyne Productions</a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</footer>
 
 		@if (App::environment() == 'production')
 			<!--[if lt IE 9]>

@@ -5,7 +5,7 @@ use Str,
 	Model;
 use Illuminate\Auth\UserTrait,
 	Illuminate\Auth\UserInterface,
-	Illuminate\Auth\Reminders\RemindableTrait,
+	Illuminate\Auth\RemindableTrait,
 	Illuminate\Auth\Reminders\RemindableInterface;
 use Laracasts\Presenter\PresentableTrait;
 use Illuminate\Database\Eloquent\SoftDeletingTrait;

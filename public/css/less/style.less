@@ -123,6 +123,11 @@ header {
 		font-style: italic;
 		text-shadow: 0 1px 2px rgba(0, 0, 0, .25);
 		letter-spacing: 0.01em;
+		outline: none;
+
+		&:hover {
+			text-decoration: none;
+		}
 	}
 
 	nav.nav-sub {
@@ -169,7 +174,7 @@ header {
 }
 
 section {
-	margin-top: @spacing;
+	margin: @spacing 0;
 
 	a {
 		color: @color-primary;
@@ -190,6 +195,109 @@ section {
 		font-weight: 500;
 		font-style: italic;
 		color: desaturate(@color-primary, 50%);
+	}
+
+	ul, ol {
+		li {
+			margin-bottom: 5px;
+			line-height: @line-height;
+			position: relative;
+
+			font-size: @font-size;
+		}
+	}
+
+	ul {
+		list-style-type: square;
+	}
+
+	ol {
+		position: relative;
+
+		counter-reset: li;
+		list-style: none;
+
+		li {
+			padding: 4px 0 5px 55px;
+
+			&:before {
+				content: counter(li);
+				counter-increment: li;
+				position: absolute;
+				top: 0;
+				left: 0;
+				height: 100%;
+				width: 30px;
+				padding: 0 10px 0 0;
+				color: #999;
+				font-size: 22px;
+				font-weight: 600;
+				line-height: 35px;
+				text-align: right;
+				font-family: @font-special;
+				border-right: 1px solid #ddd;
+			}
+
+			&:after {
+				content: ".";
+				display: block;
+				clear: both;
+				visibility: hidden;
+				line-height: 0;
+				height: 0;
+			}
+		}
+	}
+
+	dl {
+		dt {
+			margin-top: 8px;
+			line-height: @line-height;
+
+			font-family: @font-special;
+			font-size: @font-size;
+			font-weight: 600;
+		}
+
+		dd {
+			margin-bottom: 2px;
+			line-height: @line-height;
+
+			font-size: @font-size;
+
+			strong {
+				font-size: @font-size;
+			}
+		}
+	}
+}
+
+footer {
+	padding: @spacing 0;
+
+	background: @color-nav-main;
+	color: @color-white;
+	border-top: 1px solid rgba(0, 0, 0, .5);
+	font-size: @font-size-small;
+
+	h2 {
+		margin-top: 0;
+
+		font-family: @font-special;
+		font-weight: 500;
+		font-size: @font-size-large;
+		font-style: italic;
+	}
+
+	a {
+		color: rgba(255, 255, 255, .5);
+		border-bottom: 1px solid transparent;
+
+		&:hover {
+			text-decoration: none;
+			color: lighten(@color-primary-bright, 10%);
+			border-color: lighten(@color-primary-bright, 10%);
+		}
 	}
 }
 
@@ -321,28 +429,6 @@ form {
 			.panel-title {
 				color: @color-info-alert;
 			}
-		}
-	}
-}
-
-dl {
-	dt {
-		margin-top: 8px;
-		line-height: @line-height;
-
-		font-family: @font-special;
-		font-size: @font-size;
-		font-weight: 600;
-	}
-
-	dd {
-		margin-bottom: 2px;
-		line-height: @line-height;
-
-		font-size: @font-size;
-
-		strong {
-			font-size: @font-size;
 		}
 	}
 }

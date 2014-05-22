@@ -153,5 +153,6 @@
 
 			<script src="http://localhost/global/bootstrap/3.1/js/bootstrap.min.js"></script>
 		@endif
+		@yield('scripts')
 	</body>
 </html>

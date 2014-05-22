@@ -69,6 +69,13 @@ class XtrasRoutingServiceProvider extends ServiceProvider {
 				'as'	=> 'mods',
 				'uses'	=> 'Xtras\Controllers\ItemController@index'
 			));
+			Route::get('xtra/{id}/upload', [
+				'as'	=> 'xtra.upload',
+				'uses'	=> 'Xtras\Controllers\ItemController@upload']);
+			Route::get('xtra/ajax/checkName', [
+				'as'	=> 'xtra.ajax.checkName',
+				'uses'	=> 'Xtras\Controllers\ItemController@ajaxCheckName']);
+			Route::resource('xtra', 'Xtras\Controllers\ItemController');
 
 			Route::get('account/edit/{slug}', array(
 				'as'	=> 'account',

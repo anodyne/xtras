@@ -1,6 +1,8 @@
 <?php namespace Xtras\Repositories\Eloquent;
 
 use ItemModel,
+	TypeModel,
+	ProductModel,
 	ItemRepositoryContract;
 
 class ItemRepository implements ItemRepositoryContract {
@@ -12,7 +14,14 @@ class ItemRepository implements ItemRepositoryContract {
 
 	public function create(array $data, $flashMessage = true)
 	{
-		# code...
+		$item = ItemModel::create($data);
+
+		if ($flashMessage)
+		{
+			//
+		}
+
+		return $item;
 	}
 
 	public function delete($id, $flashMessage = true)
@@ -23,6 +32,21 @@ class ItemRepository implements ItemRepositoryContract {
 	public function find($id)
 	{
 		return ItemModel::find($id);
+	}
+
+	public function findByName($name)
+	{
+		return ItemModel::where('name', $name)->get();
+	}
+
+	public function getItemTypes()
+	{
+		return TypeModel::lists('name', 'id');
+	}
+
+	public function getProducts()
+	{
+		return ProductModel::lists('name', 'id');
 	}
 
 	public function getRecentlyAdded($number)

@@ -3,6 +3,7 @@
 use App,
 	Auth,
 	View,
+	Event,
 	Config;
 use Parsedown;
 use Aws\S3\S3Client;
@@ -19,6 +20,7 @@ class XtrasServiceProvider extends ServiceProvider {
 		$this->registerBrowser();
 		$this->registerMarkdown();
 		$this->registerFilesystem();
+		$this->registerEvents();
 	}
 
 	public function boot()
@@ -105,6 +107,14 @@ class XtrasServiceProvider extends ServiceProvider {
 		{
 			return new Services\MarkdownService(new Parsedown);
 		});
+	}
+
+	protected function registerEvents()
+	{
+		Event::listen('item.created', 'Xtras\Events\ItemEventHandler@onCreate');
+		Event::listen('item.deleted', 'Xtras\Events\ItemEventHandler@onDelete');
+		Event::listen('item.updated', 'Xtras\Events\ItemEventHandler@onUpdate');
+		Event::listen('item.uploaded', 'Xtras\Events\ItemEventHandler@onUpload');
 	}
 
 }

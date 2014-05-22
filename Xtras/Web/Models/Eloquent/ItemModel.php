@@ -75,4 +75,15 @@ class ItemModel extends Model {
 		$query->where('slug', 'like', "%{$slug}%");
 	}
 
+	/*
+	|---------------------------------------------------------------------------
+	| Accessors/Mutators
+	|---------------------------------------------------------------------------
+	*/
+
+	public function setSlugAttribute($value)
+	{
+		$this->attributes['slug'] = ( ! empty($value)) ? $value : Str::slug($this->name);
+	}
+
 }

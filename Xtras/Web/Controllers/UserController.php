@@ -1,6 +1,7 @@
 <?php namespace Xtras\Controllers;
 
-use View,
+use Auth,
+	View,
 	UserRepositoryContract;
 
 class UserController extends BaseController {
@@ -61,6 +62,17 @@ class UserController extends BaseController {
 	public function destroy($id)
 	{
 		//
+	}
+
+	public function xtras()
+	{
+		// Get the user
+		$user = Auth::user();
+
+		return View::make('pages.user.xtras')
+			->withSkins($user->items->filter(function($i){ return $i->type->name == 'Skin'; }))
+			->withRanks($user->items->filter(function($i){ return $i->type->name == 'Rank Set'; }))
+			->withMods($user->items->filter(function($i){ return $i->type->name == 'MOD'; }));
 	}
 
 }

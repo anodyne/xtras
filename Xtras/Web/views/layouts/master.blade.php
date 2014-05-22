@@ -73,7 +73,7 @@
 									<li><a href="#">Skins</a></li>
 									<li><a href="#">MODs</a></li>
 									<li><a href="#">Ranks</a></li>
-									<li><a href="{{ URL::route('xtras', [$_currentUser->slug]) }}">My Xtras</a></li>
+									<li><a href="{{ URL::route('xtras') }}">My Xtras</a></li>
 								</ul>
 							</nav>
 						</div>

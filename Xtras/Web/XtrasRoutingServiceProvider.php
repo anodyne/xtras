@@ -70,11 +70,11 @@ class XtrasRoutingServiceProvider extends ServiceProvider {
 				'uses'	=> 'Xtras\Controllers\ItemController@index'
 			));
 
-			Route::get('account/{slug}', array(
+			Route::get('account/edit/{slug}', array(
 				'as'	=> 'account',
 				'uses'	=> 'Xtras\Controllers\UserController@edit'
 			));
-			Route::get('account/{slug}/xtras', [
+			Route::get('account/xtras', [
 				'as'	=> 'xtras',
 				'uses'	=> 'Xtras\Controllers\UserController@xtras']);
 			

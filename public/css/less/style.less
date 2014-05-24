@@ -551,3 +551,70 @@ form {
 		padding: @spacing;
 	}
 }
+
+.xtra {
+	position: relative;
+	margin-bottom: @spacing;
+
+	background: #ebebeb;
+
+	.rounded(@border-radius);
+	.box-shadow(~"inset 0 0 0 transparent, inset 0 0 1px rgba(0, 0, 0, .5)");
+
+	.xtra-img {
+		.border-radius(@border-radius, @border-radius, 0, 0);
+	}
+
+	.xtra-avatar {
+		position: relative;
+		display: block;
+		margin: -50px auto 0 auto;
+
+		border: 3px solid #ebebeb;
+	}
+
+	.xtra-heading {
+		margin: 10px 0;
+
+		text-align: center;
+	}
+
+	.xtra-desc {
+		padding: 10px;
+
+		font-size: @font-size-small;
+	}
+}
+
+.avatar {
+	height: 100px;
+	width: 100px;
+
+	background-color: transparent;
+	background-repeat: no-repeat;
+	background-size: contain;
+	background-position: center;
+
+	&.avatar-sm {
+		height: 50px;
+		width: 50px;
+	}
+
+	&.avatar-lg {
+		height: 200px;
+		width: 200px;
+	}
+}
+
+.item-preview {
+	position: relative;
+	width: 100%;
+	height: 150px;
+
+	background-color: transparent;
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-position: center;
+
+	.border-radius(@border-radius, @border-radius, 0, 0);
+}

@@ -24,6 +24,17 @@
 
 		<div class="tab-content">
 			<div id="skins" class="active tab-pane">
+				<div class="btn-toolbar">
+					<div class="btn-group">
+						<a href="#" class="btn btn-sm btn-default">Show All</a>
+					</div>
+					<div class="btn-group">
+						<a href="#" class="btn btn-sm btn-default">Nova 1</a>
+						<a href="#" class="btn btn-sm btn-default">Nova 2</a>
+						<a href="#" class="btn btn-sm btn-default">Nova 3</a>
+					</div>
+				</div>
+
 				<div class="data-table data-table-striped data-table-bordered">
 				@foreach ($skins as $item)
 					<div class="row">
@@ -33,11 +44,11 @@
 						<div class="col-lg-4">
 							<div class="btn-toolbar pull-right">
 								<div class="btn-group">
-									<a href="#" class="btn btn-default">Upload File</a>
-									<a href="#" class="btn btn-default">Edit Xtra</a>
+									<a href="#" class="btn btn-default">Upload</a>
+									<a href="#" class="btn btn-default">Edit</a>
 								</div>
 								<div class="btn-group">
-									<a href="#" class="btn btn-danger">Remove Xtra</a>
+									<a href="#" class="btn btn-danger">Remove</a>
 								</div>
 							</div>
 						</div>
@@ -47,6 +58,17 @@
 			</div>
 
 			<div id="ranks" class="tab-pane">
+				<div class="btn-toolbar">
+					<div class="btn-group">
+						<a href="#" class="btn btn-sm btn-default">Show All</a>
+					</div>
+					<div class="btn-group">
+						<a href="#" class="btn btn-sm btn-default">Nova 1</a>
+						<a href="#" class="btn btn-sm btn-default">Nova 2</a>
+						<a href="#" class="btn btn-sm btn-default">Nova 3</a>
+					</div>
+				</div>
+
 				<div class="data-table data-table-striped data-table-bordered">
 				@foreach ($ranks as $item)
 					<div class="row">
@@ -56,11 +78,11 @@
 						<div class="col-lg-4">
 							<div class="btn-toolbar pull-right">
 								<div class="btn-group">
-									<a href="#" class="btn btn-default">Upload File</a>
-									<a href="#" class="btn btn-default">Edit Xtra</a>
+									<a href="#" class="btn btn-default">Upload</a>
+									<a href="#" class="btn btn-default">Edit</a>
 								</div>
 								<div class="btn-group">
-									<a href="#" class="btn btn-danger">Remove Xtra</a>
+									<a href="#" class="btn btn-danger">Remove</a>
 								</div>
 							</div>
 						</div>
@@ -70,6 +92,17 @@
 			</div>
 
 			<div id="mods" class="tab-pane">
+				<div class="btn-toolbar">
+					<div class="btn-group">
+						<a href="#" class="btn btn-sm btn-default">Show All</a>
+					</div>
+					<div class="btn-group">
+						<a href="#" class="btn btn-sm btn-default">Nova 1</a>
+						<a href="#" class="btn btn-sm btn-default">Nova 2</a>
+						<a href="#" class="btn btn-sm btn-default">Nova 3</a>
+					</div>
+				</div>
+
 				<div class="data-table data-table-striped data-table-bordered">
 				@foreach ($mods as $item)
 					<div class="row">
@@ -79,11 +112,11 @@
 						<div class="col-lg-4">
 							<div class="btn-toolbar pull-right">
 								<div class="btn-group">
-									<a href="#" class="btn btn-default">Upload File</a>
-									<a href="#" class="btn btn-default">Edit Xtra</a>
+									<a href="#" class="btn btn-default">Upload</a>
+									<a href="#" class="btn btn-default">Edit</a>
 								</div>
 								<div class="btn-group">
-									<a href="#" class="btn btn-danger">Remove Xtra</a>
+									<a href="#" class="btn btn-danger">Remove</a>
 								</div>
 							</div>
 						</div>

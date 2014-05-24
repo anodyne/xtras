@@ -73,7 +73,7 @@
 				{{ Form::button('Create and Continue', ['type' => 'submit', 'class' => 'btn btn-lg btn-block btn-primary']) }}
 			</div>
 			<div class="col-lg-9">
-				<button class="btn btn-lg btn-link" disabled="disabled">Next Step: Upload Files and Preview Images <span class="icn-size-16">{{ $_icons['next'] }}</span></button>
+				<button class="btn btn-lg btn-link" disabled="disabled">Next Step: Upload Files and Preview Images {{ $_icons['next'] }}</button>
 			</div>
 		</div>
 	{{ Form::close() }}

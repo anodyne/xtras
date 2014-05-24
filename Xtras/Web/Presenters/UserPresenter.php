@@ -1,10 +1,19 @@
 <?php namespace Xtras\Presenters;
 
-use HTML,
+use URL,
+	HTML,
+	View,
 	Markdown;
 use Laracasts\Presenter\Presenter;
 
 class UserPresenter extends Presenter {
+
+	public function avatar(array $options)
+	{
+		$mergedOptions = $options + ['url' => URL::asset('images/ap-avatar.jpg')];
+
+		return View::make('partials.avatar')->with($mergedOptions);
+	}
 
 	public function bio()
 	{

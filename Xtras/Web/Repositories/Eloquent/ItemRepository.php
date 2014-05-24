@@ -3,6 +3,7 @@
 use ItemModel,
 	TypeModel,
 	ProductModel,
+	ItemMetaModel,
 	ItemRepositoryContract;
 
 class ItemRepository implements ItemRepositoryContract {
@@ -15,6 +16,11 @@ class ItemRepository implements ItemRepositoryContract {
 	public function create(array $data, $flashMessage = true)
 	{
 		$item = ItemModel::create($data);
+
+		if (array_key_exists('meta', $data))
+		{
+			$this->updateMetaData($item->id, $data['meta']);
+		}
 
 		if ($flashMessage)
 		{
@@ -62,6 +68,28 @@ class ItemRepository implements ItemRepositoryContract {
 	public function update($id, array $data, $flashMessage = true)
 	{
 		# code...
+	}
+
+	public function updateMetaData($id, array $data)
+	{
+		// Get the item
+		$item = $this->find($id);
+
+		if ($item->meta)
+		{
+			// Get the meta data
+			$meta = $item->meta;
+			$meta->update($data);
+		}
+		else
+		{
+			// Create a new instance
+			$meta = new ItemMetaModel;
+			$meta->fill($data);
+			$meta->save();
+
+			$item->meta()->save($meta);
+		}
 	}
 
 }

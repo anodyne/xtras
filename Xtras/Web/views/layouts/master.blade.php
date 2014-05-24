@@ -37,7 +37,7 @@
 							<a href="#" data-toggle="dropdown" class="dropdown-toggle"><span class="icn-size-16 user-icon">{{ $_icons['user'] }}</span> {{ Auth::user()->present()->name }} <span class="caret"></span></a>
 							<ul class="dropdown-menu dropdown-menu-right dd">
 								<li><a href="{{ URL::route('xtras', [$_currentUser->slug]) }}">My Xtras</a></li>
-								<li><a href="#">Create New Xtra</a></li>
+								<li><a href="{{ URL::route('xtra.create') }}">Create New Xtra</a></li>
 								<li class="divider"></li>
 								<li><a href="{{ URL::route('profile', [$_currentUser->slug]) }}">My Profile</a></li>
 								<li><a href="{{ URL::route('account', [$_currentUser->slug]) }}">Edit My Profile</a></li>

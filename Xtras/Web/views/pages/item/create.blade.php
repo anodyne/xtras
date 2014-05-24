@@ -7,6 +7,10 @@
 @section('content')
 	<h1>Xtra Information <small>Create New Xtra</small></h1>
 
+	<p>Use the form below to enter the basic information for your new xtra. This is information that users will see when viewing your xtra and that will be used when users are searching for xtras. Once the item is created, you'll be able to upload the zip file and any preview images you want.</p>
+
+	<hr>
+
 	{{ Form::open(['route' => 'xtra.store']) }}
 		<div class="row">
 			<div class="col-lg-3">
@@ -46,7 +50,7 @@
 			<div class="col-lg-6">
 				<div class="form-group">
 					<label>Support</label>
-					{{ Form::text('name', null, ['class' => 'form-control']) }}
+					{{ Form::text('support', null, ['class' => 'form-control']) }}
 					<p class="help-block">You can specify an email address or website URL to use for support of this item if you want.</p>
 				</div>
 			</div>
@@ -62,38 +66,15 @@
 			</div>
 		</div>
 
+		{{ Form::hidden('slug', '') }}
+
 		<div class="row">
-			<div class="col-lg-12">
-				{{ Form::button('Create', ['type' => 'submit', 'class' => 'btn btn-lg btn-primary']) }}
+			<div class="col-lg-3">
+				{{ Form::button('Create and Continue', ['type' => 'submit', 'class' => 'btn btn-lg btn-block btn-primary']) }}
+			</div>
+			<div class="col-lg-9">
+				<button class="btn btn-lg btn-link" disabled="disabled">Next Step: Upload Files and Preview Images <span class="icn-size-16">{{ $_icons['next'] }}</span></button>
 			</div>
 		</div>
 	{{ Form::close() }}
-@stop
-
-@section('scripts')
-	<script>
-
-		$('[name="name"]').on('blur', function()
-		{
-			$.ajax({
-				url: "{{ URL::route('xtra.ajax.checkName') }}",
-				data: { name: $(this).val() },
-				dataType: "json",
-				success: function(data)
-				{
-					if (data.code == 1)
-					{
-						// Success
-					}
-					else
-					{
-						$('[name="name"]').val('');
-
-						// Show an indicator
-					}
-				}
-			});
-		});
-
-	</script>
 @stop

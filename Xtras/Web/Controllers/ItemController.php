@@ -39,8 +39,11 @@ class ItemController extends BaseController {
 	{
 		// Validate
 
-		// Create
-		$item = $this->items->create(Input::all(), false);
+		// Build the input array
+		$data = Input::all() + ['user_id' => $this->currentUser->id];
+
+		// Create the item
+		$item = $this->items->create($data, false);
 
 		// Fire the item creation event
 		Event::fire('item.created', [$item]);

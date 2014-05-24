@@ -26,8 +26,8 @@ class MainController extends BaseController {
 	public function index()
 	{
 		return View::make('pages.main')
-			->withNew($this->items->getRecentlyAdded(5))
-			->withUpdated($this->items->getRecentlyUpdated(5));
+			->withNew($this->items->getRecentlyAdded(6))
+			->withUpdated($this->items->getRecentlyUpdated(6));
 	}
 
 	public function login()

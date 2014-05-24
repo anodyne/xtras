@@ -18,7 +18,6 @@ class ItemSeeder extends Seeder {
 				'product_id' => 3,
 				'name' => 'Pulsar',
 				'desc' => $faker->paragraph(10),
-				'slug' => 'pulsar',
 			),
 			array(
 				'user_id' => 1,
@@ -26,7 +25,6 @@ class ItemSeeder extends Seeder {
 				'product_id' => 3,
 				'name' => 'DS9 Duty Uniform',
 				'desc' => $faker->paragraph(10),
-				'slug' => 'ds9-duty-uniform',
 			),
 			array(
 				'user_id' => 1,
@@ -34,7 +32,6 @@ class ItemSeeder extends Seeder {
 				'product_id' => 3,
 				'name' => 'Skinny Bio Page',
 				'desc' => $faker->paragraph(10),
-				'slug' => 'skinny-bio',
 			),
 		);
 

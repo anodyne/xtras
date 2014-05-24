@@ -1,6 +1,7 @@
 <?php namespace Xtras\Models\Eloquent;
 
-use Model;
+use Str,
+	Model;
 use Laracasts\Presenter\PresentableTrait;
 use Illuminate\Database\Eloquent\SoftDeletingTrait;
 
@@ -11,8 +12,8 @@ class ItemModel extends Model {
 
 	protected $table = 'items';
 
-	protected $fillable = ['user_id', 'type_id', 'product_id', 'name', 'desc', 
-		'slug', 'support'];
+	protected $fillable = ['user_id', 'type_id', 'product_id', 'name', 'desc',
+		'support'];
 
 	protected $dates = ['created_at', 'updated_at', 'deleted_at'];
 
@@ -62,28 +63,6 @@ class ItemModel extends Model {
 	public function orders()
 	{
 		return $this->hasMany('OrderModel', 'item_id');
-	}
-
-	/*
-	|---------------------------------------------------------------------------
-	| Model Scopes
-	|---------------------------------------------------------------------------
-	*/
-
-	public function scopeSlug($query, $slug)
-	{
-		$query->where('slug', 'like', "%{$slug}%");
-	}
-
-	/*
-	|---------------------------------------------------------------------------
-	| Accessors/Mutators
-	|---------------------------------------------------------------------------
-	*/
-
-	public function setSlugAttribute($value)
-	{
-		$this->attributes['slug'] = ( ! empty($value)) ? $value : Str::slug($this->name);
 	}
 
 }

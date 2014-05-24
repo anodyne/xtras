@@ -20,7 +20,6 @@ class CreateItems extends Migration {
 			$table->integer('product_id')->unsigned();
 			$table->string('name');
 			$table->text('desc')->nullable();
-			$table->string('slug');
 			$table->string('support')->nullable();
 			$table->timestamps();
 			$table->softDeletes();
@@ -42,6 +41,10 @@ class CreateItems extends Migration {
 			$table->bigIncrements('id');
 			$table->bigInteger('item_id');
 			$table->text('installation')->nullable();
+			$table->string('image1')->nullable();
+			$table->string('image2')->nullable();
+			$table->string('image3')->nullable();
+			$table->string('file')->nullable();
 			$table->timestamps();
 			$table->softDeletes();
 		});

@@ -1,10 +1,10 @@
 @font-face {
 	font-family: 'icomoon';
-	src: url('../fonts/icomoon-ultimate.eot');
-	src: url('../fonts/icomoon-ultimate.eot?#iefix') format('embedded-opentype'),
-		url('../fonts/icomoon-ultimate.svg#icomoon') format('svg'),
-		url('../fonts/icomoon-ultimate.woff') format('woff'),
-		url('../fonts/icomoon-ultimate.ttf') format('truetype');
+	src:url('../fonts/icomoon.eot?kkbvb9');
+	src:url('../fonts/icomoon.eot?#iefixkkbvb9') format('embedded-opentype'),
+		url('../fonts/icomoon.woff?kkbvb9') format('woff'),
+		url('../fonts/icomoon.ttf?kkbvb9') format('truetype'),
+		url('../fonts/icomoon.svg?kkbvb9#icomoon') format('svg');
 	font-weight: normal;
 	font-style: normal;
 }
@@ -13,21 +13,13 @@
 	font-family: 'icomoon';
 	speak: none;
 	font-weight: normal !important;
+	font-size: 20px !important;
 
 	-webkit-font-smoothing: antialiased;
 	font-smoothing: antialiased;
 }
-.icn-size-16 {
-	font-size: 16px !important;
-}
-.icn-size-24 {
-	font-size: 24px !important;
-}
-.icn-size-32 {
-	font-size: 32px !important;
-}
-.icn-size-64 {
-	font-size: 64px !important;
+.icn-size-lg {
+	font-size: 40px !important;
 }
 
 .icn-opacity-25 {

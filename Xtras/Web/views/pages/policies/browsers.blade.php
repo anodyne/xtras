@@ -12,7 +12,7 @@
 	<div class="visible-md visible-lg">
 		<div class="btn-toolbar">
 			<div class="btn-group">
-				<a href="{{ URL::route('policies') }}" class="btn btn-default icn-size-16">{{ $_icons['back'] }}</a>
+				<a href="{{ URL::route('policies') }}" class="btn btn-default">{{ $_icons['back'] }}</a>
 			</div>
 		</div>
 	</div>

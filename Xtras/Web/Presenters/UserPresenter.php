@@ -59,7 +59,7 @@ class UserPresenter extends Presenter {
 	{
 		if ( ! empty($this->entity->url))
 		{
-			return HTML::link($this->entity->url, "Visit Author's Site", ['class' => 'btn btn-default']);
+			return HTML::link($this->entity->url, "Author's Website", ['class' => 'btn btn-default']);
 		}
 
 		return false;

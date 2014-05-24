@@ -18,6 +18,7 @@ return array(
 	'login' => '<span class="icn" data-icon=")"></span>',
 	'logout' => '<span class="icn" data-icon="("></span>',
 
+	'next' => '<span class="icn" data-icon=">"></span>',
 	'notify' => '<span class="icn" data-icon="n"></span>',
 
 	'remove' => '<span class="icn" data-icon="-"></span>',

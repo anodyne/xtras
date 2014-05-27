@@ -204,6 +204,11 @@ return array(
 		'ItemRepositoryContract' => 'Xtras\Repositories\Contracts\ItemRepositoryContract',
 		'UserRepositoryContract' => 'Xtras\Repositories\Contracts\UserRepositoryContract',
 
+		/**
+		 * Traits
+		 */
+		'UtilityTrait'	=> 'Xtras\Traits\UtilityTrait',
+
 	),
 
 );

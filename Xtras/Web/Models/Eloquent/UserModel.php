@@ -59,6 +59,13 @@ class UserModel extends Model implements UserInterface, RemindableInterface {
 			: $value;
 	}
 
+	public function setSlugAttribute($value)
+	{
+		$this->attributes['slug'] = ( ! empty($value))
+			? $value
+			: Str::slug(Str::lower($this->name));
+	}
+
 	/*
 	|--------------------------------------------------------------------------
 	| Model Scopes
@@ -72,22 +79,13 @@ class UserModel extends Model implements UserInterface, RemindableInterface {
 
 	/*
 	|--------------------------------------------------------------------------
-	| Model Boot
+	| Model Methods
 	|--------------------------------------------------------------------------
 	*/
 
-	public static function boot()
+	public function access()
 	{
-		parent::boot();
-
-		/**
-		 * When the user is being saved, convert their name into the profile
-		 * slug and drop everything to lowercase.
-		 */
-		static::saving(function($user)
-		{
-			$user->slug = Str::lower(Str::slug($user->name));
-		});
+		return 1;
 	}
 
 }

@@ -10,7 +10,11 @@ class UserPresenter extends Presenter {
 
 	public function avatar(array $options)
 	{
-		$mergedOptions = $options + ['url' => URL::asset('images/ap-avatar.jpg')];
+		// Figure out what the avatar file is
+		$url = ($this->entity->avatar) ?: 'no-avatar.jpg';
+
+		// Merge all the options to pass them to the partial
+		$mergedOptions = $options + ['url' => URL::asset('images/avatars/'.$url)];
 
 		return View::make('partials.avatar')->with($mergedOptions);
 	}

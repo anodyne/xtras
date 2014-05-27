@@ -1,7 +1,7 @@
 <div class="xtra">
 	{{ View::make('partials.avatar')->withType(false)->withUrl('http://www.hdwallpapers.in/walls/fantasy_space-wide.jpg')->withClass('item-preview') }}
 
-	{{ $item->user->present()->avatar(['type' => 'link', 'link' => URL::route('profile', [$item->user->slug]), 'class' => 'avatar xtra-avatar img-circle']) }}
+	<span class="tooltip-top" data-title="{{ $item->user->name }}">{{ $item->user->present()->avatar(['type' => 'link', 'link' => URL::route('profile', [$item->user->slug]), 'class' => 'avatar xtra-avatar img-circle']) }}</span>
 
 	<h4 class="xtra-heading">{{ $item->present()->name }}</h4>
 	<div class="text-center">

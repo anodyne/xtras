@@ -21,16 +21,67 @@ class ItemSeeder extends Seeder {
 			),
 			array(
 				'user_id' => 1,
+				'type_id' => 1,
+				'product_id' => 3,
+				'name' => 'Titan',
+				'desc' => $faker->paragraph(10),
+			),
+			array(
+				'user_id' => 1,
+				'type_id' => 1,
+				'product_id' => 3,
+				'name' => 'Lightness',
+				'desc' => $faker->paragraph(10),
+			),
+
+			array(
+				'user_id' => 2,
 				'type_id' => 2,
 				'product_id' => 3,
 				'name' => 'DS9 Duty Uniform',
 				'desc' => $faker->paragraph(10),
 			),
 			array(
+				'user_id' => 2,
+				'type_id' => 2,
+				'product_id' => 3,
+				'name' => 'DS9 Dress Uniform',
+				'desc' => $faker->paragraph(10),
+			),
+			array(
+				'user_id' => 2,
+				'type_id' => 2,
+				'product_id' => 3,
+				'name' => 'DS9 Alternate Uniform #1',
+				'desc' => $faker->paragraph(10),
+			),
+			array(
+				'user_id' => 2,
+				'type_id' => 2,
+				'product_id' => 3,
+				'name' => 'DS9 Alternate Uniform #2',
+				'desc' => $faker->paragraph(10),
+			),
+			
+			array(
 				'user_id' => 1,
 				'type_id' => 3,
 				'product_id' => 3,
 				'name' => 'Skinny Bio Page',
+				'desc' => $faker->paragraph(10),
+			),
+			array(
+				'user_id' => 1,
+				'type_id' => 3,
+				'product_id' => 3,
+				'name' => 'External Post Archiving',
+				'desc' => $faker->paragraph(10),
+			),
+			array(
+				'user_id' => 1,
+				'type_id' => 3,
+				'product_id' => 3,
+				'name' => 'Stardate Display',
 				'desc' => $faker->paragraph(10),
 			),
 		);

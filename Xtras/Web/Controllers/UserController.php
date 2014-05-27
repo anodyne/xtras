@@ -2,6 +2,8 @@
 
 use Auth,
 	View,
+	Event,
+	Redirect,
 	UserRepositoryContract;
 
 class UserController extends BaseController {
@@ -56,7 +58,15 @@ class UserController extends BaseController {
 
 	public function update($id)
 	{
-		//
+		// Validate
+
+		// Update the user
+		$user = $this->users->update(Input::all());
+
+		// Fire the user update event
+		Event::fire('user.updated', [$user]);
+
+		return Redirect::route('account.edit', [$user->slug]);
 	}
 
 	public function destroy($id)

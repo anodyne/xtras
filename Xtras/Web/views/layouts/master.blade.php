@@ -157,6 +157,13 @@
 
 				<script src="http://localhost/global/bootstrap/3.1/js/bootstrap.min.js"></script>
 			@endif
+			<script>
+				$(document).ready(function()
+				{
+					$('.tooltip-bottom').tooltip({ position: "bottom" });
+					$('.tooltip-top').tooltip({ position: "top" });
+				});
+			</script>
 			@yield('scripts')
 		</div>
 	</body>

@@ -65,4 +65,15 @@ class ItemModel extends Model {
 		return $this->hasMany('OrderModel', 'item_id');
 	}
 
+	/*
+	|---------------------------------------------------------------------------
+	| Model Methods
+	|---------------------------------------------------------------------------
+	*/
+
+	public function isActive()
+	{
+		return ( ! empty($this->meta->toArray()['file']));
+	}
+
 }

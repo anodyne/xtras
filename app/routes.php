@@ -2,5 +2,7 @@
 
 Route::get('test', function()
 {
-	echo Markdown::parse('# Hello Parsedown');
+	$item = ItemModel::first();
+
+	sd($item->meta->toArray());
 });

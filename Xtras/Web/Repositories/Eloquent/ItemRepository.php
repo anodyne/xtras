@@ -1,6 +1,7 @@
 <?php namespace Xtras\Repositories\Eloquent;
 
-use ItemModel,
+use Input,
+	ItemModel,
 	TypeModel,
 	ProductModel,
 	ItemMetaModel,
@@ -13,8 +14,10 @@ class ItemRepository implements ItemRepositoryContract {
 		return ItemModel::all();
 	}
 
-	public function create(array $data, $flashMessage = true)
+	public function create(array $data = [], $flashMessage = true)
 	{
+		$data = (count($data) > 0) ? $data : Input::all();
+
 		$item = ItemModel::create($data);
 
 		if (array_key_exists('meta', $data))

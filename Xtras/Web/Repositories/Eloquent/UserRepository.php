@@ -13,7 +13,7 @@ class UserRepository implements UserRepositoryContract {
 		return UserModel::all();
 	}
 
-	public function create(array $data, $flashMessage = true)
+	public function create(array $data = [], $flashMessage = true)
 	{
 		# code...
 	}
@@ -33,7 +33,7 @@ class UserRepository implements UserRepositoryContract {
 		return UserModel::where('slug', $slug)->first();
 	}
 
-	public function update($id, array $data, $flashMessage = true)
+	public function update($id, array $data = [], $flashMessage = true)
 	{
 		// Get the user
 		$user = $this->find($id);

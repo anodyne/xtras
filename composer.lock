@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "6ccc79f4e5f470f5d4f23147efac23a2",
+    "hash": "1d4aa796bb342cb350aff8063cae29a2",
     "packages": [
         {
             "name": "aws/aws-sdk-php",
@@ -387,16 +387,16 @@
         },
         {
             "name": "guzzlehttp/guzzle",
-            "version": "4.1.0",
+            "version": "4.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/guzzle/guzzle.git",
-                "reference": "85a0ba7de064493c928a8bcdc5eef01e0bde9953"
+                "reference": "577a69ff7d0a24e9576a2885c3a7afbaadd51ec1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/guzzle/guzzle/zipball/85a0ba7de064493c928a8bcdc5eef01e0bde9953",
-                "reference": "85a0ba7de064493c928a8bcdc5eef01e0bde9953",
+                "url": "https://api.github.com/repos/guzzle/guzzle/zipball/577a69ff7d0a24e9576a2885c3a7afbaadd51ec1",
+                "reference": "577a69ff7d0a24e9576a2885c3a7afbaadd51ec1",
                 "shasum": ""
             },
             "require": {
@@ -415,7 +415,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "4.0.x-dev"
+                    "dev-master": "4.1.x-dev"
                 }
             },
             "autoload": {
@@ -448,7 +448,7 @@
                 "rest",
                 "web service"
             ],
-            "time": "2014-05-28 05:13:19"
+            "time": "2014-06-08 20:00:20"
         },
         {
             "name": "guzzlehttp/streams",
@@ -801,6 +801,65 @@
                 "laravel"
             ],
             "time": "2014-06-01 18:14:55"
+        },
+        {
+            "name": "laravelbook/ardent",
+            "version": "v2.4.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/laravelbook/ardent.git",
+                "reference": "0a0238b8040abc1c71401ce27a8edf2619fa5bed"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/laravelbook/ardent/zipball/0a0238b8040abc1c71401ce27a8edf2619fa5bed",
+                "reference": "0a0238b8040abc1c71401ce27a8edf2619fa5bed",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/database": "~4.1",
+                "illuminate/support": "~4.1",
+                "illuminate/validation": "~4.1",
+                "php": ">=5.3.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "LaravelBook\\Ardent": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Max Ehsan",
+                    "email": "contact@laravelbook.com",
+                    "homepage": "http://laravelbook.com/",
+                    "role": "Developer"
+                },
+                {
+                    "name": "Igor Santos",
+                    "email": "igorsantos07@gmail.com",
+                    "homepage": "http://www.igorsantos.com.br",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Self-validating smart models for Laravel 4's Eloquent O/RM",
+            "homepage": "http://laravelbook.com/",
+            "keywords": [
+                "Active Record",
+                "activerecord",
+                "database",
+                "eloquent",
+                "framework",
+                "laravel",
+                "orm",
+                "sql",
+                "validation"
+            ],
+            "time": "2014-02-25 20:39:04"
         },
         {
             "name": "league/flysystem",

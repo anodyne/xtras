@@ -37,8 +37,6 @@ class ItemController extends BaseController {
 
 	public function store()
 	{
-		// Validate
-
 		// Build the input array
 		$data = Input::all() + ['user_id' => $this->currentUser->id];
 

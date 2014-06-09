@@ -19,6 +19,7 @@ class CreateItems extends Migration {
 			$table->integer('type_id')->unsigned();
 			$table->integer('product_id')->unsigned();
 			$table->string('name');
+			$table->string('slug')->nullable();
 			$table->text('desc')->nullable();
 			$table->string('support')->nullable();
 			$table->timestamps();

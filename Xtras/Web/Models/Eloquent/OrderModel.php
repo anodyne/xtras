@@ -16,14 +16,9 @@ class OrderModel extends Model {
 	|---------------------------------------------------------------------------
 	*/
 
-	public function item()
-	{
-		return $this->belongsTo('ItemModel');
-	}
-
-	public function user()
-	{
-		return $this->belongsTo('UserModel');
-	}
+	public static $relationsData = [
+		'item'	=> [self::BELONGS_TO, 'ItemModel'],
+		'user'	=> [self::BELONGS_TO, 'UserModel'],
+	];
 
 }

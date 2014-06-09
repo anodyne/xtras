@@ -1,7 +1,6 @@
 <?php namespace Xtras\Models\Eloquent;
 
-use Str,
-	Model;
+use Str, Model;
 use Laracasts\Presenter\PresentableTrait;
 use Illuminate\Database\Eloquent\SoftDeletingTrait;
 
@@ -12,8 +11,8 @@ class ItemModel extends Model {
 
 	protected $table = 'items';
 
-	protected $fillable = ['user_id', 'type_id', 'product_id', 'name', 'desc',
-		'support'];
+	protected $fillable = ['user_id', 'type_id', 'product_id', 'name', 'slug',
+		'desc', 'support'];
 
 	protected $dates = ['created_at', 'updated_at', 'deleted_at'];
 
@@ -21,48 +20,54 @@ class ItemModel extends Model {
 
 	/*
 	|---------------------------------------------------------------------------
+	| Validation
+	|---------------------------------------------------------------------------
+	*/
+
+	public static $rules = [
+		'type_id'		=> 'required|integer',
+		'product_id'	=> 'required|integer',
+		'name'			=> 'required',
+	];
+
+	public static $customMessages = [
+		'type_id.required' => "You must enter a type",
+		'type_id.integer' => "You have entered an invalid value for the type. Please select from the dropdown.",
+		'product_id.required' => "You must enter a product",
+		'product_id.integer' => "You have entered an invalid value for the product. Please select from the dropdown.",
+		'name.required' => "You must enter a name",
+	];
+
+	/*
+	|---------------------------------------------------------------------------
 	| Relationships
 	|---------------------------------------------------------------------------
 	*/
 
-	public function product()
-	{
-		return $this->belongsTo('ProductModel');
-	}
+	public static $relationsData = [
+		'product'	=> [self::BELONGS_TO, 'ProductModel'],
+		'type'		=> [self::BELONGS_TO, 'TypeModel'],
+		'user'		=> [self::BELONGS_TO, 'UserModel'],
+		'messages'	=> [self::HAS_MANY, 'ItemMessageModel', 'foreignKey' => 'item_id'],
+		'meta'		=> [self::HAS_MANY, 'ItemMetaModel', 'foreignKey' => 'item_id'],
+		'ratings'	=> [self::HAS_MANY, 'ItemRatingModel', 'foreignKey' => 'item_id'],
+		'comments'	=> [self::HAS_MANY, 'CommentModel', 'foreignKey' => 'item_id'],
+		'orders'	=> [self::HAS_MANY, 'OrderModel', 'foreignKey' => 'item_id'],
+	];
 
-	public function type()
-	{
-		return $this->belongsTo('TypeModel');
-	}
+	/*
+	|---------------------------------------------------------------------------
+	| Model Hooks
+	|---------------------------------------------------------------------------
+	*/
 
-	public function user()
+	public function beforeSave()
 	{
-		return $this->belongsTo('UserModel');
-	}
-
-	public function messages()
-	{
-		return $this->hasMany('ItemMessageModel', 'item_id');
-	}
-
-	public function meta()
-	{
-		return $this->hasOne('ItemMetaModel', 'item_id');
-	}
-
-	public function ratings()
-	{
-		return $this->hasMany('ItemRatingModel', 'item_id');
-	}
-
-	public function comments()
-	{
-		return $this->hasMany('CommentModel', 'item_id');
-	}
-
-	public function orders()
-	{
-		return $this->hasMany('OrderModel', 'item_id');
+		// If the name has changed, updated the slug
+		if ($this->isDirty('name'))
+		{
+			$this->slug = Str::slug(Str::lower($this->name));
+		}
 	}
 
 	/*

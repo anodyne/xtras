@@ -23,9 +23,8 @@ class TypeModel extends Model {
 	|---------------------------------------------------------------------------
 	*/
 
-	public function items()
-	{
-		return $this->hasMany('ItemModel', 'type_id');
-	}
+	public static $relationsData = [
+		'items' => [self::HAS_MANY, 'ItemModel', 'foreignKey' => 'type_id'],
+	];
 
 }

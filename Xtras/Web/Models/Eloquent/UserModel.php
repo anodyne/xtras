@@ -30,40 +30,34 @@ class UserModel extends Model implements UserInterface, RemindableInterface {
 
 	protected $presenter = 'Xtras\Presenters\UserPresenter';
 
+	// Hash the password automatically
+	public static $passwordAttributes  = ['password'];
+	public $autoHashPasswordAttributes = true;
+
 	/*
 	|--------------------------------------------------------------------------
 	| Relationships
 	|--------------------------------------------------------------------------
 	*/
 
-	public function items()
-	{
-		return $this->hasMany('ItemModel', 'user_id');
-	}
-
-	public function orders()
-	{
-		return $this->hasMany('OrderModel', 'user_id');
-	}
+	public static $relationsData = [
+		'items'		=> [self::HAS_MANY, 'ItemModel', 'foreignKey' => 'user_id'],
+		'orders'	=> [self::HAS_MANY, 'OrderModel', 'foreignKey' => 'user_id'],
+	];
 
 	/*
-	|--------------------------------------------------------------------------
-	| Model Accessors and Mutators
-	|--------------------------------------------------------------------------
+	|---------------------------------------------------------------------------
+	| Model Hooks
+	|---------------------------------------------------------------------------
 	*/
 
-	public function setPasswordAttribute($value)
+	public function beforeSave()
 	{
-		$this->attributes['password'] = (Str::length($value) < 60) 
-			? Hash::make($value)
-			: $value;
-	}
-
-	public function setSlugAttribute($value)
-	{
-		$this->attributes['slug'] = ( ! empty($value))
-			? $value
-			: Str::slug(Str::lower($this->name));
+		// If the name has changed, update the slug
+		if ($this->isDirty('name'))
+		{
+			$this->slug = Str::slug(Str::lower($this->name));
+		}
 	}
 
 	/*

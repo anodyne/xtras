@@ -21,9 +21,8 @@ class CommentModel extends Model {
 	|---------------------------------------------------------------------------
 	*/
 
-	public function item()
-	{
-		return $this->belongsTo('ItemModel');
-	}
+	public static $relationsData = [
+		'item' => [self::BELONGS_TO, 'ItemModel'],
+	];
 
 }

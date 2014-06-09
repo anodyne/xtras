@@ -1,22 +1,22 @@
 <?php namespace Xtras\Extensions\Laravel\Database\Eloquent;
 
 use Date;
-use Illuminate\Database\Eloquent\Model as EloquentModel;
+use LaravelBook\Ardent\Ardent;
 
-class Model extends EloquentModel {
+class Model extends Ardent {
+
+	// Hydrate models from the input array
+	public $autoHydrateEntityFromInput = true;
+	public $forceEntityHydrationFromInput = true;
+
+	// Get rid of attributes we don't need
+	public $autoPurgeRedundantAttributes = true;
 	
 	/*
 	|--------------------------------------------------------------------------
 	| Eloquent Model Method Overrides
 	|--------------------------------------------------------------------------
 	*/
-
-	public function __construct(array $attributes = [])
-	{
-		$attributes = $this->scrubInputData($attributes);
-
-		parent::__construct($attributes);
-	}
 
 	/**
 	 * Get a fresh timestamp for the model.
@@ -50,33 +50,6 @@ class Model extends EloquentModel {
 		}
 
 		return $value;
-	}
-
-	/*
-	|--------------------------------------------------------------------------
-	| Model Helpers
-	|--------------------------------------------------------------------------
-	*/
-
-	/**
-	 * Scrub the data being used to make sure we're can store it in the table.
-	 *
-	 * @param	array	Array of data to scrub
-	 * @return	array
-	 */
-	protected function scrubInputData(array $data)
-	{
-		// Loop through the data and scrub it for any issues
-		foreach ($data as $key => $value)
-		{
-			// Make sure we're only using fillable fields
-			if ( ! $this->isFillable($key))
-			{
-				unset($data[$key]);
-			}
-		}
-
-		return $data;
 	}
 
 	/*

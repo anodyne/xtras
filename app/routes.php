@@ -4,5 +4,5 @@ Route::get('test', function()
 {
 	$item = ItemModel::first();
 
-	sd($item->meta->toArray());
+	s($item->orders->toArray());
 });

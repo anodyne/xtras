@@ -96,7 +96,7 @@ class ItemSeeder extends Seeder {
 			ItemRatingModel::create(array(
 				'user_id' => 1,
 				'item_id' => 1,
-				'rating' => $faker->randomNumber(1, 5),
+				'rating' => $faker->numberBetween(1, 5),
 			));
 		}
 	}

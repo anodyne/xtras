@@ -35,7 +35,6 @@
 @stop
 
 @section('scripts')
-	{{ HTML::script('js/jquery.ui.effect.min.js') }}
 	<script>
 
 		$('.xtra-toggle').on('click', function(e)
@@ -46,25 +45,14 @@
 
 			if (target == 'newest')
 			{
-				$('#updated').addClass('hide', {
-					duration: 500,
-					queue: false
-				});
-				$('#newest').removeClass('hide', {
-					duration: 500,
-					queue: false
-				});
+				$('div#updated').addClass('hide');
+				$('div#newest').removeClass('hide');
 			}
-			else if (target == 'updated')
+			
+			if (target == 'updated')
 			{
-				$('#newest').addClass('hide', {
-					duration: 500,
-					queue: false
-				});
-				$('#updated').removeClass('hide', {
-					duration: 500,
-					queue: false
-				});
+				$('div#newest').addClass('hide');
+				$('div#updated').removeClass('hide');
 			}
 		});
 

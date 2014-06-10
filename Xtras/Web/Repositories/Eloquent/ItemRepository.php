@@ -68,7 +68,7 @@ class ItemRepository implements ItemRepositoryContract {
 		return ItemModel::orderDesc('updated_at')->take($number)->get();
 	}
 
-	public function update($id, array $data, $flashMessage = true)
+	public function update($id, array $data = [], $flashMessage = true)
 	{
 		# code...
 	}

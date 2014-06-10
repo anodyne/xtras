@@ -7,15 +7,15 @@ use Auth,
 	Session,
 	Redirect,
 	Validator,
-	ItemRepositoryContract,
-	UserRepositoryContract;
+	ItemRepositoryInterface,
+	UserRepositoryInterface;
 
 class MainController extends BaseController {
 
 	protected $items;
 	protected $users;
 
-	public function __construct(ItemRepositoryContract $items, UserRepositoryContract $users)
+	public function __construct(ItemRepositoryInterface $items, UserRepositoryInterface $users)
 	{
 		parent::__construct();
 

@@ -4,13 +4,13 @@ use Auth,
 	View,
 	Event,
 	Redirect,
-	UserRepositoryContract;
+	UserRepositoryInterface;
 
 class UserController extends BaseController {
 
 	protected $users;
 
-	public function __construct(UserRepositoryContract $users)
+	public function __construct(UserRepositoryInterface $users)
 	{
 		parent::__construct();
 

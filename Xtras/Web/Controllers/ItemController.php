@@ -1,16 +1,17 @@
 <?php namespace Xtras\Controllers;
 
-use View,
+use App,
+	View,
 	Event,
 	Input,
 	Redirect,
-	ItemRepositoryContract;
+	ItemRepositoryInterface;
 
 class ItemController extends BaseController {
 
 	protected $items;
 
-	public function __construct(ItemRepositoryContract $items)
+	public function __construct(ItemRepositoryInterface $items)
 	{
 		parent::__construct();
 
@@ -37,11 +38,13 @@ class ItemController extends BaseController {
 
 	public function store()
 	{
-		// Build the input array
-		$data = Input::all() + ['user_id' => $this->currentUser->id];
-
+		if (Input::get('user_id') != $this->currentUser->id)
+		{
+			//
+		}
+		
 		// Create the item
-		$item = $this->items->create($data, false);
+		$item = $this->items->create();
 
 		// Fire the item creation event
 		Event::fire('item.created', [$item]);
@@ -80,7 +83,8 @@ class ItemController extends BaseController {
 	public function upload($id)
 	{
 		return View::make('pages.item.upload')
-			->withItem($this->items->find($id));
+			->withItem($this->items->find($id))
+			->withBrowser(App::make('xtras.browser'));
 	}
 
 	public function ajaxCheckName()

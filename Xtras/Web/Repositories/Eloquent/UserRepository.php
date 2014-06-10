@@ -2,9 +2,9 @@
 
 use UserModel,
 	UtilityTrait,
-	UserRepositoryContract;
+	UserRepositoryInterface;
 
-class UserRepository implements UserRepositoryContract {
+class UserRepository implements UserRepositoryInterface {
 
 	use UtilityTrait;
 

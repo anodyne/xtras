@@ -5,9 +5,9 @@ use Input,
 	TypeModel,
 	ProductModel,
 	ItemMetaModel,
-	ItemRepositoryContract;
+	ItemRepositoryInterface;
 
-class ItemRepository implements ItemRepositoryContract {
+class ItemRepository implements ItemRepositoryInterface {
 
 	public function all()
 	{
@@ -16,18 +16,12 @@ class ItemRepository implements ItemRepositoryContract {
 
 	public function create(array $data = [], $flashMessage = true)
 	{
-		$data = (count($data) > 0) ? $data : Input::all();
+		$item = new ItemModel;
+		$item->save();
 
-		$item = ItemModel::create($data);
-
-		if (array_key_exists('meta', $data))
+		if (Input::has('meta'))
 		{
-			$this->updateMetaData($item->id, $data['meta']);
-		}
-
-		if ($flashMessage)
-		{
-			//
+			$this->updateMetaData($item->id, Input::get('meta'));
 		}
 
 		return $item;
@@ -60,12 +54,12 @@ class ItemRepository implements ItemRepositoryContract {
 
 	public function getRecentlyAdded($number)
 	{
-		return ItemModel::orderDesc('created_at')->take($number)->get();
+		return ItemModel::orderBy('created_at', 'desc')->take($number)->get();
 	}
 
 	public function getRecentlyUpdated($number)
 	{
-		return ItemModel::orderDesc('updated_at')->take($number)->get();
+		return ItemModel::orderBy('updated_at', 'desc')->take($number)->get();
 	}
 
 	public function update($id, array $data = [], $flashMessage = true)
@@ -78,7 +72,7 @@ class ItemRepository implements ItemRepositoryContract {
 		// Get the item
 		$item = $this->find($id);
 
-		if ($item->meta)
+		if ($item->meta->count() > 0)
 		{
 			// Get the meta data
 			$meta = $item->meta;

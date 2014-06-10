@@ -6,13 +6,13 @@ use Auth,
 	Session,
 	Redirect,
 	Validator,
-	UserRepositoryContract;
+	UserRepositoryInterface;
 
 class LoginController extends BaseController {
 
 	protected $user;
 	
-	public function __construct(UserRepositoryContract $user)
+	public function __construct(UserRepositoryInterface $user)
 	{
 		parent::__construct();
 

@@ -2,13 +2,13 @@
 
 use View,
 	Redirect,
-	ItemRepositoryContract;
+	ItemRepositoryInterface;
 
 class SearchController extends BaseController {
 
 	protected $items;
 
-	public function __construct(ItemRepositoryContract $items)
+	public function __construct(ItemRepositoryInterface $items)
 	{
 		parent::__construct();
 

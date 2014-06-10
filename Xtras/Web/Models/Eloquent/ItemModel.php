@@ -32,9 +32,9 @@ class ItemModel extends Model {
 
 	public static $customMessages = [
 		'type_id.required' => "You must enter a type",
-		'type_id.integer' => "You have entered an invalid value for the type. Please select from the dropdown.",
+		'type_id.integer' => "You have entered an invalid value for the type. Please select the type from the dropdown.",
 		'product_id.required' => "You must enter a product",
-		'product_id.integer' => "You have entered an invalid value for the product. Please select from the dropdown.",
+		'product_id.integer' => "You have entered an invalid value for the product. Please select the product from the dropdown.",
 		'name.required' => "You must enter a name",
 	];
 
@@ -57,17 +57,15 @@ class ItemModel extends Model {
 
 	/*
 	|---------------------------------------------------------------------------
-	| Model Hooks
+	| Model Accessors/Mutators
 	|---------------------------------------------------------------------------
 	*/
 
-	public function beforeSave()
+	public function setSlugAttribute($value)
 	{
-		// If the name has changed, updated the slug
-		if ($this->isDirty('name'))
-		{
-			$this->slug = Str::slug(Str::lower($this->name));
-		}
+		$this->attributes['slug'] = ( ! empty($value)) 
+			? $value 
+			: Str::slug(Str::lower($this->attributes['name']));
 	}
 
 	/*

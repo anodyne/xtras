@@ -67,6 +67,7 @@
 		</div>
 
 		{{ Form::hidden('slug', '') }}
+		{{ Form::hidden('user_id', $_currentUser->id) }}
 
 		<div class="row">
 			<div class="col-lg-3">

@@ -181,6 +181,7 @@ return array(
 		/**
 		 * Classes
 		 */
+		'Browser'	=> 'Ikimea\Browser\Browser',
 		'Date'		=> 'Carbon\Carbon',
 		'Markdown'	=> 'Xtras\Facades\Markdown',
 		'Model'		=> 'Xtras\Extensions\Laravel\Database\Eloquent\Model',
@@ -199,10 +200,10 @@ return array(
 		'OrderModel'		=> 'Xtras\Models\Eloquent\OrderModel',
 
 		/**
-		 * Repository Contracts
+		 * Repository Interfaces
 		 */
-		'ItemRepositoryContract' => 'Xtras\Repositories\Contracts\ItemRepositoryContract',
-		'UserRepositoryContract' => 'Xtras\Repositories\Contracts\UserRepositoryContract',
+		'ItemRepositoryInterface' => 'Xtras\Repositories\Interfaces\ItemRepositoryInterface',
+		'UserRepositoryInterface' => 'Xtras\Repositories\Interfaces\UserRepositoryInterface',
 
 		/**
 		 * Traits

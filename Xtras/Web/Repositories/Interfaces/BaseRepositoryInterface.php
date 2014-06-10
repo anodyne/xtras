@@ -1,6 +1,6 @@
-<?php namespace Xtras\Repositories\Contracts;
+<?php namespace Xtras\Repositories\Interfaces;
 
-interface BaseRepositoryContract {
+interface BaseRepositoryInterface {
 	
 	public function all();
 	public function create(array $data = [], $flashMessage = true);

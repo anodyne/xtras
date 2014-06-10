@@ -1,6 +1,6 @@
-<?php namespace Xtras\Repositories\Contracts;
+<?php namespace Xtras\Repositories\Interfaces;
 
-interface ItemRepositoryContract extends BaseRepositoryContract {
+interface ItemRepositoryInterface extends BaseRepositoryInterface {
 
 	public function findByName($name);
 	public function getItemTypes();

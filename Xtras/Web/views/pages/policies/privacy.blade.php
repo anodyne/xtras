@@ -7,26 +7,22 @@
 @section('content')
 	<h1>Privacy Policy</h1>
 
-	<div class="visible-xs visible-sm"></div>
-
-	<div class="visible-md visible-lg">
-		<div class="btn-toolbar">
-			<div class="btn-group">
-				<a href="{{ URL::route('policies') }}" class="btn btn-default">{{ $_icons['back'] }}</a>
-			</div>
+	<div class="btn-toolbar">
+		<div class="btn-group">
+			<a href="{{ URL::route('policies') }}" class="btn btn-default">{{ $_icons['back'] }}</a>
 		</div>
 	</div>
 
 	<h2>General Information</h2>
 
-	<p>We collect the email addresses of those who communicate with us via e-mail, aggregate information on what pages consumers access or visit, and information volunteered by the consumer (such as survey information and/or site registrations). The information we collect is used to improve the content of our Web pages and the quality of our service, and is not shared with or sold to other organizations for commercial purposes, except to provide products or services you've requested, when we have your permission, or under the following circumstances:</p>
+	<p>We do not share or sell your information to other organizations for commercial purposes. We hate when companies do that to us, so we're not going to do it to you. The only exceptions to this rule are:</p>
 
 	<ul>
-		<li>It is necessary to share information in order to investigate, prevent, or take action regarding illegal activities, suspected fraud, situations involving potential threats to the physical safety of any person, violations of <a href="{{ URL::route('policies', ['terms']) }}">Terms of Service</a>, or as otherwise required by law.</li>
+		<li>It is necessary to share information in order to investigate, prevent, or take action regarding illegal activities, suspected fraud, situations involving potential threats to the physical safety of any person, violations of <a href="{{ URL::route('policies', ['terms']) }}">Terms of Use</a>, or as otherwise required by law.</li>
 		<li>We transfer information about you if Anodyne Productions is acquired by or merged with another company. In this event, Anodyne will notify you before information about you is transferred and becomes subject to a different privacy policy.</li>
 	</ul>
 
-	<h2>Information Gathering and Usage</h2>
+	<h2>Information Gathering &amp; Usage</h2>
 
 	<ul>
 		<li>When you register for an Anodyne Productions account, we ask for information such as your name and email address.</li>
@@ -47,7 +43,7 @@
 
 	<h2>Disclosure</h2>
 
-	<p>Anodyne Productions may disclose personally identifiable information under special circumstances, such as when your actions violate the <a href="{{ URL::route('policies', ['terms']) }}">Terms of Service</a>.</p>
+	<p>Anodyne Productions may disclose personally identifiable information under special circumstances, such as when your actions violate the <a href="{{ URL::route('policies', ['terms']) }}">Terms of Use</a>.</p>
 
 	<h2>Changes</h2>
 

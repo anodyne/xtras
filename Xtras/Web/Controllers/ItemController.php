@@ -52,10 +52,10 @@ class ItemController extends BaseController {
 		return Redirect::route('xtra.upload', [$item->id]);
 	}
 
-	public function show($id)
+	public function show($author, $slug)
 	{
 		// Get the item by its ID
-		$item = $this->items->find($id);
+		$item = $this->items->findByAuthorAndSlug($author, $slug);
 
 		if ($item)
 		{

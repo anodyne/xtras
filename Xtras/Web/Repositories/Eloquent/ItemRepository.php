@@ -3,6 +3,7 @@
 use Input,
 	ItemModel,
 	TypeModel,
+	UserModel,
 	ProductModel,
 	ItemMetaModel,
 	ItemRepositoryInterface;
@@ -37,9 +38,43 @@ class ItemRepository implements ItemRepositoryInterface {
 		return ItemModel::find($id);
 	}
 
+	public function findByAuthor($author)
+	{
+		// Get the user
+		$user = UserModel::where('slug', $author)->first();
+
+		if ($user)
+		{
+			return $user->items;
+		}
+
+		return false;
+	}
+
+	public function findByAuthorAndSlug($author, $slug)
+	{
+		// Get all items for the author
+		$items = $this->findByAuthor($author);
+
+		if ($items)
+		{
+			return $items->filter(function($i) use ($slug)
+			{
+				return $i->slug === $slug;
+			})->first();
+		}
+
+		return false;
+	}
+
 	public function findByName($name)
 	{
 		return ItemModel::where('name', $name)->get();
+	}
+
+	public function findBySlug($slug)
+	{
+		return ItemModel::where('slug', 'like', "%{$slug}%")->get();
 	}
 
 	public function getItemTypes()

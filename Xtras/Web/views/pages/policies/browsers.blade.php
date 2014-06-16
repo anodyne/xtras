@@ -17,9 +17,9 @@
 		</div>
 	</div>
 
-	<p>Even though AnodyneXtras is designed to support the latest web browsers, we recommend using <a href="https://www.google.com/chrome/" target="_blank">Google Chrome</a>. It is fast and automatically keeps itself up to date. We also support the current versions of Safari, Firefox, and IE 9+.</p>
+	<p>Even though AnodyneXtras is designed to support the latest web browsers, we recommend using <a href="https://www.google.com/chrome/" target="_blank">Google Chrome</a>. It's fast and automatically keeps itself up-to-date. We also support the current versions of Safari and Firefox as well as well as IE 9+.</p>
 
-	<p>While beta and developer builds of these browsers are likely to work, you may encounter unexpected bugs due to the unstable nature of these builds. If you encounter a bug on AnodyneXtras in one of these unreleased builds, please verify that it also exists in the stable version of the same browser. If the bug appears to only exist in the unstable version, you should probably report it to the browser developer first.</p>
+	<p>While beta and developer builds of these browsers are likely to work, you may encounter unexpected bugs due to the unstable nature of these builds. If you encounter a bug on AnodyneXtras in one of these unreleased builds, please verify it also exists in the stable version of the same browser. If the bug appears to only exist in the unstable version, you should probably report it to the browser developer first.</p>
 
 	<h2>IE Compatibility View</h2>
 

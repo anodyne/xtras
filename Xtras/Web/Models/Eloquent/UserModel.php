@@ -47,17 +47,15 @@ class UserModel extends Model implements UserInterface, RemindableInterface {
 
 	/*
 	|---------------------------------------------------------------------------
-	| Model Hooks
+	| Model Accessors/Mutators
 	|---------------------------------------------------------------------------
 	*/
 
-	public function beforeSave()
+	public function setSlugAttribute($value)
 	{
-		// If the name has changed, update the slug
-		if ($this->isDirty('name'))
-		{
-			$this->slug = Str::slug(Str::lower($this->name));
-		}
+		$this->attributes['slug'] = ( ! empty($value)) 
+			? $value 
+			: Str::slug(Str::lower($this->attributes['name']));
 	}
 
 	/*

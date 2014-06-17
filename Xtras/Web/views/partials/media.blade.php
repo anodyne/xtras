@@ -9,6 +9,6 @@
 		{{ $item->present()->productAsLabel }}
 	</div>
 	<div class="xtra-desc">
-		<p><a href="{{ URL::route('item', [$item->id]) }}" class="btn btn-lg btn-block btn-default">More Info</a></p>
+		<p><a href="{{ URL::route('item', [$item->user->slug, $item->slug]) }}" class="btn btn-lg btn-block btn-default">More Info</a></p>
 	</div>
 </div>

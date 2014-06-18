@@ -77,6 +77,29 @@ class ItemRepository implements ItemRepositoryInterface {
 		return ItemModel::where('slug', 'like', "%{$slug}%")->get();
 	}
 
+	public function findByType($type)
+	{
+		switch ($type)
+		{
+			case 'mods':
+				$type = TypeModel::where('name', 'MOD')->first();
+			break;
+
+			case 'ranks':
+				$type = TypeModel::where('name', 'Rank Set')->first();
+			break;
+
+			case 'skins':
+				$type = TypeModel::where('name', 'Skin')->first();
+			break;
+		}
+
+		return $type->items->sortBy(function($s)
+		{
+			return $s->name;
+		});
+	}
+
 	public function getItemTypes()
 	{
 		return TypeModel::lists('name', 'id');

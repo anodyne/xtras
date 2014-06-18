@@ -6,6 +6,7 @@ interface ItemRepositoryInterface extends BaseRepositoryInterface {
 	public function findByAuthorAndSlug($author, $name);
 	public function findByName($name);
 	public function findBySlug($slug);
+	public function findByType($type);
 	public function getItemTypes();
 	public function getProducts();
 	public function getRecentlyAdded($number);

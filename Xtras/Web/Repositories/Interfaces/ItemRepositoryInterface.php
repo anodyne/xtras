@@ -11,5 +11,6 @@ interface ItemRepositoryInterface extends BaseRepositoryInterface {
 	public function getProducts();
 	public function getRecentlyAdded($number);
 	public function getRecentlyUpdated($number);
+	public function search($input);
 
 }

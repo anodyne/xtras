@@ -84,12 +84,14 @@
 								</div>
 
 								<div class="col-md-4 col-lg-4">
-									<div class="header-search">
-										<div class="input-group">
-											{{ Form::text('search', null, array('placeholder' => 'Search Xtras', 'class' => 'input-sm form-control search-field')) }}
-											<span class="input-group-btn">{{ Form::button('Search', array('class' => 'btn btn-default btn-sm')) }}</span>
+									{{ Form::open(['route' => 'search.do']) }}
+										<div class="header-search">
+											<div class="input-group">
+												{{ Form::text('search', null, array('placeholder' => 'Search Xtras', 'class' => 'input-sm form-control search-field')) }}
+												<span class="input-group-btn">{{ Form::button('Search', array('class' => 'btn btn-default btn-sm', 'type' => 'submit')) }}</span>
+											</div>
 										</div>
-									</div>
+									{{ Form::close() }}
 								</div>
 							@endif
 						</div>

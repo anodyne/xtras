@@ -120,6 +120,13 @@ class ItemRepository implements ItemRepositoryInterface {
 		return ItemModel::orderBy('updated_at', 'desc')->take($number)->get();
 	}
 
+	public function search($input)
+	{
+		return ItemModel::where('name', 'like', "%{$input}%")
+			->orWhere('desc', 'like', "%{$input}%")
+			->get();
+	}
+
 	public function update($id, array $data = [], $flashMessage = true)
 	{
 		# code...

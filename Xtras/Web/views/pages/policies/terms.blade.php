@@ -20,6 +20,9 @@
 		<dt>No Breaking the Law</dt>
 		<dd>Simply put, if it's illegal or unauthorized where you live, don't do it here either.</dd>
 
+		<dt>No Advertising</dt>
+		<dd>We all want to add a few more people to our games, but this is not the time or place to do so. Advertising your game, site, service, or any other non-affiliated service will result in account suspension or termination.</dd>
+
 		<dt>It Belongs to YOU</dt>
 		<dd>Your account is your account. That means you (and you alone) are responsible for maintaining the security of your account.</dd>
 		<dd>You are responsible for all activity and Content posted from your account.</dd>

@@ -18,6 +18,9 @@
 				</div>
 			{{ Form::close() }}
 		</div>
+		<div class="col-md-3 col-lg-3">
+			<a href="{{ URL::route('search.advanced') }}" class="btn btn-link">Advanced Search</a>
+		</div>
 	</div>
 
 	@if ($results->count() > 0)
@@ -26,7 +29,9 @@
 			<div class="row">
 				<div class="col-md-9 col-lg-9">
 					<p class="lead">{{ $item->present()->name }}</p>
-					<span class="text-sm text-muted">{{ $item->present()->description }}</span>
+					{{ $item->present()->typeAsLabel }}
+					{{ $item->present()->productAsLabel }}
+					<div class="text-sm text-muted">{{ $item->present()->description }}</div>
 				</div>
 				<div class="col-md-3 col-lg-3">
 					<div class="btn-toolbar pull-right">

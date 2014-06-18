@@ -127,6 +127,29 @@ class ItemRepository implements ItemRepositoryInterface {
 			->get();
 	}
 
+	public function searchAdvanced(array $input)
+	{
+		$search = ItemModel::query();
+
+		if (array_key_exists('type', $input) and count($input['type']) > 0)
+		{
+			$search = $search->whereIn('type_id', $input['type']);
+		}
+
+		if (array_key_exists('product', $input) and count($input['product']) > 0)
+		{
+			$search = $search->whereIn('product_id', $input['product']);
+		}
+
+		if ( ! empty($input['search']))
+		{
+			$search = $search->where('name', 'like', "%{$input['search']}%")
+				->orWhere('desc', 'like', "%{$input['search']}%");
+		}
+
+		return $search->get();
+	}
+
 	public function update($id, array $data = [], $flashMessage = true)
 	{
 		# code...

@@ -84,15 +84,18 @@ class XtrasRoutingServiceProvider extends ServiceProvider {
 			
 			Route::resource('account', 'Xtras\Controllers\UserController');
 
-			Route::get('search', [
-				'as'	=> 'search',
-				'uses'	=> 'Xtras\Controllers\SearchController@index']);
-			Route::post('search', [
-				'as'	=> 'search.do',
-				'uses'	=> 'Xtras\Controllers\SearchController@doSearch']);
 			Route::get('results', [
 				'as'	=> 'search.results',
 				'uses'	=> 'Xtras\Controllers\SearchController@results']);
+			Route::get('advanced-search', [
+				'as'	=> 'search.advanced',
+				'uses'	=> 'Xtras\Controllers\SearchController@advanced']);
+			Route::post('search', [
+				'as'	=> 'search.do',
+				'uses'	=> 'Xtras\Controllers\SearchController@doSearch']);
+			Route::post('search-advanced', [
+				'as'	=> 'search.doAdvanced',
+				'uses'	=> 'Xtras\Controllers\SearchController@doAdvancedSearch']);
 		});
 
 		Route::get('profile/{name}', array(

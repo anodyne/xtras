@@ -17,6 +17,22 @@ class SearchController extends BaseController {
 		$this->items = $items;
 	}
 
+	public function advanced()
+	{
+		return View::make('pages.search_advanced')
+			->withTypes($this->items->getItemTypes())
+			->withProducts($this->items->getProducts());
+	}
+
+	public function doAdvancedSearch()
+	{
+		$items = $this->items->searchAdvanced(Input::all());
+
+		return Redirect::route('search.results')
+			->withTerm(Input::get('search'))
+			->withResults($items);
+	}
+
 	public function doSearch()
 	{
 		$items = $this->items->search(Input::get('search'));

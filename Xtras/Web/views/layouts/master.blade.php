@@ -90,6 +90,7 @@
 												{{ Form::text('search', null, array('placeholder' => 'Search Xtras', 'class' => 'input-sm form-control search-field')) }}
 												<span class="input-group-btn">{{ Form::button('Search', array('class' => 'btn btn-default btn-sm', 'type' => 'submit')) }}</span>
 											</div>
+											<a href="{{ URL::route('search.advanced') }}" class="search-advanced">Advanced Search</a>
 										</div>
 									{{ Form::close() }}
 								</div>

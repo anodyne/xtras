@@ -59,7 +59,9 @@ class ItemController extends BaseController {
 
 		if ($item)
 		{
-			return View::make('pages.item.show')->withItem($item);
+			return View::make('pages.item.show')
+				->withItem($item)
+				->withMeta($item->meta->first());
 		}
 
 		// TODO: couldn't find the item
@@ -98,6 +100,36 @@ class ItemController extends BaseController {
 		}
 
 		return json_encode(['code' => 1]);
+	}
+
+	public function skins()
+	{
+		// Find all the skins
+		$items = $this->items->findByType('skins');
+
+		return View::make('pages.item.list')
+			->withType('Skins')
+			->withItems($items);
+	}
+
+	public function ranks()
+	{
+		// Find all the ranks
+		$items = $this->items->findByType('ranks');
+
+		return View::make('pages.item.list')
+			->withType('Rank Sets')
+			->withItems($items);
+	}
+
+	public function mods()
+	{
+		// Find all the mods
+		$items = $this->items->findByType('mods');
+
+		return View::make('pages.item.list')
+			->withType('MODs')
+			->withItems($items);
 	}
 
 }

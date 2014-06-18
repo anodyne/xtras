@@ -609,8 +609,13 @@ form {
 	}
 
 	.xtra-heading {
-		margin: 10px 0;
-
+		margin: 10px;
+		line-height: @line-height;
+		
+		white-space: nowrap;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		-ms-text-overflow: ellipsis;
 		text-align: center;
 	}
 

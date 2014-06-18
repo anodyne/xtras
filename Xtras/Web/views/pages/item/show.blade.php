@@ -12,21 +12,21 @@
 	<div>{{ $item->present()->description }}</div>
 
 	<div class="visible-md visible-lg">
-		{{ partial('btn-toolbar', ['data' => [0 => [['link' => '#', 'text' => 'Download the Latest Version', 'class' => 'btn btn-lg btn-primary']]]]) }}
+		{{ partial('btn-toolbar', ['data' => [0 => [['link' => '#', 'text' => '<span class="tab-icon tab-icon-up2 tab-icon-right">'.$_icons['download'].'</span>Download the Latest Version', 'class' => 'btn btn-lg btn-primary']]]]) }}
 	</div>
 
 	<div class="row">
 		<div class="col-lg-9">
 			<ul class="nav nav-tabs">
-				<li class="active"><a href="#details" data-toggle="tab">Details</a></li>
+				<li class="active"><a href="#details" data-toggle="tab"><span class="tab-icon tab-icon-up3">{{ $_icons['info'] }}</span>Details</a></li>
 
-				@if ($item->meta and ! empty($item->meta->installation))
-					<li><a href="#install" data-toggle="tab">Installation</a></li>
+				@if ($meta and ! empty($meta->installation))
+					<li><a href="#install" data-toggle="tab"><span class="tab-icon tab-icon-up3">{{ $_icons['new'] }}</span>Installation</a></li>
 				@endif
 
-				<li><a href="#versions" data-toggle="tab">Version History</a></li>
-				<li class="visible-md visible-lg"><a href="#download" data-toggle="tab">Downloads</a></li>
-				<li><a href="#comments" data-toggle="tab">Comments {{ $item->present()->commentsCount }}</a></li>
+				<li><a href="#versions" data-toggle="tab"><span class="tab-icon tab-icon-up3">{{ $_icons['clock'] }}</span>Version History</a></li>
+				<li class="visible-md visible-lg"><a href="#download" data-toggle="tab"><span class="tab-icon tab-icon-up3">{{ $_icons['download'] }}</span>Downloads</a></li>
+				<li><a href="#comments" data-toggle="tab"><span class="tab-icon">{{ $_icons['comment'] }}</span> Comments {{ $item->present()->commentsCount }}</a></li>
 			</ul>
 
 			<div class="tab-content">
@@ -57,11 +57,11 @@
 					{{ partial('btn-toolbar', ['data' => [0 => [['link' => '#', 'text' => 'Report an Issue', 'class' => 'btn btn-default']], 1 => [['link' => '#', 'text' => 'Report Abuse to Anodyne', 'class' => 'btn btn-default']]]]) }}
 				</div>
 
-				@if ($item->meta and ! empty($item->meta->installation))
+				@if ($meta and ! empty($meta->installation))
 					<div id="install" class="tab-pane">
 						<h2>Installation</h2>
 
-						{{ $item->meta->present()->installation }}
+						{{ $meta->present()->installation }}
 					</div>
 				@endif
 

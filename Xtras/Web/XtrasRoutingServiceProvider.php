@@ -56,18 +56,16 @@ class XtrasRoutingServiceProvider extends ServiceProvider {
 				'as'	=> 'item',
 				'uses'	=> 'Xtras\Controllers\ItemController@show']);
 
-			Route::get('skins', array(
+			Route::get('skins', [
 				'as'	=> 'skins',
-				'uses'	=> 'Xtras\Controllers\ItemController@index'
-			));
-			Route::get('ranks', array(
+				'uses'	=> 'Xtras\Controllers\ItemController@skins']);
+			Route::get('ranks', [
 				'as'	=> 'ranks',
-				'uses'	=> 'Xtras\Controllers\ItemController@index'
-			));
-			Route::get('mods', array(
+				'uses'	=> 'Xtras\Controllers\ItemController@ranks']);
+			Route::get('mods', [
 				'as'	=> 'mods',
-				'uses'	=> 'Xtras\Controllers\ItemController@index'
-			));
+				'uses'	=> 'Xtras\Controllers\ItemController@mods']);
+
 			Route::get('xtra/{id}/upload', [
 				'as'	=> 'xtra.upload',
 				'uses'	=> 'Xtras\Controllers\ItemController@upload']);

@@ -75,9 +75,9 @@
 								<div class="col-md-5 col-lg-5">
 									<nav class="nav-sub">
 										<ul>
-											<li><a href="#">Skins</a></li>
-											<li><a href="#">MODs</a></li>
-											<li><a href="#">Ranks</a></li>
+											<li><a href="{{ URL::route('skins') }}">Skins</a></li>
+											<li><a href="{{ URL::route('mods') }}">MODs</a></li>
+											<li><a href="{{ URL::route('ranks') }}">Ranks</a></li>
 											<li><a href="{{ URL::route('xtras') }}">My Xtras</a></li>
 										</ul>
 									</nav>

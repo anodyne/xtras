@@ -10,4 +10,9 @@ class ItemMetaPresenter extends Presenter {
 		return Markdown::parse($this->entity->installation);
 	}
 
+	public function history()
+	{
+		return Markdown::parse($this->entity->history);
+	}
+
 }

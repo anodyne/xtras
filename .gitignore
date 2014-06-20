@@ -7,3 +7,5 @@ vendor
 
 *.sublime-project
 *.sublime-workspace
+
+Xtras/assets/*

@@ -5,22 +5,26 @@ use App,
 	Event,
 	Input,
 	Redirect,
-	ItemRepositoryInterface;
+	Response,
+	ItemRepositoryInterface,
+	UserRepositoryInterface,
+	OrderRepositoryInterface;
 
 class ItemController extends BaseController {
 
 	protected $items;
+	protected $users;
+	protected $orders;
 
-	public function __construct(ItemRepositoryInterface $items)
+	public function __construct(ItemRepositoryInterface $items,
+			UserRepositoryInterface $users,
+			OrderRepositoryInterface $orders)
 	{
 		parent::__construct();
 
 		$this->items = $items;
-	}
-
-	public function index()
-	{
-		//
+		$this->users = $users;
+		$this->orders = $orders;
 	}
 
 	public function create()
@@ -49,7 +53,7 @@ class ItemController extends BaseController {
 		// Fire the item creation event
 		Event::fire('item.created', [$item]);
 
-		return Redirect::route('xtra.upload', [$item->id]);
+		return Redirect::route('item.upload', [$item->id]);
 	}
 
 	public function show($author, $slug)
@@ -61,7 +65,8 @@ class ItemController extends BaseController {
 		{
 			return View::make('pages.item.show')
 				->withItem($item)
-				->withMeta($item->meta->first());
+				->withMeta($item->meta)
+				->withFiles($item->files->sortBy('version', SORT_REGULAR, true));
 		}
 
 		// TODO: couldn't find the item
@@ -88,12 +93,59 @@ class ItemController extends BaseController {
 			->withItem($this->items->find($id))
 			->withBrowser(App::make('xtras.browser'));
 	}
+	
+	public function doZipUpload($id)
+	{
+		// Get the item
+		$item = $this->items->find($id);
+
+		if (Input::hasFile('file'))
+		{
+			// Get the uploaded file
+			$file = Input::file('file');
+
+			// Set the filename
+			$filename = "{$item->user->slug}/{$item->slug}-{$item->version}";
+			$filename.= ".{$file->getClientOriginalExtension()}";
+
+			// Get the contents of the uploaded file
+			$contents = \File::get($file->getRealPath());
+
+			// Get an instance of the filesystem
+			$fs = App::make('xtras.filesystem');
+
+			// Upload the file
+			$result = $fs->write($filename, $contents);
+
+			if ($result)
+			{
+				// Update the database record
+				$this->items->updateFileData($item->id, [
+					'filename' => $filename,
+					'version' => $item->version,
+				]);
+
+				// Fire the event
+				Event::fire('item.uploaded', [$item]);
+
+				return Response::json('success', 200);
+			}
+
+			return Response::json('failure', 400);
+		}
+	}
+
+	public function doImageUpload($id)
+	{
+		# code...
+	}
 
 	public function ajaxCheckName()
 	{
-		// Find the items
-		$items = $this->items->findByName(Input::get('name'));
+		// Try to find any items
+		$items = $this->users->findItemsByName($this->currentUser, Input::get('name'));
 
+		// If we already have something, no dice...
 		if ($items->count() > 0)
 		{
 			return json_encode(['code' => 0]);
@@ -130,6 +182,33 @@ class ItemController extends BaseController {
 		return View::make('pages.item.list')
 			->withType('MODs')
 			->withItems($items);
+	}
+
+	public function download($id, $fileId)
+	{
+		// Get the specific file record
+		$file = $this->items->getFile($fileId);
+
+		// Grab just the filename for easy use
+		$filename = $file->filename;
+
+		// Add an order record
+		$this->orders->create($this->currentUser, $file);
+
+		// Get the filesystem out of the container
+		$fs = App::make('xtras.filesystem');
+
+		// Start reading
+		$stream = $fs->readStream($filename);
+
+		// Send the right headers
+		header("Content-Type: application/zip");
+		header("Content-Length: ".$fs->getSize($filename));
+		header("Content-disposition: attachment; filename=\"".basename($filename)."\"");
+
+		// Dump the attachment and stop the script
+		fpassthru($stream);
+		exit;
 	}
 
 }

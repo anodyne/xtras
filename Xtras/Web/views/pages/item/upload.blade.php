@@ -29,18 +29,13 @@
 	</div>
 
 	<div id="uploadPreviews" class="hide">
+		<p class="alert alert-success">The zip archive has been successfully uploaded!</p>
+
 		<h2>Preview Images</h2>
 
-		<p>In order to cover all scenarios, you should upload a primary preview image that is at least 800 pixels wide and 300 pixels tall. This ensures that the preview image will be sharp and clear in all use cases, including high resolution displays.</p>
+		<p>In order to cover all scenarios, you should upload a primary preview image that is at least 800 pixels wide and 300 pixels tall. This ensures that the preview image will be sharp and clear in all use cases, including on high resolution displays.</p>
 
-			<div class="row">
-				<div class="col-lg-3">
-					{{ Form::button('Upload and Continue', ['type' => 'submit', 'class' => 'btn btn-lg btn-block btn-primary']) }}
-				</div>
-				<div class="col-lg-9">
-					<button class="btn btn-lg btn-link" disabled="disabled">Next Step: Notify Users of Update <span class="icn-size-16">{{ $_icons['next'] }}</span></button>
-				</div>
-			</div>
+		<div id="dzPreviews" class="dropzone"></div>
 	</div>
 @stop
 
@@ -52,12 +47,34 @@
 	{{ HTML::script('js/dropzone.min.js') }}
 	<script>
 
-		$(document).ready(function()
+		Dropzone.autoDiscover = false;
+
+		$(function()
 		{
-			$('#dzZip').dropzone({
-				url: "/file/post",
+			var zipUpload = $('#dzZip').dropzone({
+				url: "{{ URL::route('item.upload.doZip', [$item->id]) }}",
 				clickable: true,
-				acceptedFiles: ".zip"
+				acceptedFiles: ".zip",
+				init: function()
+				{
+					this.on("success", function(file)
+					{
+						$('#uploadZip').addClass('hide');
+						$('#uploadPreviews').removeClass('hide');
+					});
+				}
+			});
+
+			var previewsUpload = $('#dzPreviews').dropzone({
+				url: "{{ URL::route('item.upload.doImages', [$item->id]) }}",
+				clickable: true,
+				acceptedFiles: ".jpg, .jpeg, .png, .gif, .bmp",
+				uploadMultiple: true,
+				maxFiles: 3,
+				init: function()
+				{
+					//
+				}
 			});
 		});
 

@@ -173,4 +173,9 @@ class MainController extends BaseController {
 		return View::make($view);
 	}
 
+	public function faq()
+	{
+		return View::make('pages.faq');
+	}
+
 }

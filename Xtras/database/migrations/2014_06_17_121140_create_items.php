@@ -19,9 +19,20 @@ class CreateItems extends Migration {
 			$table->integer('type_id')->unsigned();
 			$table->integer('product_id')->unsigned();
 			$table->string('name');
+			$table->string('version');
 			$table->string('slug')->nullable();
 			$table->text('desc')->nullable();
 			$table->string('support')->nullable();
+			$table->timestamps();
+			$table->softDeletes();
+		});
+
+		Schema::create('items_files', function(Blueprint $table)
+		{
+			$table->bigIncrements('id');
+			$table->bigInteger('item_id')->unsigned();
+			$table->string('filename');
+			$table->string('version');
 			$table->timestamps();
 			$table->softDeletes();
 		});
@@ -42,10 +53,10 @@ class CreateItems extends Migration {
 			$table->bigIncrements('id');
 			$table->bigInteger('item_id');
 			$table->text('installation')->nullable();
+			$table->text('history')->nullable();
 			$table->string('image1')->nullable();
 			$table->string('image2')->nullable();
 			$table->string('image3')->nullable();
-			$table->string('file')->nullable();
 			$table->timestamps();
 			$table->softDeletes();
 		});
@@ -89,6 +100,7 @@ class CreateItems extends Migration {
 			$table->bigIncrements('id');
 			$table->integer('user_id');
 			$table->bigInteger('item_id');
+			$table->bigInteger('file_id');
 			$table->boolean('notify')->default((int) true);
 			$table->timestamps();
 		});
@@ -104,6 +116,7 @@ class CreateItems extends Migration {
 		Schema::drop('items');
 		Schema::drop('types');
 		Schema::drop('products');
+		Schema::drop('items_files');
 		Schema::drop('items_messages');
 		Schema::drop('items_ratings');
 		Schema::drop('items_meta');

@@ -5,6 +5,7 @@ return array(
 	'add' => '<span class="icn" data-icon="+"></span>',
 
 	'back' => '<span class="icn" data-icon="<"></span>',
+	'bug' => '<span class="octicon octicon-bug"></span>',
 
 	'comment' => '<span class="icn" data-icon="c"></span>',
 	'clock' => '<span class="icn" data-icon="l"></span>',
@@ -25,6 +26,8 @@ return array(
 
 	'login' => '<span class="icn" data-icon=")"></span>',
 	'logout' => '<span class="icn" data-icon="("></span>',
+
+	'markdown' => '<span class="octicon octicon-markdown"></span>',
 
 	'next' => '<span class="icn" data-icon=">"></span>',
 	'notify' => '<span class="icn" data-icon="n"></span>',

@@ -41,11 +41,11 @@
 								<li class="dropdown">
 									<a href="#" data-toggle="dropdown" class="dropdown-toggle"><span class="user-icon">{{ $_icons['user'] }}</span> {{ Auth::user()->present()->name }} <span class="caret"></span></a>
 									<ul class="dropdown-menu dropdown-menu-right dd">
-										<li><a href="{{ URL::route('xtras', [$_currentUser->slug]) }}">My Xtras</a></li>
-										<li><a href="{{ URL::route('xtra.create') }}">Create New Xtra</a></li>
+										<li><a href="{{ URL::route('account.xtras', [$_currentUser->slug]) }}">My Xtras</a></li>
+										<li><a href="{{ URL::route('item.create') }}">Create New Xtra</a></li>
 										<li class="divider"></li>
-										<li><a href="{{ URL::route('profile', [$_currentUser->slug]) }}">My Profile</a></li>
-										<li><a href="{{ URL::route('account', [$_currentUser->slug]) }}">Edit My Profile</a></li>
+										<li><a href="{{ URL::route('account.profile', [$_currentUser->slug]) }}">My Profile</a></li>
+										<li><a href="{{ URL::route('account.edit', [$_currentUser->slug]) }}">Edit My Profile</a></li>
 										<li class="divider"></li>
 										<li><a href="{{ URL::route('logout') }}">Logout</a></li>
 									</ul>
@@ -79,7 +79,7 @@
 											<li><a href="{{ URL::route('skins') }}">Skins</a></li>
 											<li><a href="{{ URL::route('mods') }}">MODs</a></li>
 											<li><a href="{{ URL::route('ranks') }}">Ranks</a></li>
-											<li><a href="{{ URL::route('xtras') }}">My Xtras</a></li>
+											<li><a href="{{ URL::route('account.xtras') }}">My Xtras</a></li>
 										</ul>
 									</nav>
 								</div>
@@ -129,7 +129,7 @@
 							<li><a href="{{ URL::route('home') }}">Home</a></li>
 
 							@if (Auth::check())
-								<li><a href="{{ URL::route('xtras') }}">My Xtras</a></li>
+								<li><a href="{{ URL::route('account.xtras') }}">My Xtras</a></li>
 								<li><a href="{{ URL::route('skins') }}">Skins</a></li>
 								<li><a href="{{ URL::route('ranks') }}">Ranks</a></li>
 								<li><a href="{{ URL::route('mods') }}">MODs</a></li>
@@ -139,6 +139,7 @@
 					<div class="col-md-3 col-lg-2">
 						<ul class="list-unstyled">
 							<li><a href="{{ URL::route('policies') }}">Site Policies</a></li>
+							<li><a href="{{ URL::route('faq') }}">FAQs</a></li>
 							<li><a href="#">Contact</a></li>
 							<li><a href="http://anodyne-productions.com">Anodyne Productions</a></li>
 						</ul>

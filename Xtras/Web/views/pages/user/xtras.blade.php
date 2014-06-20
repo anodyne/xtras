@@ -9,7 +9,7 @@
 
 	<div class="btn-toolbar">
 		<div class="btn-group">
-			<a href="{{ URL::route('xtra.create') }}" class="btn btn-primary">Add New Xtra</a>
+			<a href="{{ URL::route('item.create') }}" class="btn btn-primary">Add New Xtra</a>
 		</div>
 	</div>
 

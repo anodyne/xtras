@@ -42,6 +42,13 @@ class XtrasRoutingServiceProvider extends ServiceProvider {
 		Route::post('register', 'Xtras\Controllers\MainController@doRegistration');
 		Route::controller('password', 'Xtras\Controllers\RemindersController');
 
+		Route::get('policies/{type?}', [
+			'as'	=> 'policies',
+			'uses'	=> 'Xtras\Controllers\MainController@policies']);
+		Route::get('faq', [
+			'as'	=> 'faq',
+			'uses'	=> 'Xtras\Controllers\MainController@faq']);
+
 		/**
 		 * Xtras
 		 */
@@ -51,10 +58,6 @@ class XtrasRoutingServiceProvider extends ServiceProvider {
 				'as'	=> 'home',
 				'uses'	=> 'Xtras\Controllers\MainController@index'
 			));
-
-			Route::get('item/{author}/{slug}', [
-				'as'	=> 'item',
-				'uses'	=> 'Xtras\Controllers\ItemController@show']);
 
 			Route::get('skins', [
 				'as'	=> 'skins',
@@ -66,22 +69,37 @@ class XtrasRoutingServiceProvider extends ServiceProvider {
 				'as'	=> 'mods',
 				'uses'	=> 'Xtras\Controllers\ItemController@mods']);
 
-			Route::get('xtra/{id}/upload', [
-				'as'	=> 'xtra.upload',
+			Route::get('item/{id}/upload', [
+				'as'	=> 'item.upload',
 				'uses'	=> 'Xtras\Controllers\ItemController@upload']);
-			Route::get('xtra/ajax/checkName', [
-				'as'	=> 'xtra.ajax.checkName',
+			Route::post('item/{id}/upload-zip', [
+				'as'	=> 'item.upload.doZip',
+				'uses'	=> 'Xtras\Controllers\ItemController@doZipUpload']);
+			Route::post('item/{id}/upload-images', [
+				'as'	=> 'item.upload.doImages',
+				'uses'	=> 'Xtras\Controllers\ItemController@doImagesUpload']);
+			Route::get('item/{id}/download/{fileId}', [
+				'as'	=> 'item.download',
+				'uses'	=> 'Xtras\Controllers\ItemController@download']);
+			Route::post('item/ajax/checkName', [
+				'as'	=> 'item.ajax.checkName',
 				'uses'	=> 'Xtras\Controllers\ItemController@ajaxCheckName']);
-			Route::resource('xtra', 'Xtras\Controllers\ItemController');
+			Route::resource('item', 'Xtras\Controllers\ItemController');
+			Route::get('item/{author}/{slug}', [
+				'as'	=> 'item.show',
+				'uses'	=> 'Xtras\Controllers\ItemController@show']);
 
+			Route::get('profile/{name}', array(
+			'as'	=> 'account.profile',
+			'uses'	=> 'Xtras\Controllers\UserController@show'
+		));
 			Route::get('account/edit/{slug}', array(
-				'as'	=> 'account',
+				'as'	=> 'account.edit',
 				'uses'	=> 'Xtras\Controllers\UserController@edit'
 			));
 			Route::get('account/xtras', [
-				'as'	=> 'xtras',
+				'as'	=> 'account.xtras',
 				'uses'	=> 'Xtras\Controllers\UserController@xtras']);
-			
 			Route::resource('account', 'Xtras\Controllers\UserController');
 
 			Route::get('results', [
@@ -97,15 +115,6 @@ class XtrasRoutingServiceProvider extends ServiceProvider {
 				'as'	=> 'search.doAdvanced',
 				'uses'	=> 'Xtras\Controllers\SearchController@doAdvancedSearch']);
 		});
-
-		Route::get('profile/{name}', array(
-			'as'	=> 'profile',
-			'uses'	=> 'Xtras\Controllers\UserController@show'
-		));
-
-		Route::get('policies/{type?}', array(
-			'as'	=> 'policies',
-			'uses'	=> 'Xtras\Controllers\MainController@policies'));
 	}
 
 }

@@ -5,6 +5,7 @@ use Input,
 	TypeModel,
 	UserModel,
 	ProductModel,
+	ItemFileModel,
 	ItemMetaModel,
 	ItemRepositoryInterface;
 
@@ -23,6 +24,11 @@ class ItemRepository implements ItemRepositoryInterface {
 		if (Input::has('meta'))
 		{
 			$this->updateMetaData($item->id, Input::get('meta'));
+		}
+
+		if (Input::has('files'))
+		{
+			$this->updateFileData($item->id, Input::get('files'));
 		}
 
 		return $item;
@@ -100,6 +106,11 @@ class ItemRepository implements ItemRepositoryInterface {
 		});
 	}
 
+	public function getFile($id)
+	{
+		return ItemFileModel::find($id);
+	}
+
 	public function getItemTypes()
 	{
 		return TypeModel::lists('name', 'id');
@@ -155,12 +166,25 @@ class ItemRepository implements ItemRepositoryInterface {
 		# code...
 	}
 
+	public function updateFileData($id, array $data)
+	{
+		// Get the item
+		$item = $this->find($id);
+
+		// Create a new instance
+		$file = new ItemFileModel;
+		$file->fill($data);
+		$file->save();
+
+		$item->files()->save($file);
+	}
+
 	public function updateMetaData($id, array $data)
 	{
 		// Get the item
 		$item = $this->find($id);
 
-		if ($item->meta->count() > 0)
+		if ($item->meta)
 		{
 			// Get the meta data
 			$meta = $item->meta;

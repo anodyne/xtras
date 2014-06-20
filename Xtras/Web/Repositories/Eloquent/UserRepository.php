@@ -33,6 +33,22 @@ class UserRepository implements UserRepositoryInterface {
 		return UserModel::where('slug', $slug)->first();
 	}
 
+	public function findItemsByName(UserModel $user, $value)
+	{
+		return $user->items->filter(function($i) use ($value)
+		{
+			return $i->name == $value;
+		});
+	}
+
+	public function findItemsBySlug(UserModel $user, $value)
+	{
+		return $user->items->filter(function($i) use ($value)
+		{
+			return $i->slug == $value;
+		});
+	}
+
 	public function update($id, array $data = [], $flashMessage = true)
 	{
 		// Get the user

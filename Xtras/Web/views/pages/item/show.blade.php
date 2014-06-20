@@ -116,9 +116,9 @@
 		</div>
 
 		<div class="col-lg-3">
-			<p><img src="http://placehold.it/250x250"></p>
-			<p><img src="http://placehold.it/250x250"></p>
-			<p><img src="http://placehold.it/250x250"></p>
+			<p><img src="http://placehold.it/250x250" class="img-rounded"></p>
+			<p><img src="http://placehold.it/250x250" class="img-rounded"></p>
+			<p><img src="http://placehold.it/250x250" class="img-rounded"></p>
 		</div>
 	</div>
 @stop

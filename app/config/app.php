@@ -192,6 +192,7 @@ return array(
 		'ProductModel'		=> 'Xtras\Models\Eloquent\ProductModel',
 		'UserModel'			=> 'Xtras\Models\Eloquent\UserModel',
 		'ItemModel'			=> 'Xtras\Models\Eloquent\ItemModel',
+		'ItemFileModel'		=> 'Xtras\Models\Eloquent\ItemFileModel',
 		'ItemMessageModel'	=> 'Xtras\Models\Eloquent\ItemMessageModel',
 		'ItemMetaModel'		=> 'Xtras\Models\Eloquent\ItemMetaModel',
 		'ItemRatingModel'	=> 'Xtras\Models\Eloquent\ItemRatingModel',
@@ -202,8 +203,9 @@ return array(
 		/**
 		 * Repository Interfaces
 		 */
-		'ItemRepositoryInterface' => 'Xtras\Repositories\Interfaces\ItemRepositoryInterface',
-		'UserRepositoryInterface' => 'Xtras\Repositories\Interfaces\UserRepositoryInterface',
+		'ItemRepositoryInterface'	=> 'Xtras\Repositories\Interfaces\ItemRepositoryInterface',
+		'OrderRepositoryInterface'	=> 'Xtras\Repositories\Interfaces\OrderRepositoryInterface',
+		'UserRepositoryInterface'	=> 'Xtras\Repositories\Interfaces\UserRepositoryInterface',
 
 		/**
 		 * Traits

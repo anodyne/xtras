@@ -11,8 +11,19 @@
 
 	<div>{{ $item->present()->description }}</div>
 
-	<div class="visible-md visible-lg">
-		{{ partial('btn-toolbar', ['data' => [0 => [['link' => '#', 'text' => '<span class="tab-icon tab-icon-up2 tab-icon-right">'.$_icons['download'].'</span>Download the Latest Version', 'class' => 'btn btn-lg btn-primary']]]]) }}
+	<div class="btn-toolbar">
+		<div class="btn-group">
+			<a href="#" class="btn btn-lg btn-primary"><span class="tab-icon tab-icon-up2 tab-icon-right">{{ $_icons['download'] }}</span>Download the Latest Version</a>
+		</div>
+	</div>
+
+	<div class="btn-toolbar">
+		<div class="btn-group">
+			<a href="#" class="btn btn-default">Report an Issue</a>
+		</div>
+		<div class="btn-group">
+			<a href="#" class="btn btn-default">Report Abuse to Anodyne</a>
+		</div>
 	</div>
 
 	<div class="row">
@@ -20,11 +31,16 @@
 			<ul class="nav nav-tabs">
 				<li class="active"><a href="#details" data-toggle="tab"><span class="tab-icon tab-icon-up3">{{ $_icons['info'] }}</span>Details</a></li>
 
-				@if ($meta and ! empty($meta->installation))
-					<li><a href="#install" data-toggle="tab"><span class="tab-icon tab-icon-up3">{{ $_icons['new'] }}</span>Installation</a></li>
+				@if ($meta)
+					@if ( ! empty($meta->installation))
+						<li><a href="#install" data-toggle="tab"><span class="tab-icon tab-icon-up3">{{ $_icons['new'] }}</span>Installation</a></li>
+					@endif
+
+					@if ( ! empty($meta->history))
+						<li><a href="#versions" data-toggle="tab"><span class="tab-icon tab-icon-up3">{{ $_icons['clock'] }}</span>Version History</a></li>
+					@endif
 				@endif
 
-				<li><a href="#versions" data-toggle="tab"><span class="tab-icon tab-icon-up3">{{ $_icons['clock'] }}</span>Version History</a></li>
 				<li class="visible-md visible-lg"><a href="#download" data-toggle="tab"><span class="tab-icon tab-icon-up3">{{ $_icons['download'] }}</span>Downloads</a></li>
 				<li><a href="#comments" data-toggle="tab"><span class="tab-icon">{{ $_icons['comment'] }}</span> Comments {{ $item->present()->commentsCount }}</a></li>
 			</ul>
@@ -53,30 +69,48 @@
 							<dd>{{ $item->present()->updated }}</dd>
 						@endif
 					</dl>
-
-					{{ partial('btn-toolbar', ['data' => [0 => [['link' => '#', 'text' => 'Report an Issue', 'class' => 'btn btn-default']], 1 => [['link' => '#', 'text' => 'Report Abuse to Anodyne', 'class' => 'btn btn-default']]]]) }}
 				</div>
 
-				@if ($meta and ! empty($meta->installation))
-					<div id="install" class="tab-pane">
-						<h2>Installation</h2>
+				@if ($meta)
+					@if ( ! empty($meta->installation))
+						<div id="install" class="tab-pane">
+							{{ $meta->present()->installation }}
+						</div>
+					@endif
 
-						{{ $meta->present()->installation }}
-					</div>
+					@if ( ! empty($meta->history))
+						<div id="versions" class="tab-pane">
+							{{ $meta->present()->history }}
+						</div>
+					@endif
 				@endif
 
-				<div id="versions" class="tab-pane">
-					<h2>Version History</h2>
-				</div>
-
 				<div id="download" class="tab-pane">
-					<h2>Downloads</h2>
+					<div class="data-table data-table-striped data-table-bordered">
+					@foreach ($files as $file)
+						<div class="row">
+							<div class="col-md-9 col-lg-9">
+								<p class="lead"><strong>{{ $file->present()->version }}</strong></p>
+								<p class="text-sm text-muted">{{ $file->present()->added }}</p>
+							</div>
+							<div class="col-md-3 col-lg-3">
+								<div class="btn-toolbar pull-right">
+									<div class="btn-group">
+										<a href="{{ URL::route('item.download', [$item->id, $file->id]) }}" class="btn btn-default">{{ $_icons['download'] }}</a>
+									</div>
+								</div>
+							</div>
+						</div>
+					@endforeach
+					</div>
 				</div>
 
 				<div id="comments" class="tab-pane">
-					<h2>Comments</h2>
-
-					{{ partial('btn-toolbar', ['data' => [0 => [['link' => '#', 'text' => 'Add a Comment', 'class' => 'btn btn-default']]]]) }}
+					<div class="btn-toolbar">
+						<div class="btn-group">
+							<a href="#" class="btn btn-default">Add a Comment</a>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>

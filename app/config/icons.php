@@ -7,7 +7,8 @@ return array(
 	'back' => '<span class="icn" data-icon="<"></span>',
 	'bug' => '<span class="octicon octicon-bug"></span>',
 
-	'comment' => '<span class="icn" data-icon="c"></span>',
+	'comment' => '<span class="icn" data-icon="b"></span>',
+	'comments' => '<span class="icn" data-icon="c"></span>',
 	'clock' => '<span class="icn" data-icon="l"></span>',
 	'check' => '<span class="icn" data-icon="k"></span>',
 	'close' => '<span class="icn" data-icon="x"></span>',

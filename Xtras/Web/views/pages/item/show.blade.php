@@ -88,7 +88,7 @@
 				@endif
 
 				<li class="visible-md visible-lg"><a href="#download" data-toggle="tab"><span class="tab-icon tab-icon-up3">{{ $_icons['download'] }}</span>Downloads</a></li>
-				<li><a href="#comments" data-toggle="tab"><span class="tab-icon">{{ $_icons['comment'] }}</span> Comments {{ $item->present()->commentsCount }}</a></li>
+				<li><a href="#comments" data-toggle="tab"><span class="tab-icon">{{ $_icons['comments'] }}</span> Comments {{ $item->present()->commentsCount }}</a></li>
 			</ul>
 
 			<div class="tab-content">

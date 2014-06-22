@@ -445,6 +445,21 @@ form {
 		
 		.panel-title {
 			font-weight: 600;
+			font-family: @font-special;
+		}
+	}
+
+	&.panel-danger {
+		border-color: lighten(@color-danger-alert, 28%);
+
+		.panel-heading {
+			color: @color-danger-alert;
+			border-color: lighten(@color-danger-alert, 28%);
+			background-color: lighten(@color-danger-alert, 38%);
+
+			.panel-title {
+				color: @color-danger-alert;
+			}
 		}
 	}
 
@@ -662,6 +677,10 @@ form {
 .tab-icon {
 	float: left;
 	margin-right: 5px;
+
+	&.tab-icon-up1 {
+		margin-top: -1px;
+	}
 
 	&.tab-icon-up2 {
 		margin-top: -2px;

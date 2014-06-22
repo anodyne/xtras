@@ -5,29 +5,75 @@
 @stop
 
 @section('content')
-	<h1>{{ $item->present()->name }} <small>{{ $item->present()->type }}</small></h1>
-
-	<h4>by {{ $item->present()->author }}</h4>
-
-	<div>{{ $item->present()->description }}</div>
-
-	<div class="btn-toolbar">
-		<div class="btn-group">
-			<a href="#" class="btn btn-lg btn-primary"><span class="tab-icon tab-icon-up2 tab-icon-right">{{ $_icons['download'] }}</span>Download the Latest Version</a>
-		</div>
-	</div>
-
-	<div class="btn-toolbar">
-		<div class="btn-group">
-			<a href="#" class="btn btn-default">Report an Issue</a>
-		</div>
-		<div class="btn-group">
-			<a href="#" class="btn btn-default">Report Abuse to Anodyne</a>
-		</div>
-	</div>
-
 	<div class="row">
 		<div class="col-lg-9">
+			<h1>{{ $item->present()->name }} <small>{{ $item->present()->type }}</small></h1>
+
+			<h4>by {{ $item->present()->author }}</h4>
+
+			<div>{{ $item->present()->description }}</div>
+
+			<div class="btn-toolbar">
+				<div class="btn-group">
+					<a href="#" class="btn btn-lg btn-primary"><span class="tab-icon tab-icon-up2 tab-icon-right">{{ $_icons['download'] }}</span>Download the Latest Version</a>
+				</div>
+			</div>
+
+			<div class="btn-toolbar">
+				<div class="btn-group">
+					<a href="#" class="btn btn-default">Report an Issue</a>
+				</div>
+				<div class="btn-group">
+					<a href="#" class="btn btn-default">Report Abuse to Anodyne</a>
+				</div>
+			</div>
+
+			<div class="panel panel-warning">
+				<div class="panel-heading">
+					<h2 class="panel-title"><span class="tab-icon tab-icon-up2">{{ $_icons['warning'] }}</span>Report an Issue</h2>
+				</div>
+				<div class="panel-body">
+					{{ Form::open() }}
+						<div class="row">
+							<div class="col-md-10 col-lg-10">
+								<div class="form-group">
+									<label>Message</label>
+									{{ Form::textarea('content', null, ['class' => 'form-control', 'rows' => 5]) }}
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-lg-12">
+								{{ Form::button('Report Issue', ['type' => 'submit', 'class' => 'btn btn-default']) }}
+							</div>
+						</div>
+					{{ Form::close() }}
+				</div>
+			</div>
+
+			<div class="panel panel-danger">
+				<div class="panel-heading">
+					<h2 class="panel-title"><span class="tab-icon tab-icon-up2">{{ $_icons['warning'] }}</span>Report Abuse to Anodyne</h2>
+				</div>
+				<div class="panel-body">
+					{{ Form::open() }}
+						<div class="row">
+							<div class="col-md-10 col-lg-10">
+								<div class="form-group">
+									<label>Message</label>
+									{{ Form::textarea('content', null, ['class' => 'form-control', 'rows' => 5]) }}
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-lg-12">
+								{{ Form::button('Report Abuse', ['type' => 'submit', 'class' => 'btn btn-default']) }}
+							</div>
+						</div>
+					{{ Form::close() }}
+				</div>
+			</div>
+
 			<ul class="nav nav-tabs">
 				<li class="active"><a href="#details" data-toggle="tab"><span class="tab-icon tab-icon-up3">{{ $_icons['info'] }}</span>Details</a></li>
 
@@ -109,6 +155,28 @@
 					<div class="btn-toolbar">
 						<div class="btn-group">
 							<a href="#" class="btn btn-default">Add a Comment</a>
+						</div>
+					</div>
+
+					<div class="panel panel-default">
+						<div class="panel-heading">
+							<h2 class="panel-title"><span class="tab-icon tab-icon-up1">{{ $_icons['comment'] }}</span>Add a Comment</h2>
+						</div>
+						<div class="panel-body">
+							{{ Form::open() }}
+								<div class="row">
+									<div class="col-md-10 col-lg-10">
+										<div class="form-group">
+											{{ Form::textarea('content', null, ['class' => 'form-control', 'rows' => 5]) }}
+										</div>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-lg-12">
+										{{ Form::button('Submit', ['type' => 'submit', 'class' => 'btn btn-default']) }}
+									</div>
+								</div>
+							{{ Form::close() }}
 						</div>
 					</div>
 				</div>

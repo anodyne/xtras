@@ -113,15 +113,15 @@ class CreateItems extends Migration {
 	 */
 	public function down()
 	{
-		Schema::drop('items');
-		Schema::drop('types');
-		Schema::drop('products');
-		Schema::drop('items_files');
-		Schema::drop('items_messages');
-		Schema::drop('items_ratings');
-		Schema::drop('items_meta');
-		Schema::drop('comments');
-		Schema::drop('orders');
+		Schema::dropIfExists('items');
+		Schema::dropIfExists('types');
+		Schema::dropIfExists('products');
+		Schema::dropIfExists('items_files');
+		Schema::dropIfExists('items_messages');
+		Schema::dropIfExists('items_ratings');
+		Schema::dropIfExists('items_meta');
+		Schema::dropIfExists('comments');
+		Schema::dropIfExists('orders');
 	}
 
 }

@@ -212,6 +212,11 @@ return array(
 		 */
 		'UtilityTrait'	=> 'Xtras\Traits\UtilityTrait',
 
+		/**
+		 * Mailers
+		 */
+		'ItemMailer'	=> 'Xtras\Mailers\ItemMailer',
+
 	),
 
 );

@@ -111,9 +111,12 @@ class XtrasServiceProvider extends ServiceProvider {
 	protected function registerEvents()
 	{
 		Event::listen('item.created', 'Xtras\Events\ItemEventHandler@onCreate');
+		Event::listen('item.comment', 'Xtras\Events\ItemEventHandler@onComment');
 		Event::listen('item.deleted', 'Xtras\Events\ItemEventHandler@onDelete');
 		Event::listen('item.updated', 'Xtras\Events\ItemEventHandler@onUpdate');
 		Event::listen('item.uploaded', 'Xtras\Events\ItemEventHandler@onUpload');
+		Event::listen('item.report.abuse', 'Xtras\Events\ItemEventHandler@onReportAbuse');
+		Event::listen('item.report.issue', 'Xtras\Events\ItemEventHandler@onReportIssue');
 
 		Event::listen('user.created', 'Xtras\Events\UserEventHandler@onCreate');
 		Event::listen('user.deleted', 'Xtras\Events\UserEventHandler@onDelete');

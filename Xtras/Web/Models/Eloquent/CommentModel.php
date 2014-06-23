@@ -23,6 +23,7 @@ class CommentModel extends Model {
 
 	public static $relationsData = [
 		'item' => [self::BELONGS_TO, 'ItemModel'],
+		'user' => [self::BELONGS_TO, 'UserModel'],
 	];
 
 }

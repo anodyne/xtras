@@ -24,6 +24,11 @@ class UserPresenter extends Presenter {
 		return Markdown::parse($this->entity->bio);
 	}
 
+	public function email()
+	{
+		return $this->entity->email;
+	}
+
 	public function itemsMods()
 	{
 		return $this->entity->items->filter(function($i)

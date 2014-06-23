@@ -1,15 +1,38 @@
 <?php namespace Xtras\Repositories\Eloquent;
 
-use Input,
+use Auth,
+	Input,
 	ItemModel,
 	TypeModel,
 	UserModel,
+	CommentModel,
 	ProductModel,
 	ItemFileModel,
 	ItemMetaModel,
 	ItemRepositoryInterface;
 
 class ItemRepository implements ItemRepositoryInterface {
+
+	public function addComment($id, array $data)
+	{
+		// Get the item
+		$item = $this->find($id);
+
+		if ($item)
+		{
+			// Create a comment record
+			$comment = new CommentModel;
+			$comment->fill($data);
+			$comment->save();
+
+			// Attach the comment to the item
+			$item->comments()->save($comment);
+
+			return $comment;
+		}
+
+		return false;
+	}
 
 	public function all()
 	{
@@ -83,7 +106,7 @@ class ItemRepository implements ItemRepositoryInterface {
 		return ItemModel::where('slug', 'like', "%{$slug}%")->get();
 	}
 
-	public function findByType($type)
+	public function findByType($type, $paginate = false)
 	{
 		switch ($type)
 		{
@@ -100,10 +123,17 @@ class ItemRepository implements ItemRepositoryInterface {
 			break;
 		}
 
-		return $type->items->sortBy(function($s)
+		$sortedItems = $type->items->sortBy(function($s)
 		{
 			return $s->name;
 		});
+
+		if ($paginate)
+		{
+			return \Paginator::make($sortedItems->toArray(), $sortedItems->count(), 25);
+		}
+
+		return $sortedItems;
 	}
 
 	public function getFile($id)

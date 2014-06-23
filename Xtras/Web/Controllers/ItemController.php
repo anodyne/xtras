@@ -66,7 +66,8 @@ class ItemController extends BaseController {
 			return View::make('pages.item.show')
 				->withItem($item)
 				->withMeta($item->meta)
-				->withFiles($item->files->sortBy('version', SORT_REGULAR, true));
+				->withFiles($item->files->sortBy('version', SORT_REGULAR, true))
+				->withComments($item->comments->sortBy('created_at', SORT_REGULAR, true));
 		}
 
 		// TODO: couldn't find the item
@@ -209,6 +210,73 @@ class ItemController extends BaseController {
 		// Dump the attachment and stop the script
 		fpassthru($stream);
 		exit;
+	}
+
+	public function reportAbuse($id)
+	{
+		// Get the item
+		$item = $this->items->find($id);
+
+		// The combined array
+		$input = array_merge(Input::all(), [
+			'user_id'	=> $this->currentUser->id,
+			'item_id'	=> $item->id,
+		]);
+
+		// Fire the event
+		Event::fire('item.report.abuse', [$item, $input]);
+		
+		return Redirect::route('item.show', [$item->user->slug, $item->slug])
+			->with('flashStatus', 'success')
+			->with('flashMessage', "Thank you for reporting the issue to Anodyne. An email has been sent to Anodyne with the details. We'll contact you further if we need additional information.");
+	}
+
+	public function reportIssue($id)
+	{
+		// Get the item
+		$item = $this->items->find($id);
+
+		// The combined array
+		$input = array_merge(Input::all(), [
+			'user_id'	=> $this->currentUser->id,
+			'item_id'	=> $item->id,
+		]);
+
+		// Fire the event
+		Event::fire('item.report.issue', [$item, $input]);
+
+		return Redirect::route('item.show', [$item->user->slug, $item->slug])
+			->with('flashStatus', 'success')
+			->with('flashMessage', "Thank you for reporting the issue. An email has been sent to the developer with the details. They'll contact you further if they need additional information.");
+	}
+
+	public function storeComment($id)
+	{
+		// Get the item
+		$item = $this->items->find($id);
+
+		// The combined array
+		$input = array_merge(Input::all(), [
+			'user_id'	=> $this->currentUser->id,
+			'item_id'	=> $item->id,
+		]);
+
+		// Store the comment
+		$comment = $this->items->addComment($id, $input);
+
+		if ($comment)
+		{
+			// Fire the event
+			Event::fire('item.comment', [$item, $comment, $input]);
+
+			return Redirect::route('item.show', [$item->user->slug, $item->slug])
+				->with('flashStatus', 'success')
+				->with('flashMessage', "Your comment has been added!");
+		}
+
+		return Redirect::route('item.show', [$item->user->slug, $item->slug])
+			->with('flashStatus', 'danger')
+			->with('flashMessage', "There was a problem and your comment could not be added.");
 	}
 
 }

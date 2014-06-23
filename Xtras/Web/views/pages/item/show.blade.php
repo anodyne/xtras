@@ -11,34 +11,40 @@
 
 			<h4>by {{ $item->present()->author }}</h4>
 
+			<div>{{ $item->present()->messages }}</div>
+
 			<div>{{ $item->present()->description }}</div>
 
 			<div class="btn-toolbar">
 				<div class="btn-group">
-					<a href="#" class="btn btn-lg btn-primary"><span class="tab-icon tab-icon-up2 tab-icon-right">{{ $_icons['download'] }}</span>Download the Latest Version</a>
+					{{ $item->present()->downloadBtn }}
 				</div>
 			</div>
 
 			<div class="btn-toolbar">
 				<div class="btn-group">
-					<a href="#" class="btn btn-default">Report an Issue</a>
+					<a href="#" rel="issue" class="btn btn-default">Report an Issue</a>
 				</div>
 				<div class="btn-group">
-					<a href="#" class="btn btn-default">Report Abuse to Anodyne</a>
+					<a href="#" rel="abuse" class="btn btn-default">Report Abuse to Anodyne</a>
 				</div>
 			</div>
 
-			<div class="panel panel-warning">
+			<div class="panel panel-warning hide" id="issuePanel">
 				<div class="panel-heading">
+					<button type="button" class="close">&times;</button>
 					<h2 class="panel-title"><span class="tab-icon tab-icon-up2">{{ $_icons['warning'] }}</span>Report an Issue</h2>
 				</div>
 				<div class="panel-body">
-					{{ Form::open() }}
+					<p>Found an issue with this xtra? Let the developer know by sending them a message. Make sure to be specific about what's wrong, how to reproduce the issue, and any other information you think is pertinent (MODs you have installed, what skin you're using, what browser(s) you've run across the issue in, etc.).</p>
+
+					{{ Form::open(['route' => ['item.reportIssue', $item->id]]) }}
 						<div class="row">
 							<div class="col-md-10 col-lg-10">
 								<div class="form-group">
 									<label>Message</label>
 									{{ Form::textarea('content', null, ['class' => 'form-control', 'rows' => 5]) }}
+									<p class="help-block text-sm">{{ $_icons['markdown'] }} Parsed as Markdown</p>
 								</div>
 							</div>
 						</div>
@@ -51,17 +57,21 @@
 				</div>
 			</div>
 
-			<div class="panel panel-danger">
+			<div class="panel panel-danger hide" id="abusePanel">
 				<div class="panel-heading">
+					<button type="button" class="close">&times;</button>
 					<h2 class="panel-title"><span class="tab-icon tab-icon-up2">{{ $_icons['warning'] }}</span>Report Abuse to Anodyne</h2>
 				</div>
 				<div class="panel-body">
-					{{ Form::open() }}
+					<p>If you think this xtra is doing something malicious, has a virus attached to it, or is doing something that violates the Terms of Use, let Anodyne know and we'll look in to the issue further. Please include all relevant information about the abuse and any information you think is pertinent for Anodyne to know.</p>
+
+					{{ Form::open(['route' => ['item.reportAbuse', $item->id]]) }}
 						<div class="row">
 							<div class="col-md-10 col-lg-10">
 								<div class="form-group">
 									<label>Message</label>
 									{{ Form::textarea('content', null, ['class' => 'form-control', 'rows' => 5]) }}
+									<p class="help-block text-sm">{{ $_icons['markdown'] }} Parsed as Markdown</p>
 								</div>
 							</div>
 						</div>
@@ -154,20 +164,24 @@
 				<div id="comments" class="tab-pane">
 					<div class="btn-toolbar">
 						<div class="btn-group">
-							<a href="#" class="btn btn-default">Add a Comment</a>
+							<a href="#" rel="comment" class="btn btn-default">Add a Comment</a>
 						</div>
 					</div>
 
-					<div class="panel panel-default">
+					<div class="panel panel-default hide" id="commentPanel">
 						<div class="panel-heading">
+							<button type="button" class="close">&times;</button>
 							<h2 class="panel-title"><span class="tab-icon tab-icon-up1">{{ $_icons['comment'] }}</span>Add a Comment</h2>
 						</div>
 						<div class="panel-body">
-							{{ Form::open() }}
+							<p>If you have an issue with this xtra, please use the Report Issue button at the top of the page. Comments should be used to ask questions or commend the author on their work.</p>
+							
+							{{ Form::open(['route' => ['item.addComment', $item->id]]) }}
 								<div class="row">
 									<div class="col-md-10 col-lg-10">
 										<div class="form-group">
 											{{ Form::textarea('content', null, ['class' => 'form-control', 'rows' => 5]) }}
+											<p class="help-block text-sm">{{ $_icons['markdown'] }} Parsed as Markdown</p>
 										</div>
 									</div>
 								</div>
@@ -179,6 +193,21 @@
 							{{ Form::close() }}
 						</div>
 					</div>
+
+					@if ($comments->count() > 0)
+						@foreach ($comments as $comment)
+							@if ($comment->user->id == $item->user->id)
+								<blockquote class="author">
+							@else
+								<blockquote>
+							@endif
+								{{ $comment->present()->content }}
+								{{ $comment->present()->author }}
+							</blockquote>
+						@endforeach
+					@else
+						<p class="alert alert-warning">There are no comments for this xtra.</p>
+					@endif
 				</div>
 			</div>
 		</div>
@@ -189,4 +218,33 @@
 			<p><img src="http://placehold.it/250x250" class="img-rounded"></p>
 		</div>
 	</div>
+@stop
+
+@section('scripts')
+	<script>
+
+		$('.close').on('click', function()
+		{
+			$(this).closest('.panel').addClass('hide');
+		});
+
+		$('[rel="issue"]').on('click', function(e)
+		{
+			e.preventDefault();
+			$('#issuePanel').removeClass('hide');
+		});
+
+		$('[rel="abuse"]').on('click', function(e)
+		{
+			e.preventDefault();
+			$('#abusePanel').removeClass('hide');
+		});
+
+		$('[rel="comment"]').on('click', function(e)
+		{
+			e.preventDefault();
+			$('#commentPanel').removeClass('hide');
+		});
+
+	</script>
 @stop

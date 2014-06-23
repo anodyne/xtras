@@ -41,7 +41,40 @@ class ItemPresenter extends Presenter {
 
 	public function downloadBtn()
 	{
-		return HTML::link('', 'Download Latest Version', array('class' => 'btn btn-lg btn-primary'));
+		// Get the icons
+		$downloadIcon = \Config::get('icons.download');
+
+		// Get the latest version
+		$latest = $this->entity->getLatestVersion()->toArray();
+
+		$link = \URL::route('item.download', [$this->entity->id, $latest['files']['id']]);
+		$title = '<span class="tab-icon tab-icon-up2 tab-icon-right">'.$downloadIcon.'</span>Download Latest Version';
+
+		return '<a href="'.$link.'" class="btn btn-lg btn-primary">'.$title.'</a>';
+	}
+
+	public function messages()
+	{
+		// Get right now...
+		$now = \Date::now();
+
+		// Start the output
+		$output = "";
+
+		if ($this->entity->messages->count() > 0)
+		{
+			foreach ($this->entity->messages as $message)
+			{
+				if ($message->expires === null or ($message->expires !== null and $now->lt($message->expires)))
+				{
+					$output .= View::make('partials.alert')
+						->withType($message->type)
+						->withContent(Markdown::parse($message->content));
+				}
+			}
+		}
+
+		return $output;
 	}
 
 	public function name()
@@ -51,14 +84,14 @@ class ItemPresenter extends Presenter {
 
 	public function product()
 	{
-		return $this->entity->product->name;
+		return $this->entity->product->present()->name;
 	}
 
 	public function productAsLabel()
 	{
 		return View::make('partials.label')
 			->withClass('default')
-			->withContent($this->entity->product->name);
+			->withContent($this->product());
 	}
 
 	public function rating()

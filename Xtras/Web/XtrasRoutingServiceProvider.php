@@ -84,6 +84,15 @@ class XtrasRoutingServiceProvider extends ServiceProvider {
 			Route::post('item/ajax/checkName', [
 				'as'	=> 'item.ajax.checkName',
 				'uses'	=> 'Xtras\Controllers\ItemController@ajaxCheckName']);
+			Route::post('item/{id}/report-issue', [
+				'as'	=> 'item.reportIssue',
+				'uses'	=> 'Xtras\Controllers\ItemController@reportIssue']);
+			Route::post('item/{id}/report-abuse', [
+				'as'	=> 'item.reportAbuse',
+				'uses'	=> 'Xtras\Controllers\ItemController@reportAbuse']);
+			Route::post('item/{id}/add-comment', [
+				'as'	=> 'item.addComment',
+				'uses'	=> 'Xtras\Controllers\ItemController@storeComment']);
 			Route::resource('item', 'Xtras\Controllers\ItemController');
 			Route::get('item/{author}/{slug}', [
 				'as'	=> 'item.show',

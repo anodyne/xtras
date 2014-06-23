@@ -6,7 +6,7 @@
 
 @section('content')
 	<div id="newest">
-		<a href="#" data-target="updated" class="btn btn-sm btn-default pull-right xtra-toggle">See Recently Updated Xtras</a>
+		<a href="#" data-target="updated" class="btn btn-info pull-right xtra-toggle">See Recently Updated Xtras</a>
 
 		<h2>Newest Xtras</h2>
 
@@ -20,7 +20,7 @@
 	</div>
 	
 	<div id="updated" class="hide">
-		<a href="#" data-target="newest" class="btn btn-sm btn-default pull-right xtra-toggle">See Newest Xtras</a>
+		<a href="#" data-target="newest" class="btn btn-info pull-right xtra-toggle">See Newest Xtras</a>
 
 		<h2>Recently Updated Xtras</h2>
 

@@ -14,12 +14,12 @@
 	</div>
 
 	@if ($skins->count() == 0 and $ranks->count() == 0 and $mods->count() == 0)
-		{{ partial('alert', ['type' => 'warning', 'content' => "It looks like you don't have any Xtras. Go ahead and change that and create your first!"]) }}
+		<p class="alert alert-warning">It looks like you don't have any Xtras. Go ahead and change that, create your first!</p>
 	@else
 		<ul class="nav nav-tabs">
 			<li class="active"><a href="#skins" data-toggle="tab">Skins</a></li>
-			<li><a href="#ranks" data-toggle="tab">Rank Sets</a></li>
 			<li><a href="#mods" data-toggle="tab">MODs</a></li>
+			<li><a href="#ranks" data-toggle="tab">Rank Sets</a></li>
 		</ul>
 
 		<div class="tab-content">
@@ -37,7 +37,7 @@
 
 				<div class="data-table data-table-striped data-table-bordered">
 				@foreach ($skins as $item)
-					<div class="row">
+					<div class="row {{ $item->product->present()->nameAsSlug }}">
 						<div class="col-lg-8">
 							<p class="lead">{{ $item->present()->name }}</p>
 						</div>

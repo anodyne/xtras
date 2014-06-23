@@ -220,6 +220,8 @@ section {
 	}
 
 	h2 {
+		margin-top: 0;
+
 		font-family: @font-special;
 		font-weight: 500;
 		font-style: italic;
@@ -425,7 +427,7 @@ form {
 	.rounded(@border-radius);
 
 	&.alert-info {
-		.alert-variant(lighten(@color-info-alert, 32%), lighten(@color-info-alert, 22%), @color-info-alert);
+		.alert-variant(lighten(@color-info-alert, 22%), lighten(@color-info-alert, 12%), darken(@color-info-alert, 22%));
 	}
 
 	&.alert-success {
@@ -478,15 +480,15 @@ form {
 	}
 
 	&.panel-info {
-		border-color: lighten(@color-info-alert, 22%);
+		border-color: lighten(@color-info-alert, 12%);
 
 		.panel-heading {
-			color: @color-info-alert;
-			border-color: lighten(@color-info-alert, 22%);
-			background-color: lighten(@color-info-alert, 32%);
+			color: darken(@color-info-alert, 22%);
+			border-color: lighten(@color-info-alert, 12%);
+			background-color: lighten(@color-info-alert, 22%);
 
 			.panel-title {
-				color: @color-info-alert;
+				color: darken(@color-info-alert, 22%);
 			}
 		}
 	}
@@ -709,4 +711,20 @@ code {
 
 .img-rounded {
 	.rounded(@border-radius);
+}
+
+blockquote {
+	footer {
+		height: auto;
+		padding: 0;
+		margin: 0;
+
+		background: transparent;
+		border: none;
+	}
+
+	&.author {
+		border-color: @color-primary;
+		color: @color-primary;
+	}
 }

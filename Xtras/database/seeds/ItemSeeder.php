@@ -36,6 +36,18 @@ class ItemSeeder extends Seeder {
 				'slug' => '',
 			]);
 
+			// Create a new meta model
+			$meta = new ItemMetaModel;
+			$meta->fill([
+				'installation' => implode("\r\n\r\n", $faker->paragraphs(3)),
+				'history' => $faker->paragraph,
+			]);
+			$meta->save();
+
+			// Attach the meta model to the item
+			$item->meta()->save($meta);
+
+			// Determine how many times we're looping through ratings
 			$ratingsLoop = $faker->numberBetween(1, 10);
 
 			for ($j = 1; $j < $ratingsLoop; $j++)
@@ -46,6 +58,35 @@ class ItemSeeder extends Seeder {
 					'rating' => $faker->numberBetween(1, 5),
 				]);
 			}
+
+			// Determine how many times we're looping through comments
+			$commentsLoop = $faker->numberBetween(1, 10);
+
+			for ($c = 1; $c < $commentsLoop; $c++)
+			{
+				CommentModel::create([
+					'user_id' => $faker->numberBetween(1, 2),
+					'item_id' => $item->id,
+					'content' => $faker->paragraph,
+				]);
+			}
+
+			// Determine how many times we're looping through files
+			$filesLoop = $faker->numberBetween(1, 10);
+
+			for ($f = 1; $f < $filesLoop; $f++)
+			{
+				$version = $faker->randomFloat(1, 1, 9);
+				$filename = "{$item->user->slug}/{$item->slug}-{$version}.zip";
+
+				ItemFileModel::create([
+					'item_id' => $item->id,
+					'filename' => $filename,
+					'version' => $faker->randomFloat(1, 1, 9),
+				]);
+			}
+
+			$item->update(['version' => $version]);
 		}
 	}
 

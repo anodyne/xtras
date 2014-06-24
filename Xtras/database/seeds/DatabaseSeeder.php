@@ -21,8 +21,8 @@ class DatabaseSeeder extends Seeder {
 
 		if ($env != 'production')
 		{
-			$this->call('ItemSeeder');
 			$this->call('UserSeeder');
+			$this->call('ItemSeeder');
 		}
 	}
 

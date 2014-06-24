@@ -74,6 +74,7 @@ class CreateItems extends Migration {
 			$table->increments('id');
 			$table->string('name');
 			$table->text('desc');
+			$table->boolean('display')->default((int) true);
 			$table->timestamps();
 			$table->softDeletes();
 		});
@@ -82,6 +83,7 @@ class CreateItems extends Migration {
 		{
 			$table->increments('id');
 			$table->string('name');
+			$table->boolean('display')->default((int) true);
 			$table->timestamps();
 			$table->softDeletes();
 		});

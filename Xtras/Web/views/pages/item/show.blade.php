@@ -195,24 +195,9 @@
 					</div>
 
 					<blockquote ng-repeat="comment in comments">
-						<% comment.content %>
-						<% comment.author %>
+						<div ng-bind-html="comment.content"></div>
+						<div ng-bind-html="comment.author"></div>
 					</blockquote>
-
-					{{--@if ($comments->count() > 0)
-						@foreach ($comments as $comment)
-							@if ($comment->user->id == $item->user->id)
-								<blockquote class="author">
-							@else
-								<blockquote>
-							@endif
-								{{ $comment->present()->content }}
-								{{ $comment->present()->author }}
-							</blockquote>
-						@endforeach
-					@else
-						<p class="alert alert-warning">There are no comments for this xtra.</p>
-					@endif--}}
 				</div>
 			</div>
 		</div>

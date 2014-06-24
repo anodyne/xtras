@@ -1,4 +1,4 @@
-var xtrasApp = angular.module('xtrasApp', [], function($interpolateProvider) {
+var xtrasApp = angular.module('xtrasApp', ['ngSanitize'], function($interpolateProvider) {
 	$interpolateProvider.startSymbol('<%');
 	$interpolateProvider.endSymbol('%>');
 });
@@ -30,15 +30,16 @@ function CommentsController($scope, $http, $window) {
 			content: $scope.newCommentContent
 		};
 
-		console.log($scope.comments);
-
-		// Push the content onto the comments
-		$scope.comments.unshift(comment);
-
 		// Post the data
 		$http.post($window.url + '/comments/' + $window.itemId, comment);
 
+		// Refresh all the comments
+		$http.get($window.url + '/comments/' + $window.itemId).success(function(comments)
+		{
+			$scope.comments = comments.data;
+		});
+
 		// Hide the panel
-		$('#commentPanel').addClass('hide');
+		$('#commentPanel').fadeOut('normal');
 	}
 }

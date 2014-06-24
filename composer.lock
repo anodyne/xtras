@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "35ca8f0f28ef2a5c03c0159c28855ce1",
+    "hash": "f5f7e525af5c7f0e5f79812b39211a51",
     "packages": [
         {
             "name": "aws/aws-sdk-php",
@@ -804,7 +804,7 @@
         },
         {
             "name": "laravelbook/ardent",
-            "version": "v2.4.2",
+            "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravelbook/ardent.git",
@@ -2222,6 +2222,66 @@
             "description": "Symfony Translation Component",
             "homepage": "http://symfony.com",
             "time": "2014-05-22 13:47:45"
+        },
+        {
+            "name": "zizaco/entrust",
+            "version": "1.2.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Zizaco/entrust.git",
+                "reference": "48cbd45bd0a07997b1e883d44558ec9e809eacef"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Zizaco/entrust/zipball/48cbd45bd0a07997b1e883d44558ec9e809eacef",
+                "reference": "48cbd45bd0a07997b1e883d44558ec9e809eacef",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/support": "4.x",
+                "laravelbook/ardent": "dev-master",
+                "php": ">=5.4.0"
+            },
+            "require-dev": {
+                "illuminate/database": "4.x",
+                "mockery/mockery": "0.7.2",
+                "zizaco/factory-muff": "dev-master"
+            },
+            "suggest": {
+                "zizaco/confide": "Confide is an authentication solution for Laravel 4 that couples very well with Entrust"
+            },
+            "type": "library",
+            "autoload": {
+                "classmap": [
+                    "src/commands"
+                ],
+                "psr-0": {
+                    "Zizaco\\Entrust": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Zizaco Zizuini",
+                    "email": "zizaco@gmail.com",
+                    "homepage": "http://www.zizaco.net"
+                },
+                {
+                    "name": "Andrew Elkins",
+                    "homepage": "http://www.andrewelkins.com"
+                }
+            ],
+            "description": "This package provides a flexible way to add Role-based Permissions to Laravel 4",
+            "keywords": [
+                "auth",
+                "illuminate",
+                "laravel",
+                "roles"
+            ],
+            "time": "2014-03-07 06:22:46"
         }
     ],
     "packages-dev": [

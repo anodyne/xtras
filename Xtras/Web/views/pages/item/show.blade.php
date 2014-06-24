@@ -6,7 +6,7 @@
 
 @section('content')
 	<div class="row" ng-controller="CommentsController">
-		<div class="col-lg-9">
+		<div class="col-md-9 col-lg-9">
 			<h1>{{ $item->present()->name }} <small>{{ $item->present()->type }}</small></h1>
 
 			<h4>by {{ $item->present()->author }}</h4>
@@ -217,10 +217,10 @@
 			</div>
 		</div>
 
-		<div class="col-lg-3">
-			<p><img src="http://placehold.it/250x250" class="img-rounded"></p>
-			<p><img src="http://placehold.it/250x250" class="img-rounded"></p>
-			<p><img src="http://placehold.it/250x250" class="img-rounded"></p>
+		<div class="col-md-3 col-lg-3">
+			<p><img src="http://placehold.it/250x175" class="img-rounded"></p>
+			<p><img src="http://placehold.it/250x175" class="img-rounded"></p>
+			<p><img src="http://placehold.it/250x175" class="img-rounded"></p>
 		</div>
 	</div>
 @stop

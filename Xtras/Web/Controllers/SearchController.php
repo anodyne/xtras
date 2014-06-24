@@ -20,7 +20,7 @@ class SearchController extends BaseController {
 	public function advanced()
 	{
 		return View::make('pages.search_advanced')
-			->withTypes($this->items->getItemTypes())
+			->withTypes($this->items->getTypes())
 			->withProducts($this->items->getProducts());
 	}
 

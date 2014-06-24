@@ -35,7 +35,7 @@ class ItemController extends BaseController {
 			$products += $this->items->getProducts();
 
 			$types[''] = "Choose a type";
-			$types += $this->items->getItemTypes();
+			$types += $this->items->getTypesByPermissions($this->currentUser);
 
 			return View::make('pages.item.create')
 				->withProducts($products)

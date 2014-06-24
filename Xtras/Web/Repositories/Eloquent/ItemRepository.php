@@ -141,16 +141,33 @@ class ItemRepository implements ItemRepositoryInterface {
 		return ItemFileModel::find($id);
 	}
 
-	public function getItemTypes()
+	public function getProducts()
+	{
+		return ProductModel::active()->lists('name', 'id');
+	}
+
+	public function getRecentlyAdded($number)
+	{
+		return ItemModel::orderBy('created_at', 'desc')->take($number)->get();
+	}
+
+	public function getRecentlyUpdated($number)
+	{
+		return ItemModel::orderBy('updated_at', 'desc')->take($number)->get();
+	}
+
+	public function getTypes()
+	{
+		return TypeModel::active()->lists('name', 'id');
+	}
+
+	public function getTypesByPermissions(UserModel $user)
 	{
 		// Get all the types
-		$types = TypeModel::all();
+		$types = TypeModel::active()->get();
 
 		// Start an array of items
 		$finalTypes = [];
-
-		// Get the current user
-		$user = \Auth::user();
 
 		foreach ($types as $type)
 		{
@@ -180,21 +197,6 @@ class ItemRepository implements ItemRepositoryInterface {
 		}
 
 		return $finalTypes;
-	}
-
-	public function getProducts()
-	{
-		return ProductModel::lists('name', 'id');
-	}
-
-	public function getRecentlyAdded($number)
-	{
-		return ItemModel::orderBy('created_at', 'desc')->take($number)->get();
-	}
-
-	public function getRecentlyUpdated($number)
-	{
-		return ItemModel::orderBy('updated_at', 'desc')->take($number)->get();
 	}
 
 	public function search($input)

@@ -11,7 +11,7 @@ class TypeModel extends Model {
 
 	protected $table = 'types';
 
-	protected $fillable = ['name'];
+	protected $fillable = ['name', 'display'];
 
 	protected $dates = ['created_at', 'updated_at', 'deleted_at'];
 
@@ -26,5 +26,16 @@ class TypeModel extends Model {
 	public static $relationsData = [
 		'items' => [self::HAS_MANY, 'ItemModel', 'foreignKey' => 'type_id'],
 	];
+
+	/*
+	|---------------------------------------------------------------------------
+	| Model Scopes
+	|---------------------------------------------------------------------------
+	*/
+
+	public function scopeActive($query)
+	{
+		$query->where('display', (int) true);
+	}
 
 }

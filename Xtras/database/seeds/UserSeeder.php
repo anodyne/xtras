@@ -32,7 +32,7 @@ class UserSeeder extends Seeder {
 			$user = UserModel::create($user);
 
 			// Attach the Xtras Administrator role
-			//$user->roles()->attach(1);
+			$user->roles()->attach(1);
 		}
 	}
 

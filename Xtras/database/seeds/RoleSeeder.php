@@ -9,29 +9,40 @@ class RoleSeeder extends Seeder {
 	 */
 	public function run()
 	{
+		$permissions = [
+			['display_name' => "Create Xtra", 'name' => "xtras.item.create"],
+			['display_name' => "Edit Xtra", 'name' => "xtras.item.edit"],
+			['display_name' => "Delete Xtra", 'name' => "xtras.item.delete"],
+			['display_name' => "Skin Xtras", 'name' => "xtras.item.skins"],
+			['display_name' => "MOD Xtras", 'name' => "xtras.item.mods"],
+			['display_name' => "Rank Xtras", 'name' => "xtras.item.ranks"],
+		];
+
+		foreach ($permissions as $permission)
+		{
+			PermissionModel::create($permission);
+		}
+
 		$roles = [
 			['name' => "Xtras Administrator"],
 			['name' => "Xtras User (No Rank Sets)"],
 			['name' => "Xtras User (Including Rank Sets)"],
 		];
 
-		foreach ($roles as $role)
-		{
-			RoleModel::create($role);
-		}
-
-		$permissions = [
-			['name' => "Create Xtra", 'display_name' => "xtra.item.create"],
-			['name' => "Edit Xtra", 'display_name' => "xtra.item.edit"],
-			['name' => "Delete Xtra", 'display_name' => "xtra.item.delete"],
-			['name' => "Skin Xtras", 'display_name' => "xtra.item.skins"],
-			['name' => "MOD Xtras", 'display_name' => "xtra.item.mods"],
-			['name' => "Rank Xtras", 'display_name' => "xtra.item.ranks"],
+		$roleAssociations = [
+			1 => [1, 2, 3, 4, 5, 6],
+			2 => [1, 2, 3, 4, 5],
+			3 => [1, 2, 3, 4, 5, 6],
 		];
 
-		foreach ($permissions as $permission)
+		foreach ($roles as $role)
 		{
-			PermissionModel::create($permission);
+			$role = RoleModel::create($role);
+
+			foreach ($roleAssociations[$role->id] as $ra)
+			{
+				$role->perms()->attach($ra);
+			}
 		}
 	}
 

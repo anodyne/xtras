@@ -3,7 +3,7 @@
 use Str,
 	Hash,
 	Model;
-//use Zizaco\Entrust\HasRole;
+use Zizaco\Entrust\HasRole;
 use Illuminate\Auth\UserTrait,
 	Illuminate\Auth\UserInterface,
 	Illuminate\Auth\Reminders\RemindableTrait,
@@ -13,7 +13,7 @@ use Illuminate\Database\Eloquent\SoftDeletingTrait;
 
 class UserModel extends Model implements UserInterface, RemindableInterface {
 
-	//use HasRole;
+	use HasRole;
 	use UserTrait;
 	use RemindableTrait;
 	use PresentableTrait;

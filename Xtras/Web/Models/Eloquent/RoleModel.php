@@ -2,10 +2,12 @@
 
 use Zizaco\Entrust\EntrustRole;
 
-class Role extends EntrustRole {
+class RoleModel extends EntrustRole {
 
 	protected $connection = 'anodyneUsers';
 	
 	protected $table = 'roles';
+
+	protected $fillable = ['name'];
 
 }

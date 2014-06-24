@@ -111,7 +111,7 @@ return array(
 
 		'Xtras\XtrasServiceProvider',
 		'Xtras\XtrasRoutingServiceProvider',
-		//'Zizaco\Entrust\EntrustServiceProvider',
+		'Zizaco\Entrust\EntrustServiceProvider',
 
 	),
 
@@ -184,7 +184,7 @@ return array(
 		 */
 		'Browser'	=> 'Ikimea\Browser\Browser',
 		'Date'		=> 'Carbon\Carbon',
-		//'Entrust'	=> 'Zizaco\Entrust\EntrustFacade',
+		'Entrust'	=> 'Zizaco\Entrust\EntrustFacade',
 		'Markdown'	=> 'Xtras\Facades\Markdown',
 		'Model'		=> 'Xtras\Extensions\Laravel\Database\Eloquent\Model',
 		
@@ -202,6 +202,7 @@ return array(
 		'CommentModel'		=> 'Xtras\Models\Eloquent\CommentModel',
 		'OrderModel'		=> 'Xtras\Models\Eloquent\OrderModel',
 		'RoleModel'			=> 'Xtras\Models\Eloquent\RoleModel',
+		'PermissionModel'	=> 'Xtras\Models\Eloquent\PermissionModel',
 
 		/**
 		 * Repository Interfaces

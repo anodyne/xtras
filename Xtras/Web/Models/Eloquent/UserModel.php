@@ -2,7 +2,8 @@
 
 use Str,
 	Hash,
-	Model;
+	Model,
+	Config;
 use Zizaco\Entrust\HasRole;
 use Illuminate\Auth\UserTrait,
 	Illuminate\Auth\UserInterface,
@@ -77,9 +78,14 @@ class UserModel extends Model implements UserInterface, RemindableInterface {
 	|--------------------------------------------------------------------------
 	*/
 
-	public function access()
-	{
-		return 1;
-	}
+	public function roles()
+    {
+        return $this->belongsToMany(
+        	Config::get('entrust::role'),
+        	Config::get('entrust::assigned_roles_table'),
+        	'user_id',
+        	'role_id'
+        );
+    }
 
 }

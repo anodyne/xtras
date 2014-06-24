@@ -33,7 +33,7 @@
 
 		<h2>Preview Images</h2>
 
-		<p>In order to cover all scenarios, you should upload a primary preview image that is at least 800 pixels wide and 300 pixels tall. This ensures that the preview image will be sharp and clear in all use cases, including on high resolution displays.</p>
+		<p>In order to cover all scenarios, you should upload a primary preview image that is at least 700 pixels wide and 300 pixels tall. This ensures that the preview image will be sharp and clear in all use cases, including on high resolution displays.</p>
 
 		<div id="dzPreviews" class="dropzone"></div>
 	</div>

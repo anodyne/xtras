@@ -221,6 +221,11 @@ return array(
 		 */
 		'ItemMailer'	=> 'Xtras\Mailers\ItemMailer',
 
+		/**
+		 * Transformers
+		 */
+		'CommentTransformer'	=> 'Xtras\Transformers\CommentTransformer',
+
 	),
 
 );

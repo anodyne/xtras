@@ -123,6 +123,9 @@ class XtrasRoutingServiceProvider extends ServiceProvider {
 			Route::post('search-advanced', [
 				'as'	=> 'search.doAdvanced',
 				'uses'	=> 'Xtras\Controllers\SearchController@doAdvancedSearch']);
+
+			Route::get('comments/{itemId}', 'Xtras\Controllers\CommentController@index');
+			Route::post('comments/{itemId}', 'Xtras\Controllers\CommentController@store');
 		});
 	}
 

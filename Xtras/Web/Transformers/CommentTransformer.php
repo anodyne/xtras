@@ -9,7 +9,7 @@ class CommentTransformer extends Fractal\TransformerAbstract {
 	{
 		return [
 			'id'		=> (int) $comment->id,
-			'author'	=> $comment->user->present()->name,
+			'author'	=> $comment->present()->author,
 			'item'		=> (int) $comment->item->id,
 			'content'	=> $comment->present()->content,
 		];

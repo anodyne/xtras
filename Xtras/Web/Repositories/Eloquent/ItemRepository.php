@@ -12,7 +12,6 @@ use Auth,
 	CommentTransformer,
 	ItemRepositoryInterface;
 use Illuminate\Support\Collection;
-use League\Fractal\Resource\Collection as FractalCollection;
 
 class ItemRepository implements ItemRepositoryInterface {
 
@@ -147,11 +146,7 @@ class ItemRepository implements ItemRepositoryInterface {
 		if ($item)
 		{
 			// Pull back the comments and sort them in descending order
-			$comments = $item->comments->sortByDesc('created_at');
-
-			return $comments;
-
-			return new FractalCollection($comments, new CommentTransformer);
+			return $item->comments->sortByDesc('created_at');
 		}
 
 		return new Collection;

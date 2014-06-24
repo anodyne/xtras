@@ -7,7 +7,7 @@ function CommentsController($scope, $http, $window) {
 
 	$http.get($window.url + '/comments/' + $window.itemId).success(function(comments)
 	{
-		$scope.comments = comments;
+		$scope.comments = comments.data;
 	});
 
 	$scope.countComments = function()
@@ -29,6 +29,8 @@ function CommentsController($scope, $http, $window) {
 			item_id: $window.itemId,
 			content: $scope.newCommentContent
 		};
+
+		console.log($scope.comments);
 
 		// Push the content onto the comments
 		$scope.comments.unshift(comment);

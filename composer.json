@@ -2,6 +2,7 @@
 	"require": {
 		"laravel/framework": "4.2.*",
 		"league/flysystem": "~0.4",
+		"league/fractal": "~0.8",
 		"aws/aws-sdk-php": "~2.0",
 		"erusev/parsedown": "~1.0",
 		"ikimea/browser": "~1.0",

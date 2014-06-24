@@ -5,7 +5,7 @@
 @stop
 
 @section('content')
-	<div class="row">
+	<div class="row" ng-controller="CommentsController">
 		<div class="col-lg-9">
 			<h1>{{ $item->present()->name }} <small>{{ $item->present()->type }}</small></h1>
 
@@ -98,7 +98,7 @@
 				@endif
 
 				<li class="visible-md visible-lg"><a href="#download" data-toggle="tab"><span class="tab-icon tab-icon-up3">{{ $_icons['download'] }}</span>Downloads</a></li>
-				<li><a href="#comments" data-toggle="tab"><span class="tab-icon">{{ $_icons['comments'] }}</span> Comments {{ $item->present()->commentsCount }}</a></li>
+				<li><a href="#comments" data-toggle="tab"><span class="tab-icon">{{ $_icons['comments'] }}</span> Comments <span ng-if="countComments()">(<% countComments() %>)</span></a></li>
 			</ul>
 
 			<div class="tab-content">
@@ -176,25 +176,30 @@
 						<div class="panel-body">
 							<p>If you have an issue with this xtra, please use the Report Issue button at the top of the page. Comments should be used to ask questions or commend the author on their work.</p>
 							
-							{{ Form::open(['route' => ['item.addComment', $item->id]]) }}
+							<form ng-submit="addComment()">
 								<div class="row">
 									<div class="col-md-10 col-lg-10">
 										<div class="form-group">
-											{{ Form::textarea('content', null, ['class' => 'form-control', 'rows' => 5]) }}
+											{{ Form::textarea('content', null, ['class' => 'form-control', 'rows' => 5, 'ng-model' => 'newCommentContent']) }}
 											<p class="help-block text-sm">{{ $_icons['markdown'] }} Parsed as Markdown</p>
 										</div>
 									</div>
 								</div>
 								<div class="row">
 									<div class="col-lg-12">
-										{{ Form::button('Submit', ['type' => 'submit', 'class' => 'btn btn-default']) }}
+										{{ Form::button('Submit', ['type' => 'submit', 'id' => 'commentSubmit', 'class' => 'btn btn-default']) }}
 									</div>
 								</div>
-							{{ Form::close() }}
+							</form>
 						</div>
 					</div>
 
-					@if ($comments->count() > 0)
+					<blockquote ng-repeat="comment in comments">
+						<% comment.content %>
+						<% comment.author %>
+					</blockquote>
+
+					{{--@if ($comments->count() > 0)
 						@foreach ($comments as $comment)
 							@if ($comment->user->id == $item->user->id)
 								<blockquote class="author">
@@ -207,7 +212,7 @@
 						@endforeach
 					@else
 						<p class="alert alert-warning">There are no comments for this xtra.</p>
-					@endif
+					@endif--}}
 				</div>
 			</div>
 		</div>
@@ -221,7 +226,12 @@
 @stop
 
 @section('scripts')
+	{{ HTML::script('js/app.js') }}
 	<script>
+
+		window.url = "{{ Request::root() }}";
+		window.itemId = "{{ $item->id }}";
+		window.userId = "{{ $_currentUser->id }}";
 
 		$('.close').on('click', function()
 		{

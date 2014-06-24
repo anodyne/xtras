@@ -9,7 +9,10 @@ use Auth,
 	ProductModel,
 	ItemFileModel,
 	ItemMetaModel,
+	CommentTransformer,
 	ItemRepositoryInterface;
+use Illuminate\Support\Collection;
+use League\Fractal\Resource\Collection as FractalCollection;
 
 class ItemRepository implements ItemRepositoryInterface {
 
@@ -134,6 +137,24 @@ class ItemRepository implements ItemRepositoryInterface {
 		}
 
 		return $sortedItems;
+	}
+
+	public function getComments($id)
+	{
+		// Get the item
+		$item = $this->find($id);
+
+		if ($item)
+		{
+			// Pull back the comments and sort them in descending order
+			$comments = $item->comments->sortByDesc('created_at');
+
+			return $comments;
+
+			return new FractalCollection($comments, new CommentTransformer);
+		}
+
+		return new Collection;
 	}
 
 	public function getFile($id)

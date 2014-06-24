@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" ng-app="xtrasApp">
 	<head>
 		<meta charset="utf-8">
 		<title>@yield('title') &bull; AnodyneXtras</title>
@@ -14,12 +14,12 @@
 		<![endif]-->
 
 		@if (App::environment() == 'production')
-			<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,600" rel="stylesheet">
-			<link href="http://fonts.googleapis.com/css?family=Bitter:400,700" rel="stylesheet">
-			<link href="http://fonts.googleapis.com/css?family=Exo+2:500,500italic,600,600italic" rel="stylesheet">
+			<link href="//fonts.googleapis.com/css?family=Open+Sans:400,600" rel="stylesheet">
+			<link href="//fonts.googleapis.com/css?family=Bitter:400,700" rel="stylesheet">
+			<link href="//fonts.googleapis.com/css?family=Exo+2:500,500italic,600,600italic" rel="stylesheet">
 			<link href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet">
 		@else
-			<link href="http://localhost/global/bootstrap/3.1/css/bootstrap.min.css" rel="stylesheet">
+			<link href="//localhost/global/bootstrap/3.1/css/bootstrap.min.css" rel="stylesheet">
 		@endif
 
 		{{ HTML::style('css/style.css') }}
@@ -153,22 +153,24 @@
 
 		@if (App::environment() == 'production')
 			<!--[if lt IE 9]>
-				<script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+				<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 			<![endif]-->
 			<!--[if gte IE 9]><!-->
-				<script src="http://code.jquery.com/jquery-2.1.1.min.js"></script>
+				<script src="//code.jquery.com/jquery-2.1.1.min.js"></script>
 			<!--<![endif]-->
 
 			<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+			<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.0-beta.13/angular.min.js"></script>
 		@else
 			<!--[if lt IE 9]>
-				<script src="http://localhost/global/jquery/jquery-1.11.1.min.js"></script>
+				<script src="//localhost/global/jquery/jquery-1.11.1.min.js"></script>
 			<![endif]-->
 			<!--[if gte IE 9]><!-->
-				<script src="http://localhost/global/jquery/jquery-2.1.1.min.js"></script>
+				<script src="//localhost/global/jquery/jquery-2.1.1.min.js"></script>
 			<!--<![endif]-->
 
-			<script src="http://localhost/global/bootstrap/3.1/js/bootstrap.min.js"></script>
+			<script src="//localhost/global/bootstrap/3.1/js/bootstrap.min.js"></script>
+			<script src="//localhost/global/angular/1.3/angular.min.js"></script>
 		@endif
 		<script>
 			$(document).ready(function()

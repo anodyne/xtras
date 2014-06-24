@@ -143,7 +143,43 @@ class ItemRepository implements ItemRepositoryInterface {
 
 	public function getItemTypes()
 	{
-		return TypeModel::lists('name', 'id');
+		// Get all the types
+		$types = TypeModel::all();
+
+		// Start an array of items
+		$finalTypes = [];
+
+		// Get the current user
+		$user = \Auth::user();
+
+		foreach ($types as $type)
+		{
+			switch ($type->name)
+			{
+				case 'Skin':
+					if ($user->can('xtras.item.skins'))
+					{
+						$finalTypes[$type->id] = $type->name;
+					}
+				break;
+
+				case 'MOD':
+					if ($user->can('xtras.item.mods'))
+					{
+						$finalTypes[$type->id] = $type->name;
+					}
+				break;
+
+				case 'Rank Set':
+					if ($user->can('xtras.item.ranks'))
+					{
+						$finalTypes[$type->id] = $type->name;
+					}
+				break;
+			}
+		}
+
+		return $finalTypes;
 	}
 
 	public function getProducts()

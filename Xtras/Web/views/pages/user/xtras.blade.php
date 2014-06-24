@@ -7,11 +7,13 @@
 @section('content')
 	<h1>My Xtras</h1>
 
-	<div class="btn-toolbar">
-		<div class="btn-group">
-			<a href="{{ URL::route('item.create') }}" class="btn btn-primary">Add New Xtra</a>
+	@if ($_currentUser->can('xtras.item.create'))
+		<div class="btn-toolbar">
+			<div class="btn-group">
+				<a href="{{ URL::route('item.create') }}" class="btn btn-primary">Add New Xtra</a>
+			</div>
 		</div>
-	</div>
+	@endif
 
 	@if ($skins->count() == 0 and $ranks->count() == 0 and $mods->count() == 0)
 		<p class="alert alert-warning">It looks like you don't have any Xtras. Go ahead and change that, create your first!</p>

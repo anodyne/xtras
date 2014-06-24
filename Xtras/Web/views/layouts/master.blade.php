@@ -42,7 +42,10 @@
 									<a href="#" data-toggle="dropdown" class="dropdown-toggle"><span class="user-icon">{{ $_icons['user'] }}</span> {{ Auth::user()->present()->name }} <span class="caret"></span></a>
 									<ul class="dropdown-menu dropdown-menu-right dd">
 										<li><a href="{{ URL::route('account.xtras', [$_currentUser->slug]) }}">My Xtras</a></li>
-										<li><a href="{{ URL::route('item.create') }}">Create New Xtra</a></li>
+										
+										@if ($_currentUser->can('xtras.item.create'))
+											<li><a href="{{ URL::route('item.create') }}">Create New Xtra</a></li>
+										@endif
 										<li class="divider"></li>
 										<li><a href="{{ URL::route('account.profile', [$_currentUser->slug]) }}">My Profile</a></li>
 										<li><a href="{{ URL::route('account.edit', [$_currentUser->slug]) }}">Edit My Profile</a></li>

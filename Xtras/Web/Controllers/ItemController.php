@@ -29,31 +29,45 @@ class ItemController extends BaseController {
 
 	public function create()
 	{
-		$products[''] = "Choose a product";
-		$products += $this->items->getProducts();
+		if ($this->currentUser->can('xtras.item.create'))
+		{
+			$products[''] = "Choose a product";
+			$products += $this->items->getProducts();
 
-		$types[''] = "Choose a type";
-		$types += $this->items->getItemTypes();
+			$types[''] = "Choose a type";
+			$types += $this->items->getItemTypes();
 
-		return View::make('pages.item.create')
-			->withProducts($products)
-			->withTypes($types);
+			return View::make('pages.item.create')
+				->withProducts($products)
+				->withTypes($types);
+		}
+
+		return View::make('pages.error')
+			->withType('danger')
+			->withError("You do not have permission to create xtras!");
 	}
 
 	public function store()
 	{
-		if (Input::get('user_id') != $this->currentUser->id)
+		if ($this->currentUser->can('xtras.item.create'))
 		{
-			//
+			if (Input::get('user_id') != $this->currentUser->id)
+			{
+				//
+			}
+			
+			// Create the item
+			$item = $this->items->create();
+
+			// Fire the item creation event
+			Event::fire('item.created', [$item]);
+
+			return Redirect::route('item.upload', [$item->id]);
 		}
-		
-		// Create the item
-		$item = $this->items->create();
 
-		// Fire the item creation event
-		Event::fire('item.created', [$item]);
-
-		return Redirect::route('item.upload', [$item->id]);
+		return View::make('pages.error')
+			->withType('danger')
+			->withError("You do not have permission to create xtras!");
 	}
 
 	public function show($author, $slug)

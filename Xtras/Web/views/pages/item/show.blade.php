@@ -226,7 +226,6 @@
 @stop
 
 @section('scripts')
-	{{ HTML::script('js/app.js') }}
 	<script>
 
 		window.url = "{{ Request::root() }}";

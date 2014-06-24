@@ -171,6 +171,7 @@
 
 			<script src="//localhost/global/bootstrap/3.1/js/bootstrap.min.js"></script>
 			<script src="//localhost/global/angular/1.3/angular.min.js"></script>
+			{{ HTML::script('js/app.js') }}
 		@endif
 		<script>
 			$(document).ready(function()

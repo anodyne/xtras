@@ -6,7 +6,7 @@
 
 @section('content')
 	<div class="row">
-		<div class="col-sm-10 col-md-8 col-lg-6 col-sm-offset-1 col-md-offset-2 col-lg-offset-3">
+		<div class="col-md-8 col-lg-6 col-md-offset-2 col-lg-offset-3">
 			<h1>Log In</h1>
 
 			<p>AnodyneXtras is the one-stop-shop to find skins, MODs and rank sets created by Anodyne Productions and the wider Anodyne community. From here you can search for and download items to make your Nova sim more unique.</p>

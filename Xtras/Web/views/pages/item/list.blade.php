@@ -10,7 +10,7 @@
 	@if ($items->count() > 0)
 		<div class="row">
 			@foreach ($items as $item)
-				<div class="col-sm-6 col-md-6 col-lg-4">
+				<div class="col-md-6 col-lg-4">
 					{{ View::make('partials.media')->withItem($item) }}
 				</div>
 			@endforeach

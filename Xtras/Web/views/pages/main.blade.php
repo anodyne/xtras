@@ -6,13 +6,13 @@
 
 @section('content')
 	<div id="newest">
-		<a href="#" data-target="updated" class="btn btn-info pull-right xtra-toggle">See Recently Updated Xtras</a>
+		<a href="#" data-target="updated" class="btn btn-sm btn-default pull-right xtra-toggle">See Recently Updated Xtras</a>
 
-		<h2>Newest Xtras</h2>
+		<h1>Newest Xtras</h1>
 
 		<div class="row">
 			@foreach ($new as $item)
-				<div class="col-sm-6 col-md-6 col-lg-4">
+				<div class="col-md-6 col-lg-4">
 					{{ View::make('partials.media')->withItem($item) }}
 				</div>
 			@endforeach
@@ -20,13 +20,13 @@
 	</div>
 	
 	<div id="updated" class="hide">
-		<a href="#" data-target="newest" class="btn btn-info pull-right xtra-toggle">See Newest Xtras</a>
+		<a href="#" data-target="newest" class="btn btn-sm btn-default pull-right xtra-toggle">See Newest Xtras</a>
 
-		<h2>Recently Updated Xtras</h2>
+		<h1>Recently Updated Xtras</h1>
 
 		<div class="row">
 			@foreach ($updated as $item)
-				<div class="col-sm-6 col-md-6 col-lg-4">
+				<div class="col-md-6 col-lg-4">
 					{{ View::make('partials.media')->withItem($item) }}
 				</div>
 			@endforeach

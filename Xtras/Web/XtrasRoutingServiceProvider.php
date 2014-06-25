@@ -12,6 +12,9 @@ class XtrasRoutingServiceProvider extends ServiceProvider {
 
 	public function boot()
 	{
+		$this->routeProtections();
+		$this->sessionsRoutes();
+
 		$this->defineRoutes();
 	}
 
@@ -23,25 +26,47 @@ class XtrasRoutingServiceProvider extends ServiceProvider {
 		// the item the user requested.
 	}
 
-	protected function defineRoutes()
+	protected function routeProtections()
 	{
-		/**
-		 * Log In, Register. Password reset
-		 */
+		// Make sure CSRF protection is in place
+		Route::when('*', 'csrf', ['post', 'put', 'patch']);
+	}
+
+	protected function sessionsRoutes()
+	{
 		Route::get('login', [
 			'as'	=> 'login',
 			'uses'	=> 'Xtras\Controllers\MainController@login']);
-		Route::post('login', 'Xtras\Controllers\MainController@doLogin');
-		Route::get('logout', array(
+		Route::post('login', [
+			'as'	=> 'login.do',
+			'uses'	=> 'Xtras\Controllers\MainController@doLogin']);
+		Route::get('logout', [
 			'as'	=> 'logout',
-			'uses'	=> 'Xtras\Controllers\MainController@logout'));
-		Route::get('register', array(
+			'uses'	=> 'Xtras\Controllers\MainController@logout']);
+		
+		Route::get('register', [
 			'as'	=> 'register',
-			'uses'	=> 'Xtras\Controllers\MainController@register'
-		));
-		Route::post('register', 'Xtras\Controllers\MainController@doRegistration');
-		Route::controller('password', 'Xtras\Controllers\RemindersController');
+			'uses'	=> 'Xtras\Controllers\MainController@register']);
+		Route::post('register', [
+			'as'	=> 'register.do',
+			'uses'	=> 'Xtras\Controllers\MainController@doRegistration']);
 
+		Route::get('password/remind', [
+			'as'	=> 'password.remind',
+			'uses'	=> 'Xtras\Controllers\RemindersController@getRemind']);
+		Route::post('password/remind', [
+			'as'	=> 'password.remind.do',
+			'uses'	=> 'Xtras\Controllers\RemindersController@postRemind']);
+		Route::get('password/reset/{token}', [
+			'as'	=> 'password.reset',
+			'uses'	=> 'Xtras\Controllers\RemindersController@getReset']);
+		Route::post('password/reset', [
+			'as'	=> 'password.reset.do',
+			'uses'	=> 'Xtras\Controllers\RemindersController@postRemind']);
+	}
+
+	protected function defineRoutes()
+	{
 		Route::get('policies/{type?}', [
 			'as'	=> 'policies',
 			'uses'	=> 'Xtras\Controllers\MainController@policies']);

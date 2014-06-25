@@ -5,25 +5,18 @@ use Illuminate\Support\ServiceProvider;
 
 class XtrasRoutingServiceProvider extends ServiceProvider {
 
-	public function register()
-	{
-		//
-	}
+	public function register() {}
 
 	public function boot()
 	{
 		$this->routeProtections();
+
 		$this->sessionsRoutes();
-
-		$this->defineRoutes();
-	}
-
-	protected function notes()
-	{
-		// When a user hits a route with a slug, we need to do a little
-		// work to figure out if there's more than one items with that slug.
-		// If there are, we need to show a list of those items instead of just
-		// the item the user requested.
+		$this->pagesRoutes();
+		$this->itemRoutes();
+		$this->searchRoutes();
+		$this->accountRoutes();
+		$this->miscRoutes();
 	}
 
 	protected function routeProtections()
@@ -51,106 +44,163 @@ class XtrasRoutingServiceProvider extends ServiceProvider {
 			'as'	=> 'register.do',
 			'uses'	=> 'Xtras\Controllers\MainController@doRegistration']);
 
-		Route::get('password/remind', [
-			'as'	=> 'password.remind',
-			'uses'	=> 'Xtras\Controllers\RemindersController@getRemind']);
-		Route::post('password/remind', [
-			'as'	=> 'password.remind.do',
-			'uses'	=> 'Xtras\Controllers\RemindersController@postRemind']);
-		Route::get('password/reset/{token}', [
-			'as'	=> 'password.reset',
-			'uses'	=> 'Xtras\Controllers\RemindersController@getReset']);
-		Route::post('password/reset', [
-			'as'	=> 'password.reset.do',
-			'uses'	=> 'Xtras\Controllers\RemindersController@postRemind']);
+		Route::group(['prefix' => 'password', 'namespace' => 'Xtras\Controllers'], function()
+		{
+			Route::get('remind', [
+				'as'	=> 'password.remind',
+				'uses'	=> 'RemindersController@remind']);
+			Route::post('remind', [
+				'as'	=> 'password.remind.do',
+				'uses'	=> 'RemindersController@doRemind']);
+			Route::get('reset/{token}', [
+				'as'	=> 'password.reset',
+				'uses'	=> 'RemindersController@reset']);
+			Route::post('reset', [
+				'as'	=> 'password.reset.do',
+				'uses'	=> 'RemindersController@doReset']);
+		});
 	}
 
-	protected function defineRoutes()
+	protected function pagesRoutes()
 	{
-		Route::get('policies/{type?}', [
-			'as'	=> 'policies',
-			'uses'	=> 'Xtras\Controllers\MainController@policies']);
-		Route::get('faq', [
-			'as'	=> 'faq',
-			'uses'	=> 'Xtras\Controllers\MainController@faq']);
-
-		/**
-		 * Xtras
-		 */
-		Route::group(array('before' => 'auth'), function()
+		Route::group(['namespace' => 'Xtras\Controllers'], function()
 		{
-			Route::get('/', array(
-				'as'	=> 'home',
-				'uses'	=> 'Xtras\Controllers\MainController@index'
-			));
+			Route::get('/', [
+				'before'	=> 'auth',
+				'as'		=> 'home',
+				'uses'		=> 'MainController@index']);
 
 			Route::get('skins', [
-				'as'	=> 'skins',
-				'uses'	=> 'Xtras\Controllers\ItemController@skins']);
+				'before'	=> 'auth',
+				'as'		=> 'skins',
+				'uses'		=> 'ItemController@skins']);
 			Route::get('ranks', [
-				'as'	=> 'ranks',
-				'uses'	=> 'Xtras\Controllers\ItemController@ranks']);
+				'before'	=> 'auth',
+				'as'		=> 'ranks',
+				'uses'		=> 'ItemController@ranks']);
 			Route::get('mods', [
-				'as'	=> 'mods',
-				'uses'	=> 'Xtras\Controllers\ItemController@mods']);
+				'before'	=> 'auth',
+				'as'		=> 'mods',
+				'uses'		=> 'ItemController@mods']);
 
-			Route::get('item/{id}/upload', [
-				'as'	=> 'item.upload',
-				'uses'	=> 'Xtras\Controllers\ItemController@upload']);
-			Route::post('item/{id}/upload-zip', [
-				'as'	=> 'item.upload.doZip',
-				'uses'	=> 'Xtras\Controllers\ItemController@doZipUpload']);
-			Route::post('item/{id}/upload-images', [
-				'as'	=> 'item.upload.doImages',
-				'uses'	=> 'Xtras\Controllers\ItemController@doImagesUpload']);
-			Route::get('item/{id}/download/{fileId}', [
-				'as'	=> 'item.download',
-				'uses'	=> 'Xtras\Controllers\ItemController@download']);
-			Route::post('item/ajax/checkName', [
-				'as'	=> 'item.ajax.checkName',
-				'uses'	=> 'Xtras\Controllers\ItemController@ajaxCheckName']);
-			Route::post('item/{id}/report-issue', [
-				'as'	=> 'item.reportIssue',
-				'uses'	=> 'Xtras\Controllers\ItemController@reportIssue']);
-			Route::post('item/{id}/report-abuse', [
-				'as'	=> 'item.reportAbuse',
-				'uses'	=> 'Xtras\Controllers\ItemController@reportAbuse']);
-			Route::post('item/{id}/add-comment', [
-				'as'	=> 'item.addComment',
-				'uses'	=> 'Xtras\Controllers\ItemController@storeComment']);
-			Route::resource('item', 'Xtras\Controllers\ItemController');
-			Route::get('item/{author}/{slug}', [
-				'as'	=> 'item.show',
-				'uses'	=> 'Xtras\Controllers\ItemController@show']);
+			Route::get('policies/{type?}', [
+				'as'		=> 'policies',
+				'uses'		=> 'MainController@policies']);
+			Route::get('faq', [
+				'as'		=> 'faq',
+				'uses'		=> 'MainController@faq']);
+		});
+	}
 
-			Route::get('profile/{name}', array(
-			'as'	=> 'account.profile',
-			'uses'	=> 'Xtras\Controllers\UserController@show'
-		));
-			Route::get('account/edit/{slug}', array(
-				'as'	=> 'account.edit',
-				'uses'	=> 'Xtras\Controllers\UserController@edit'
-			));
-			Route::get('account/xtras', [
-				'as'	=> 'account.xtras',
-				'uses'	=> 'Xtras\Controllers\UserController@xtras']);
-			Route::resource('account', 'Xtras\Controllers\UserController');
+	protected function searchRoutes()
+	{
+		$groupOptions = [
+			'before'	=> 'auth',
+			'prefix'	=> 'search',
+			'namespace' => 'Xtras\Controllers'
+		];
 
+		Route::group($groupOptions, function()
+		{
+			Route::post('/', [
+				'as'	=> 'search.do',
+				'uses'	=> 'SearchController@doSearch']);
 			Route::get('results', [
 				'as'	=> 'search.results',
-				'uses'	=> 'Xtras\Controllers\SearchController@results']);
-			Route::get('advanced-search', [
+				'uses'	=> 'SearchController@results']);
+			Route::get('advanced', [
 				'as'	=> 'search.advanced',
-				'uses'	=> 'Xtras\Controllers\SearchController@advanced']);
-			Route::post('search', [
-				'as'	=> 'search.do',
-				'uses'	=> 'Xtras\Controllers\SearchController@doSearch']);
-			Route::post('search-advanced', [
+				'uses'	=> 'SearchController@advanced']);
+			Route::post('advanced', [
 				'as'	=> 'search.doAdvanced',
-				'uses'	=> 'Xtras\Controllers\SearchController@doAdvancedSearch']);
+				'uses'	=> 'SearchController@doAdvancedSearch']);
+		});
+	}
 
-			Route::get('comments/{itemId}', 'Xtras\Controllers\CommentController@index');
-			Route::post('comments/{itemId}', 'Xtras\Controllers\CommentController@store');
+	protected function itemRoutes()
+	{
+		$groupOptions = [
+			'before'	=> 'auth',
+			'prefix'	=> 'item',
+			'namespace' => 'Xtras\Controllers'
+		];
+
+		Route::group($groupOptions, function()
+		{
+			Route::get('create', [
+				'as'	=> 'item.create',
+				'uses'	=> 'ItemController@create']);
+			Route::post('/', [
+				'as'	=> 'item.store',
+				'uses'	=> 'ItemController@store']);
+
+			Route::get('{id}/edit', [
+				'as'	=> 'item.edit',
+				'uses'	=> 'ItemController@edit']);
+			Route::put('{id}', [
+				'as'	=> 'item.update',
+				'uses'	=> 'ItemController@update']);
+
+			Route::delete('{id}', [
+				'as'	=> 'item.destroy',
+				'uses'	=> 'ItemController@destroy']);
+
+			Route::get('{id}/upload', [
+				'as'	=> 'item.upload',
+				'uses'	=> 'ItemController@upload']);
+			Route::post('{id}/upload-zip', [
+				'as'	=> 'item.upload.doZip',
+				'uses'	=> 'ItemController@doZipUpload']);
+			Route::post('{id}/upload-images', [
+				'as'	=> 'item.upload.doImages',
+				'uses'	=> 'ItemController@doImagesUpload']);
+
+			Route::get('{id}/download/{fileId}', [
+				'as'	=> 'item.download',
+				'uses'	=> 'ItemController@download']);
+			
+			Route::post('{id}/report-issue', [
+				'as'	=> 'item.reportIssue',
+				'uses'	=> 'ItemController@reportIssue']);
+			Route::post('{id}/report-abuse', [
+				'as'	=> 'item.reportAbuse',
+				'uses'	=> 'ItemController@reportAbuse']);
+			
+			Route::get('{author}/{slug}', [
+				'as'	=> 'item.show',
+				'uses'	=> 'ItemController@show']);
+
+			Route::post('ajax/checkName', [
+				'as'	=> 'item.ajax.checkName',
+				'uses'	=> 'ItemController@ajaxCheckName']);
+		});
+	}
+
+	protected function accountRoutes()
+	{
+		Route::group(['before' => 'auth', 'namespace' => 'Xtras\Controllers'], function()
+		{
+			Route::get('profile/{name}', array(
+				'as'	=> 'account.profile',
+				'uses'	=> 'UserController@show'
+			));
+			Route::get('account/edit/{slug}', array(
+				'as'	=> 'account.edit',
+				'uses'	=> 'UserController@edit'
+			));
+			Route::get('my-xtras', [
+				'as'	=> 'account.xtras',
+				'uses'	=> 'UserController@xtras']);
+			Route::resource('account', 'UserController');
+		});
+	}
+
+	protected function miscRoutes()
+	{
+		Route::group(['before' => 'auth', 'namespace' => 'Xtras\Controllers'], function()
+		{
+			Route::get('comments/{itemId}', 'CommentController@index');
+			Route::post('comments/{itemId}', 'CommentController@store');
 		});
 	}
 

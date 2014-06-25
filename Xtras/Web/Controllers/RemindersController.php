@@ -1,20 +1,18 @@
 <?php namespace Xtras\Controllers;
 
-use App,
-	Hash,
-	View,
+use View,
 	Input,
 	Password,
 	Redirect;
 
 class RemindersController extends BaseController {
 
-	public function getRemind()
+	public function remind()
 	{
 		return View::make('password.remind');
 	}
 
-	public function postRemind()
+	public function doRemind()
 	{
 		switch ($response = Password::remind(Input::only('email')))
 		{
@@ -26,14 +24,14 @@ class RemindersController extends BaseController {
 		}
 	}
 
-	public function getReset($token = null)
+	public function reset($token = null)
 	{
-		if (is_null($token)) App::abort(404);
+		if (is_null($token)) \App::abort(404);
 
 		return View::make('password.reset')->with('token', $token);
 	}
 
-	public function postReset()
+	public function doReset()
 	{
 		$credentials = Input::only(
 			'email', 'password', 'password_confirmation', 'token'
@@ -41,7 +39,7 @@ class RemindersController extends BaseController {
 
 		$response = Password::reset($credentials, function($user, $password)
 		{
-			$user->password = Hash::make($password);
+			$user->password = \Hash::make($password);
 
 			$user->save();
 		});

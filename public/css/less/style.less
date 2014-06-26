@@ -328,8 +328,8 @@ footer {
 
 		&:hover {
 			text-decoration: none;
-			color: lighten(@color-primary-bright, 10%);
-			border-color: lighten(@color-primary-bright, 10%);
+			color: @color-primary-bright;
+			border-color: @color-primary-bright;
 		}
 	}
 }
@@ -374,7 +374,7 @@ form {
 	.rounded(@border-radius);
 
 	&.btn-primary {
-		.btn-pseudo-states(@color-white, @color-primary-bright, @color-primary-bright);
+		.btn-pseudo-states(@color-white, @color-primary-light, @color-primary-light);
 	}
 
 	&.btn-link {
@@ -619,7 +619,7 @@ form {
 	> li.active > a,
 	> li.active > a:hover,
 	> li.active > a:focus {
-		background-color: @color-primary-bright;
+		background-color: @color-primary-light;
 	}
 
 	> li.active > a,
@@ -736,7 +736,7 @@ form {
 code {
 	background-color: @color-subtle;
 	border: 1px solid @color-gray-light;
-	color: @color-primary-bright;
+	color: @color-primary-light;
 
 	.rounded(@border-radius);
 }

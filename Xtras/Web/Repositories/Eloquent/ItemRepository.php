@@ -108,7 +108,7 @@ class ItemRepository implements ItemRepositoryInterface {
 		return ItemModel::where('slug', 'like', "%{$slug}%")->get();
 	}
 
-	public function findByType($type, $paginate = false)
+	public function findByType($type, $paginate = false, $splitByProduct = false)
 	{
 		switch ($type)
 		{
@@ -129,6 +129,19 @@ class ItemRepository implements ItemRepositoryInterface {
 		{
 			return $s->name;
 		});
+
+		if ($splitByProduct)
+		{
+			// An array of all the data
+			$finalArray = [];
+
+			$sortedItems->each(function($s) use (&$finalArray)
+			{
+				$finalArray[$s->product->name][] = $s;
+			});
+
+			return $finalArray;
+		}
 
 		if ($paginate)
 		{

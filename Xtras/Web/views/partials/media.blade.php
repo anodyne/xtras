@@ -1,5 +1,11 @@
 <div class="xtra">
-	{{ View::make('partials.avatar')->withType(false)->withUrl('http://www.hdwallpapers.in/walls/fantasy_space-wide.jpg')->withClass('item-preview') }}
+	@if ( ! empty($item->meta->image1))
+		<?php $preview = $item->meta->image1;?>
+	@else
+		<?php $preview = URL::asset('images/previews/space'.rand(1, 13).'.jpg');?>
+	@endif
+	
+	{{ View::make('partials.image')->withType(false)->withUrl($preview)->withClass('item-preview') }}
 
 	{{ $item->user->present()->avatar(['type' => 'link', 'link' => URL::route('account.profile', [$item->user->slug]), 'class' => 'avatar xtra-avatar img-circle']) }}
 

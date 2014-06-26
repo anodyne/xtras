@@ -134,7 +134,7 @@ class XtrasRoutingServiceProvider extends ServiceProvider {
 				'as'	=> 'item.store',
 				'uses'	=> 'ItemController@store']);
 
-			Route::get('{id}/edit', [
+			Route::get('{author}/{slug}/edit', [
 				'as'	=> 'item.edit',
 				'uses'	=> 'ItemController@edit']);
 			Route::put('{id}', [

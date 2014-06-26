@@ -72,7 +72,7 @@ class ItemController extends BaseController {
 
 	public function show($author, $slug)
 	{
-		// Get the item by its ID
+		// Get the item
 		$item = $this->items->findByAuthorAndSlug($author, $slug);
 
 		if ($item)
@@ -87,14 +87,42 @@ class ItemController extends BaseController {
 		// TODO: couldn't find the item
 	}
 
-	public function edit($id)
+	public function edit($author, $slug)
 	{
-		//
+		// Get the item
+		$item = $this->items->findByAuthorAndSlug($author, $slug);
+
+		if ($item)
+		{
+			return View::make('pages.item.edit')
+				->withItem($item)
+				->withMeta($item->meta);
+		}
+
+		// TODO: couldn't find the item
 	}
 
 	public function update($id)
 	{
-		//
+		if ($this->currentUser->can('xtras.item.edit'))
+		{
+			if (Input::get('user_id') != $this->currentUser->id)
+			{
+				//
+			}
+			
+			// Update the item
+			$item = $this->items->update($id, Input::all());
+
+			// Fire the item update event
+			Event::fire('item.updated', [$item]);
+
+			return Redirect::route('item.upload', [$item->id]);
+		}
+
+		return View::make('pages.error')
+			->withType('danger')
+			->withError("You do not have permission to edit xtras!");
 	}
 
 	public function destroy($id)

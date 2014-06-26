@@ -49,6 +49,32 @@ class UserRepository implements UserRepositoryInterface {
 		});
 	}
 
+	public function findItemsByType(UserModel $user, $value, $splitByProduct = false)
+	{
+		// Get just the items we want and sort them
+		$filteredItems = $user->items->filter(function($i) use ($value)
+		{
+			return $i->type->name == $value;
+		})->sortBy('name');
+
+		if ($splitByProduct)
+		{
+			// An array of all the data
+			$finalArray = [];
+
+			$filteredItems->each(function($s) use (&$finalArray)
+			{
+				$finalArray[$s->product->name][] = $s;
+			});
+
+			ksort($finalArray);
+
+			return $finalArray;
+		}
+
+		return $filteredItems;
+	}
+
 	public function update($id, array $data = [], $flashMessage = true)
 	{
 		// Get the user

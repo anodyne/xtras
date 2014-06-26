@@ -76,13 +76,10 @@ class UserController extends BaseController {
 
 	public function xtras()
 	{
-		// Get the user
-		$user = Auth::user();
-
 		return View::make('pages.user.xtras')
-			->withSkins($user->items->filter(function($i){ return $i->type->name == 'Skin'; }))
-			->withRanks($user->items->filter(function($i){ return $i->type->name == 'Rank Set'; }))
-			->withMods($user->items->filter(function($i){ return $i->type->name == 'MOD'; }));
+			->withSkins($this->users->findItemsByType($this->currentUser, 'Skin', true))
+			->withMods($this->users->findItemsByType($this->currentUser, 'MOD', true))
+			->withRanks($this->users->findItemsByType($this->currentUser, 'Rank Set', true));
 	}
 
 }

@@ -51,7 +51,7 @@ nav.nav-main {
 				display: block;
 				padding: 0 25px;
 
-				font-size: @font-size-small;
+				font-size: @font-size-sm;
 				color: @color-gray;
 				font-family: @font-special;
 				font-weight: 500;
@@ -121,7 +121,7 @@ header {
 	border-top: 1px solid rgba(0, 0, 0, .5);
 	border-bottom: 1px solid rgba(0, 0, 0, .5);
 
-	.gradient(@color-primary-bright, @color-primary);
+	.gradient(@color-primary-light, @color-primary);
 
 	.brand {
 		position: relative;
@@ -179,11 +179,11 @@ header {
 		padding-top: 28px;
 
 		.btn {
-			.border-radius(0, 50px, 50px, 0);
+			.border-radius(0, @border-radius-lg, @border-radius-lg, 0);
 		}
 
 		.search-field {
-			.border-radius(50px, 0, 0, 50px);
+			.border-radius(@border-radius-lg, 0, 0, @border-radius-lg);
 		}
 
 		.search-advanced {
@@ -203,7 +203,7 @@ section {
 		color: @color-primary;
 
 		&:hover {
-			color: @color-primary-bright;
+			color: @color-primary-light;
 		}
 
 		&:active {
@@ -216,7 +216,7 @@ section {
 
 		font-family: @font-titles;
 		font-weight: 700;
-		color: @color-primary-bright;
+		color: @color-primary-light;
 	}
 
 	h2 {
@@ -311,14 +311,14 @@ footer {
 	background: @color-nav-main;
 	color: @color-white;
 	border-top: 1px solid rgba(0, 0, 0, .5);
-	font-size: @font-size-small;
+	font-size: @font-size-sm;
 
 	h2 {
 		margin-top: 0;
 
 		font-family: @font-special;
 		font-weight: 500;
-		font-size: @font-size-large;
+		font-size: @font-size-lg;
 		font-style: italic;
 	}
 
@@ -356,7 +356,7 @@ form {
 }
 
 .text-sm {
-	font-size: @font-size-small;
+	font-size: @font-size-sm;
 }
 
 .text-danger {
@@ -393,8 +393,8 @@ form {
 	.rounded(2px);
 
 	&.label-warning {
-		color: @color-warning-text;
-		background-color: lighten(@color-warning, 5%);
+		color: @color-warning-dark;
+		background-color: @color-warning-bright;
 	}
 
 	&.label-success {
@@ -402,15 +402,19 @@ form {
 	}
 
 	&.label-info {
-		background-color: @color-info-bright;
+		background-color: @color-info;
 	}
 
 	&.label-default {
-		background-color: @color-gray-dark;
+		background-color: @color-gray-blue;
 	}
 
 	&.label-danger {
-		background-color: darken(@color-danger-bright, 15%);
+		background-color: @color-danger;
+	}
+
+	&.label-primary {
+		background-color: @color-primary-bright;
 	}
 
 	&.label-lg {
@@ -423,19 +427,19 @@ form {
 	font-weight: 500;
 	font-size: @font-size;
 
-	.alert-variant(rgb(251, 246, 217), rgb(218, 208, 139), rgb(146, 131, 50));
+	.alert-variant(@color-warning-bright, @color-warning-light, @color-warning-dark);
 	.rounded(@border-radius);
 
 	&.alert-info {
-		.alert-variant(lighten(@color-info-alert, 22%), lighten(@color-info-alert, 12%), darken(@color-info-alert, 22%));
+		.alert-variant(@color-info-bright, @color-info-light, @color-info-dark);
 	}
 
 	&.alert-success {
-		.alert-variant(lighten(@color-success-alert, 38%), lighten(@color-success-alert, 28%), @color-success-alert);
+		.alert-variant(@color-success-bright, @color-success-light, @color-success-dark);
 	}
 
 	&.alert-danger {
-		.alert-variant(lighten(@color-danger-alert, 38%), lighten(@color-danger-alert, 28%), @color-danger-alert);
+		.alert-variant(@color-danger-bright, @color-danger-light, @color-danger-dark);
 	}
 }
 
@@ -451,44 +455,72 @@ form {
 		}
 	}
 
-	&.panel-danger {
-		border-color: lighten(@color-danger-alert, 28%);
+	&.panel-default {
+		border-color: @color-gray-light;
 
 		.panel-heading {
-			color: @color-danger-alert;
-			border-color: lighten(@color-danger-alert, 28%);
-			background-color: lighten(@color-danger-alert, 38%);
+			color: @color-gray-blue;
+			border-color: @color-gray-light;
+			background-color: @color-subtle;
 
 			.panel-title {
-				color: @color-danger-alert;
+				color: @color-gray-blue;
+			}
+		}
+	}
+
+	&.panel-danger {
+		border-color: @color-danger-light;
+
+		.panel-heading {
+			color: @color-danger;
+			border-color: @color-danger-light;
+			background-color: @color-danger-bright;
+
+			.panel-title {
+				color: @color-danger-dark;
 			}
 		}
 	}
 
 	&.panel-warning {
-		border-color: rgb(218, 208, 139);
+		border-color: @color-warning-light;
 
 		.panel-heading {
-			color: rgb(146, 131, 50);
-			border-color: rgb(218, 208, 139);
-			background-color: rgb(251, 246, 217);
+			color: @color-warning-dark;
+			border-color: @color-warning-light;
+			background-color: @color-warning-bright;
 
 			.panel-title {
-				color: rgb(146, 131, 50);
+				color: @color-warning-dark;
 			}
 		}
 	}
 
 	&.panel-info {
-		border-color: lighten(@color-info-alert, 12%);
+		border-color: @color-info-light;
 
 		.panel-heading {
-			color: darken(@color-info-alert, 22%);
-			border-color: lighten(@color-info-alert, 12%);
-			background-color: lighten(@color-info-alert, 22%);
+			color: @color-info-dark;
+			border-color: @color-info-light;
+			background-color: @color-info-bright;
 
 			.panel-title {
-				color: darken(@color-info-alert, 22%);
+				color: @color-info-dark;
+			}
+		}
+	}
+
+	&.panel-success {
+		border-color: @color-success-light;
+
+		.panel-heading {
+			color: @color-success-dark;
+			border-color: @color-success-light;
+			background-color: @color-success-bright;
+
+			.panel-title {
+				color: @color-success-dark;
 			}
 		}
 	}
@@ -501,7 +533,7 @@ form {
 		margin-left: 0;
 		margin-right: 0;
 
-		border-top: 1px solid @color-lightgray;
+		border-top: 1px solid @color-gray-light;
 
 		p {
 			margin: 10px 0;
@@ -518,21 +550,21 @@ form {
 
 	&.data-table-bordered {
 		> .row {
-			border-left: 1px solid @color-lightgray;
-			border-right: 1px solid @color-lightgray;
+			border-left: 1px solid @color-gray-light;
+			border-right: 1px solid @color-gray-light;
 
 			&:first-child {
 				.border-radius(@border-radius, @border-radius, 0, 0);
 			}
 
 			&:last-child {
-				border-bottom: 1px solid @color-lightgray;
+				border-bottom: 1px solid @color-gray-light;
 
 				.border-radius(0, 0, @border-radius, @border-radius);
 			}
 
 			&:nth-child(1):nth-last-child(1) {
-				border-bottom: 1px solid @color-lightgray;
+				border-bottom: 1px solid @color-gray-light;
 
 				.rounded(@border-radius);
 			}
@@ -639,7 +671,7 @@ form {
 	.xtra-desc {
 		padding: 10px;
 
-		font-size: @font-size-small;
+		font-size: @font-size-sm;
 	}
 }
 
@@ -703,7 +735,7 @@ form {
 
 code {
 	background-color: @color-subtle;
-	border: 1px solid @color-lightgray;
+	border: 1px solid @color-gray-light;
 	color: @color-primary-bright;
 
 	.rounded(@border-radius);

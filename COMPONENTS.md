@@ -3,7 +3,7 @@
 ## PHP
 
 - [Laravel](http://laravel.com)
-	- Version: 4.2.5
+	- Version: 4.2.6
 - [Flysystem](http://flysystem.thephpleague.com/)
 	- Version: 0.4.5
 - [Fractal](http://fractal.thephpleague.com/)

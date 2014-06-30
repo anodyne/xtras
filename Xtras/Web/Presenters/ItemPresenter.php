@@ -50,7 +50,7 @@ class ItemPresenter extends Presenter {
 		$link = \URL::route('item.download', [$this->entity->id, $latest['files']['id']]);
 		$title = '<span class="tab-icon tab-icon-up2 tab-icon-right">'.$downloadIcon.'</span>Download Latest Version';
 
-		return '<a href="'.$link.'" class="btn btn-lg btn-primary">'.$title.'</a>';
+		return '<a href="'.$link.'" class="btn btn-lg btn-block btn-primary">'.$title.'</a>';
 	}
 
 	public function messages()

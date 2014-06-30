@@ -15,21 +15,6 @@
 
 			<div>{{ $item->present()->description }}</div>
 
-			<div class="btn-toolbar">
-				<div class="btn-group">
-					{{ $item->present()->downloadBtn }}
-				</div>
-			</div>
-
-			<div class="btn-toolbar">
-				<div class="btn-group">
-					<a href="#" rel="issue" class="btn btn-default">Report an Issue</a>
-				</div>
-				<div class="btn-group">
-					<a href="#" rel="abuse" class="btn btn-default">Report Abuse to Anodyne</a>
-				</div>
-			</div>
-
 			<div class="panel panel-warning hide" id="issuePanel">
 				<div class="panel-heading">
 					<button type="button" class="close">&times;</button>
@@ -85,7 +70,7 @@
 			</div>
 
 			<ul class="nav nav-tabs">
-				<li class="active"><a href="#details" data-toggle="tab"><span class="tab-icon tab-icon-up3">{{ $_icons['info'] }}</span>Details</a></li>
+				<li class="active"><a href="#download" data-toggle="tab"><span class="tab-icon tab-icon-up3">{{ $_icons['download'] }}</span>Downloads</a></li>
 
 				@if ($meta)
 					@if ( ! empty($meta->installation))
@@ -97,12 +82,11 @@
 					@endif
 				@endif
 
-				<li class="visible-md visible-lg"><a href="#download" data-toggle="tab"><span class="tab-icon tab-icon-up3">{{ $_icons['download'] }}</span>Downloads</a></li>
 				<li><a href="#comments" data-toggle="tab"><span class="tab-icon">{{ $_icons['comments'] }}</span> Comments <span ng-if="countComments()">(<% countComments() %>)</span></a></li>
 			</ul>
 
 			<div class="tab-content">
-				<div id="details" class="active tab-pane">
+				<div id="details" class="tab-pane">
 					<h2>Details</h2>
 
 					<dl>
@@ -141,7 +125,7 @@
 					@endif
 				@endif
 
-				<div id="download" class="tab-pane">
+				<div id="download" class="active tab-pane">
 					<div class="data-table data-table-striped data-table-bordered">
 					@foreach ($files as $file)
 						<div class="row">
@@ -203,9 +187,36 @@
 		</div>
 
 		<div class="col-md-3 col-lg-3">
-			<p><img src="http://placehold.it/250x175" class="img-rounded"></p>
-			<p><img src="http://placehold.it/250x175" class="img-rounded"></p>
-			<p><img src="http://placehold.it/250x175" class="img-rounded"></p>
+			<p>{{ $item->present()->downloadBtn }}</p>
+
+			<p><a href="#" rel="issue" class="btn btn-block btn-default">Report an Issue</a></p>
+
+			<p><a href="#" rel="abuse" class="btn btn-block btn-default">Report Abuse to Anodyne</a></p>
+
+			<hr>
+
+			<h2 class="text-right">Details</h2>
+
+			<dl class="text-right">
+				<dt>Author</dt>
+				<dd>{{ $item->present()->author }}</dd>
+
+				<dt>Downloads</dt>
+				<dd>{{ $item->present()->downloads }}</dd>
+
+				@if ($item->present()->rating !== false)
+					<dt>Rating</dt>
+					<dd>{{ $item->present()->rating }}</dd>
+				@endif
+
+				<dt>Added</dt>
+				<dd>{{ $item->present()->created }}</dd>
+
+				@if ($item->present()->created != $item->present()->updated)
+					<dt>Last Updated</dt>
+					<dd>{{ $item->present()->updated }}</dd>
+				@endif
+			</dl>
 		</div>
 	</div>
 @stop

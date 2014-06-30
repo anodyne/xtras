@@ -15,7 +15,13 @@ class UserRepository implements UserRepositoryInterface {
 
 	public function create(array $data = [], $flashMessage = true)
 	{
-		# code...
+		// Create the user
+		$user = UserModel::create($data);
+
+		// Set the role
+		$user->roles()->attach(2);
+
+		return $user;
 	}
 
 	public function delete($id, $flashMessage = true)

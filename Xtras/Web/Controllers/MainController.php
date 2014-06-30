@@ -26,8 +26,8 @@ class MainController extends BaseController {
 	public function index()
 	{
 		return View::make('pages.main')
-			->withNew($this->items->getRecentlyAdded(6))
-			->withUpdated($this->items->getRecentlyUpdated(6));
+			->withNew($this->items->getRecentlyAdded(9))
+			->withUpdated($this->items->getRecentlyUpdated(9));
 	}
 
 	public function login()
@@ -37,38 +37,42 @@ class MainController extends BaseController {
 
 	public function doLogin()
 	{
-		$validator = Validator::make(Input::all(), array(
+		// Validate
+		$validator = Validator::make(Input::all(), [
 			'email'		=> 'required',
 			'password'	=> 'required',
-		));
+		], [
+			'email.required' => "Email address is required.",
+			'password.required' => "Passwords cannot be blank.",
+		]);
 
 		if ( ! $validator->passes())
 		{
-			Session::flash('flashStatus', 'danger');
-			Session::flash('flashMessage', "Your information couldn't be validated. Please correct the issues and try again.");
-
-			return Redirect::back()->withInput()->withErrors($validator->errors());
+			return Redirect::route('login')
+				->withInput()
+				->withErrors($validator->errors())
+				->with('flashStatus', 'danger')
+				->with('flashMessage', "Please enter your email address and password and try again.");
 		}
 
+		// Grab the values and trim them
 		$email = trim(Input::get('email'));
 		$password = trim(Input::get('password'));
 
-		if (Auth::attempt(array('email' => $email, 'password' => $password), true))
+		if (Auth::attempt(['email' => $email, 'password' => $password], true))
 		{
 			if (Session::has('url.intended'))
 			{
 				return Redirect::intended('home');
 			}
-			else
-			{
-				return Redirect::route('home');
-			}
+			
+			return Redirect::route('home');
 		}
 
-		Session::flash('flashStatus', 'danger');
-		Session::flash('flashMessage', "Either your email address or password were incorrect. Please try again.");
-
-		return Redirect::back()->withInput();
+		return Redirect::route('login')
+			->withInput()
+			->with('flashStatus', 'danger')
+			->with('flashMessage', "Either your email address or password were incorrect. Please try again.");
 	}
 
 	public function logout()
@@ -81,25 +85,26 @@ class MainController extends BaseController {
 	public function register()
 	{
 		// Generate a random number
-		$random = mt_rand(1, 99);
+		$random = mt_rand(1, 999);
 
 		// Put the number into the session
 		Session::flash('confirmNumber', $random);
 
 		return View::make('pages.register')->with('confirmNumber', $random);
 	}
+
 	public function doRegistration()
 	{
 		// Setup the validator
-		$validator = Validator::make(Input::all(), array(
+		$validator = Validator::make(Input::all(), [
 			'name'				=> 'required',
 			'email'				=> 'required|email|unique:users,email',
 			'password'			=> 'required',
 			'password_confirm'	=> 'required|same:password',
 			'confirm'			=> 'required'
-		), array(
+		], [
 			'email.unique'		=> "The email address you entered is already registered. You can <a href='".\URL::route('home')."'>log in</a>, or, if you've forgotten your password, you can reset it from the <a href='".\URL::to('password/remind')."'>Reset Password</a> page.",
-		));
+		]);
 
 		// Validator failed
 		if ( ! $validator->passes())
@@ -122,7 +127,7 @@ class MainController extends BaseController {
 		}
 
 		// Create the user
-		$user = $this->users->create(Input::all());
+		$user = $this->users->create(Input::all(), false);
 
 		if ($user)
 		{
@@ -130,7 +135,7 @@ class MainController extends BaseController {
 			Auth::login($user, true);
 
 			// Fire the registration event
-			Event::fire('user.registered', array($user, Input::all()));
+			Event::fire('user.registered', [$user, Input::all()]);
 
 			return Redirect::route('home')
 				->with('flashMessage', "Welcome to AnodyneXtras!")

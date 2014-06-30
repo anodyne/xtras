@@ -28,12 +28,14 @@
 - [jQuery](http://jquery.com/)
 	- Version: 1.11.1 (IE < 9), 2.1.1
 - [jQuery UI](http://jqueryui.com/)
-	- Version: 1.10.4
+	- Version: 1.11.0
 - [Bootstrap](http://getbootstrap.com)
 	- Version: 3.2.0
 - [DropzoneJS](http://www.dropzonejs.com/)
 	- Version: 3.10.2
 - [HTML5Shiv](https://code.google.com/p/html5shiv/)
+- [AngularJS](https://angularjs.org/)
+	- Version: 1.3.0-beta.13
 
 ## Others
 

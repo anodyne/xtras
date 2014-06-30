@@ -201,6 +201,7 @@ section {
 
 	a  {
 		color: @color-primary;
+		outline: none;
 
 		&:hover {
 			color: @color-primary-light;
@@ -208,6 +209,7 @@ section {
 
 		&:active {
 			color: @color-primary;
+			outline: none;
 		}
 	}
 
@@ -353,6 +355,40 @@ form {
 			font-size: @font-size;
 		}
 	}
+
+	.help-block {
+		font-size: @font-size-sm;
+	}
+}
+
+.has-warning .help-block,
+.has-warning label,
+.has-warning .radio,
+.has-warning .checkbox,
+.has-warning .radio-inline,
+.has-warning .checkbox-inline {
+  color: @color-warning-dark;
+}
+.has-warning .form-control {
+  border-color: @color-warning-dark;
+}
+.has-warning .form-control:focus {
+  border-color: @color-warning-dark;
+}
+
+.has-error .help-block,
+.has-error label,
+.has-error .radio,
+.has-error .checkbox,
+.has-error .radio-inline,
+.has-error .checkbox-inline {
+  color: @color-danger;
+}
+.has-error .form-control {
+  border-color: @color-danger;
+}
+.has-error .form-control:focus {
+  border-color: @color-danger-dark;
 }
 
 .text-sm {

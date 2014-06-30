@@ -687,16 +687,16 @@
         },
         {
             "name": "laravel/framework",
-            "version": "v4.2.5",
+            "version": "v4.2.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/framework.git",
-                "reference": "30088567a133fadf14b708dcc4001d6c639b8c59"
+                "reference": "2e73cd58ee42919166a51897b965e1135b85048c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/30088567a133fadf14b708dcc4001d6c639b8c59",
-                "reference": "30088567a133fadf14b708dcc4001d6c639b8c59",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/2e73cd58ee42919166a51897b965e1135b85048c",
+                "reference": "2e73cd58ee42919166a51897b965e1135b85048c",
                 "shasum": ""
             },
             "require": {
@@ -800,7 +800,7 @@
                 "framework",
                 "laravel"
             ],
-            "time": "2014-06-26 17:33:59"
+            "time": "2014-06-29 00:16:51"
         },
         {
             "name": "laravelbook/ardent",

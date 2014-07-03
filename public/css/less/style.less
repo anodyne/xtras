@@ -362,7 +362,7 @@ form {
 }
 
 .has-warning .help-block,
-.has-warning label,
+.has-warning .control-label,
 .has-warning .radio,
 .has-warning .checkbox,
 .has-warning .radio-inline,
@@ -377,7 +377,7 @@ form {
 }
 
 .has-error .help-block,
-.has-error label,
+.has-error .control-label,
 .has-error .radio,
 .has-error .checkbox,
 .has-error .radio-inline,
@@ -400,6 +400,14 @@ form {
 
 	&:hover {
 		color: @color-danger;
+	}
+}
+
+.text-warning {
+	color: @color-warning-dark;
+
+	&:hover {
+		color: @color-warning-dark;
 	}
 }
 

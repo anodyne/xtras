@@ -6,6 +6,8 @@ use App,
 	Input,
 	Redirect,
 	Response,
+	ItemUpdateValidator,
+	ItemCreationValidator,
 	ItemRepositoryInterface,
 	UserRepositoryInterface,
 	OrderRepositoryInterface;
@@ -15,16 +17,20 @@ class ItemController extends BaseController {
 	protected $items;
 	protected $users;
 	protected $orders;
+	protected $itemCreate;
+	protected $itemUpdate;
 
 	public function __construct(ItemRepositoryInterface $items,
-			UserRepositoryInterface $users,
-			OrderRepositoryInterface $orders)
+			UserRepositoryInterface $users, OrderRepositoryInterface $orders,
+			ItemCreationValidator $itemCreate, ItemUpdateValidator $itemUpdate)
 	{
 		parent::__construct();
 
 		$this->items = $items;
 		$this->users = $users;
 		$this->orders = $orders;
+		$this->itemCreate = $itemCreate;
+		$this->itemUpdate = $itemUpdate;
 	}
 
 	public function create()
@@ -42,20 +48,16 @@ class ItemController extends BaseController {
 				->withTypes($types);
 		}
 
-		return View::make('pages.error')
-			->withType('danger')
-			->withError("You do not have permission to create xtras!");
+		return $this->errorUnauthorized("You do not have permission to create Xtras.");
 	}
 
 	public function store()
 	{
 		if ($this->currentUser->can('xtras.item.create'))
 		{
-			if (Input::get('user_id') != $this->currentUser->id)
-			{
-				//
-			}
-			
+			// Validate the form
+			$this->itemCreate->validate(Input::all());
+
 			// Create the item
 			$item = $this->items->create();
 
@@ -65,9 +67,7 @@ class ItemController extends BaseController {
 			return Redirect::route('item.upload', [$item->id]);
 		}
 
-		return View::make('pages.error')
-			->withType('danger')
-			->withError("You do not have permission to create xtras!");
+		return $this->errorUnauthorized("You do not have permission to create Xtras.");
 	}
 
 	public function show($author, $slug)
@@ -84,32 +84,43 @@ class ItemController extends BaseController {
 				->withComments($item->comments->sortBy('created_at', SORT_REGULAR, true));
 		}
 
-		// TODO: couldn't find the item
+		return $this->errorNotFound("Xtra not found.");
 	}
 
 	public function edit($author, $slug)
 	{
-		// Get the item
-		$item = $this->items->findByAuthorAndSlug($author, $slug);
-
-		if ($item)
+		if ($this->currentUser->can('xtras.item.edit'))
 		{
-			return View::make('pages.item.edit')
-				->withItem($item)
-				->withMeta($item->meta);
+			// Get the item
+			$item = $this->items->findByAuthorAndSlug($author, $slug);
+
+			if ($item)
+			{
+				return View::make('pages.item.edit')
+					->withItem($item)
+					->withMeta($item->meta);
+			}
 		}
 
-		// TODO: couldn't find the item
+		return $this->errorUnauthorized("You do not have permission to edit Xtras.");
 	}
 
 	public function update($id)
 	{
 		if ($this->currentUser->can('xtras.item.edit'))
 		{
-			if (Input::get('user_id') != $this->currentUser->id)
+			// Get the item
+			$xtra = $this->items->find($id);
+			
+			if ($xtra->user->id != $this->currentUser->id)
 			{
-				//
+				return View::make('pages.error')
+					->withType('danger')
+					->withError("You do not have permission to edit Xtras that are not your own!");
 			}
+
+			// Validate the form
+			$this->itemUpdate->validate(Input::all());
 			
 			// Update the item
 			$item = $this->items->update($id, Input::all());
@@ -120,9 +131,7 @@ class ItemController extends BaseController {
 			return Redirect::route('item.upload', [$item->id]);
 		}
 
-		return View::make('pages.error')
-			->withType('danger')
-			->withError("You do not have permission to edit xtras!");
+		return $this->errorUnauthorized("You do not have permission to edit Xtras.");
 	}
 
 	public function destroy($id)

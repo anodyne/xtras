@@ -17,6 +17,7 @@ class XtrasRoutingServiceProvider extends ServiceProvider {
 		$this->searchRoutes();
 		$this->accountRoutes();
 		$this->miscRoutes();
+		$this->adminRoutes();
 	}
 
 	protected function routeProtections()
@@ -201,6 +202,27 @@ class XtrasRoutingServiceProvider extends ServiceProvider {
 		{
 			Route::get('comments/{itemId}', 'CommentController@index');
 			Route::post('comments/{itemId}', 'CommentController@store');
+		});
+	}
+
+	protected function adminRoutes()
+	{
+		$groupOptions = [
+			'before'	=> 'auth',
+			'prefix'	=> 'admin',
+			'namespace' => 'Xtras\Controllers\Admin'
+		];
+
+		Route::group($groupOptions, function()
+		{
+			Route::get('/', [
+				'as'	=> 'admin',
+				'uses'	=> 'AdminController@index']);
+
+			Route::resource('users', 'UsersController', ['except' => ['show']]);
+			Route::resource('products', 'ProductsController', ['except' => ['show']]);
+			Route::resource('types', 'TypesController', ['except' => ['show']]);
+			Route::resource('items', 'ItemsController', ['except' => ['show']]);
 		});
 	}
 

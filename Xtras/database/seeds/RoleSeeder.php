@@ -16,6 +16,7 @@ class RoleSeeder extends Seeder {
 			['display_name' => "Skin Xtras", 'name' => "xtras.item.skins"],
 			['display_name' => "MOD Xtras", 'name' => "xtras.item.mods"],
 			['display_name' => "Rank Xtras", 'name' => "xtras.item.ranks"],
+			['display_name' => "Xtras Admin", 'name' => "xtras.admin"],
 		];
 
 		foreach ($permissions as $permission)
@@ -30,7 +31,7 @@ class RoleSeeder extends Seeder {
 		];
 
 		$roleAssociations = [
-			1 => [1, 2, 3, 4, 5, 6],
+			1 => [1, 2, 3, 4, 5, 6, 7],
 			2 => [1, 2, 3, 4, 5],
 			3 => [1, 2, 3, 4, 5, 6],
 		];

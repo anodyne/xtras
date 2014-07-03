@@ -28,7 +28,7 @@ class ItemSeeder extends Seeder {
 			}
 
 			$item = ItemModel::create([
-				'user_id' => $faker->numberBetween(1, 2),
+				'user_id' => $faker->numberBetween(1, 25),
 				'type_id' => $type,
 				'product_id' => $faker->numberBetween(1, 3),
 				'name' => $name,

@@ -23,7 +23,10 @@
 		<dt>Can I have more than 3 preview images for my xtra?</dt>
 		<dd>No. We have decided on allowing 3 preview images at this time.</dd>
 
-		<dt>Why can't I create a rank set xtra?</dt>
+		<dt>Why can't I create a rank set Xtra?</dt>
 		<dd>Because of how complicated the rank system is in Nova 1 and 2, there are a limited number of users with access to create rank set xtras. In the future, when Nova 3 is released, we'll open it up to more people. If you have a rank set you'd like to share, contact us and we'll consider providing you access to create a new rank set xtra.</dd>
+
+		<dt>How do I update one of my Xtras with a new version?</dt>
+		<dd>If you want to add a new version to one of your Xtras, it's as simple as editing the Xtra. You'll update the basic information and then step through the same process you did for creating the Xtra to upload your zip file and update any preview images.</dd>
 	</dl>
 @stop

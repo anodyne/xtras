@@ -59,6 +59,7 @@ class XtrasServiceProvider extends ServiceProvider {
 		// Set up bindings from the interface to their concrete classes
 		App::bind($a['ItemRepositoryInterface'], 'Xtras\Repositories\Eloquent\ItemRepository');
 		App::bind($a['OrderRepositoryInterface'], 'Xtras\Repositories\Eloquent\OrderRepository');
+		App::bind($a['ProductRepositoryInterface'], 'Xtras\Repositories\Eloquent\ProductRepository');
 		App::bind($a['UserRepositoryInterface'], 'Xtras\Repositories\Eloquent\UserRepository');
 
 		// Make sure we some variables available on all views

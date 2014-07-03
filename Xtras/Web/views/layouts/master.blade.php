@@ -49,6 +49,12 @@
 										<li class="divider"></li>
 										<li><a href="{{ URL::route('account.profile', [$_currentUser->slug]) }}">My Profile</a></li>
 										<li><a href="{{ URL::route('account.edit', [$_currentUser->slug]) }}">Edit My Profile</a></li>
+
+										@if ($_currentUser->can('xtras.admin'))
+											<li class="divider"></li>
+											<li><a href="{{ URL::route('admin') }}">Admin</a></li>
+										@endif
+
 										<li class="divider"></li>
 										<li><a href="{{ URL::route('logout') }}">Logout</a></li>
 									</ul>
@@ -123,7 +129,7 @@
 					<div class="col-md-8 col-lg-8">
 						<h2>AnodyneXtras</h2>
 
-						<p class="text-muted">Every game is unique in its own right. It has its own players, characters, mission, and driving force. Why shouldn't each game be able to accurately reflect its distinctiveness through its look and feel and functionality? We don't think that should be a hinderance and we've created AnodyneXtras as a one-stop-shop for skins, MODs, and rank sets for Nova so you can make your copy of Nova as unique as the game being played on it.</p>
+						<p class="text-muted">Every game is unique; it has its own players, characters, missions, and driving force. Why shouldn't each game accurately reflect its distinctiveness through its look and feel and functionality? We've created AnodyneXtras as a one-stop-shop for skins, MODs, and rank sets for Nova so you can make your version of Nova as unique as the game being played with it.</p>
 
 						<p class="text-muted">&copy; {{ Date::now()->year }} Anodyne Productions</p>
 					</div>

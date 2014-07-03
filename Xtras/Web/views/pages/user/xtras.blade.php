@@ -38,7 +38,7 @@
 								<div class="col-lg-4">
 									<div class="btn-toolbar pull-right">
 										<div class="btn-group">
-											<a href="#" class="btn btn-default">{{ $_icons['upload'] }}</a>
+											<a href="#" class="btn btn-default">{{ $_icons['warning'] }}</a>
 											<a href="{{ URL::route('item.edit', [$item->user->slug, $item->slug]) }}" class="btn btn-default">{{ $_icons['edit'] }}</a>
 										</div>
 										<div class="btn-group">
@@ -68,7 +68,7 @@
 								<div class="col-lg-4">
 									<div class="btn-toolbar pull-right">
 										<div class="btn-group">
-											<a href="#" class="btn btn-default">{{ $_icons['upload'] }}</a>
+											<a href="#" class="btn btn-default">{{ $_icons['warning'] }}</a>
 											<a href="{{ URL::route('item.edit', [$item->user->slug, $item->slug]) }}" class="btn btn-default">{{ $_icons['edit'] }}</a>
 										</div>
 										<div class="btn-group">
@@ -98,7 +98,7 @@
 								<div class="col-lg-4">
 									<div class="btn-toolbar pull-right">
 										<div class="btn-group">
-											<a href="#" class="btn btn-default">{{ $_icons['upload'] }}</a>
+											<a href="#" class="btn btn-default">{{ $_icons['warning'] }}</a>
 											<a href="{{ URL::route('item.edit', [$item->user->slug, $item->slug]) }}" class="btn btn-default">{{ $_icons['edit'] }}</a>
 										</div>
 										<div class="btn-group">

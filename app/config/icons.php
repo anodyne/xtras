@@ -23,6 +23,7 @@ return array(
 
 	'help' => '<span class="icn" data-icon="h"></span>',
 
+	'images' => '<span class="icn" data-icon="i"></span>',
 	'info' => '<span class="icn" data-icon="i"></span>',
 
 	'login' => '<span class="icn" data-icon=")"></span>',

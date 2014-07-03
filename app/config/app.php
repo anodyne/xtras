@@ -207,9 +207,10 @@ return array(
 		/**
 		 * Repository Interfaces
 		 */
-		'ItemRepositoryInterface'	=> 'Xtras\Repositories\Interfaces\ItemRepositoryInterface',
-		'OrderRepositoryInterface'	=> 'Xtras\Repositories\Interfaces\OrderRepositoryInterface',
-		'UserRepositoryInterface'	=> 'Xtras\Repositories\Interfaces\UserRepositoryInterface',
+		'ItemRepositoryInterface'		=> 'Xtras\Repositories\Interfaces\ItemRepositoryInterface',
+		'OrderRepositoryInterface'		=> 'Xtras\Repositories\Interfaces\OrderRepositoryInterface',
+		'ProductRepositoryInterface'	=> 'Xtras\Repositories\Interfaces\ProductRepositoryInterface',
+		'UserRepositoryInterface'		=> 'Xtras\Repositories\Interfaces\UserRepositoryInterface',
 
 		/**
 		 * Traits
@@ -225,6 +226,17 @@ return array(
 		 * Transformers
 		 */
 		'CommentTransformer'	=> 'Xtras\Transformers\CommentTransformer',
+
+		/**
+		 * Validators
+		 */
+		'ItemCreationValidator'	=> 'Xtras\Validators\ItemCreationValidator',
+		'ItemUpdateValidator'	=> 'Xtras\Validators\ItemUpdateValidator',
+
+		/**
+		 * Exceptions
+		 */
+		'FormValidationException'	=> 'Xtras\Exceptions\FormValidationException',
 
 	),
 

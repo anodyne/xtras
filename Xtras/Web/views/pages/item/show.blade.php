@@ -70,19 +70,48 @@
 			</div>
 
 			<ul class="nav nav-tabs">
-				<li class="active"><a href="#download" data-toggle="tab"><span class="tab-icon tab-icon-up3">{{ $_icons['download'] }}</span>Downloads</a></li>
+				<li class="active">
+					<a href="#download" data-toggle="tab">
+						<span class="visible-md tooltip-top" data-title="Downloads">{{ $_icons['download'] }}</span>
+						<span class="visible-lg"><span class="tab-icon tab-icon-up3">{{ $_icons['download'] }}</span>Downloads</span>
+					</a>
+				</li>
 
 				@if ($meta)
 					@if ( ! empty($meta->installation))
-						<li><a href="#install" data-toggle="tab"><span class="tab-icon tab-icon-up3">{{ $_icons['new'] }}</span>Installation</a></li>
+						<li>
+							<a href="#install" data-toggle="tab">
+								<span class="visible-md tooltip-top" data-title="Installation">{{ $_icons['new'] }}</span>
+								<span class="visible-lg"><span class="tab-icon tab-icon-up3">{{ $_icons['new'] }}</span>Installation</span>
+							</a>
+						</li>
 					@endif
 
 					@if ( ! empty($meta->history))
-						<li><a href="#versions" data-toggle="tab"><span class="tab-icon tab-icon-up3">{{ $_icons['clock'] }}</span>Version History</a></li>
+						<li>
+							<a href="#versions" data-toggle="tab">
+								<span class="visible-md tooltip-top" data-title="Versions">{{ $_icons['clock'] }}</span>
+								<span class="visible-lg"><span class="tab-icon tab-icon-up3">{{ $_icons['clock'] }}</span>Version History</span>
+							</a>
+						</li>
+					@endif
+
+					@if ( ! empty($meta->image1) or ! empty($meta->image2) or ! empty($meta->image3))
+						<li>
+							<a href="#images" data-toggle="tab">
+								<span class="visible-md tooltip-top" data-title="Images">{{ $_icons['images'] }}</span>
+								<span class="visible-lg"><span class="tab-icon tab-icon-up3">{{ $_icons['images'] }}</span>Images</span>
+							</a>
+						</li>
 					@endif
 				@endif
 
-				<li><a href="#comments" data-toggle="tab"><span class="tab-icon">{{ $_icons['comments'] }}</span> Comments <span ng-if="countComments()">(<% countComments() %>)</span></a></li>
+				<li>
+					<a href="#comments" data-toggle="tab">
+						<span class="visible-md tooltip-top" data-title="Comments">{{ $_icons['comments'] }}</span>
+						<span class="visible-lg"><span class="tab-icon">{{ $_icons['comments'] }}</span> Comments <span ng-if="countComments()">(<% countComments() %>)</span></span>
+					</a>
+				</li>
 			</ul>
 
 			<div class="tab-content">
@@ -120,6 +149,12 @@
 
 					@if ( ! empty($meta->history))
 						<div id="versions" class="tab-pane">
+							{{ $meta->present()->history }}
+						</div>
+					@endif
+
+					@if ( ! empty($meta->image1) or ! empty($meta->image2) or ! empty($meta->image3))
+						<div id="images" class="tab-pane">
 							{{ $meta->present()->history }}
 						</div>
 					@endif
@@ -191,7 +226,10 @@
 
 			<p><a href="#" rel="issue" class="btn btn-block btn-default">Report an Issue</a></p>
 
-			<p><a href="#" rel="abuse" class="btn btn-block btn-default">Report Abuse to Anodyne</a></p>
+			<p><a href="#" rel="abuse" class="btn btn-block btn-default">
+				<span class="visible-md">Report Abuse</span>
+				<span class="visible-lg">Report Abuse to Anodyne</span>
+			</a></p>
 
 			<hr>
 

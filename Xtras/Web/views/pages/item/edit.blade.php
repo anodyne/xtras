@@ -21,7 +21,7 @@
 			<div class="col-md-2 col-lg-2">
 				<div class="form-group">
 					<label>Version</label>
-					{{ Form::text('version', '1.0', ['class' => 'form-control']) }}
+					{{ Form::text('version', null, ['class' => 'form-control']) }}
 				</div>
 			</div>
 		</div>
@@ -71,11 +71,8 @@
 			<div class="col-md-3 col-lg-3">
 				{{ Form::button('Update Xtra', ['type' => 'submit', 'class' => 'btn btn-lg btn-block btn-primary']) }}
 			</div>
-			<div class="col-md-3 col-lg-3">
-				<a href="#" class="btn btn-lg btn-block btn-default">Upload New File</a>
-			</div>
-			<div class="col-md-3 col-lg-3">
-				<a href="#" class="btn btn-lg btn-block btn-default">Update Images</a>
+			<div class="col-md-9 col-lg-9">
+				<button class="btn btn-lg btn-link" disabled="disabled">Next Step: Upload Item Zip File</button>
 			</div>
 		</div>
 	{{ Form::close() }}

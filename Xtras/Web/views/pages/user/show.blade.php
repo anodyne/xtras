@@ -42,6 +42,8 @@
 						</div>
 					@endforeach
 					</div>
+				@else
+					<p class="alert alert-warning">{{ $user->present()->name }} doesn't have any skins.</p>
 				@endif
 			</div>
 
@@ -54,6 +56,8 @@
 						</div>
 					@endforeach
 					</div>
+				@else
+					<p class="alert alert-warning">{{ $user->present()->name }} doesn't have any MODs.</p>
 				@endif
 			</div>
 
@@ -66,6 +70,8 @@
 						</div>
 					@endforeach
 					</div>
+				@else
+					<p class="alert alert-warning">{{ $user->present()->name }} doesn't have any rank sets.</p>
 				@endif
 			</div>
 		</div>

@@ -210,6 +210,7 @@ return array(
 		'ItemRepositoryInterface'		=> 'Xtras\Repositories\Interfaces\ItemRepositoryInterface',
 		'OrderRepositoryInterface'		=> 'Xtras\Repositories\Interfaces\OrderRepositoryInterface',
 		'ProductRepositoryInterface'	=> 'Xtras\Repositories\Interfaces\ProductRepositoryInterface',
+		'TypeRepositoryInterface'		=> 'Xtras\Repositories\Interfaces\TypeRepositoryInterface',
 		'UserRepositoryInterface'		=> 'Xtras\Repositories\Interfaces\UserRepositoryInterface',
 
 		/**

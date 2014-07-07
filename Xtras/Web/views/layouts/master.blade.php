@@ -6,8 +6,8 @@
 		<meta name="description" content="AnodyneXtras is a one-stop-shop for skins, MODs, and rank sets for Anodyne Productions' Nova software.">
 		<meta name="author" content="Anodyne Productions">
 		<meta name="viewport" content="width=device-width">
-		<link rel="icon" type="image/x-icon" href="{{ URL::asset('favicon.ico?v2') }}">
-		<link rel="apple-touch-icon-precomposed" href="{{ URL::asset('apple-touch-icon.png') }}">
+		<link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico?v2') }}">
+		<link rel="apple-touch-icon-precomposed" href="{{ asset('apple-touch-icon.png') }}">
 
 		<!--[if lt IE 9]>
 		{{ HTML::script('js/html5shiv.js') }}
@@ -21,7 +21,6 @@
 		@else
 			<link href="//localhost/global/bootstrap/3.2/css/bootstrap.min.css" rel="stylesheet">
 		@endif
-
 		{{ HTML::style('css/style.css') }}
 		{{ HTML::style('css/fonts.css') }}
 		@yield('styles')
@@ -41,22 +40,22 @@
 								<li class="dropdown">
 									<a href="#" data-toggle="dropdown" class="dropdown-toggle"><span class="user-icon">{{ $_icons['user'] }}</span> {{ Auth::user()->present()->name }} <span class="caret"></span></a>
 									<ul class="dropdown-menu dropdown-menu-right dd">
-										<li><a href="{{ URL::route('account.xtras', [$_currentUser->slug]) }}">My Xtras</a></li>
+										<li><a href="{{ route('account.xtras', [$_currentUser->slug]) }}">My Xtras</a></li>
 										
 										@if ($_currentUser->can('xtras.item.create'))
-											<li><a href="{{ URL::route('item.create') }}">Create New Xtra</a></li>
+											<li><a href="{{ route('item.create') }}">Create New Xtra</a></li>
 										@endif
 										<li class="divider"></li>
-										<li><a href="{{ URL::route('account.profile', [$_currentUser->slug]) }}">My Profile</a></li>
-										<li><a href="{{ URL::route('account.edit', [$_currentUser->slug]) }}">Edit My Profile</a></li>
+										<li><a href="{{ route('account.profile', [$_currentUser->slug]) }}">My Profile</a></li>
+										<li><a href="{{ route('account.edit', [$_currentUser->slug]) }}">Edit My Profile</a></li>
 
 										@if ($_currentUser->can('xtras.admin'))
 											<li class="divider"></li>
-											<li><a href="{{ URL::route('admin') }}">Admin</a></li>
+											<li><a href="{{ route('admin') }}">Admin</a></li>
 										@endif
 
 										<li class="divider"></li>
-										<li><a href="{{ URL::route('logout') }}">Logout</a></li>
+										<li><a href="{{ route('logout') }}">Logout</a></li>
 									</ul>
 								</li>
 							@endif
@@ -65,7 +64,7 @@
 						<ul>
 							<li><a href="http://anodyne-productions.com">Anodyne<div class="arrow"></div></a></li>
 							<li><a href="http://anodyne-productions.com/nova">Nova<div class="arrow"></div></a></li>
-							<li><a href="{{ URL::route('home') }}" class="active">Xtras<div class="arrow"></div></a></li>
+							<li><a href="{{ route('home') }}" class="active">Xtras<div class="arrow"></div></a></li>
 							<li><a href="http://forums.anodyne-productions.com">Forums<div class="arrow"></div></a></li>
 							<!--<li><a href="http://help.anodyne-productions.com">Help<div class="arrow"></div></a></li>
 							<li><a href="http://learn.anodyne-productions.com">Learn<div class="arrow"></div></a></li>-->
@@ -77,30 +76,30 @@
 				<header>
 					<div class="container">
 						<div class="row">
-							<div class="col-md-3 col-lg-3">
-								<a href="{{ URL::route('home') }}" class="brand">AnodyneXtras</a>
+							<div class="col-md-3">
+								<a href="{{ route('home') }}" class="brand">AnodyneXtras</a>
 							</div>
 
 							@if (Auth::check())
-								<div class="col-md-5 col-lg-5">
+								<div class="col-md-5">
 									<nav class="nav-sub">
 										<ul>
-											<li><a href="{{ URL::route('skins') }}">Skins</a></li>
-											<li><a href="{{ URL::route('mods') }}">MODs</a></li>
-											<li><a href="{{ URL::route('ranks') }}">Ranks</a></li>
-											<li><a href="{{ URL::route('account.xtras') }}">My Xtras</a></li>
+											<li><a href="{{ route('skins') }}">Skins</a></li>
+											<li><a href="{{ route('mods') }}">MODs</a></li>
+											<li><a href="{{ route('ranks') }}">Ranks</a></li>
+											<li><a href="{{ route('account.xtras') }}">My Xtras</a></li>
 										</ul>
 									</nav>
 								</div>
 
-								<div class="col-md-4 col-lg-4">
+								<div class="col-md-4">
 									{{ Form::open(['route' => 'search.do']) }}
 										<div class="header-search">
 											<div class="input-group">
 												{{ Form::text('search', null, array('placeholder' => 'Search Xtras', 'class' => 'input-sm form-control search-field')) }}
 												<span class="input-group-btn">{{ Form::button('Search', array('class' => 'btn btn-default btn-sm', 'type' => 'submit')) }}</span>
 											</div>
-											<a href="{{ URL::route('search.advanced') }}" class="search-advanced">Advanced Search</a>
+											<a href="{{ route('search.advanced') }}" class="search-advanced">Advanced Search</a>
 										</div>
 									{{ Form::close() }}
 								</div>
@@ -123,32 +122,32 @@
 			<div class="push"></div>
 		</div>
 
-		<footer class="visible-md visible-lg">
+		<footer>
 			<div class="container">
 				<div class="row">
-					<div class="col-md-8 col-lg-8">
+					<div class="col-md-8">
 						<h2>AnodyneXtras</h2>
 
 						<p class="text-muted">Every game is unique; it has its own players, characters, missions, and driving force. Why shouldn't each game accurately reflect its distinctiveness through its look and feel and functionality? We've created AnodyneXtras as a one-stop-shop for skins, MODs, and rank sets for Nova so you can make your version of Nova as unique as the game being played with it.</p>
 
 						<p class="text-muted">&copy; {{ Date::now()->year }} Anodyne Productions</p>
 					</div>
-					<div class="col-md-2 col-lg-2">
+					<div class="col-md-2">
 						<ul class="list-unstyled">
-							<li><a href="{{ URL::route('home') }}">Home</a></li>
+							<li><a href="{{ route('home') }}">Home</a></li>
 
 							@if (Auth::check())
-								<li><a href="{{ URL::route('account.xtras') }}">My Xtras</a></li>
-								<li><a href="{{ URL::route('skins') }}">Skins</a></li>
-								<li><a href="{{ URL::route('ranks') }}">Ranks</a></li>
-								<li><a href="{{ URL::route('mods') }}">MODs</a></li>
+								<li><a href="{{ route('account.xtras') }}">My Xtras</a></li>
+								<li><a href="{{ route('skins') }}">Skins</a></li>
+								<li><a href="{{ route('ranks') }}">Ranks</a></li>
+								<li><a href="{{ route('mods') }}">MODs</a></li>
 							@endif
 						</ul>
 					</div>
-					<div class="col-md-2 col-lg-2">
+					<div class="col-md-2">
 						<ul class="list-unstyled">
-							<li><a href="{{ URL::route('policies') }}">Site Policies</a></li>
-							<li><a href="{{ URL::route('faq') }}">FAQs</a></li>
+							<li><a href="{{ route('policies') }}">Site Policies</a></li>
+							<li><a href="{{ route('faq') }}">FAQs</a></li>
 							<li><a href="#">Contact</a></li>
 							<li><a href="http://anodyne-productions.com">Anodyne</a></li>
 						</ul>
@@ -156,6 +155,8 @@
 				</div>
 			</div>
 		</footer>
+
+		@yield('modals')
 
 		@if (App::environment() == 'production')
 			<!--[if lt IE 9]>
@@ -178,9 +179,15 @@
 			<script src="//localhost/global/bootstrap/3.2/js/bootstrap.min.js"></script>
 			<script src="//localhost/global/angular/1.3/angular.min.js"></script>
 			<script src="//localhost/global/angular/1.3/angular-sanitize.min.js"></script>
-			{{ HTML::script('js/app.js') }}
 		@endif
+		{{ HTML::script('js/app.js') }}
 		<script>
+			// Destroy all modals when they're hidden
+			$('.modal').on('hidden.bs.modal', function()
+			{
+				$('.modal').removeData('bs.modal');
+			});
+
 			$(document).ready(function()
 			{
 				$('.tooltip-bottom').tooltip({ position: "bottom" });

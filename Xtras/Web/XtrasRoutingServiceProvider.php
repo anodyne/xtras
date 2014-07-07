@@ -219,6 +219,9 @@ class XtrasRoutingServiceProvider extends ServiceProvider {
 				'as'	=> 'admin',
 				'uses'	=> 'AdminController@index']);
 
+			Route::get('products/{id}/remove', 'ProductsController@remove');
+			Route::get('types/{id}/remove', 'TypesController@remove');
+
 			Route::resource('users', 'UsersController', ['except' => ['show']]);
 			Route::resource('products', 'ProductsController', ['except' => ['show']]);
 			Route::resource('types', 'TypesController', ['except' => ['show']]);

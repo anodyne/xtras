@@ -60,6 +60,7 @@ class XtrasServiceProvider extends ServiceProvider {
 		App::bind($a['ItemRepositoryInterface'], 'Xtras\Repositories\Eloquent\ItemRepository');
 		App::bind($a['OrderRepositoryInterface'], 'Xtras\Repositories\Eloquent\OrderRepository');
 		App::bind($a['ProductRepositoryInterface'], 'Xtras\Repositories\Eloquent\ProductRepository');
+		App::bind($a['TypeRepositoryInterface'], 'Xtras\Repositories\Eloquent\TypeRepository');
 		App::bind($a['UserRepositoryInterface'], 'Xtras\Repositories\Eloquent\UserRepository');
 
 		// Make sure we some variables available on all views
@@ -123,6 +124,14 @@ class XtrasServiceProvider extends ServiceProvider {
 		Event::listen('user.deleted', 'Xtras\Events\UserEventHandler@onDelete');
 		Event::listen('user.registered', 'Xtras\Events\UserEventHandler@onRegister');
 		Event::listen('user.updated', 'Xtras\Events\UserEventHandler@onUpdate');
+
+		Event::listen('product.created', 'Xtras\Events\ProductEventHandler@onCreate');
+		Event::listen('product.deleted', 'Xtras\Events\ProductEventHandler@onDelete');
+		Event::listen('product.updated', 'Xtras\Events\ProductEventHandler@onUpdate');
+
+		Event::listen('type.created', 'Xtras\Events\TypeEventHandler@onCreate');
+		Event::listen('type.deleted', 'Xtras\Events\TypeEventHandler@onDelete');
+		Event::listen('type.updated', 'Xtras\Events\TypeEventHandler@onUpdate');
 	}
 
 }

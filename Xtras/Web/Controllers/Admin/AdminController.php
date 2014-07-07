@@ -7,9 +7,19 @@ use Xtras\Controllers\BaseController;
 
 class AdminController extends BaseController {
 
+	public function __construct()
+	{
+		parent::__construct();
+	}
+
 	public function index()
 	{
-		return View::make('pages.admin.index');
+		if ($this->currentUser->can('xtras.admin'))
+		{
+			return View::make('pages.admin.index');
+		}
+
+		return $this->errorUnauthorized("You do not have permissions to administer AnodyneXtras");
 	}
 
 }

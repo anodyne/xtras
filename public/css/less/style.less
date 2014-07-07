@@ -9,7 +9,7 @@ body {
 body {
 	position: relative;
 	z-index: -100;
-	line-height: 1.75;
+	line-height: @line-height;
 
 	font-family: @font-base;
 	font-size: @font-size;
@@ -348,12 +348,10 @@ form {
 		.rounded(@border-radius);
 	}
 
-	.checkbox-inline {
-		label {
-			font-weight: 400;
-			font-family: @font-base;
-			font-size: @font-size;
-		}
+	.checkbox-inline, .radio-inline {
+		font-weight: 400;
+		font-family: @font-base;
+		font-size: @font-size-sm;
 	}
 
 	.help-block {
@@ -421,6 +419,22 @@ form {
 		.btn-pseudo-states(@color-white, @color-primary-light, @color-primary-light);
 	}
 
+	&.btn-danger {
+		.btn-pseudo-states(@color-white, @color-danger-light, @color-danger-light);
+	}
+
+	&.btn-success {
+		.btn-pseudo-states(@color-white, @color-success-light, @color-success-light);
+	}
+
+	&.btn-info {
+		.btn-pseudo-states(@color-white, @color-info-light, @color-info-light);
+	}
+
+	&.btn-warning {
+		.btn-pseudo-states(@color-warning-dark, @color-warning-bright, @color-warning-bright);
+	}
+
 	&.btn-link {
 		color: @color-primary;
 		font-size: @font-size;
@@ -431,6 +445,10 @@ form {
 	margin: @spacing 0;
 }
 
+.badge {
+	font-weight: 600;
+	background-color: @color-gray-blue;
+}
 .label {
 	font-weight: 600;
 
@@ -802,5 +820,25 @@ blockquote {
 	&.author {
 		border-color: @color-primary;
 		color: @color-primary;
+	}
+}
+
+.modal-content {
+	.rounded(@border-radius);
+}
+
+.list-group {
+	.list-group-item {
+		> .badge {
+			margin-top: 5px;
+		}
+
+		&:first-child {
+			.border-radius(@border-radius, @border-radius, 0, 0);
+		}
+
+		&:last-child {
+			.border-radius(0, 0, @border-radius, @border-radius);
+		}
 	}
 }

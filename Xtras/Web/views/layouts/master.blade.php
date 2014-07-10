@@ -34,7 +34,7 @@
 				<nav class="nav-main">
 					<div class="container">
 						<ul class="pull-right">
-							<li><a href="#">Contact</a></li>
+							<li><a href="#" class="js-contact">Contact</a></li>
 
 							@if (Auth::check())
 								<li class="dropdown">
@@ -148,7 +148,7 @@
 						<ul class="list-unstyled">
 							<li><a href="{{ route('policies') }}">Site Policies</a></li>
 							<li><a href="{{ route('faq') }}">FAQs</a></li>
-							<li><a href="#">Contact</a></li>
+							<li><a href="#" class="js-contact">Contact</a></li>
 							<li><a href="http://anodyne-productions.com">Anodyne</a></li>
 						</ul>
 					</div>
@@ -156,6 +156,7 @@
 			</div>
 		</footer>
 
+		{{ modal(['modalId' => 'contactModal', 'modalHeader' => "Contact Anodyne"]) }}
 		@yield('modals')
 
 		@if (App::environment() == 'production')
@@ -186,6 +187,11 @@
 			$('.modal').on('hidden.bs.modal', function()
 			{
 				$('.modal').removeData('bs.modal');
+			});
+
+			$('.js-contact').on('click', function()
+			{
+				//
 			});
 
 			$(document).ready(function()

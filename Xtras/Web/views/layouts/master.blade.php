@@ -156,7 +156,7 @@
 			</div>
 		</footer>
 
-		{{ modal(['modalId' => 'contactModal', 'modalHeader' => "Contact Anodyne"]) }}
+		{{ modal(['id' => 'contactModal', 'header' => "Contact Anodyne"]) }}
 		@yield('modals')
 
 		@if (App::environment() == 'production')
@@ -189,9 +189,19 @@
 				$('.modal').removeData('bs.modal');
 			});
 
-			$('.js-contact').on('click', function()
+			$('.js-contact').on('click', function(e)
 			{
-				//
+				e.preventDefault();
+
+				var contactUrl = "http://localhost/anodyne/www/public/contact";
+
+				@if (App::environment() == 'production')
+					contactUrl = "http://anodyne-productions.com/contact";
+				@endif
+
+				$('#contactModal').modal({
+					remote: contactUrl
+				}).modal('show');
 			});
 
 			$(document).ready(function()

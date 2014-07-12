@@ -110,8 +110,8 @@
 
 				<section>
 					<div class="container">
-						@if (Session::has('flashMessage'))
-							{{ partial('alert', ['type' => Session::get('flashStatus'), 'content' => Session::get('flashMessage')]) }}
+						@if (Session::has('flash.message'))
+							@include('partials.alert')
 						@endif
 
 						@yield('content')

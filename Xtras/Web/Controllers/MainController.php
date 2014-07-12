@@ -48,11 +48,11 @@ class MainController extends BaseController {
 
 		if ( ! $validator->passes())
 		{
+			Flash::error("Please enter your email address and password and try again.");
+
 			return Redirect::route('login')
 				->withInput()
-				->withErrors($validator->errors())
-				->with('flashStatus', 'danger')
-				->with('flashMessage', "Please enter your email address and password and try again.");
+				->withErrors($validator->errors());
 		}
 
 		// Grab the values and trim them
@@ -69,10 +69,10 @@ class MainController extends BaseController {
 			return Redirect::route('home');
 		}
 
+		Flash::error("Either your email address or password were incorrect. Please try again.");
+
 		return Redirect::route('login')
-			->withInput()
-			->with('flashStatus', 'danger')
-			->with('flashMessage', "Either your email address or password were incorrect. Please try again.");
+			->withInput();
 	}
 
 	public function logout()
@@ -109,9 +109,7 @@ class MainController extends BaseController {
 		// Validator failed
 		if ( ! $validator->passes())
 		{
-			// Flash the session
-			Session::flash('flashStatus', 'danger');
-			Session::flash('flashMessage', "Your information couldn't be validated. Please correct the issues and try again.");
+			Flash::error("Your information couldn't be validated. Please correct the issue(s) and try again.");
 
 			return Redirect::route('register')
 				->withInput()
@@ -121,9 +119,9 @@ class MainController extends BaseController {
 		// Make sure the confirmation number matches
 		if (Input::get('confirm') != Session::get('confirmNumber'))
 		{
-			return Redirect::route('register')
-				->with('flashMessage', "Registration failed due to incorrect anti-spam confirmation number.")
-				->with('flashStatus', 'danger');
+			Flash::error("Registration failed due to incorrect anti-spam confirmation number. Please try again.");
+
+			return Redirect::route('register');
 		}
 
 		// Create the user
@@ -137,16 +135,15 @@ class MainController extends BaseController {
 			// Fire the registration event
 			Event::fire('user.registered', [$user, Input::all()]);
 
-			return Redirect::route('home')
-				->with('flashMessage', "Welcome to AnodyneXtras!")
-				->with('flashStatus', 'success');
+			Flash::success("Welcome to AnodyneXtras!");
+
+			return Redirect::route('home');
 		}
 		else
 		{
-			return Redirect::route('register')
-				->withInput()
-				->with('flashMessage', "There was an error creating your account. Please try again!")
-				->with('flashStatus', 'danger');
+			Flash::error("There was an error creating your account. Please try again.");
+
+			return Redirect::route('register')->withInput();
 		}
 	}
 

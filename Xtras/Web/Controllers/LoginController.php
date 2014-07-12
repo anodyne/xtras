@@ -2,6 +2,7 @@
 
 use Auth,
 	View,
+	Flash,
 	Input,
 	Session,
 	Redirect,
@@ -33,7 +34,7 @@ class LoginController extends BaseController {
 
 		if ( ! $validator->passes())
 		{
-			Session::flash('loginMessage', "Your information couldn't be validated. Please correct the issues and try again.");
+			Flash::error("Your information couldn't be validated. Please correct the issue(s) and try again.");
 
 			return Redirect::route('login')->withInput()->withErrors($validator->errors());
 		}
@@ -53,7 +54,7 @@ class LoginController extends BaseController {
 			}
 		}
 
-		Session::flash('loginMessage', "Either your email address or password were incorrect. Please try again.");
+		Flash::error("Either your email address or password were incorrect. Please try again.");
 
 		return Redirect::route('login')->withInput();
 	}

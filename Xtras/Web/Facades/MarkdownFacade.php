@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Facade;
 
-class Markdown extends Facade {
+class MarkdownFacade extends Facade {
 
 	/**
 	 * Get the registered name of the component.

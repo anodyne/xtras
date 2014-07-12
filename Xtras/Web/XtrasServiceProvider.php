@@ -21,6 +21,7 @@ class XtrasServiceProvider extends ServiceProvider {
 		$this->registerMarkdown();
 		$this->registerFilesystem();
 		$this->registerEvents();
+		$this->registerFlashNotifier();
 	}
 
 	public function boot()
@@ -132,6 +133,14 @@ class XtrasServiceProvider extends ServiceProvider {
 		Event::listen('type.created', 'Xtras\Events\TypeEventHandler@onCreate');
 		Event::listen('type.deleted', 'Xtras\Events\TypeEventHandler@onDelete');
 		Event::listen('type.updated', 'Xtras\Events\TypeEventHandler@onUpdate');
+	}
+
+	protected function registerFlashNotifier()
+	{
+		$this->app['xtras.flash'] = $this->app->share(function($app)
+		{
+			return new Services\FlashNotiferService($app['session.store']);
+		});
 	}
 
 }

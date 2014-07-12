@@ -185,7 +185,8 @@ return array(
 		'Browser'	=> 'Ikimea\Browser\Browser',
 		'Date'		=> 'Carbon\Carbon',
 		'Entrust'	=> 'Zizaco\Entrust\EntrustFacade',
-		'Markdown'	=> 'Xtras\Facades\Markdown',
+		'Flash'		=> 'Xtras\Facades\FlashFacade',
+		'Markdown'	=> 'Xtras\Facades\MarkdownFacade',
 		'Model'		=> 'Xtras\Extensions\Laravel\Database\Eloquent\Model',
 		
 		/**

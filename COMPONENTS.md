@@ -9,7 +9,7 @@
 - [Fractal](http://fractal.thephpleague.com/)
 	- Version: 0.8.3
 - [AWS SDK](https://aws.amazon.com/sdkforphp/)
-	- Version: 2.6.10
+	- Version: 2.6.12
 - [Parsedown](http://parsedown.org/)
 	- Version: 1.0.1
 - [Browser](https://github.com/Ikimea/Browser)
@@ -17,11 +17,13 @@
 - [Presenter](https://github.com/laracasts/Presenter)
 	- Version: 0.1.4
 - [Guzzle](http://guzzlephp.org/)
-	- Version: 4.1.2
+	- Version: 4.1.3
 - [Sanitizer](https://github.com/daylerees/sanitizer)
 	- Version: 1.0.1
 - [Entrust](https://github.com/Zizaco/entrust)
-	- Version: 1.2.0
+	- Version: 1.2.2
+- [Ardent](https://github.com/laravelbook/ardent)
+	- Version: 2.4.2
 
 ## Javascript
 

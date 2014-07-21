@@ -34,7 +34,7 @@
 		@endforeach
 		</div>
 	@else
-		<p class="alert alert-warning">No item types found.</p>
+		{{ alert('warning', "No item types found.") }}
 	@endif
 @stop
 

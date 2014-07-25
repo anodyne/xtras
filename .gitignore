@@ -7,5 +7,6 @@ vendor
 
 *.sublime-project
 *.sublime-workspace
+config.codekit
 
 Xtras/assets/*

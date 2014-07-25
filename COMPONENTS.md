@@ -3,11 +3,11 @@
 ## PHP
 
 - [Laravel](http://laravel.com)
-	- Version: 4.2.6
+	- Version: 4.2.7
 - [Flysystem](http://flysystem.thephpleague.com/)
-	- Version: 0.4.5
+	- Version: 0.5.3
 - [Fractal](http://fractal.thephpleague.com/)
-	- Version: 0.8.3
+	- Version: 0.9.1
 - [AWS SDK](https://aws.amazon.com/sdkforphp/)
 	- Version: 2.6.12
 - [Parsedown](http://parsedown.org/)
@@ -17,7 +17,7 @@
 - [Presenter](https://github.com/laracasts/Presenter)
 	- Version: 0.1.4
 - [Guzzle](http://guzzlephp.org/)
-	- Version: 4.1.3
+	- Version: 4.1.4
 - [Sanitizer](https://github.com/daylerees/sanitizer)
 	- Version: 1.0.1
 - [Entrust](https://github.com/Zizaco/entrust)

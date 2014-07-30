@@ -119,9 +119,8 @@ header {
 	height: 90px;
 
 	border-top: 1px solid rgba(0, 0, 0, .5);
-	border-bottom: 1px solid rgba(0, 0, 0, .5);
-
-	.gradient(@color-primary-light, @color-primary);
+	border-bottom: 1px solid rgba(0, 0, 0, .2);
+	background: @color-primary;
 
 	.brand {
 		position: relative;
@@ -162,7 +161,7 @@ header {
 				a {
 					line-height: 84px;
 
-					color: rgba(255, 255, 255, .5);
+					color: rgba(255, 255, 255, .6);
 					font-weight: 500;
 					font-family: @font-special;
 
@@ -218,7 +217,7 @@ section {
 
 		font-family: @font-titles;
 		font-weight: 700;
-		color: @color-primary-light;
+		color: @color-primary;
 	}
 
 	h2 {
@@ -227,7 +226,7 @@ section {
 		font-family: @font-special;
 		font-weight: 500;
 		font-style: italic;
-		color: desaturate(@color-primary, 50%);
+		color: @color-primary-light;
 	}
 
 	ul, ol {
@@ -422,7 +421,7 @@ form {
 	.rounded(@border-radius);
 
 	&.btn-primary {
-		.btn-pseudo-states(@color-white, @color-primary-light, @color-primary-light);
+		.btn-pseudo-states(@color-white, @color-primary, @color-primary);
 	}
 
 	&.btn-danger {

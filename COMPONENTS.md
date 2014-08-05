@@ -3,7 +3,7 @@
 ## PHP
 
 - [Laravel](http://laravel.com)
-	- Version: 4.2.7
+	- Version: 4.2.8
 - [Flysystem](http://flysystem.thephpleague.com/)
 	- Version: 0.5.3
 - [Fractal](http://fractal.thephpleague.com/)
@@ -17,11 +17,11 @@
 - [Presenter](https://github.com/laracasts/Presenter)
 	- Version: 0.1.4
 - [Guzzle](http://guzzlephp.org/)
-	- Version: 4.1.4
+	- Version: 4.1.6
 - [Sanitizer](https://github.com/daylerees/sanitizer)
 	- Version: 1.0.1
 - [Entrust](https://github.com/Zizaco/entrust)
-	- Version: 1.2.2
+	- Version: 1.2.3
 - [Ardent](https://github.com/laravelbook/ardent)
 	- Version: 2.4.2
 

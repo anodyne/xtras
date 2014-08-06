@@ -13,7 +13,7 @@ return array(
 	|
 	*/
 
-	'debug' => true,
+	'debug' => false,
 
 	/*
 	|--------------------------------------------------------------------------
@@ -67,7 +67,7 @@ return array(
 
 	'key' => $_ENV['APP_KEY'],
 
-	'cipher' => MCRYPT_RIJNDAEL_256,
+	'cipher' => MCRYPT_RIJNDAEL_128,
 
 	/*
 	|--------------------------------------------------------------------------
@@ -112,6 +112,7 @@ return array(
 		'Xtras\XtrasServiceProvider',
 		'Xtras\XtrasRoutingServiceProvider',
 		'Zizaco\Entrust\EntrustServiceProvider',
+		'Barryvdh\Debugbar\ServiceProvider',
 
 	),
 
@@ -184,6 +185,7 @@ return array(
 		 */
 		'Browser'	=> 'Ikimea\Browser\Browser',
 		'Date'		=> 'Carbon\Carbon',
+		'Debugbar'	=> 'Barryvdh\Debugbar\Facade',
 		'Entrust'	=> 'Zizaco\Entrust\EntrustFacade',
 		'Flash'		=> 'Xtras\Facades\FlashFacade',
 		'Markdown'	=> 'Xtras\Facades\MarkdownFacade',

@@ -1,14 +1,23 @@
 <?php namespace Xtras\Models\Eloquent;
 
 use Model;
+use Laracasts\Presenter\PresentableTrait;
+use Illuminate\Database\Eloquent\SoftDeletingTrait;
 
-class ItemRatingModel extends Model {
+class ItemMessageModel extends Model {
 
-	public $timestamps = false;
+	use PresentableTrait;
+	use SoftDeletingTrait;
 
-	protected $table = 'items_ratings';
+	protected $connection = 'mysql';
 
-	protected $fillable = ['user_id', 'item_id', 'rating'];
+	protected $table = 'items_messages';
+
+	protected $fillable = ['item_id', 'type', 'content', 'expires'];
+
+	protected $dates = ['expires', 'created_at', 'updated_at', 'deleted_at'];
+
+	protected $presenter = 'Xtras\Presenters\ItemMessagePresenter';
 
 	/*
 	|---------------------------------------------------------------------------
@@ -29,11 +38,6 @@ class ItemRatingModel extends Model {
 	public function scopeItem($query, $item)
 	{
 		$query->where('item_id', $item);
-	}
-
-	public function scopeUser($query, $user)
-	{
-		$query->where('user_id', $user);
 	}
 
 }

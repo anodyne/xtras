@@ -26,6 +26,13 @@ class CreateUsers extends Migration {
 			$table->softDeletes();
 		});
 
+		Schema::connection('anodyneUsers')->create('sessions', function(Blueprint $table)
+		{
+			$table->string('id')->unique();
+			$table->text('payload');
+			$table->integer('last_activity');
+		});
+
 		Schema::connection('anodyneUsers')->create('roles', function(Blueprint $table)
 		{
 			$table->increments('id')->unsigned();
@@ -84,6 +91,7 @@ class CreateUsers extends Migration {
 		Schema::connection('anodyneUsers')->dropIfExists('roles');
 		Schema::connection('anodyneUsers')->dropIfExists('permissions');
 		Schema::connection('anodyneUsers')->dropIfExists('users');
+		Schema::connection('anodyneUsers')->dropIfExists('sessions');
 	}
 
 }

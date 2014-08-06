@@ -4,18 +4,20 @@ use Model;
 use Laracasts\Presenter\PresentableTrait;
 use Illuminate\Database\Eloquent\SoftDeletingTrait;
 
-class ItemMessageModel extends Model {
+class ProductModel extends Model {
 
 	use PresentableTrait;
 	use SoftDeletingTrait;
 
-	protected $table = 'items_messages';
+	protected $connection = 'mysql';
 
-	protected $fillable = ['item_id', 'type', 'content', 'expires'];
+	protected $table = 'products';
 
-	protected $dates = ['expires', 'created_at', 'updated_at', 'deleted_at'];
+	protected $fillable = ['name', 'desc', 'display'];
 
-	protected $presenter = 'Xtras\Presenters\ItemMessagePresenter';
+	protected $dates = ['created_at', 'updated_at', 'deleted_at'];
+
+	protected $presenter = 'Xtras\Presenters\ProductPresenter';
 
 	/*
 	|---------------------------------------------------------------------------
@@ -24,7 +26,7 @@ class ItemMessageModel extends Model {
 	*/
 
 	public static $relationsData = [
-		'item' => [self::BELONGS_TO, 'ItemModel'],
+		'items' => [self::HAS_MANY, 'ItemModel', 'foreignKey' => 'product_id'],
 	];
 
 	/*
@@ -33,9 +35,9 @@ class ItemMessageModel extends Model {
 	|---------------------------------------------------------------------------
 	*/
 
-	public function scopeItem($query, $item)
+	public function scopeActive($query)
 	{
-		$query->where('item_id', $item);
+		$query->where('display', (int) true);
 	}
 
 }

@@ -9,6 +9,8 @@ class ItemMetaModel extends Model {
 	use PresentableTrait;
 	use SoftDeletingTrait;
 
+	protected $connection = 'mysql';
+
 	protected $table = 'items_meta';
 
 	protected $fillable = ['item_id', 'installation', 'history', 'image1', 'image2',

@@ -4,6 +4,8 @@ use Model;
 
 class OrderModel extends Model {
 
+	protected $connection = 'mysql';
+
 	protected $table = 'orders';
 
 	protected $fillable = ['user_id', 'item_id', 'file_id', 'notify'];

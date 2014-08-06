@@ -4,18 +4,20 @@ use Model;
 use Laracasts\Presenter\PresentableTrait;
 use Illuminate\Database\Eloquent\SoftDeletingTrait;
 
-class ProductModel extends Model {
+class TypeModel extends Model {
 
 	use PresentableTrait;
 	use SoftDeletingTrait;
 
-	protected $table = 'products';
+	protected $connection = 'mysql';
 
-	protected $fillable = ['name', 'desc', 'display'];
+	protected $table = 'types';
+
+	protected $fillable = ['name', 'display'];
 
 	protected $dates = ['created_at', 'updated_at', 'deleted_at'];
 
-	protected $presenter = 'Xtras\Presenters\ProductPresenter';
+	protected $presenter = 'Xtras\Presenters\TypePresenter';
 
 	/*
 	|---------------------------------------------------------------------------
@@ -24,7 +26,7 @@ class ProductModel extends Model {
 	*/
 
 	public static $relationsData = [
-		'items' => [self::HAS_MANY, 'ItemModel', 'foreignKey' => 'product_id'],
+		'items' => [self::HAS_MANY, 'ItemModel', 'foreignKey' => 'type_id'],
 	];
 
 	/*

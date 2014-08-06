@@ -12,6 +12,6 @@ config.codekit
 Anodyne/Xtras/assets/*
 
 app/config/packages/barryvdh/*
-app/storage/debugbar/*
+app/storage/debugbar/
 public/packages/barryvdh/*
 public/packages/maximebf/*

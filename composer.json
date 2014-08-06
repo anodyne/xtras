@@ -14,19 +14,20 @@
 
 	"require-dev": {
 		"raveren/kint": "dev-master",
-		"fzaninotto/faker": "*"
+		"fzaninotto/faker": "*",
+		"barryvdh/laravel-debugbar": "1.*"
 	},
 	
 	"autoload": {
 		"classmap": [
-			"Xtras/database/migrations",
-			"Xtras/database/seeds"
+			"Anodyne/Xtras/database/migrations",
+			"Anodyne/Xtras/database/seeds"
 		],
 		
 		"psr-4": {
-			"Xtras\\": "Xtras\\Web",
-			"Xtras\\Api\\": "Xtras\\Api",
-			"Xtras\\Extensions\\": "Xtras\\Extensions"
+			"Xtras\\": "Anodyne\\Xtras\\Web",
+			"Xtras\\Api\\": "Anodyne\\Xtras\\Api",
+			"Xtras\\Extensions\\": "Anodyne\\Xtras\\Extensions"
 		}
 	},
 	
@@ -36,5 +37,9 @@
 	},
 
 	"minimum-stability": "dev",
-	"prefer-stable": true
+	"prefer-stable": true,
+
+	"post-update-cmd": [
+		"php artisan debugbar:publish"
+	]
 }

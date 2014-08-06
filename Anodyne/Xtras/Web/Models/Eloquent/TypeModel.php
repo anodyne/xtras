@@ -9,8 +9,6 @@ class TypeModel extends Model {
 	use PresentableTrait;
 	use SoftDeletingTrait;
 
-	protected $connection = 'mysql';
-
 	protected $table = 'types';
 
 	protected $fillable = ['name', 'display'];

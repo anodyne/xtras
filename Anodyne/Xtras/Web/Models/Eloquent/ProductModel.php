@@ -9,8 +9,6 @@ class ProductModel extends Model {
 	use PresentableTrait;
 	use SoftDeletingTrait;
 
-	protected $connection = 'mysql';
-
 	protected $table = 'products';
 
 	protected $fillable = ['name', 'desc', 'display'];

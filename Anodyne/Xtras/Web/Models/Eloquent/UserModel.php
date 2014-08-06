@@ -20,6 +20,8 @@ class UserModel extends Model implements UserInterface, RemindableInterface {
 	use PresentableTrait;
 	use SoftDeletingTrait;
 
+	protected $connection = 'anodyneUsers';
+
 	protected $table = 'users';
 
 	protected $fillable = ['name', 'email', 'password', 'url', 'bio', 'slug',

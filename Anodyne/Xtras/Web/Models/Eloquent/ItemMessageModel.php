@@ -9,8 +9,6 @@ class ItemMessageModel extends Model {
 	use PresentableTrait;
 	use SoftDeletingTrait;
 
-	protected $connection = 'mysql';
-
 	protected $table = 'items_messages';
 
 	protected $fillable = ['item_id', 'type', 'content', 'expires'];

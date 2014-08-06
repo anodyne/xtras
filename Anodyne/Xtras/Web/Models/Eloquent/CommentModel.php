@@ -7,8 +7,6 @@ class CommentModel extends Model {
 
 	use PresentableTrait;
 
-	protected $connection = 'mysql';
-
 	protected $table = 'comments';
 
 	protected $fillable = ['user_id', 'item_id', 'content'];

@@ -4,8 +4,6 @@ use Model;
 
 class ItemRatingModel extends Model {
 
-	protected $connection = 'mysql';
-
 	public $timestamps = false;
 
 	protected $table = 'items_ratings';

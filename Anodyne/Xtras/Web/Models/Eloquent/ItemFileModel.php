@@ -9,8 +9,6 @@ class ItemFileModel extends Model {
 	use PresentableTrait;
 	use SoftDeletingTrait;
 
-	protected $connection = 'mysql';
-
 	protected $table = 'items_files';
 
 	protected $fillable = ['item_id', 'filename', 'version'];

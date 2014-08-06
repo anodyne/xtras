@@ -25,9 +25,9 @@ class RoleSeeder extends Seeder {
 		}
 
 		$roles = [
-			['name' => "Xtras Administrator"],
-			['name' => "Xtras User (No Rank Sets)"],
-			['name' => "Xtras User (Including Rank Sets)"],
+			['name' => "System Administrator"],
+			['name' => "Anodyne User (w/o Rank Sets)"],
+			['name' => "Anodyne User (w/ Rank Sets)"],
 		];
 
 		$roleAssociations = [

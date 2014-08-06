@@ -9,4 +9,9 @@ vendor
 *.sublime-workspace
 config.codekit
 
-Xtras/assets/*
+Anodyne/Xtras/assets/*
+
+app/config/packages/barryvdh/*
+app/storage/debugbar/*
+public/packages/barryvdh/*
+public/packages/maximebf/*

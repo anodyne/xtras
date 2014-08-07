@@ -183,38 +183,47 @@ return array(
 		/**
 		 * Classes
 		 */
-		'Browser'	=> 'Ikimea\Browser\Browser',
-		'Date'		=> 'Carbon\Carbon',
-		'Debugbar'	=> 'Barryvdh\Debugbar\Facade',
-		'Entrust'	=> 'Zizaco\Entrust\EntrustFacade',
-		'Flash'		=> 'Xtras\Facades\FlashFacade',
-		'Markdown'	=> 'Xtras\Facades\MarkdownFacade',
-		'Model'		=> 'Xtras\Extensions\Laravel\Database\Eloquent\Model',
+		'Browser'		=> 'Ikimea\Browser\Browser',
+		'Date'			=> 'Carbon\Carbon',
+		'Debugbar'		=> 'Barryvdh\Debugbar\Facade',
+		'Entrust'		=> 'Zizaco\Entrust\EntrustFacade',
+		'Flash'			=> 'Xtras\Foundation\Facades\FlashFacade',
+		'Markdown'		=> 'Xtras\Foundation\Facades\MarkdownFacade',
+		'Model'			=> 'Xtras\Extensions\Laravel\Database\Eloquent\Model',
 		
 		/**
 		 * Models
 		 */
-		'ProductModel'		=> 'Xtras\Models\Eloquent\ProductModel',
-		'UserModel'			=> 'Xtras\Models\Eloquent\UserModel',
-		'ItemModel'			=> 'Xtras\Models\Eloquent\ItemModel',
-		'ItemFileModel'		=> 'Xtras\Models\Eloquent\ItemFileModel',
-		'ItemMessageModel'	=> 'Xtras\Models\Eloquent\ItemMessageModel',
-		'ItemMetaModel'		=> 'Xtras\Models\Eloquent\ItemMetaModel',
-		'ItemRatingModel'	=> 'Xtras\Models\Eloquent\ItemRatingModel',
-		'TypeModel'			=> 'Xtras\Models\Eloquent\TypeModel',
-		'CommentModel'		=> 'Xtras\Models\Eloquent\CommentModel',
-		'OrderModel'		=> 'Xtras\Models\Eloquent\OrderModel',
-		'RoleModel'			=> 'Xtras\Models\Eloquent\RoleModel',
-		'PermissionModel'	=> 'Xtras\Models\Eloquent\PermissionModel',
+		'ProductModel'		=> 'Xtras\Foundation\Data\Models\Eloquent\ProductModel',
+		'UserModel'			=> 'Xtras\Foundation\Data\Models\Eloquent\UserModel',
+		'ItemModel'			=> 'Xtras\Foundation\Data\Models\Eloquent\ItemModel',
+		'ItemFileModel'		=> 'Xtras\Foundation\Data\Models\Eloquent\ItemFileModel',
+		'ItemMessageModel'	=> 'Xtras\Foundation\Data\Models\Eloquent\ItemMessageModel',
+		'ItemMetaModel'		=> 'Xtras\Foundation\Data\Models\Eloquent\ItemMetaModel',
+		'ItemRatingModel'	=> 'Xtras\Foundation\Data\Models\Eloquent\ItemRatingModel',
+		'TypeModel'			=> 'Xtras\Foundation\Data\Models\Eloquent\TypeModel',
+		'CommentModel'		=> 'Xtras\Foundation\Data\Models\Eloquent\CommentModel',
+		'OrderModel'		=> 'Xtras\Foundation\Data\Models\Eloquent\OrderModel',
+		'RoleModel'			=> 'Xtras\Foundation\Data\Models\Eloquent\RoleModel',
+		'PermissionModel'	=> 'Xtras\Foundation\Data\Models\Eloquent\PermissionModel',
 
 		/**
 		 * Repository Interfaces
 		 */
-		'ItemRepositoryInterface'		=> 'Xtras\Repositories\Interfaces\ItemRepositoryInterface',
-		'OrderRepositoryInterface'		=> 'Xtras\Repositories\Interfaces\OrderRepositoryInterface',
-		'ProductRepositoryInterface'	=> 'Xtras\Repositories\Interfaces\ProductRepositoryInterface',
-		'TypeRepositoryInterface'		=> 'Xtras\Repositories\Interfaces\TypeRepositoryInterface',
-		'UserRepositoryInterface'		=> 'Xtras\Repositories\Interfaces\UserRepositoryInterface',
+		'ItemRepositoryInterface'		=> 'Xtras\Foundation\Data\Interfaces\ItemRepositoryInterface',
+		'OrderRepositoryInterface'		=> 'Xtras\Foundation\Data\Interfaces\OrderRepositoryInterface',
+		'ProductRepositoryInterface'	=> 'Xtras\Foundation\Data\Interfaces\ProductRepositoryInterface',
+		'TypeRepositoryInterface'		=> 'Xtras\Foundation\Data\Interfaces\TypeRepositoryInterface',
+		'UserRepositoryInterface'		=> 'Xtras\Foundation\Data\Interfaces\UserRepositoryInterface',
+
+		/**
+		 * Repositories
+		 */
+		'ItemRepository'	=> 'Xtras\Foundation\Data\Repositories\Eloquent\ItemRepository',
+		'OrderRepository'	=> 'Xtras\Foundation\Data\Repositories\Eloquent\OrderRepository',
+		'ProductRepository'	=> 'Xtras\Foundation\Data\Repositories\Eloquent\ProductRepository',
+		'TypeRepository'	=> 'Xtras\Foundation\Data\Repositories\Eloquent\TypeRepository',
+		'UserRepository'	=> 'Xtras\Foundation\Data\Repositories\Eloquent\UserRepository',
 
 		/**
 		 * Traits

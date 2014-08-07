@@ -35,7 +35,7 @@ class XtrasServiceProvider extends ServiceProvider {
 		$this->app->before(function($request)
 		{
 			// Get the browser object
-			$browser = App::make('xtras.browser');
+			$browser = App::make('browser');
 
 			$supported = array(
 				Browser::BROWSER_IE			=> 9,
@@ -55,14 +55,14 @@ class XtrasServiceProvider extends ServiceProvider {
 	protected function setupBindings()
 	{
 		// Get the class aliases
-		$a = $this->app['config']->get('app.aliases');
+		$a = Config::get('app.aliases');
 
 		// Set up bindings from the interface to their concrete classes
-		App::bind($a['ItemRepositoryInterface'], 'Xtras\Repositories\Eloquent\ItemRepository');
-		App::bind($a['OrderRepositoryInterface'], 'Xtras\Repositories\Eloquent\OrderRepository');
-		App::bind($a['ProductRepositoryInterface'], 'Xtras\Repositories\Eloquent\ProductRepository');
-		App::bind($a['TypeRepositoryInterface'], 'Xtras\Repositories\Eloquent\TypeRepository');
-		App::bind($a['UserRepositoryInterface'], 'Xtras\Repositories\Eloquent\UserRepository');
+		App::bind($a['ItemRepositoryInterface'], $a['ItemRepository']);
+		App::bind($a['OrderRepositoryInterface'], $a['OrderRepository']);
+		App::bind($a['ProductRepositoryInterface'], $a['ProductRepository']);
+		App::bind($a['TypeRepositoryInterface'], $a['TypeRepository']);
+		App::bind($a['UserRepositoryInterface'], $a['UserRepository']);
 
 		// Make sure we some variables available on all views
 		View::share('_currentUser', Auth::user());
@@ -71,7 +71,7 @@ class XtrasServiceProvider extends ServiceProvider {
 
 	protected function registerBrowser()
 	{
-		$this->app['xtras.browser'] = $this->app->share(function($app)
+		$this->app['browser'] = $this->app->share(function($app)
 		{
 			return new Browser;
 		});
@@ -107,7 +107,7 @@ class XtrasServiceProvider extends ServiceProvider {
 	{
 		$this->app['markdown'] = $this->app->share(function($app)
 		{
-			return new Services\MarkdownService(new Parsedown);
+			return new \Xtras\Foundation\Services\MarkdownService(new Parsedown);
 		});
 	}
 
@@ -137,9 +137,9 @@ class XtrasServiceProvider extends ServiceProvider {
 
 	protected function registerFlashNotifier()
 	{
-		$this->app['xtras.flash'] = $this->app->share(function($app)
+		$this->app['flash'] = $this->app->share(function($app)
 		{
-			return new Services\FlashNotiferService($app['session.store']);
+			return new \Xtras\Foundation\Services\FlashNotiferService($app['session.store']);
 		});
 	}
 

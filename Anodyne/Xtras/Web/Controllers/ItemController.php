@@ -3,6 +3,7 @@
 use App,
 	View,
 	Event,
+	Flash,
 	Input,
 	Redirect,
 	Response,
@@ -296,9 +297,10 @@ class ItemController extends BaseController {
 		// Fire the event
 		Event::fire('item.report.issue', [$item, $input]);
 
-		return Redirect::route('item.show', [$item->user->slug, $item->slug])
-			->with('flashStatus', 'success')
-			->with('flashMessage', "Thank you for reporting the issue. An email has been sent to the developer with the details. They'll contact you further if they need additional information.");
+		// Set the flash message
+		Flash::success("Thank you for reporting the issue. An email has been sent to the developer with the details. They'll contact you further if they need additional information.");
+
+		return Redirect::route('item.show', [$item->user->slug, $item->slug]);
 	}
 
 	public function storeComment($id)

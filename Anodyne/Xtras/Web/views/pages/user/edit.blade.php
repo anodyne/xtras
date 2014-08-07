@@ -24,7 +24,7 @@
 		</div>
 
 		<div class="row">
-			@if ($_currentUser->access() > 1)
+			@if ($_currentUser->can('xtras.admin'))
 				<div class="col-lg-4">
 					<div class="form-group">
 						<label>Profile Slug</label>
@@ -35,7 +35,7 @@
 				<div class="col-lg-8">
 					<div class="form-group">
 						<label>Profile Link</label>
-						<p class="form-control-static">{{ URL::route('profile', [$user->slug]) }}</p>
+						<p class="form-control-static">{{ route('profile', [$user->slug]) }}</p>
 					</div>
 				</div>
 			@endif

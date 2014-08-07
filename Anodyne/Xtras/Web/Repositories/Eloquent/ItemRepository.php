@@ -177,12 +177,14 @@ class ItemRepository implements ItemRepositoryInterface {
 
 	public function getRecentlyAdded($number)
 	{
-		return ItemModel::orderBy('created_at', 'desc')->take($number)->get();
+		return ItemModel::with('product', 'type', 'user')
+			->orderBy('created_at', 'desc')->take($number)->get();
 	}
 
 	public function getRecentlyUpdated($number)
 	{
-		return ItemModel::orderBy('updated_at', 'desc')->take($number)->get();
+		return ItemModel::with('product', 'type', 'user')
+			->orderBy('updated_at', 'desc')->take($number)->get();
 	}
 
 	public function getTypes()

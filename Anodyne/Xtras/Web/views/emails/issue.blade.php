@@ -1,27 +1,17 @@
-<!DOCTYPE html>
-<html lang="en">
-	<head>
-		<meta charset="utf-8">
-		<style>
-			body {
-				font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-				font-size: 14px;
-				line-height: 20px;
-				color: #333333;
-				background-color: #ffffff;
-			}
-		</style>
-	</head>
-	<body>
-		<h2>Issue Report</h2>
-		
-		<ul>
-			<li>Item Name: {{ $xtraName }}</li>
-			<li>Item Type: {{ $xtraType }}</li>
-			<li>Item URL: {{ $xtraUrl}}</li>
-			<li>Reported By: {{ $userName }} ({{ $userEmail }})</li>
-		</ul>
+@extends('layouts.email')
 
-		{{ Markdown::parse($content) }}
-	</body>
-</html>
+@section('content')
+	<h1>Issue Report</h1>
+
+	<p>An issue has been reported with one of your Xtras. The information about the Xtra is below as well as comments from the reporting user. If you have questions about the issue report, please contact the user directly.</p>
+
+	<hr>
+		
+	<ul>
+		<li><strong>Item:</strong> {{ $name }}</li>
+		<li><strong>Item Type:</strong> {{ $type }}</li>
+		<li><strong>Reported By:</strong> {{ $userName }} ({{ $userEmail }})</li>
+	</ul>
+
+	{{ Markdown::parse($content) }}
+@stop

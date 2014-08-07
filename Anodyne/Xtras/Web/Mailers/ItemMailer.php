@@ -1,6 +1,6 @@
 <?php namespace Xtras\Mailers;
 
-use Config;
+use URL, HTML, Config;
 
 class ItemMailer extends BaseMailer {
 
@@ -26,7 +26,7 @@ class ItemMailer extends BaseMailer {
 				'to'		=> Config::get('xtras.abuseEmail'),
 				'xtraName'	=> $item->present()->name,
 				'xtraType'	=> $item->present()->type,
-				'xtraUrl'	=> \URL::route('item.show', [$item->user->slug, $item->slug]),
+				'xtraUrl'	=> URL::route('item.show', [$item->user->slug, $item->slug]),
 				'userName'	=> $user->present()->name,
 				'userEmail'	=> $user->present()->email,
 			];
@@ -48,15 +48,14 @@ class ItemMailer extends BaseMailer {
 			$user = $this->users->find($data['user_id']);
 
 			$emailData = [
-				'subject'	=> "Issue Reported - ".$item->present()->name,
-				'content'	=> $data['content'],
-				'from'		=> $user->present()->email,
-				'to'		=> $item->user->present()->email,
-				'xtraName'	=> $item->present()->name,
-				'xtraType'	=> $item->present()->type,
-				'xtraUrl'	=> \URL::route('item.show', [$item->user->slug, $item->slug]),
-				'userName'	=> $user->present()->name,
-				'userEmail'	=> $user->present()->email,
+				'subject' => "Issue Reported - ".$item->present()->name,
+				'content' => $data['content'],
+				'from' => $user->present()->email,
+				'to' => $item->user->present()->email,
+				'name' => HTML::link(route('item.show', [$item->user->slug, $item->slug]), $item->present()->name),
+				'type' => $item->present()->type,
+				'userName' => $user->present()->name,
+				'userEmail' => $user->present()->email,
 			];
 
 			return $this->send('issue', $emailData);

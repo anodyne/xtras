@@ -18,7 +18,7 @@
 			@endforeach
 		</div>
 	</div>
-	
+		
 	<div id="updated" class="hide">
 		<a href="#" data-target="newest" class="btn btn-sm btn-default pull-right xtra-toggle">See Newest Xtras</a>
 
@@ -36,7 +36,6 @@
 
 @section('scripts')
 	<script>
-
 		$('.xtra-toggle').on('click', function(e)
 		{
 			e.preventDefault();
@@ -55,6 +54,5 @@
 				$('div#updated').removeClass('hide');
 			}
 		});
-
 	</script>
 @stop

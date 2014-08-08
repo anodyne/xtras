@@ -37,7 +37,9 @@
 	- Version: 3.10.2
 - [HTML5Shiv](https://code.google.com/p/html5shiv/)
 - [AngularJS](https://angularjs.org/)
-	- Version: 1.3.0-beta.13
+	- Version: 1.3.0-beta.16
+- [jQuery Validate](http://jqueryvalidation.org/)
+	- Version: 1.13.0
 
 ## Others
 

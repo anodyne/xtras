@@ -113,15 +113,18 @@ class ItemRepository implements ItemRepositoryInterface {
 		switch ($type)
 		{
 			case 'mods':
-				$type = TypeModel::where('name', 'MOD')->first();
+				$type = TypeModel::with('items.user', 'items.meta', 'items.product', 'items.type')
+					->where('name', 'MOD')->first();
 			break;
 
 			case 'ranks':
-				$type = TypeModel::where('name', 'Rank Set')->first();
+				$type = TypeModel::with('items.user', 'items.meta', 'items.product', 'items.type')
+					->where('name', 'Rank Set')->first();
 			break;
 
 			case 'skins':
-				$type = TypeModel::where('name', 'Skin')->first();
+				$type = TypeModel::with('items.user', 'items.meta', 'items.product', 'items.type')
+					->where('name', 'Skin')->first();
 			break;
 		}
 
@@ -177,13 +180,13 @@ class ItemRepository implements ItemRepositoryInterface {
 
 	public function getRecentlyAdded($number)
 	{
-		return ItemModel::with('product', 'type', 'user')
+		return ItemModel::with('product', 'type', 'user', 'meta')
 			->orderBy('created_at', 'desc')->take($number)->get();
 	}
 
 	public function getRecentlyUpdated($number)
 	{
-		return ItemModel::with('product', 'type', 'user')
+		return ItemModel::with('product', 'type', 'user', 'meta')
 			->orderBy('updated_at', 'desc')->take($number)->get();
 	}
 

@@ -1,8 +1,21 @@
 <?php namespace Xtras\Mailers;
 
-use URL, HTML, Config;
+use HTML,
+	Config,
+	ItemRepositoryInterface,
+	UserRepositoryInterface;
 
 class ItemMailer extends BaseMailer {
+
+	protected $items;
+	protected $users;
+
+	public function __construct(ItemRepositoryInterface $items,
+			UserRepositoryInterface $users)
+	{
+		$this->items = $items;
+		$this->users = $users;
+	}
 
 	public function addedComment($data)
 	{
@@ -20,15 +33,15 @@ class ItemMailer extends BaseMailer {
 			$user = $this->users->find($data['user_id']);
 
 			$emailData = [
-				'subject'	=> "Abuse Reported - ".$item->present()->name,
-				'content'	=> $data['content'],
-				'from'		=> $user->present()->email,
-				'to'		=> Config::get('xtras.abuseEmail'),
-				'xtraName'	=> $item->present()->name,
-				'xtraType'	=> $item->present()->type,
-				'xtraUrl'	=> URL::route('item.show', [$item->user->slug, $item->slug]),
-				'userName'	=> $user->present()->name,
-				'userEmail'	=> $user->present()->email,
+				'subject' => "Abuse Reported - ".$item->present()->name,
+				'content' => $data['content'],
+				'from' => $user->present()->email,
+				'replyTo' => $user->present()->email,
+				'to' => Config::get('xtras.abuseEmail'),
+				'name' => HTML::link(route('item.show', [$item->user->slug, $item->slug]), $item->present()->name),
+				'type' => $item->present()->type,
+				'userName' => $user->present()->name,
+				'userEmail' => $user->present()->email,
 			];
 
 			return $this->send('abuse', $emailData);
@@ -51,6 +64,7 @@ class ItemMailer extends BaseMailer {
 				'subject' => "Issue Reported - ".$item->present()->name,
 				'content' => $data['content'],
 				'from' => $user->present()->email,
+				'replyTo' => $user->present()->email,
 				'to' => $item->user->present()->email,
 				'name' => HTML::link(route('item.show', [$item->user->slug, $item->slug]), $item->present()->name),
 				'type' => $item->present()->type,

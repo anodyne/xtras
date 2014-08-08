@@ -277,10 +277,11 @@ class ItemController extends BaseController {
 
 		// Fire the event
 		Event::fire('item.report.abuse', [$item, $input]);
+
+		// Set the flash information
+		Flash::success("Thank you for reporting the issue to Anodyne. An email has been sent to Anodyne with the details. We'll contact you further if we need additional information.");
 		
-		return Redirect::route('item.show', [$item->user->slug, $item->slug])
-			->with('flashStatus', 'success')
-			->with('flashMessage', "Thank you for reporting the issue to Anodyne. An email has been sent to Anodyne with the details. We'll contact you further if we need additional information.");
+		return Redirect::route('item.show', [$item->user->slug, $item->slug]);
 	}
 
 	public function reportIssue($id)

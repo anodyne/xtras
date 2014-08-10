@@ -17,7 +17,7 @@
 - [Presenter](https://github.com/laracasts/Presenter)
 	- Version: 0.1.4
 - [Guzzle](http://guzzlephp.org/)
-	- Version: 4.1.6
+	- Version: 4.1.7
 - [Sanitizer](https://github.com/daylerees/sanitizer)
 	- Version: 1.0.1
 - [Entrust](https://github.com/Zizaco/entrust)

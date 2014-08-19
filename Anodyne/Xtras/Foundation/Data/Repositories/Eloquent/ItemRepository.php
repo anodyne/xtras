@@ -154,6 +154,27 @@ class ItemRepository implements ItemRepositoryInterface {
 		return $sortedItems;
 	}
 
+	public function getByPage($type, $page = 1, $limit = 15)
+	{
+		// Get the type
+		$itemType = TypeModel::name($type)->first();
+
+		// Build the results
+		$results = new \stdClass;
+		$results->page = $page;
+		$results->limit = $limit;
+		$results->totalItems = ItemModel::itemType($itemType->id)->count();
+		$results->items = [];
+
+		$items = ItemModel::with('meta', 'type', 'user', 'product')
+			->itemType($itemType->id)
+			->skip($limit * ($page - 1))->take($limit)->get();
+
+		$results->items = $items->all();
+
+		return $results;
+	}
+
 	public function getComments($id)
 	{
 		// Get the item
@@ -235,32 +256,36 @@ class ItemRepository implements ItemRepositoryInterface {
 
 	public function search($input)
 	{
-		return ItemModel::where('name', 'like', "%{$input}%")
+		return ItemModel::with('product', 'type', 'user')
+			->where('name', 'like', "%{$input}%")
 			->orWhere('desc', 'like', "%{$input}%")
-			->get();
+			->paginate(25);
 	}
 
 	public function searchAdvanced(array $input)
 	{
 		$search = ItemModel::query();
 
-		if (array_key_exists('type', $input) and count($input['type']) > 0)
+		if (array_key_exists('t', $input) and count($input['t']) > 0)
 		{
-			$search = $search->whereIn('type_id', $input['type']);
+			$search = $search->whereIn('type_id', $input['t']);
 		}
 
-		if (array_key_exists('product', $input) and count($input['product']) > 0)
+		if (array_key_exists('p', $input) and count($input['p']) > 0)
 		{
-			$search = $search->whereIn('product_id', $input['product']);
+			$search = $search->whereIn('product_id', $input['p']);
 		}
 
-		if ( ! empty($input['search']))
+		if ( ! empty($input['q']))
 		{
-			$search = $search->where('name', 'like', "%{$input['search']}%")
-				->orWhere('desc', 'like', "%{$input['search']}%");
+			$search = $search->where(function($query) use ($input)
+			{
+				$query->where('name', 'like', "%{$input['q']}%")
+					->orWhere('desc', 'like', "%{$input['q']}%");
+			});
 		}
 
-		return $search->get();
+		return $search->paginate(25);
 	}
 
 	public function update($id, array $data = [], $flashMessage = true)

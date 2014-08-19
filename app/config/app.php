@@ -112,7 +112,6 @@ return array(
 		'Xtras\XtrasServiceProvider',
 		'Xtras\XtrasRoutingServiceProvider',
 		'Zizaco\Entrust\EntrustServiceProvider',
-		'Barryvdh\Debugbar\ServiceProvider',
 
 	),
 
@@ -185,7 +184,6 @@ return array(
 		 */
 		'Browser'		=> 'Ikimea\Browser\Browser',
 		'Date'			=> 'Carbon\Carbon',
-		'Debugbar'		=> 'Barryvdh\Debugbar\Facade',
 		'Entrust'		=> 'Zizaco\Entrust\EntrustFacade',
 		'Flash'			=> 'Xtras\Foundation\Facades\FlashFacade',
 		'Markdown'		=> 'Xtras\Foundation\Facades\MarkdownFacade',

@@ -11,7 +11,7 @@ class ItemSeeder extends Seeder {
 	{
 		$faker = Faker\Factory::create();
 
-		for ($i = 0; $i < 30; $i++)
+		for ($i = 0; $i < 100; $i++)
 		{
 			$type = $faker->numberBetween(1, 3);
 

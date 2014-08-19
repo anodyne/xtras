@@ -23,6 +23,7 @@ class CreateItems extends Migration {
 			$table->string('slug')->nullable();
 			$table->text('desc')->nullable();
 			$table->string('support')->nullable();
+			$table->float('rating')->default(0);
 			$table->timestamps();
 			$table->softDeletes();
 		});

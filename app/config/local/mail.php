@@ -2,8 +2,6 @@
 
 return [
 
-	'pretend' => true,
-
 	'driver' => 'log',
 
 ];

@@ -4,20 +4,20 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "32dffcb8298fa83ccbcb683aaf4432d4",
+    "hash": "55f0519e0f7292f74f100ac152f5d47f",
     "packages": [
         {
             "name": "aws/aws-sdk-php",
-            "version": "2.6.13",
+            "version": "2.6.15",
             "source": {
                 "type": "git",
                 "url": "https://github.com/aws/aws-sdk-php.git",
-                "reference": "d1f345a65b490bd83fff735d8a9e49b224ce24b5"
+                "reference": "4eaf38f0297533d48f013be7e1ffa1cb2c912e2f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/d1f345a65b490bd83fff735d8a9e49b224ce24b5",
-                "reference": "d1f345a65b490bd83fff735d8a9e49b224ce24b5",
+                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/4eaf38f0297533d48f013be7e1ffa1cb2c912e2f",
+                "reference": "4eaf38f0297533d48f013be7e1ffa1cb2c912e2f",
                 "shasum": ""
             },
             "require": {
@@ -72,7 +72,7 @@
                 "s3",
                 "sdk"
             ],
-            "time": "2014-07-31 20:34:29"
+            "time": "2014-08-14 20:49:47"
         },
         {
             "name": "classpreloader/classpreloader",
@@ -295,16 +295,16 @@
         },
         {
             "name": "guzzle/guzzle",
-            "version": "v3.9.1",
+            "version": "v3.9.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/guzzle/guzzle3.git",
-                "reference": "92d9934f2fca1da15178c91239576ae26e505e60"
+                "reference": "54991459675c1a2924122afbb0e5609ade581155"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/guzzle/guzzle3/zipball/92d9934f2fca1da15178c91239576ae26e505e60",
-                "reference": "92d9934f2fca1da15178c91239576ae26e505e60",
+                "url": "https://api.github.com/repos/guzzle/guzzle3/zipball/54991459675c1a2924122afbb0e5609ade581155",
+                "reference": "54991459675c1a2924122afbb0e5609ade581155",
                 "shasum": ""
             },
             "require": {
@@ -348,7 +348,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "3.8-dev"
+                    "dev-master": "3.9-dev"
                 }
             },
             "autoload": {
@@ -383,25 +383,25 @@
                 "rest",
                 "web service"
             ],
-            "time": "2014-05-07 17:04:22"
+            "time": "2014-08-11 04:32:36"
         },
         {
             "name": "guzzlehttp/guzzle",
-            "version": "4.1.6",
+            "version": "4.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/guzzle/guzzle.git",
-                "reference": "e49ad58038b46a0d7739627a72f6d998cd92d3d6"
+                "reference": "cc79aa76054e3e5e45dfd87f7b0f61f54b3a759d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/guzzle/guzzle/zipball/e49ad58038b46a0d7739627a72f6d998cd92d3d6",
-                "reference": "e49ad58038b46a0d7739627a72f6d998cd92d3d6",
+                "url": "https://api.github.com/repos/guzzle/guzzle/zipball/cc79aa76054e3e5e45dfd87f7b0f61f54b3a759d",
+                "reference": "cc79aa76054e3e5e45dfd87f7b0f61f54b3a759d",
                 "shasum": ""
             },
             "require": {
                 "ext-json": "*",
-                "guzzlehttp/streams": "~1.4",
+                "guzzlehttp/streams": "~2.1",
                 "php": ">=5.4.0"
             },
             "require-dev": {
@@ -415,7 +415,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "4.1.x-dev"
+                    "dev-master": "4.2-dev"
                 }
             },
             "autoload": {
@@ -448,20 +448,20 @@
                 "rest",
                 "web service"
             ],
-            "time": "2014-08-03 20:38:45"
+            "time": "2014-08-18 00:48:35"
         },
         {
             "name": "guzzlehttp/streams",
-            "version": "1.4.0",
+            "version": "2.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/guzzle/streams.git",
-                "reference": "3b761a328e5ed6ed519e960aded95d7acbe77894"
+                "reference": "f91b721d73f0e561410903b3b3c90a5d0e40b534"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/guzzle/streams/zipball/3b761a328e5ed6ed519e960aded95d7acbe77894",
-                "reference": "3b761a328e5ed6ed519e960aded95d7acbe77894",
+                "url": "https://api.github.com/repos/guzzle/streams/zipball/f91b721d73f0e561410903b3b3c90a5d0e40b534",
+                "reference": "f91b721d73f0e561410903b3b3c90a5d0e40b534",
                 "shasum": ""
             },
             "require": {
@@ -473,7 +473,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.4.x-dev"
+                    "dev-master": "2.0-dev"
                 }
             },
             "autoload": {
@@ -501,7 +501,7 @@
                 "Guzzle",
                 "stream"
             ],
-            "time": "2014-07-19 18:43:42"
+            "time": "2014-08-17 21:15:53"
         },
         {
             "name": "ikimea/browser",
@@ -2337,21 +2337,20 @@
     "packages-dev": [
         {
             "name": "barryvdh/laravel-debugbar",
-            "version": "v1.6.6",
+            "version": "v1.6.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/barryvdh/laravel-debugbar.git",
-                "reference": "a3ec4b26c05beba60463c536dec5ab2a98656103"
+                "reference": "ccf9ababfb2b5ddbf8c3ece2ca3fc9989b11ec0d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/barryvdh/laravel-debugbar/zipball/a3ec4b26c05beba60463c536dec5ab2a98656103",
-                "reference": "a3ec4b26c05beba60463c536dec5ab2a98656103",
+                "url": "https://api.github.com/repos/barryvdh/laravel-debugbar/zipball/ccf9ababfb2b5ddbf8c3ece2ca3fc9989b11ec0d",
+                "reference": "ccf9ababfb2b5ddbf8c3ece2ca3fc9989b11ec0d",
                 "shasum": ""
             },
             "require": {
-                "illuminate/filesystem": "~4.0",
-                "illuminate/support": "~4.0",
+                "laravel/framework": "~4.0",
                 "maximebf/debugbar": "~1.9",
                 "php": ">=5.3.0",
                 "symfony/finder": "~2.3"
@@ -2359,7 +2358,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.x-dev"
+                    "dev-master": "1.6-dev"
                 }
             },
             "autoload": {
@@ -2385,7 +2384,7 @@
                 "profiler",
                 "webprofiler"
             ],
-            "time": "2014-07-08 07:20:07"
+            "time": "2014-08-09 20:41:59"
         },
         {
             "name": "fzaninotto/faker",
@@ -2493,18 +2492,23 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/raveren/kint.git",
-                "reference": "cd801406b28cfa74d257bbd4f9e9fdddf59390c5"
+                "reference": "d4780fc6e974f00c427c1fd2492dca4dcd636704"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/raveren/kint/zipball/cd801406b28cfa74d257bbd4f9e9fdddf59390c5",
-                "reference": "cd801406b28cfa74d257bbd4f9e9fdddf59390c5",
+                "url": "https://api.github.com/repos/raveren/kint/zipball/d4780fc6e974f00c427c1fd2492dca4dcd636704",
+                "reference": "d4780fc6e974f00c427c1fd2492dca4dcd636704",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.2.0"
             },
             "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "0.9-dev"
+                }
+            },
             "autoload": {
                 "files": [
                     "Kint.class.php"
@@ -2531,7 +2535,7 @@
                 "kint",
                 "php"
             ],
-            "time": "2014-08-04 19:57:55"
+            "time": "2014-08-11 11:44:51"
         }
     ],
     "aliases": [

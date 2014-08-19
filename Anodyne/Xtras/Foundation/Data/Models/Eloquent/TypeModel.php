@@ -38,4 +38,9 @@ class TypeModel extends Model {
 		$query->where('display', (int) true);
 	}
 
+	public function scopeName($query, $name)
+	{
+		$query->where('name', $name);
+	}
+
 }

@@ -210,31 +210,40 @@ class ItemController extends BaseController {
 	public function skins()
 	{
 		// Find all the skins
-		$items = $this->items->findByType('skins');
+		$data = $this->items->getByPage('Skin', Input::get('page', 1), 15);
+
+		// Build the paginator
+		$paginator = \Paginator::make($data->items, $data->totalItems, 15);
 
 		return View::make('pages.item.list')
 			->withType('Skins')
-			->withItems($items);
+			->withItems($paginator);
 	}
 
 	public function ranks()
 	{
 		// Find all the ranks
-		$items = $this->items->findByType('ranks');
+		$data = $this->items->getByPage('Rank Set', Input::get('page', 1), 15);
+
+		// Build the paginator
+		$paginator = \Paginator::make($data->items, $data->totalItems, 15);
 
 		return View::make('pages.item.list')
 			->withType('Rank Sets')
-			->withItems($items);
+			->withItems($paginator);
 	}
 
 	public function mods()
 	{
 		// Find all the mods
-		$items = $this->items->findByType('mods');
+		$data = $this->items->getByPage('MOD', Input::get('page', 1), 15);
+
+		// Build the paginator
+		$paginator = \Paginator::make($data->items, $data->totalItems, 15);
 
 		return View::make('pages.item.list')
 			->withType('MODs')
-			->withItems($items);
+			->withItems($paginator);
 	}
 
 	public function download($id, $fileId)

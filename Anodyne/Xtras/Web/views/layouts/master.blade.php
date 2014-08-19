@@ -47,17 +47,21 @@
 										@endif
 										<li class="divider"></li>
 										<li><a href="{{ route('account.profile', [$_currentUser->slug]) }}">My Profile</a></li>
-										<li><a href="{{ route('account.edit', [$_currentUser->slug]) }}">Edit My Profile</a></li>
+										<li><a href="http://anodyne-productions.com/admin/users/{{ $_currentUser->slug }}/edit">Edit My Profile</a></li>
 
 										@if ($_currentUser->can('xtras.admin'))
 											<li class="divider"></li>
-											<li><a href="{{ route('admin') }}">Admin</a></li>
+											<li><a href="{{ route('admin.items.index') }}">Manage Items</a></li>
+											<li><a href="{{ route('admin.products.index') }}">Manage Products</a></li>
+											<li><a href="{{ route('admin.types.index') }}">Manage Item Types</a></li>
 										@endif
 
 										<li class="divider"></li>
 										<li><a href="{{ route('logout') }}">Logout</a></li>
 									</ul>
 								</li>
+							@else
+								<li><a href="{{ route('login') }}">Log In</a></li>
 							@endif
 						</ul>
 
@@ -80,30 +84,31 @@
 								<a href="{{ route('home') }}" class="brand">AnodyneXtras</a>
 							</div>
 
-							@if (Auth::check())
-								<div class="col-md-5">
-									<nav class="nav-sub">
-										<ul>
-											<li><a href="{{ route('skins') }}">Skins</a></li>
-											<li><a href="{{ route('mods') }}">MODs</a></li>
-											<li><a href="{{ route('ranks') }}">Ranks</a></li>
-											<li><a href="{{ route('account.xtras') }}">My Xtras</a></li>
-										</ul>
-									</nav>
-								</div>
+							<div class="col-md-5">
+								<nav class="nav-sub">
+									<ul>
+										<li><a href="{{ route('skins') }}">Skins</a></li>
+										<li><a href="{{ route('mods') }}">MODs</a></li>
+										<li><a href="{{ route('ranks') }}">Ranks</a></li>
 
-								<div class="col-md-4">
-									{{ Form::open(['route' => 'search.do']) }}
-										<div class="header-search">
-											<div class="input-group">
-												{{ Form::text('search', null, array('placeholder' => 'Search Xtras', 'class' => 'input-sm form-control search-field')) }}
-												<span class="input-group-btn">{{ Form::button('Search', array('class' => 'btn btn-default btn-sm', 'type' => 'submit')) }}</span>
-											</div>
-											<a href="{{ route('search.advanced') }}" class="search-advanced">Advanced Search</a>
+										@if (Auth::check())
+											<li><a href="{{ route('account.xtras') }}">My Xtras</a></li>
+										@endif
+									</ul>
+								</nav>
+							</div>
+
+							<div class="col-md-4">
+								{{ Form::open(['route' => 'search.do', 'method' => 'GET']) }}
+									<div class="header-search">
+										<div class="input-group">
+											{{ Form::text('q', null, array('placeholder' => 'Search Xtras', 'class' => 'input-sm form-control search-field')) }}
+											<span class="input-group-btn">{{ Form::button('Search', array('class' => 'btn btn-default btn-sm', 'type' => 'submit')) }}</span>
 										</div>
-									{{ Form::close() }}
-								</div>
-							@endif
+										<a href="{{ route('search.advanced') }}" class="search-advanced">Advanced Search</a>
+									</div>
+								{{ Form::close() }}
+							</div>
 						</div>
 					</div>
 				</header>
@@ -138,10 +143,11 @@
 
 							@if (Auth::check())
 								<li><a href="{{ route('account.xtras') }}">My Xtras</a></li>
-								<li><a href="{{ route('skins') }}">Skins</a></li>
-								<li><a href="{{ route('ranks') }}">Ranks</a></li>
-								<li><a href="{{ route('mods') }}">MODs</a></li>
 							@endif
+
+							<li><a href="{{ route('skins') }}">Skins</a></li>
+							<li><a href="{{ route('ranks') }}">Ranks</a></li>
+							<li><a href="{{ route('mods') }}">MODs</a></li>
 						</ul>
 					</div>
 					<div class="col-md-2">

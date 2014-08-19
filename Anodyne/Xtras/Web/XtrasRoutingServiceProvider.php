@@ -37,29 +37,6 @@ class XtrasRoutingServiceProvider extends ServiceProvider {
 		Route::get('logout', [
 			'as'	=> 'logout',
 			'uses'	=> 'Xtras\Controllers\MainController@logout']);
-		
-		Route::get('register', [
-			'as'	=> 'register',
-			'uses'	=> 'Xtras\Controllers\MainController@register']);
-		Route::post('register', [
-			'as'	=> 'register.do',
-			'uses'	=> 'Xtras\Controllers\MainController@doRegistration']);
-
-		Route::group(['prefix' => 'password', 'namespace' => 'Xtras\Controllers'], function()
-		{
-			Route::get('remind', [
-				'as'	=> 'password.remind',
-				'uses'	=> 'RemindersController@remind']);
-			Route::post('remind', [
-				'as'	=> 'password.remind.do',
-				'uses'	=> 'RemindersController@doRemind']);
-			Route::get('reset/{token}', [
-				'as'	=> 'password.reset',
-				'uses'	=> 'RemindersController@reset']);
-			Route::post('reset', [
-				'as'	=> 'password.reset.do',
-				'uses'	=> 'RemindersController@doReset']);
-		});
 	}
 
 	protected function pagesRoutes()
@@ -67,20 +44,16 @@ class XtrasRoutingServiceProvider extends ServiceProvider {
 		Route::group(['namespace' => 'Xtras\Controllers'], function()
 		{
 			Route::get('/', [
-				'before'	=> 'auth',
 				'as'		=> 'home',
 				'uses'		=> 'MainController@index']);
 
 			Route::get('skins', [
-				'before'	=> 'auth',
 				'as'		=> 'skins',
 				'uses'		=> 'ItemController@skins']);
 			Route::get('ranks', [
-				'before'	=> 'auth',
 				'as'		=> 'ranks',
 				'uses'		=> 'ItemController@ranks']);
 			Route::get('mods', [
-				'before'	=> 'auth',
 				'as'		=> 'mods',
 				'uses'		=> 'ItemController@mods']);
 
@@ -96,23 +69,19 @@ class XtrasRoutingServiceProvider extends ServiceProvider {
 	protected function searchRoutes()
 	{
 		$groupOptions = [
-			'before'	=> 'auth',
 			'prefix'	=> 'search',
 			'namespace' => 'Xtras\Controllers'
 		];
 
 		Route::group($groupOptions, function()
 		{
-			Route::post('/', [
+			Route::get('/', [
 				'as'	=> 'search.do',
 				'uses'	=> 'SearchController@doSearch']);
-			Route::get('results', [
-				'as'	=> 'search.results',
-				'uses'	=> 'SearchController@results']);
 			Route::get('advanced', [
 				'as'	=> 'search.advanced',
 				'uses'	=> 'SearchController@advanced']);
-			Route::post('advanced', [
+			Route::get('advanced-results', [
 				'as'	=> 'search.doAdvanced',
 				'uses'	=> 'SearchController@doAdvancedSearch']);
 		});
@@ -121,7 +90,6 @@ class XtrasRoutingServiceProvider extends ServiceProvider {
 	protected function itemRoutes()
 	{
 		$groupOptions = [
-			'before'	=> 'auth',
 			'prefix'	=> 'item',
 			'namespace' => 'Xtras\Controllers'
 		];
@@ -129,51 +97,63 @@ class XtrasRoutingServiceProvider extends ServiceProvider {
 		Route::group($groupOptions, function()
 		{
 			Route::get('create', [
-				'as'	=> 'item.create',
-				'uses'	=> 'ItemController@create']);
+				'before'	=> 'auth',
+				'as'		=> 'item.create',
+				'uses'		=> 'ItemController@create']);
 			Route::post('/', [
-				'as'	=> 'item.store',
-				'uses'	=> 'ItemController@store']);
+				'before'	=> 'auth',
+				'as'		=> 'item.store',
+				'uses'		=> 'ItemController@store']);
 
 			Route::get('{author}/{slug}/edit', [
-				'as'	=> 'item.edit',
-				'uses'	=> 'ItemController@edit']);
+				'before'	=> 'auth',
+				'as'		=> 'item.edit',
+				'uses'		=> 'ItemController@edit']);
 			Route::put('{id}', [
-				'as'	=> 'item.update',
-				'uses'	=> 'ItemController@update']);
+				'before'	=> 'auth',
+				'as'		=> 'item.update',
+				'uses'		=> 'ItemController@update']);
 
 			Route::delete('{id}', [
-				'as'	=> 'item.destroy',
-				'uses'	=> 'ItemController@destroy']);
+				'before'	=> 'auth',
+				'as'		=> 'item.destroy',
+				'uses'		=> 'ItemController@destroy']);
 
 			Route::get('{id}/upload', [
-				'as'	=> 'item.upload',
-				'uses'	=> 'ItemController@upload']);
+				'before'	=> 'auth',
+				'as'		=> 'item.upload',
+				'uses'		=> 'ItemController@upload']);
 			Route::post('{id}/upload-zip', [
-				'as'	=> 'item.upload.doZip',
-				'uses'	=> 'ItemController@doZipUpload']);
+				'before'	=> 'auth',
+				'as'		=> 'item.upload.doZip',
+				'uses'		=> 'ItemController@doZipUpload']);
 			Route::post('{id}/upload-images', [
-				'as'	=> 'item.upload.doImages',
-				'uses'	=> 'ItemController@doImagesUpload']);
+				'before'	=> 'auth',
+				'as'		=> 'item.upload.doImages',
+				'uses'		=> 'ItemController@doImagesUpload']);
 
 			Route::get('{id}/download/{fileId}', [
-				'as'	=> 'item.download',
-				'uses'	=> 'ItemController@download']);
+				'before'	=> 'auth',
+				'as'		=> 'item.download',
+				'uses'		=> 'ItemController@download']);
 			
 			Route::post('{id}/report-issue', [
-				'as'	=> 'item.reportIssue',
-				'uses'	=> 'ItemController@reportIssue']);
+				'before'	=> 'auth',
+				'as'		=> 'item.reportIssue',
+				'uses'		=> 'ItemController@reportIssue']);
 			Route::post('{id}/report-abuse', [
-				'as'	=> 'item.reportAbuse',
-				'uses'	=> 'ItemController@reportAbuse']);
+				'before'	=> 'auth',
+				'as'		=> 'item.reportAbuse',
+				'uses'		=> 'ItemController@reportAbuse']);
 			
 			Route::get('{author}/{slug}', [
 				'as'	=> 'item.show',
 				'uses'	=> 'ItemController@show']);
 
 			Route::post('ajax/checkName', [
-				'as'	=> 'item.ajax.checkName',
-				'uses'	=> 'ItemController@ajaxCheckName']);
+				'before'	=> 'auth',
+				'as'		=> 'item.ajax.checkName',
+				'uses'		=> 'ItemController@ajaxCheckName']);
 		});
 	}
 
@@ -185,14 +165,9 @@ class XtrasRoutingServiceProvider extends ServiceProvider {
 				'as'	=> 'account.profile',
 				'uses'	=> 'UserController@show'
 			));
-			Route::get('account/edit/{slug}', array(
-				'as'	=> 'account.edit',
-				'uses'	=> 'UserController@edit'
-			));
 			Route::get('my-xtras', [
 				'as'	=> 'account.xtras',
 				'uses'	=> 'UserController@xtras']);
-			Route::resource('account', 'UserController');
 		});
 	}
 

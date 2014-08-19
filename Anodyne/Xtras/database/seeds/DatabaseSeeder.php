@@ -17,11 +17,9 @@ class DatabaseSeeder extends Seeder {
 
 		$this->call('TypeSeeder');
 		$this->call('ProductSeeder');
-		$this->call('RoleSeeder');
 
 		if ($env != 'production')
 		{
-			$this->call('UserSeeder');
 			$this->call('ItemSeeder');
 		}
 	}

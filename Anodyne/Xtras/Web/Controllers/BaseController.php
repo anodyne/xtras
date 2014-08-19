@@ -19,7 +19,7 @@ abstract class BaseController extends Controller {
 
 	public function __construct()
 	{
-		$this->currentUser	= Auth::user();
+		$this->currentUser	= (Auth::check()) ? Auth::getUser()->load('roles', 'roles.perms') : null;
 		$this->request		= Request::instance();
 		$this->fractal		= new Manager;
 

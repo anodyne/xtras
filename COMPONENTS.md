@@ -9,7 +9,7 @@
 - [Fractal](http://fractal.thephpleague.com/)
 	- Version: 0.9.1
 - [AWS SDK](https://aws.amazon.com/sdkforphp/)
-	- Version: 2.6.13
+	- Version: 2.6.15
 - [Parsedown](http://parsedown.org/)
 	- Version: 1.0.1
 - [Browser](https://github.com/Ikimea/Browser)
@@ -17,7 +17,7 @@
 - [Presenter](https://github.com/laracasts/Presenter)
 	- Version: 0.1.4
 - [Guzzle](http://guzzlephp.org/)
-	- Version: 4.1.7
+	- Version: 4.2.0
 - [Sanitizer](https://github.com/daylerees/sanitizer)
 	- Version: 1.0.1
 - [Entrust](https://github.com/Zizaco/entrust)
@@ -50,4 +50,4 @@
 - Icons
 	- [Entypo](http://entypo.com/)
 	- [Octicons](http://octicons.github.com/)
-		- Version: 2.0.2
+		- Version: 2.1.1

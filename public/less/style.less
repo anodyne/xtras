@@ -424,6 +424,10 @@ form {
 		.btn-pseudo-states(@color-white, @color-primary, @color-primary);
 	}
 
+	&.btn-primary-alt {
+		.btn-pseudo-states(@color-primary-dark, lighten(@color-primary, 35%), lighten(@color-primary, 35%));
+	}
+
 	&.btn-danger {
 		.btn-pseudo-states(@color-white, @color-danger-light, @color-danger-light);
 	}
@@ -497,16 +501,45 @@ form {
 	.alert-variant(@color-warning-bright, @color-warning-light, @color-warning-dark);
 	.rounded(@border-radius);
 
+	a {
+		color: @color-warning-dark;
+		text-decoration: underline;
+	}
+
 	&.alert-info {
 		.alert-variant(@color-info-bright, @color-info-light, @color-info-dark);
+
+		a {
+			color: @color-info-dark;
+			text-decoration: underline;
+		}
 	}
 
 	&.alert-success {
 		.alert-variant(@color-success-bright, @color-success-light, @color-success-dark);
+
+		a {
+			color: @color-success-dark;
+			text-decoration: underline;
+		}
 	}
 
 	&.alert-danger {
 		.alert-variant(@color-danger-bright, @color-danger-light, @color-danger-dark);
+
+		a {
+			color: @color-danger-dark;
+			text-decoration: underline;
+		}
+	}
+
+	&.alert-warning {
+		.alert-variant(@color-warning-bright, @color-warning-light, @color-warning-dark);
+
+		a {
+			color: @color-warning-dark;
+			text-decoration: underline;
+		}
 	}
 }
 
@@ -851,5 +884,27 @@ blockquote {
 		&:last-child {
 			.border-radius(0, 0, @border-radius, @border-radius);
 		}
+	}
+}
+
+.pagination > .active > a,
+.pagination > .active > span,
+.pagination > .active > a:hover,
+.pagination > .active > span:hover,
+.pagination > .active > a:focus,
+.pagination > .active > span:focus {
+	background-color: @color-primary;
+	font-family: @font-special;
+	font-weight: 500;
+	border-color: @color-primary;
+}
+
+.pagination > li > a, .pagination > li > span {
+	color: @color-primary;
+	font-family: @font-special;
+	font-weight: 500;
+
+	&:hover {
+		color: @color-primary-light;
 	}
 }

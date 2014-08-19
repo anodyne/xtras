@@ -11,8 +11,8 @@
 
 	<h4 class="xtra-heading">{{ $item->present()->name }}</h4>
 	<div class="text-center">
-		{{ $item->present()->typeAsLabel }}
 		{{ $item->present()->productAsLabel }}
+		{{ $item->present()->typeAsLabel }}
 	</div>
 	<div class="xtra-desc">
 		<p><a href="{{ route('item.show', [$item->user->slug, $item->slug]) }}" class="btn btn-lg btn-block btn-default">More Info</a></p>

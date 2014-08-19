@@ -14,10 +14,6 @@
 
 		<div class="col-md-3">
 			<div class="list-group">
-				<a href="{{ route('admin.users.index') }}" class="list-group-item">
-					<span class="badge">15</span>
-					Users
-				</a>
 				<a href="{{ route('admin.items.index') }}" class="list-group-item">
 					<span class="badge">1,023</span>
 					Items

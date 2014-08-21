@@ -154,21 +154,30 @@ class ItemRepository implements ItemRepositoryInterface {
 		return $sortedItems;
 	}
 
-	public function getByPage($type, $page = 1, $limit = 15)
+	public function getByPage($type, $page = 1, $limit = 15, $order = 'created_at', $direction = 'desc')
 	{
 		// Get the type
-		$itemType = TypeModel::name($type)->first();
+		$itemType = ($type) ? TypeModel::name($type)->first() : false;
 
 		// Build the results
 		$results = new \stdClass;
 		$results->page = $page;
 		$results->limit = $limit;
-		$results->totalItems = ItemModel::itemType($itemType->id)->count();
+		$results->totalItems = ($type) ? ItemModel::itemType($itemType->id)->count() : ItemModel::count();
 		$results->items = [];
 
-		$items = ItemModel::with('meta', 'type', 'user', 'product')
-			->itemType($itemType->id)
-			->skip($limit * ($page - 1))->take($limit)->get();
+		if ($type)
+		{
+			$items = ItemModel::with('meta', 'type', 'user', 'product')
+				->itemType($itemType->id)
+				->orderBy($order, $direction)
+				->skip($limit * ($page - 1))->take($limit)->get();
+		}
+		else
+		{
+			$items = ItemModel::with('meta', 'type', 'user', 'product')
+				->orderBy($order, $direction)->skip($limit * ($page - 1))->take($limit)->get();
+		}
 
 		$results->items = $items->all();
 

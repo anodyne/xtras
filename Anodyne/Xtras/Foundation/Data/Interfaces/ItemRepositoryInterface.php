@@ -10,7 +10,7 @@ interface ItemRepositoryInterface extends BaseRepositoryInterface {
 	public function findByName($name);
 	public function findBySlug($slug);
 	public function findByType($type, $paginate = false, $splitByProduct = false);
-	public function getByPage($type, $page = 1, $limit = 15);
+	public function getByPage($type, $page = 1, $limit = 15, $order = 'created_at', $direction = 'desc');
 	public function getComments($id);
 	public function getFile($id);
 	public function getProducts();

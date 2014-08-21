@@ -2,24 +2,36 @@
 
 use View,
 	Input,
-	Redirect;
+	Redirect,
+	ItemRepositoryInterface;
 use Xtras\Controllers\BaseController;
 
 class ItemsController extends BaseController {
 
+	protected $items;
+
+	public function __construct(ItemRepositoryInterface $items)
+	{
+		parent::__construct();
+
+		$this->items = $items;
+	}
+
 	public function index()
 	{
-		//
-	}
+		if ($this->currentUser->can('xtras.admin'))
+		{
+			// Find all the skins
+			$data = $this->items->getByPage(false, Input::get('page', 1), 25, 'name', 'asc');
 
-	public function create()
-	{
-		//
-	}
+			// Build the paginator
+			$paginator = \Paginator::make($data->items, $data->totalItems, 25);
 
-	public function store()
-	{
-		//
+			return View::make('pages.admin.items.index')
+				->withItems($paginator);
+		}
+
+		return $this->unauthorized("You do not have permissions to manage Xtras!");
 	}
 
 	public function edit($id)

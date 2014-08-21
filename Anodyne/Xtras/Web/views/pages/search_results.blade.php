@@ -37,6 +37,12 @@
 				</div>
 				<div class="col-md-3 col-lg-3">
 					<div class="btn-toolbar pull-right">
+						@if ($_currentUser->can('xtras.admin'))
+							<div class="btn-group">
+								<a href="{{ route('admin.items.edit', [$item->id]) }}" class="btn btn-default">{{ $_icons['edit'] }}</a>
+							</div>
+						@endif
+
 						<div class="btn-group">
 							<a href="{{ route('item.show', [$item->user->slug, $item->slug]) }}" class="btn btn-default">{{ $_icons['next'] }}</a>
 						</div>

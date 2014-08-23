@@ -39,13 +39,11 @@ class ItemSeeder extends Seeder {
 			// Create a new meta model
 			$meta = new ItemMetaModel;
 			$meta->fill([
+				'item_id' => $item->id,
 				'installation' => implode("\r\n\r\n", $faker->paragraphs(3)),
 				'history' => $faker->paragraph,
 			]);
 			$meta->save();
-
-			// Attach the meta model to the item
-			$item->meta()->save($meta);
 
 			// Determine how many times we're looping through ratings
 			$ratingsLoop = $faker->numberBetween(1, 10);

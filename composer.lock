@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "55f0519e0f7292f74f100ac152f5d47f",
+    "hash": "bd78f2cc5340eaa5482e272315c91fe9",
     "packages": [
         {
             "name": "aws/aws-sdk-php",
@@ -292,6 +292,45 @@
                 "zf2"
             ],
             "time": "2014-07-11 05:56:54"
+        },
+        {
+            "name": "forxer/gravatar",
+            "version": "1.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/forxer/gravatar.git",
+                "reference": "9bb46b8bad661aa978d50a7415af1d0f79975188"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/forxer/gravatar/zipball/9bb46b8bad661aa978d50a7415af1d0f79975188",
+                "reference": "9bb46b8bad661aa978d50a7415af1d0f79975188",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.4.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "forxer\\Gravatar\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Vincent Garnier",
+                    "email": "contact@okatea.org"
+                }
+            ],
+            "description": "A library providing easy gravatar integration.",
+            "keywords": [
+                "gravatar"
+            ],
+            "time": "2014-08-22 17:33:45"
         },
         {
             "name": "guzzle/guzzle",
@@ -861,16 +900,16 @@
         },
         {
             "name": "league/flysystem",
-            "version": "0.5.3",
+            "version": "0.5.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/thephpleague/flysystem.git",
-                "reference": "305a64e3407cc8cc5e8d5657ce151bb159885ccb"
+                "reference": "33acb69d2db7c1e4c5c59083da4e680546d40a12"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/thephpleague/flysystem/zipball/305a64e3407cc8cc5e8d5657ce151bb159885ccb",
-                "reference": "305a64e3407cc8cc5e8d5657ce151bb159885ccb",
+                "url": "https://api.github.com/repos/thephpleague/flysystem/zipball/33acb69d2db7c1e4c5c59083da4e680546d40a12",
+                "reference": "33acb69d2db7c1e4c5c59083da4e680546d40a12",
                 "shasum": ""
             },
             "require": {
@@ -883,8 +922,9 @@
                 "league/phpunit-coverage-listener": "~1.1",
                 "mockery/mockery": "~0.9@dev",
                 "phpseclib/phpseclib": "~0.3.5",
+                "phpspec/phpspec": "~2.0",
                 "phpunit/phpunit": "~4.0",
-                "predis/predis": "~0.8.4",
+                "predis/predis": "~1.0",
                 "rackspace/php-opencloud": "~1.9.1",
                 "sabre/dav": "~2.0.2"
             },
@@ -900,7 +940,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "0.5-dev"
+                    "dev-master": "0.6-dev"
                 }
             },
             "autoload": {
@@ -923,13 +963,16 @@
                 "WebDAV",
                 "aws",
                 "dropbox",
+                "file systems",
+                "files",
                 "filesystem",
                 "ftp",
                 "remote",
                 "s3",
-                "sftp"
+                "sftp",
+                "storage"
             ],
-            "time": "2014-07-25 11:46:12"
+            "time": "2014-08-24 09:33:41"
         },
         {
             "name": "league/fractal",

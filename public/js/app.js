@@ -1,10 +1,11 @@
-var xtrasApp = angular.module('xtrasApp', ['ngSanitize'], function($interpolateProvider) {
+var xtrasApp = angular.module('xtrasApp', ['ngSanitize'], function($interpolateProvider)
+{
 	$interpolateProvider.startSymbol('<%');
 	$interpolateProvider.endSymbol('%>');
 });
 
-function CommentsController($scope, $http, $window) {
-
+xtrasApp.controller('CommentsController', function($scope, $http, $window)
+{
 	$http.get($window.url + '/comments/' + $window.itemId).success(function(comments)
 	{
 		$scope.comments = comments.data;
@@ -42,4 +43,4 @@ function CommentsController($scope, $http, $window) {
 		// Hide the panel
 		$('#commentPanel').fadeOut('normal');
 	}
-}
+});

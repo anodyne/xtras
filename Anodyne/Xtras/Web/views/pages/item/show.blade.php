@@ -11,6 +11,8 @@
 
 			<h4>by {{ $item->present()->author }}</h4>
 
+			{{ $item->present()->inactiveMessage }}
+
 			<div>{{ $item->present()->messages }}</div>
 
 			<div>{{ $item->present()->description }}</div>
@@ -176,11 +178,13 @@
 									<p class="text-sm text-muted">{{ $file->present()->added }}</p>
 								</div>
 								<div class="col-md-3 col-lg-3">
-									<div class="btn-toolbar pull-right">
-										<div class="btn-group">
-											<a href="{{ URL::route('item.download', [$item->id, $file->id]) }}" class="btn btn-default">{{ $_icons['download'] }}</a>
+									@if ($item->present()->active)
+										<div class="btn-toolbar pull-right">
+											<div class="btn-group">
+												<a href="{{ URL::route('item.download', [$item->id, $file->id]) }}" class="btn btn-default">{{ $_icons['download'] }}</a>
+											</div>
 										</div>
-									</div>
+									@endif
 								</div>
 							</div>
 						@endforeach
@@ -231,9 +235,17 @@
 
 		<div class="col-md-3 col-lg-3">
 			@if (Auth::check())
-				<p>{{ $item->present()->downloadBtn }}</p>
+				@if ($item->present()->active)
+					<p>{{ $item->present()->downloadBtn }}</p>
+				@endif
 
-				<p><a href="#" rel="issue" class="btn btn-block btn-default">Report an Issue</a></p>
+				<p>
+					@if (empty($item->support))
+						<a href="#" rel="issue" class="btn btn-block btn-default">Report an Issue</a>
+					@else
+						<a href="{{ $item->present()->support }}" class="btn btn-block btn-default">Get Help</a>
+					@endif
+				</p>
 
 				<p><a href="#" rel="abuse" class="btn btn-block btn-default">
 					<span class="visible-md">Report Abuse</span>

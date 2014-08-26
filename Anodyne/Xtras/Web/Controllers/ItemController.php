@@ -144,7 +144,7 @@ class ItemController extends BaseController {
 	{
 		return View::make('pages.item.upload')
 			->withItem($this->items->find($id))
-			->withBrowser(App::make('xtras.browser'));
+			->withBrowser(App::make('browser'));
 	}
 	
 	public function doZipUpload($id)
@@ -188,15 +188,48 @@ class ItemController extends BaseController {
 		}
 	}
 
-	public function doImageUpload($id)
+	public function doImagesUpload($id, $image)
 	{
-		# code...
+		// Get the item
+		$item = $this->items->find($id);
+
+		if (Input::hasFile($image))
+		{
+			// Get the uploaded file
+			$file = Input::file($image);
+
+			// Set the filename
+			$filename = "{$item->user->username}/{$item->slug}-{$image}";
+			$filename.= ".{$file->getClientOriginalExtension()}";
+
+			// Get the contents of the uploaded file
+			$contents = \File::get($file->getRealPath());
+
+			// Get an instance of the filesystem
+			$fs = App::make('xtras.filesystem');
+
+			// Upload the file
+			$result = $fs->write($filename, $contents);
+
+			if ($result)
+			{
+				// Update the database record
+				$this->items->updateMetaData($item->id, [$image => $filename]);
+
+				// Fire the event
+				Event::fire('item.uploaded', [$item]);
+
+				return Response::json('success', 200);
+			}
+
+			return Response::json('failure', 400);
+		}
 	}
 
-	public function ajaxCheckName()
+	public function ajaxCheckName($name)
 	{
 		// Try to find any items
-		$items = $this->users->findItemsByName($this->currentUser, Input::get('name'));
+		$items = $this->users->findItemsByName($this->currentUser, $name);
 
 		// If we already have something, no dice...
 		if ($items->count() > 0)
@@ -251,26 +284,29 @@ class ItemController extends BaseController {
 		// Get the specific file record
 		$file = $this->items->getFile($fileId);
 
-		// Grab just the filename for easy use
-		$filename = $file->filename;
+		if ((bool) $file->item->status)
+		{
+			// Grab just the filename for easy use
+			$filename = $file->filename;
 
-		// Add an order record
-		$this->orders->create($this->currentUser, $file);
+			// Add an order record
+			$this->orders->create($this->currentUser, $file);
 
-		// Get the filesystem out of the container
-		$fs = App::make('xtras.filesystem');
+			// Get the filesystem out of the container
+			$fs = App::make('xtras.filesystem');
 
-		// Start reading
-		$stream = $fs->readStream($filename);
+			// Start reading
+			$stream = $fs->readStream($filename);
 
-		// Send the right headers
-		header("Content-Type: application/zip");
-		header("Content-Length: ".$fs->getSize($filename));
-		header("Content-disposition: attachment; filename=\"".basename($filename)."\"");
+			// Send the right headers
+			header("Content-Type: application/zip");
+			header("Content-Length: ".$fs->getSize($filename));
+			header("Content-disposition: attachment; filename=\"".basename($filename)."\"");
 
-		// Dump the attachment and stop the script
-		fpassthru($stream);
-		exit;
+			// Dump the attachment and stop the script
+			fpassthru($stream);
+			exit;
+		}
 	}
 
 	public function reportAbuse($id)

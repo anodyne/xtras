@@ -35,7 +35,17 @@
 
 		<p>In order to cover all scenarios, you should upload a primary preview image that is at least 700 pixels wide and 300 pixels tall. This ensures that the preview image will be sharp and clear in all use cases, including on high resolution displays.</p>
 
-		<div id="dzPreviews" class="dropzone"></div>
+		<div class="row">
+			<div class="col-md-4">
+				<div id="dzPreviews1" class="dropzone"></div>
+			</div>
+			<div class="col-md-4">
+				<div id="dzPreviews2" class="dropzone"></div>
+			</div>
+			<div class="col-md-4">
+				<div id="dzPreviews3" class="dropzone"></div>
+			</div>
+		</div>
 	</div>
 @stop
 
@@ -46,7 +56,6 @@
 @section('scripts')
 	{{ HTML::script('js/dropzone.min.js') }}
 	<script>
-
 		Dropzone.autoDiscover = false;
 
 		$(function()
@@ -62,21 +71,55 @@
 						$('#uploadZip').addClass('hide');
 						$('#uploadPreviews').removeClass('hide');
 					});
+
+					this.on("sending", function(file, xhr, formData)
+					{
+						formData.append("_token", "{{ csrf_token() }}");
+					});
 				}
 			});
 
-			var previewsUpload = $('#dzPreviews').dropzone({
-				url: "{{ URL::route('item.upload.doImages', [$item->id]) }}",
+			var previewsUpload1 = $('#dzPreviews1').dropzone({
+				url: "{{ URL::route('item.upload.doImages', [$item->id, 'image1']) }}",
 				clickable: true,
 				acceptedFiles: ".jpg, .jpeg, .png, .gif, .bmp",
-				uploadMultiple: true,
-				maxFiles: 3,
+				paramName: "image1",
 				init: function()
 				{
-					//
+					this.on("sending", function(file, xhr, formData)
+					{
+						formData.append("_token", "{{ csrf_token() }}");
+					});
+				}
+			});
+
+			var previewsUpload2 = $('#dzPreviews2').dropzone({
+				url: "{{ URL::route('item.upload.doImages', [$item->id, 'image2']) }}",
+				clickable: true,
+				acceptedFiles: ".jpg, .jpeg, .png, .gif, .bmp",
+				paramName: "image2",
+				init: function()
+				{
+					this.on("sending", function(file, xhr, formData)
+					{
+						formData.append("_token", "{{ csrf_token() }}");
+					});
+				}
+			});
+
+			var previewsUpload3 = $('#dzPreviews3').dropzone({
+				url: "{{ URL::route('item.upload.doImages', [$item->id, 'image3']) }}",
+				clickable: true,
+				acceptedFiles: ".jpg, .jpeg, .png, .gif, .bmp",
+				paramName: "image3",
+				init: function()
+				{
+					this.on("sending", function(file, xhr, formData)
+					{
+						formData.append("_token", "{{ csrf_token() }}");
+					});
 				}
 			});
 		});
-
 	</script>
 @stop

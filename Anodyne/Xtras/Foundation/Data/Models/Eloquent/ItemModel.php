@@ -12,7 +12,7 @@ class ItemModel extends Model {
 	protected $table = 'items';
 
 	protected $fillable = ['user_id', 'type_id', 'product_id', 'name', 'slug',
-		'desc', 'support', 'version'];
+		'desc', 'support', 'version', 'rating', 'status'];
 
 	protected $dates = ['created_at', 'updated_at', 'deleted_at'];
 

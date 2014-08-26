@@ -186,6 +186,7 @@ return array(
 		'Date'			=> 'Carbon\Carbon',
 		'Entrust'		=> 'Zizaco\Entrust\EntrustFacade',
 		'Flash'			=> 'Xtras\Foundation\Facades\FlashFacade',
+		'Gravatar'		=> 'forxer\Gravatar\Gravatar',
 		'Markdown'		=> 'Xtras\Foundation\Facades\MarkdownFacade',
 		'Model'			=> 'Xtras\Extensions\Laravel\Database\Eloquent\Model',
 		

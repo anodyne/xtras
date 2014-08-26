@@ -4,10 +4,16 @@ use Str,
 	URL,
 	HTML,
 	View,
+	Config,
 	Markdown;
 use Laracasts\Presenter\Presenter;
 
 class ItemPresenter extends Presenter {
+
+	public function active()
+	{
+		return (bool) $this->entity->status;
+	}
 
 	public function author()
 	{
@@ -55,6 +61,14 @@ class ItemPresenter extends Presenter {
 		return '<a href="'.$link.'" class="btn btn-lg btn-block btn-primary">'.$title.'</a>';
 	}
 
+	public function inactiveMessage()
+	{
+		if ( ! $this->active())
+		{
+			return alert('danger', "This Xtra is not available at this time.");
+		}
+	}
+
 	public function messages()
 	{
 		// Get right now...
@@ -69,9 +83,7 @@ class ItemPresenter extends Presenter {
 			{
 				if ($message->expires === null or ($message->expires !== null and $now->lt($message->expires)))
 				{
-					$output .= View::make('partials.alert')
-						->withType($message->type)
-						->withContent(Markdown::parse($message->content));
+					$output .= alert($message->type, Markdown::parse($message->content));
 				}
 			}
 		}
@@ -104,6 +116,16 @@ class ItemPresenter extends Presenter {
 	public function status()
 	{
 		return Markdown::parse($this->entity->status_message);
+	}
+
+	public function support()
+	{
+		if (Str::contains($this->entity->support, '@'))
+		{
+			return "mailto:{$this->entity->support}";
+		}
+
+		return $this->entity->support;
 	}
 
 	public function type()

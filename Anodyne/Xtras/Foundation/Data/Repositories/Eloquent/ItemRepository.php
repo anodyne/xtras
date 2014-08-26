@@ -4,16 +4,23 @@ use Auth,
 	Input,
 	ItemModel,
 	TypeModel,
-	UserModel,
 	CommentModel,
 	ProductModel,
 	ItemFileModel,
 	ItemMetaModel,
 	CommentTransformer,
-	ItemRepositoryInterface;
+	ItemRepositoryInterface,
+	UserRepositoryInterface;
 use Illuminate\Support\Collection;
 
 class ItemRepository implements ItemRepositoryInterface {
+
+	protected $users;
+
+	public function __construct(UserRepositoryInterface $users)
+	{
+		$this->users = $users;
+	}
 
 	public function addComment($id, array $data)
 	{
@@ -41,10 +48,9 @@ class ItemRepository implements ItemRepositoryInterface {
 		return ItemModel::all();
 	}
 
-	public function create(array $data = [], $flashMessage = true)
+	public function create(array $data = [])
 	{
-		$item = new ItemModel;
-		$item->save();
+		$item = ItemModel::create($data);
 
 		if (Input::has('meta'))
 		{
@@ -59,7 +65,7 @@ class ItemRepository implements ItemRepositoryInterface {
 		return $item;
 	}
 
-	public function delete($id, $flashMessage = true)
+	public function delete($id)
 	{
 		# code...
 	}
@@ -72,7 +78,7 @@ class ItemRepository implements ItemRepositoryInterface {
 	public function findByAuthor($author)
 	{
 		// Get the user
-		$user = UserModel::where('slug', $author)->first();
+		$user = $this->users->findByUsername($author);
 
 		if ($user)
 		{
@@ -89,6 +95,9 @@ class ItemRepository implements ItemRepositoryInterface {
 
 		if ($items)
 		{
+			// Eager loading
+			$items = $items->load('files', 'comments', 'messages', 'orders');
+
 			return $items->filter(function($i) use ($slug)
 			{
 				return $i->slug === $slug;
@@ -273,7 +282,7 @@ class ItemRepository implements ItemRepositoryInterface {
 
 	public function searchAdvanced(array $input)
 	{
-		$search = ItemModel::query();
+		$search = ItemModel::query()->with('product', 'type', 'user');
 
 		if (array_key_exists('t', $input) and count($input['t']) > 0)
 		{
@@ -297,7 +306,7 @@ class ItemRepository implements ItemRepositoryInterface {
 		return $search->paginate(25);
 	}
 
-	public function update($id, array $data = [], $flashMessage = true)
+	public function update($id, array $data = [])
 	{
 		# code...
 	}

@@ -17,13 +17,14 @@ return array(
 
 	'edit' => '<span class="icn" data-icon="e"></span>',
 	'email' => '<span class="icn" data-icon="m"></span>',
+	'external' => '<span class="octicon octicon-link-external"></span>',
 
 	'facebook' => '<span class="icn" data-icon="2"></span>',
 	'flag' => '<span class="icn" data-icon="f"></span>',
 
 	'help' => '<span class="icn" data-icon="h"></span>',
 
-	'images' => '<span class="icn" data-icon="i"></span>',
+	'images' => '<span class="icn" data-icon="4"></span>',
 	'info' => '<span class="icn" data-icon="i"></span>',
 
 	'login' => '<span class="icn" data-icon=")"></span>',

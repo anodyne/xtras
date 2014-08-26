@@ -14,25 +14,12 @@ class ProductRepository implements ProductRepositoryInterface {
 		return ProductModel::get();
 	}
 
-	public function create(array $data = [], $flashMessage = true)
+	public function create(array $data = [])
 	{
-		// Create the product
-		$product = ProductModel::create($data);
-
-		if ($product)
-		{
-			if ($flashMessage)
-			{
-				$this->setFlashMessage("success", "Product was successfully created.");
-			}
-			
-			return $product;
-		}
-
-		return false;
+		return ProductModel::create($data);
 	}
 
-	public function delete($id, $flashMessage = true)
+	public function delete($id)
 	{
 		// Get the product
 		$product = $this->find($id);
@@ -40,12 +27,6 @@ class ProductRepository implements ProductRepositoryInterface {
 		if ($product)
 		{
 			$delete = $product->delete();
-			\Log::info($delete);
-
-			if ($flashMessage)
-			{
-				$this->setFlashMessage('success', "Product was successfully deleted.");
-			}
 
 			return $product;
 		}
@@ -58,7 +39,7 @@ class ProductRepository implements ProductRepositoryInterface {
 		return ProductModel::find($id);
 	}
 
-	public function update($id, array $data = [], $flashMessage = true)
+	public function update($id, array $data = [])
 	{
 		// Get the product
 		$product = $this->find($id);
@@ -67,11 +48,6 @@ class ProductRepository implements ProductRepositoryInterface {
 		{
 			$product->fill($data);
 			$product->save();
-
-			if ($flashMessage)
-			{
-				$this->setFlashMessage('success', "Product was sucessfully updated.");
-			}
 
 			return $product;
 		}

@@ -14,25 +14,12 @@ class TypeRepository implements TypeRepositoryInterface {
 		return TypeModel::get();
 	}
 
-	public function create(array $data = [], $flashMessage = true)
+	public function create(array $data = [])
 	{
-		// Create the type
-		$type = TypeModel::create($data);
-
-		if ($type)
-		{
-			if ($flashMessage)
-			{
-				$this->setFlashMessage("success", "Item type was successfully created.");
-			}
-			
-			return $type;
-		}
-
-		return false;
+		return TypeModel::create($data);
 	}
 
-	public function delete($id, $flashMessage = true)
+	public function delete($id)
 	{
 		// Get the type
 		$type = $this->find($id);
@@ -40,11 +27,6 @@ class TypeRepository implements TypeRepositoryInterface {
 		if ($type)
 		{
 			$delete = $type->delete();
-
-			if ($flashMessage)
-			{
-				$this->setFlashMessage('success', "Item type was successfully deleted.");
-			}
 
 			return $type;
 		}
@@ -57,7 +39,7 @@ class TypeRepository implements TypeRepositoryInterface {
 		return TypeModel::find($id);
 	}
 
-	public function update($id, array $data = [], $flashMessage = true)
+	public function update($id, array $data = [])
 	{
 		// Get the type
 		$type = $this->find($id);
@@ -66,11 +48,6 @@ class TypeRepository implements TypeRepositoryInterface {
 		{
 			$type->fill($data);
 			$type->save();
-
-			if ($flashMessage)
-			{
-				$this->setFlashMessage('success', "Item type was sucessfully updated.");
-			}
 
 			return $type;
 		}

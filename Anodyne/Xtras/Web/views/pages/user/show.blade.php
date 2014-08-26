@@ -13,12 +13,6 @@
 		<div class="btn-group">
 			{{ $user->present()->siteBtn }}
 		</div>
-
-		@if ($user->id == $_currentUser->id)
-			<div class="btn-group">
-				<a href="{{ URL::route('account.edit', [$user->slug]) }}" class="btn btn-default">Edit My Profile</a>
-			</div>
-		@endif
 	</div>
 
 	{{ $user->present()->bio }}

@@ -28,4 +28,15 @@ class ItemFileModel extends Model {
 		'orders' => [self::HAS_MANY, 'OrderModel', 'foreignKey' => 'file_id'],
 	];
 
+	/*
+	|---------------------------------------------------------------------------
+	| Model Methods
+	|---------------------------------------------------------------------------
+	*/
+
+	public function isLatest()
+	{
+		return $this->version == $this->item->version;
+	}
+
 }

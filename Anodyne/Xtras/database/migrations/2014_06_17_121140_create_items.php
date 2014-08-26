@@ -43,11 +43,9 @@ class CreateItems extends Migration {
 			$table->text('desc')->nullable();
 			$table->string('support')->nullable();
 			$table->float('rating')->default(0);
+			$table->boolean('status')->default((int) true);
 			$table->timestamps();
 			$table->softDeletes();
-
-			$table->foreign('type_id')->references('id')->on('types');
-			$table->foreign('product_id')->references('id')->on('products');
 		});
 
 		Schema::create('items_files', function(Blueprint $table)
@@ -58,8 +56,6 @@ class CreateItems extends Migration {
 			$table->string('version');
 			$table->timestamps();
 			$table->softDeletes();
-
-			$table->foreign('item_id')->references('id')->on('items');
 		});
 
 		Schema::create('items_messages', function(Blueprint $table)
@@ -71,8 +67,6 @@ class CreateItems extends Migration {
 			$table->datetime('expires')->nullable();
 			$table->timestamps();
 			$table->softDeletes();
-
-			$table->foreign('item_id')->references('id')->on('items');
 		});
 
 		Schema::create('items_meta', function(Blueprint $table)
@@ -86,8 +80,6 @@ class CreateItems extends Migration {
 			$table->string('image3')->nullable();
 			$table->timestamps();
 			$table->softDeletes();
-
-			$table->foreign('item_id')->references('id')->on('items');
 		});
 
 		Schema::create('items_ratings', function(Blueprint $table)
@@ -96,8 +88,6 @@ class CreateItems extends Migration {
 			$table->unsignedBigInteger('user_id');
 			$table->unsignedBigInteger('item_id');
 			$table->integer('rating');
-
-			$table->foreign('item_id')->references('id')->on('items');
 		});
 
 		Schema::create('comments', function(Blueprint $table)
@@ -107,8 +97,6 @@ class CreateItems extends Migration {
 			$table->unsignedBigInteger('item_id');
 			$table->text('content');
 			$table->timestamps();
-
-			$table->foreign('item_id')->references('id')->on('items');
 		});
 
 		Schema::create('orders', function(Blueprint $table)
@@ -119,9 +107,6 @@ class CreateItems extends Migration {
 			$table->unsignedBigInteger('file_id');
 			$table->boolean('notify')->default((int) true);
 			$table->timestamps();
-
-			$table->foreign('item_id')->references('id')->on('items');
-			$table->foreign('file_id')->references('id')->on('items_files');
 		});
 	}
 
@@ -132,43 +117,6 @@ class CreateItems extends Migration {
 	 */
 	public function down()
 	{
-		Schema::table('items', function(Blueprint $table)
-		{
-			$table->dropForeign('items_type_id_foreign');
-			$table->dropForeign('items_product_id_foreign');
-		});
-
-		Schema::table('items_files', function(Blueprint $table)
-		{
-			$table->dropForeign('items_files_item_id_foreign');
-		});
-
-		Schema::table('items_messages', function(Blueprint $table)
-		{
-			$table->dropForeign('items_messages_item_id_foreign');
-		});
-
-		Schema::table('items_meta', function(Blueprint $table)
-		{
-			$table->dropForeign('items_meta_item_id_foreign');
-		});
-
-		Schema::table('items_ratings', function(Blueprint $table)
-		{
-			$table->dropForeign('items_ratings_item_id_foreign');
-		});
-
-		Schema::table('comments', function(Blueprint $table)
-		{
-			$table->dropForeign('comments_item_id_foreign');
-		});
-
-		Schema::table('orders', function(Blueprint $table)
-		{
-			$table->dropForeign('orders_item_id_foreign');
-			$table->dropForeign('orders_file_id_foreign');
-		});
-		
 		Schema::dropIfExists('items');
 		Schema::dropIfExists('types');
 		Schema::dropIfExists('products');

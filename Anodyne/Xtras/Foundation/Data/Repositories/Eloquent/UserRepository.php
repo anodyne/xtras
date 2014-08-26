@@ -13,30 +13,20 @@ class UserRepository implements UserRepositoryInterface {
 		return UserModel::all();
 	}
 
-	public function create(array $data = [], $flashMessage = true)
-	{
-		// Create the user
-		$user = UserModel::create($data);
+	public function create(array $data = []){}
 
-		// Set the role
-		$user->roles()->attach(2);
-
-		return $user;
-	}
-
-	public function delete($id, $flashMessage = true)
-	{
-		# code...
-	}
+	public function delete($id){}
 
 	public function find($id)
 	{
-		return UserModel::find($id);
+		return UserModel::with('items', 'items.meta', 'items.type', 'items.product', 'items.user')
+			->find($id);
 	}
 
-	public function findBySlug($slug)
+	public function findByUsername($username)
 	{
-		return UserModel::where('slug', $slug)->first();
+		return UserModel::with('items', 'items.meta', 'items.type', 'items.product', 'items.user')
+			->where('username', $username)->first();
 	}
 
 	public function findItemsByName(UserModel $user, $value)
@@ -81,7 +71,7 @@ class UserRepository implements UserRepositoryInterface {
 		return $filteredItems;
 	}
 
-	public function update($id, array $data = [], $flashMessage = true)
+	public function update($id, array $data = [])
 	{
 		// Get the user
 		$user = $this->find($id);
@@ -89,19 +79,7 @@ class UserRepository implements UserRepositoryInterface {
 		if ($user)
 		{
 			$user->fill($data);
-			$updated = $user->save();
-
-			if ($flashMessage)
-			{
-				// Set the flash info
-				$status = ($updated) ? 'success' : 'danger';
-				$message = ($updated) 
-					? "User account has been successfully updated!"
-					: "User account update failed. Please try again.";
-
-				// Flash the session
-				$this->setFlashMessage($status, $message);
-			}
+			$user->save();
 
 			return $user;
 		}

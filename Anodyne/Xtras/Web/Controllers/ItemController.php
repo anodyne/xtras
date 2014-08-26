@@ -378,4 +378,19 @@ class ItemController extends BaseController {
 			->with('flashMessage', "There was a problem and your comment could not be added.");
 	}
 
+	public function messages($author, $slug)
+	{
+		// Get the item
+		$item = $this->items->findByAuthorAndSlug($author, $slug);
+
+		if ($item)
+		{
+			return View::make('pages.item.messages')
+				->withItem($item)
+				->withMessages($item->messages);
+		}
+
+		return $this->errorNotFound("Xtra not found.");
+	}
+
 }

@@ -154,6 +154,19 @@ class XtrasRoutingServiceProvider extends ServiceProvider {
 				'before'	=> 'auth',
 				'as'		=> 'item.ajax.checkName',
 				'uses'		=> 'ItemController@ajaxCheckName']);
+
+			Route::get('{author}/{slug}/messages', [
+				'before'	=> 'auth',
+				'as'		=> 'item.messages',
+				'uses'		=> 'ItemController@messages']);
+			Route::get('{author}/{slug}/messages/create', [
+				'before'	=> 'auth',
+				'as'		=> 'item.messages.create',
+				'uses'		=> 'ItemController@createMessage']);
+			Route::get('{author}/{slug}/messages/edit', [
+				'before'	=> 'auth',
+				'as'		=> 'item.messages.edit',
+				'uses'		=> 'ItemController@editMessage']);
 		});
 	}
 

@@ -159,15 +159,16 @@ class XtrasRoutingServiceProvider extends ServiceProvider {
 
 	protected function accountRoutes()
 	{
-		Route::group(['before' => 'auth', 'namespace' => 'Xtras\Controllers'], function()
+		Route::group(['namespace' => 'Xtras\Controllers'], function()
 		{
 			Route::get('profile/{name}', array(
 				'as'	=> 'account.profile',
 				'uses'	=> 'UserController@show'
 			));
 			Route::get('my-xtras', [
-				'as'	=> 'account.xtras',
-				'uses'	=> 'UserController@xtras']);
+				'before'	=> 'auth',
+				'as'		=> 'account.xtras',
+				'uses'		=> 'UserController@xtras']);
 		});
 	}
 
@@ -190,14 +191,9 @@ class XtrasRoutingServiceProvider extends ServiceProvider {
 
 		Route::group($groupOptions, function()
 		{
-			Route::get('/', [
-				'as'	=> 'admin',
-				'uses'	=> 'AdminController@index']);
-
 			Route::get('products/{id}/remove', 'ProductsController@remove');
 			Route::get('types/{id}/remove', 'TypesController@remove');
 
-			Route::resource('users', 'UsersController', ['except' => ['show']]);
 			Route::resource('products', 'ProductsController', ['except' => ['show']]);
 			Route::resource('types', 'TypesController', ['except' => ['show']]);
 			Route::resource('items', 'ItemsController', ['except' => ['show']]);

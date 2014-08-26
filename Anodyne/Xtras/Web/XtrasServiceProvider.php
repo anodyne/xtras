@@ -85,18 +85,18 @@ class XtrasServiceProvider extends ServiceProvider {
 			{
 				case 'local':
 
-					return new Filesystem(new Local($_ENV['FS_LOCAL_PATH']));
+					return new Filesystem(new Local($_ENV['FS_PATH']));
 
 				break;
 
 				case 'production':
 
 					$client = S3Client::factory(array(
-						'key'		=> $_ENV['FS_S3_KEY'],
-						'secret'	=> $_ENV['FS_S3_SECRET'],
+						'key'		=> $_ENV['FS_KEY'],
+						'secret'	=> $_ENV['FS_SECRET'],
 					));
 
-					return new Filesystem(new AwsS3($client, $_ENV['FS_S3_BUCKET'], $_ENV['FS_S3_PREFIX']));
+					return new Filesystem(new AwsS3($client, $_ENV['FS_BUCKET'], $_ENV['FS_PREFIX']));
 
 				break;
 			}

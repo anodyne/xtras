@@ -3,6 +3,7 @@
 use URL,
 	HTML,
 	View,
+	Gravatar,
 	Markdown;
 use Laracasts\Presenter\Presenter;
 
@@ -10,11 +11,16 @@ class UserPresenter extends Presenter {
 
 	public function avatar(array $options)
 	{
-		// Figure out what the avatar file is
-		$url = ($this->entity->avatar) ?: 'no-avatar.jpg';
+		// Figure out the fallback image
+		$defaultImg = (\App::environment() == 'local') ? 'retro' : asset('images/avatars/no-avatar.jpg');
+
+		// Build the URL for the avatar
+		$url = ( ! empty($this->entity->avatar))
+			? "{$_ENV['FS_URL']}/images/avatars/{$this->entity->avatar}"
+			: Gravatar::image($this->entity->email, 500, $defaultImg, 'pg');
 
 		// Merge all the options to pass them to the partial
-		$mergedOptions = $options + ['url' => URL::asset('images/avatars/'.$url)];
+		$mergedOptions = $options + ['url' => $url];
 
 		return View::make('partials.image')->with($mergedOptions);
 	}

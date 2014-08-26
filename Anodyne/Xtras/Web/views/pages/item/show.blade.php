@@ -181,7 +181,7 @@
 									@if ($item->present()->active)
 										<div class="btn-toolbar pull-right">
 											<div class="btn-group">
-												<a href="{{ URL::route('item.download', [$item->id, $file->id]) }}" class="btn btn-default">{{ $_icons['download'] }}</a>
+												<a href="{{ URL::route('item.download', [$item->id, $file->id]) }}" class="btn btn-default">Download</a>
 											</div>
 										</div>
 									@endif
@@ -285,7 +285,6 @@
 
 @section('scripts')
 	<script>
-
 		@if (Auth::check())
 			window.url = "{{ Request::root() }}";
 			window.itemId = "{{ $item->id }}";
@@ -319,6 +318,5 @@
 		{
 			$('.nav-tabs a:first').tab('show');
 		});
-
 	</script>
 @stop

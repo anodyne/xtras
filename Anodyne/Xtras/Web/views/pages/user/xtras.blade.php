@@ -10,7 +10,7 @@
 	@if ($_currentUser->can('xtras.item.create'))
 		<div class="btn-toolbar">
 			<div class="btn-group">
-				<a href="{{ URL::route('item.create') }}" class="btn btn-primary">Create New Xtra</a>
+				<a href="{{ route('item.create') }}" class="btn btn-primary">Create New Xtra</a>
 			</div>
 		</div>
 	@endif
@@ -32,17 +32,17 @@
 						<div class="data-table data-table-striped data-table-bordered">
 						@foreach ($items as $item)
 							<div class="row {{ $item->product->present()->nameAsSlug }}">
-								<div class="col-lg-8">
+								<div class="col-md-8">
 									<p class="lead">{{ $item->present()->name }}</p>
 								</div>
-								<div class="col-lg-4">
+								<div class="col-md-4">
 									<div class="btn-toolbar pull-right">
 										<div class="btn-group">
-											<a href="#" class="btn btn-default">{{ $_icons['warning'] }}</a>
-											<a href="{{ URL::route('item.edit', [$item->user->username, $item->slug]) }}" class="btn btn-default">{{ $_icons['edit'] }}</a>
+											<a href="{{ route('item.messages', [$item->user->username, $item->slug]) }}" class="btn btn-default">Messages</a>
+											<a href="{{ route('item.edit', [$item->user->username, $item->slug]) }}" class="btn btn-default">Edit</a>
 										</div>
 										<div class="btn-group">
-											<a href="#" class="btn btn-danger">{{ $_icons['remove'] }}</a>
+											<a href="#" class="btn btn-danger">Remove</a>
 										</div>
 									</div>
 								</div>
@@ -62,14 +62,14 @@
 						<div class="data-table data-table-striped data-table-bordered">
 						@foreach ($items as $item)
 							<div class="row">
-								<div class="col-lg-8">
+								<div class="col-md-8">
 									<p class="lead">{{ $item->present()->name }}</p>
 								</div>
-								<div class="col-lg-4">
+								<div class="col-md-4">
 									<div class="btn-toolbar pull-right">
 										<div class="btn-group">
 											<a href="#" class="btn btn-default">{{ $_icons['warning'] }}</a>
-											<a href="{{ URL::route('item.edit', [$item->user->username, $item->slug]) }}" class="btn btn-default">{{ $_icons['edit'] }}</a>
+											<a href="{{ route('item.edit', [$item->user->username, $item->slug]) }}" class="btn btn-default">{{ $_icons['edit'] }}</a>
 										</div>
 										<div class="btn-group">
 											<a href="#" class="btn btn-danger">{{ $_icons['remove'] }}</a>
@@ -92,14 +92,14 @@
 						<div class="data-table data-table-striped data-table-bordered">
 						@foreach ($items as $item)
 							<div class="row">
-								<div class="col-lg-8">
+								<div class="col-md-8">
 									<p class="lead">{{ $item->present()->name }}</p>
 								</div>
-								<div class="col-lg-4">
+								<div class="col-md-4">
 									<div class="btn-toolbar pull-right">
 										<div class="btn-group">
 											<a href="#" class="btn btn-default">{{ $_icons['warning'] }}</a>
-											<a href="{{ URL::route('item.edit', [$item->user->username, $item->slug]) }}" class="btn btn-default">{{ $_icons['edit'] }}</a>
+											<a href="{{ route('item.edit', [$item->user->username, $item->slug]) }}" class="btn btn-default">{{ $_icons['edit'] }}</a>
 										</div>
 										<div class="btn-group">
 											<a href="#" class="btn btn-danger">{{ $_icons['remove'] }}</a>

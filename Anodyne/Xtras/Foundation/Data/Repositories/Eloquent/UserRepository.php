@@ -47,6 +47,9 @@ class UserRepository implements UserRepositoryInterface {
 
 	public function findItemsByType(UserModel $user, $value, $splitByProduct = false)
 	{
+		// Eager loading
+		$user = $user->load('items', 'items.type', 'items.product', 'items.user');
+
 		// Get just the items we want and sort them
 		$filteredItems = $user->items->filter(function($i) use ($value)
 		{

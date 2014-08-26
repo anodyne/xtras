@@ -127,7 +127,7 @@ class XtrasRoutingServiceProvider extends ServiceProvider {
 				'before'	=> 'auth',
 				'as'		=> 'item.upload.doZip',
 				'uses'		=> 'ItemController@doZipUpload']);
-			Route::post('{id}/upload-images', [
+			Route::post('{id}/upload-images/{image}', [
 				'before'	=> 'auth',
 				'as'		=> 'item.upload.doImages',
 				'uses'		=> 'ItemController@doImagesUpload']);
@@ -150,7 +150,7 @@ class XtrasRoutingServiceProvider extends ServiceProvider {
 				'as'	=> 'item.show',
 				'uses'	=> 'ItemController@show']);
 
-			Route::post('ajax/checkName', [
+			Route::get('ajax/checkName/{name}', [
 				'before'	=> 'auth',
 				'as'		=> 'item.ajax.checkName',
 				'uses'		=> 'ItemController@ajaxCheckName']);

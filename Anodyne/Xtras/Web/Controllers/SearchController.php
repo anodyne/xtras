@@ -2,8 +2,6 @@
 
 use View,
 	Input,
-	Session,
-	Redirect,
 	ItemRepositoryInterface;
 
 class SearchController extends BaseController {

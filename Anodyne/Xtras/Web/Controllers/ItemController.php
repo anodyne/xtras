@@ -158,7 +158,7 @@ class ItemController extends BaseController {
 			$file = Input::file('file');
 
 			// Set the filename
-			$filename = "{$item->user->slug}/{$item->slug}-{$item->version}";
+			$filename = "{$item->user->username}/{$item->slug}-{$item->version}";
 			$filename.= ".{$file->getClientOriginalExtension()}";
 
 			// Get the contents of the uploaded file
@@ -290,7 +290,7 @@ class ItemController extends BaseController {
 		// Set the flash information
 		Flash::success("Thank you for reporting the issue to Anodyne. An email has been sent to Anodyne with the details. We'll contact you further if we need additional information.");
 		
-		return Redirect::route('item.show', [$item->user->slug, $item->slug]);
+		return Redirect::route('item.show', [$item->user->username, $item->slug]);
 	}
 
 	public function reportIssue($id)
@@ -310,7 +310,7 @@ class ItemController extends BaseController {
 		// Set the flash message
 		Flash::success("Thank you for reporting the issue. An email has been sent to the developer with the details. They'll contact you further if they need additional information.");
 
-		return Redirect::route('item.show', [$item->user->slug, $item->slug]);
+		return Redirect::route('item.show', [$item->user->username, $item->slug]);
 	}
 
 	public function storeComment($id)
@@ -332,12 +332,12 @@ class ItemController extends BaseController {
 			// Fire the event
 			Event::fire('item.comment', [$item, $comment, $input]);
 
-			return Redirect::route('item.show', [$item->user->slug, $item->slug])
+			return Redirect::route('item.show', [$item->user->username, $item->slug])
 				->with('flashStatus', 'success')
 				->with('flashMessage', "Your comment has been added!");
 		}
 
-		return Redirect::route('item.show', [$item->user->slug, $item->slug])
+		return Redirect::route('item.show', [$item->user->username, $item->slug])
 			->with('flashStatus', 'danger')
 			->with('flashMessage', "There was a problem and your comment could not be added.");
 	}

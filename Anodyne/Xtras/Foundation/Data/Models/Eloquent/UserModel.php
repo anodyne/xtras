@@ -24,7 +24,7 @@ class UserModel extends Model implements UserInterface, RemindableInterface {
 
 	protected $table = 'users';
 
-	protected $fillable = ['name', 'email', 'password', 'url', 'bio', 'slug',
+	protected $fillable = ['name', 'email', 'password', 'url', 'bio', 'username',
 		'remember_token'];
 
 	protected $hidden = ['password', 'remember_token'];
@@ -49,27 +49,14 @@ class UserModel extends Model implements UserInterface, RemindableInterface {
 	];
 
 	/*
-	|---------------------------------------------------------------------------
-	| Model Accessors/Mutators
-	|---------------------------------------------------------------------------
-	*/
-
-	public function setSlugAttribute($value)
-	{
-		$this->attributes['slug'] = ( ! empty($value)) 
-			? $value 
-			: Str::slug(Str::lower($this->attributes['name']));
-	}
-
-	/*
 	|--------------------------------------------------------------------------
 	| Model Scopes
 	|--------------------------------------------------------------------------
 	*/
 
-	public function scopeSlug($query, $slug)
+	public function scopeUsername($query, $username)
 	{
-		$query->where('slug', $slug);
+		$query->where('username', $username);
 	}
 
 	/*

@@ -75,7 +75,7 @@ class ItemSeeder extends Seeder {
 			for ($f = 1; $f < $filesLoop; $f++)
 			{
 				$version = $faker->randomFloat(1, 1, 9);
-				$filename = "{$item->user->slug}/{$item->slug}-{$version}.zip";
+				$filename = "{$item->user->username}/{$item->slug}-{$version}.zip";
 
 				ItemFileModel::create([
 					'item_id' => $item->id,

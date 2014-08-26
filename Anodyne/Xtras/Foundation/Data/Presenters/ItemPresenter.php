@@ -11,7 +11,7 @@ class ItemPresenter extends Presenter {
 
 	public function author()
 	{
-		return HTML::link("profile/{$this->entity->user->slug}", $this->entity->user->name);
+		return HTML::link("profile/{$this->entity->user->username}", $this->entity->user->present()->name);
 	}
 
 	public function commentsCount()
@@ -98,19 +98,7 @@ class ItemPresenter extends Presenter {
 
 	public function rating()
 	{
-		if ($this->entity->ratings->count() > 0)
-		{
-			$rating = 0;
-
-			foreach ($this->entity->ratings as $r)
-			{
-				$rating += $r->rating;
-			}
-
-			return sprintf('%01.1f', round($rating / $this->entity->ratings->count(), 1));
-		}
-
-		return false;
+		return sprintf('%01.1f', $this->entity->rating);
 	}
 
 	public function status()
@@ -120,7 +108,7 @@ class ItemPresenter extends Presenter {
 
 	public function type()
 	{
-		return $this->entity->type->name;
+		return $this->entity->type->present()->name;
 	}
 
 	public function typeAsLabel()
@@ -142,7 +130,7 @@ class ItemPresenter extends Presenter {
 
 		return View::make('partials.label')
 			->withClass($class)
-			->withContent($this->entity->type->name);
+			->withContent($this->entity->type->present()->name);
 	}
 
 	public function updated()

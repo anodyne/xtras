@@ -19,7 +19,7 @@ Route::get('email', function()
 			'content' => "Content",
 			'from' => $user->present()->email,
 			'to' => $item->user->present()->email,
-			'name' => HTML::link(route('item.show', [$item->user->slug, $item->slug]), $item->present()->name),
+			'name' => HTML::link(route('item.show', [$item->user->username, $item->slug]), $item->present()->name),
 			'type' => $item->present()->type,
 			'userName' => $user->present()->name,
 			'userEmail' => $user->present()->email,

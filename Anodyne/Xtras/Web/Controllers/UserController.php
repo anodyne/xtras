@@ -17,25 +17,10 @@ class UserController extends BaseController {
 		$this->users = $users;
 	}
 
-	public function index()
-	{
-		//
-	}
-
-	public function create()
-	{
-		//
-	}
-
-	public function store()
-	{
-		//
-	}
-
 	public function show($name)
 	{
-		// Get the user from the slug
-		$user = $this->users->findBySlug($name);
+		// Get the user from their username
+		$user = $this->users->findByUsername($name);
 
 		if ($user)
 		{
@@ -43,35 +28,6 @@ class UserController extends BaseController {
 		}
 
 		return $this->errorNotFound('No profile exists with that name!');
-	}
-
-	public function edit($name)
-	{
-		// Get the user from the slug
-		$user = $this->users->findBySlug($name);
-
-		if ($user)
-		{
-			return View::make('pages.user.edit')->withUser($user);
-		}
-	}
-
-	public function update($id)
-	{
-		// Validate
-
-		// Update the user
-		$user = $this->users->update(Input::all());
-
-		// Fire the user update event
-		Event::fire('user.updated', [$user]);
-
-		return Redirect::route('account.edit', [$user->slug]);
-	}
-
-	public function destroy($id)
-	{
-		//
 	}
 
 	public function xtras()

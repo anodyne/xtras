@@ -7,7 +7,7 @@
 @section('content')
 	<h1>Xtra Information <small>Create New Xtra</small></h1>
 
-	<p>Use the form below to enter the basic information for your new xtra. This is information that users will see when viewing your xtra and that will be used when users are searching for xtras. Once the item is created, you'll be able to upload the zip file and any preview images you want.</p>
+	<p>Use the form below to enter the basic information for your new Xtra. This is information that users will see when viewing your Xtra and that will be used when users are searching for Xtras. Once the Xtra is created, you'll be able to upload the zip file and any preview images you want.</p>
 
 	<hr>
 
@@ -106,27 +106,21 @@
 @section('scripts')
 
 	<script>
-
 		$('[name="name"]').on('change', function()
 		{
-			var value = $(this).val();
-
 			$.ajax({
-				url: "{{ URL::route('item.ajax.checkName') }}",
-				type: "POST",
+				url: "{{ URL::to('item/ajax/checkName') }}/" + $(this).val(),
 				dataType: "json",
-				data: { name: value },
 				success: function(data)
 				{
 					if (data.code == 0)
 					{
-						alert("You already have an xtra with that name. Please choose a different name!");
+						alert("You already have an Xtra with that name. Please choose a different name!");
 						$('[name="name"]').val('');
 					}
 				}
 			});
 		});
-
 	</script>
 
 @stop

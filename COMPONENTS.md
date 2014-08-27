@@ -5,7 +5,7 @@
 - [Laravel](http://laravel.com)
 	- Version: 4.2.8
 - [Flysystem](http://flysystem.thephpleague.com/)
-	- Version: 0.5.4
+	- Version: 0.5.5
 - [Fractal](http://fractal.thephpleague.com/)
 	- Version: 0.9.1
 - [AWS SDK](https://aws.amazon.com/sdkforphp/)

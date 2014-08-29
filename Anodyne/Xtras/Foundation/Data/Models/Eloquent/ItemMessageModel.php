@@ -17,6 +17,8 @@ class ItemMessageModel extends Model {
 
 	protected $presenter = 'Xtras\Foundation\Data\Presenters\ItemMessagePresenter';
 
+	protected $touches = ['item'];
+
 	/*
 	|---------------------------------------------------------------------------
 	| Relationships

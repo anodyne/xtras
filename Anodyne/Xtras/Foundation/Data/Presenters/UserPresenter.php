@@ -35,6 +35,36 @@ class UserPresenter extends Presenter {
 		return $this->entity->email;
 	}
 
+	public function facebook()
+	{
+		return $this->entity->facebook;
+	}
+
+	public function facebookBtn($classes = 'btn btn-default')
+	{
+		if ( ! empty($this->entity->facebook))
+		{
+			return HTML::link($this->entity->facebook, "Facebook", ['class' => $classes, 'target' => '_blank']);
+		}
+
+		return false;
+	}
+
+	public function google()
+	{
+		return $this->entity->google;
+	}
+
+	public function googleBtn($classes = 'btn btn-default')
+	{
+		if ( ! empty($this->entity->google))
+		{
+			return HTML::link($this->entity->google, "Google+", ['class' => $classes, 'target' => '_blank']);
+		}
+
+		return false;
+	}
+
 	public function itemsMods()
 	{
 		return $this->entity->items->filter(function($i)
@@ -70,11 +100,26 @@ class UserPresenter extends Presenter {
 		return $this->entity->name;
 	}
 
-	public function siteBtn()
+	public function siteBtn($classes = 'btn btn-default')
 	{
 		if ( ! empty($this->entity->url))
 		{
-			return HTML::link($this->entity->url, "Author's Website", ['class' => 'btn btn-default']);
+			return HTML::link($this->entity->url, "Author's Website", ['class' => $classes, 'target' => '_blank']);
+		}
+
+		return false;
+	}
+
+	public function twitter()
+	{
+		return $this->entity->twitter;
+	}
+
+	public function twitterBtn($classes = 'btn btn-default')
+	{
+		if ( ! empty($this->entity->twitter))
+		{
+			return HTML::link('http://twitter.com/'.str_replace('@', '', $this->entity->twitter), 'Twitter', ['class' => $classes, 'target' => '_blank']);
 		}
 
 		return false;

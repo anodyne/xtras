@@ -42,7 +42,12 @@ class ItemPresenter extends Presenter {
 
 	public function downloads()
 	{
-		return $this->entity->orders->count();
+		$entity = $this->entity;
+		
+		return $this->entity->orders->filter(function($o) use ($entity)
+		{
+			return $o->user_id != $entity->user_id;
+		})->count();
 	}
 
 	public function downloadBtn()
@@ -111,6 +116,30 @@ class ItemPresenter extends Presenter {
 	public function rating()
 	{
 		return sprintf('%01.1f', $this->entity->rating);
+	}
+
+	public function ratingAsLabel()
+	{
+		$type = 'danger';
+		$text = Config::get('icons.star').' '.$this->rating();
+
+		if ($this->rating() >= 4)
+		{
+			$type = 'info';
+		}
+		elseif ($this->rating() >= 2)
+		{
+			$type = 'warning';
+		}
+		elseif ($this->rating() == 0.0)
+		{
+			$type = 'default';
+			$text = 'No ratings';
+		}
+
+		return View::make('partials.label')
+			->withClass($type)
+			->withContent($text);
 	}
 
 	public function status()

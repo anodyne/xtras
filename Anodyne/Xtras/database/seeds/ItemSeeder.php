@@ -28,7 +28,7 @@ class ItemSeeder extends Seeder {
 			}
 
 			$item = ItemModel::create([
-				'user_id' => $faker->numberBetween(1, 25),
+				'user_id' => $faker->numberBetween(1, 50),
 				'type_id' => $type,
 				'product_id' => $faker->numberBetween(1, 3),
 				'name' => $name,
@@ -51,11 +51,14 @@ class ItemSeeder extends Seeder {
 			for ($j = 1; $j < $ratingsLoop; $j++)
 			{
 				ItemRatingModel::create([
-					'user_id' => $faker->numberBetween(1, 2),
+					'user_id' => $faker->numberBetween(1, 50),
 					'item_id' => $item->id,
 					'rating' => $faker->numberBetween(1, 5),
 				]);
 			}
+
+			// Update the total rating
+			$item->updateRating();
 
 			// Determine how many times we're looping through comments
 			$commentsLoop = $faker->numberBetween(1, 10);
@@ -63,7 +66,7 @@ class ItemSeeder extends Seeder {
 			for ($c = 1; $c < $commentsLoop; $c++)
 			{
 				CommentModel::create([
-					'user_id' => $faker->numberBetween(1, 2),
+					'user_id' => $faker->numberBetween(1, 50),
 					'item_id' => $item->id,
 					'content' => $faker->paragraph,
 				]);
@@ -85,6 +88,18 @@ class ItemSeeder extends Seeder {
 			}
 
 			$item->update(['version' => $version]);
+
+			// Determine how many times we're looping through orders
+			$ordersLoop = $faker->numberBetween(0, 100);
+
+			for ($o = 1; $o < $ordersLoop; $o++)
+			{
+				OrderModel::create([
+					'user_id' => $faker->numberBetween(1, 50),
+					'item_id' => $item->id,
+					'file_id' => $faker->numberBetween(1, 400),
+				]);
+			}
 		}
 	}
 

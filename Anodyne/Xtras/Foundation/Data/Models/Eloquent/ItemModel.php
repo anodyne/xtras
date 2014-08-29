@@ -114,4 +114,20 @@ class ItemModel extends Model {
 		return $collection;
 	}
 
+	public function updateRating()
+	{
+		$total = 0;
+
+		foreach ($this->ratings as $rating)
+		{
+			$total += $rating->rating;
+		}
+
+		$final = ($total > 0)
+			? $this->fill(['rating' => (float) $total / $this->ratings->count()])->save()
+			: (float) 0;
+
+		return true;
+	}
+
 }

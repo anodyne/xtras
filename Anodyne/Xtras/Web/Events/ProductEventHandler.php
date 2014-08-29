@@ -2,22 +2,19 @@
 
 class ProductEventHandler {
 
-	public function onCreate($data)
+	public function onCreate($product)
 	{
-		// Grab the item out of the array
-		$item = $data['item'];
+		//
 	}
 
-	public function onDelete($data)
+	public function onDelete($product)
 	{
-		// Grab the item out of the array
-		$item = $data['item'];
+		//
 	}
 
-	public function onUpdate($data)
+	public function onUpdate($product)
 	{
-		// Grab the item out of the array
-		$item = $data['item'];
+		//
 	}
 
 }

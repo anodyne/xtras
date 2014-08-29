@@ -11,61 +11,57 @@ class ItemEventHandler {
 		$this->mailer = $mailer;
 	}
 
-	public function onComment($data)
+	public function onComment($comment)
 	{
-		// Grab the data out of the array
-		$item = $data['item'];
-		$comment = $data['comment'];
-		$input = $data['input'];
-
 		// Send the email
-		$this->mailer->addedComment($input);
+		$this->mailer->addedComment($comment);
 	}
 
-	public function onCreate($data)
+	public function onCreate($item)
 	{
-		// Grab the item out of the array
-		$item = $data['item'];
+		//
 	}
 
-	public function onDelete($data)
+	public function onDelete($item)
 	{
-		// Grab the item out of the array
-		$item = $data['item'];
+		//
 	}
 
-	public function onReportAbuse($data)
+	public function onReportAbuse($item, $input)
 	{
-		// Grab the data out of the array
-		$item = $data['item'];
-		$input = $data['input'];
-
 		// Send the email
 		$this->mailer->reportAbuse($input);
 	}
 
-	public function onReportIssue($data)
+	public function onReportIssue($item, $input)
 	{
-		// Grab the data out of the array
-		$item = $data['item'];
-		$input = $data['input'];
-
 		// Send the email
 		$this->mailer->reportIssue($input);
 	}
 
-	public function onUpdate($data)
+	public function onUpdate($item)
 	{
-		// Grab the item out of the array
-		$item = $data['item'];
+		//
 	}
 
-	public function onUpload($data)
+	public function onUpload($item)
 	{
-		// Grab the item out of the array
-		$item = $data['item'];
-
 		// If this is an update, grab the orders and notify anyone who's grabbed this before
+	}
+
+	public function onMessageCreate($message)
+	{
+		# code...
+	}
+
+	public function onMessageDelete($message)
+	{
+		# code...
+	}
+
+	public function onMessageUpdate($message)
+	{
+		# code...
 	}
 
 }

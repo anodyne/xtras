@@ -2,22 +2,19 @@
 
 class TypeEventHandler {
 
-	public function onCreate($data)
+	public function onCreate($type)
 	{
-		// Grab the item out of the array
-		$item = $data['item'];
+		//
 	}
 
-	public function onDelete($data)
+	public function onDelete($type)
 	{
-		// Grab the item out of the array
-		$item = $data['item'];
+		//
 	}
 
-	public function onUpdate($data)
+	public function onUpdate($type)
 	{
-		// Grab the item out of the array
-		$item = $data['item'];
+		//
 	}
 
 }

@@ -9,6 +9,8 @@ use Auth,
 	ProductModel,
 	ItemFileModel,
 	ItemMetaModel,
+	ItemRatingModel,
+	ItemMessageModel,
 	CommentTransformer,
 	ItemRepositoryInterface,
 	UserRepositoryInterface;
@@ -44,6 +46,32 @@ class ItemRepository implements ItemRepositoryInterface {
 		return false;
 	}
 
+	public function addMessage($itemId, array $data)
+	{
+		// Get the item
+		$item = $this->find($itemId);
+
+		// Setup the expiration
+		if ( ! empty($data['expires']))
+		{
+			$expires = \Date::createFromFormat('m/d/Y', $data['expires']);
+
+			$data['expires'] = $expires->endOfDay();
+		}
+		else
+		{
+			unset($data['expires']);
+		}
+
+		// Create the message
+		$message = ItemMessageModel::create($data);
+
+		// Associate the message with the item
+		$item->messages()->save($message);
+
+		return $message;
+	}
+
 	public function all()
 	{
 		return ItemModel::all();
@@ -69,6 +97,21 @@ class ItemRepository implements ItemRepositoryInterface {
 	public function delete($id)
 	{
 		# code...
+	}
+
+	public function deleteMessage($id)
+	{
+		// Get the message
+		$message = $this->findMessage($id);
+
+		if ($message)
+		{
+			$message->delete();
+
+			return $message;
+		}
+
+		return false;
 	}
 
 	public function find($id)
@@ -164,6 +207,11 @@ class ItemRepository implements ItemRepositoryInterface {
 		return $sortedItems;
 	}
 
+	public function findMessage($id)
+	{
+		return ItemMessageModel::with('item')->where('id', $id)->first();
+	}
+
 	public function getByPage($type, $page = 1, $limit = 15, $order = 'created_at', $direction = 'desc')
 	{
 		// Get the type
@@ -211,6 +259,11 @@ class ItemRepository implements ItemRepositoryInterface {
 	public function getFile($id)
 	{
 		return ItemFileModel::find($id);
+	}
+
+	public function getMessage($id)
+	{
+		return ItemMessageModel::with('item')->where('id', $id)->first();
 	}
 
 	public function getProducts()
@@ -273,6 +326,31 @@ class ItemRepository implements ItemRepositoryInterface {
 		return $finalTypes;
 	}
 
+	public function rate(UserModel $user, $itemId, $input)
+	{
+		// Get the item
+		$item = $this->find($itemId);
+
+		// If we have an item and the author isn't the one rating it...
+		if ($item and $item->user->id != $user->id)
+		{
+			// Create a new rating
+			$rating = ItemRatingModel::firstOrCreate([
+				'item_id'	=> $item->id,
+				'user_id'	=> $user->id
+			]);
+
+			$rating->fill(['rating' => (int) $input])->save();
+
+			// Update the overall rating
+			$item->updateRating();
+
+			return $rating;
+		}
+
+		return false;
+	}
+
 	public function search($input)
 	{
 		return ItemModel::with('product', 'type', 'user')
@@ -323,6 +401,22 @@ class ItemRepository implements ItemRepositoryInterface {
 		$file->save();
 
 		$item->files()->save($file);
+	}
+
+	public function updateMessage($id, array $data)
+	{
+		// Get the message
+		$message = $this->findMessage($id);
+
+		if ($message)
+		{
+			$message->fill($data);
+			$message->save();
+
+			return $message;
+		}
+
+		return false;
 	}
 
 	public function updateMetaData($id, array $data)

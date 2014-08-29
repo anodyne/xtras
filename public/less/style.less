@@ -908,3 +908,39 @@ blockquote {
 		color: @color-primary-light;
 	}
 }
+
+.rating {
+	overflow: hidden;
+	display: block;
+}
+.rating-input {
+	display: none;
+}
+.rating-star {
+	float: right;
+	display: block;
+	width: 40px;
+	height: 60px;
+
+	font-family: "icomoon";
+	font-size: 40px;
+	color: @color-gray-medium;
+}
+.rating-star:hover,
+.rating-star:hover ~ .rating-star,
+.rating-input:checked ~ .rating-star {
+	color: @color-primary;
+}
+.rating-star,
+.rating:hover .rating-star {
+	float: right;
+	display: block;
+	width: 40px;
+	height: 60px;
+
+	font-family: "icomoon";
+	font-size: 40px;
+}
+.rating-star:before {
+	content: attr(data-icon);
+}

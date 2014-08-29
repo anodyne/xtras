@@ -1,14 +1,10 @@
 <?php namespace Xtras\Controllers;
 
-use Input,
-	CommentTransformer,
-	ItemRepositoryInterface;
-
 class CommentController extends BaseController {
 
 	protected $items;
 
-	public function __construct(ItemRepositoryInterface $items)
+	public function __construct(\ItemRepositoryInterface $items)
 	{
 		parent::__construct();
 		
@@ -17,12 +13,18 @@ class CommentController extends BaseController {
 
 	public function index($itemId)
 	{
-		return $this->respondWithCollection($this->items->getComments($itemId), new CommentTransformer);
+		return $this->respondWithCollection($this->items->getComments($itemId), new \CommentTransformer);
 	}
 
 	public function store($itemId)
 	{
-		return $this->items->addComment($itemId, Input::all());
+		// Store the comment
+		$comment = $this->items->addComment($itemId, \Input::all());
+
+		// Fire the event
+		\Event::fire('item.comment', [$comment]);
+
+		return $comment;
 	}
 
 }

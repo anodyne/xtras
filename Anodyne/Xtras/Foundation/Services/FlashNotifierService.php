@@ -1,5 +1,7 @@
 <?php namespace Xtras\Foundation\Services;
 
+use Illuminate\Session\Store as SessionStore;
+
 class FlashNotifierService {
 
 	protected $session;

@@ -33,9 +33,7 @@ class UserController extends BaseController {
 	public function xtras()
 	{
 		return View::make('pages.user.xtras')
-			->withSkins($this->users->findItemsByType($this->currentUser, 'Skin', true))
-			->withMods($this->users->findItemsByType($this->currentUser, 'MOD', true))
-			->withRanks($this->users->findItemsByType($this->currentUser, 'Rank Set', true));
+			->withXtras($this->users->getItemsByType($this->currentUser));
 	}
 
 }

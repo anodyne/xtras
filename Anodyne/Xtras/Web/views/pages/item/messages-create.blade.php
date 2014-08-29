@@ -36,7 +36,7 @@
 			<div class="col-md-2">
 				<div class="form-group">
 					<label class="control-label">Expiration</label>
-					{{ Form::text('expires', null, ['class' => 'form-control', 'data-provide' => 'datepicker']) }}
+					{{ Form::text('expires', null, ['class' => 'form-control']) }}
 				</div>
 			</div>
 		</div>
@@ -47,12 +47,4 @@
 			</div>
 		</div>
 	{{ Form::close() }}
-@stop
-
-@section('styles')
-	{{ HTML::style('css/datepicker3.css') }}
-@stop
-
-@section('scripts')
-	{{ HTML::script('js/bootstrap-datepicker.js') }}
 @stop

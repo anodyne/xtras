@@ -83,7 +83,7 @@ class ItemSeeder extends Seeder {
 				ItemFileModel::create([
 					'item_id' => $item->id,
 					'filename' => $filename,
-					'version' => $faker->randomFloat(1, 1, 9),
+					'version' => $version,
 				]);
 			}
 

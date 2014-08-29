@@ -154,20 +154,37 @@ class XtrasRoutingServiceProvider extends ServiceProvider {
 				'before'	=> 'auth',
 				'as'		=> 'item.ajax.checkName',
 				'uses'		=> 'ItemController@ajaxCheckName']);
-
-			Route::get('{author}/{slug}/messages', [
+			Route::post('ajax/rate', [
 				'before'	=> 'auth',
-				'as'		=> 'item.messages',
-				'uses'		=> 'ItemController@messages']);
-			Route::get('{author}/{slug}/messages/create', [
-				'before'	=> 'auth',
-				'as'		=> 'item.messages.create',
-				'uses'		=> 'ItemController@createMessage']);
-			Route::get('{author}/{slug}/messages/edit', [
-				'before'	=> 'auth',
-				'as'		=> 'item.messages.edit',
-				'uses'		=> 'ItemController@editMessage']);
+				'as'		=> 'item.ajax.rate',
+				'uses'		=> 'ItemController@ajaxStoreRating']);
 		});
+		
+		$messagesOptions = [
+			'before'	=> 'auth',
+			'prefix'	=> 'messages',
+			'namespace' => 'Xtras\Controllers'
+		];
+
+		Route::group($messagesOptions, function()
+		{
+			Route::get('{author}/{slug}/create', [
+				'as'	=> 'messages.create',
+				'uses'	=> 'ItemMessagesController@create']);
+			Route::post('{author}/{slug}', [
+				'as'	=> 'messages.store',
+				'uses'	=> 'ItemMessagesController@store']);
+			Route::get('{id}/edit', [
+				'as'	=> 'messages.edit',
+				'uses'	=> 'ItemMessagesController@edit']);
+			Route::put('{id}', [
+				'as'	=> 'messages.update',
+				'uses'	=> 'ItemMessagesController@update']);
+			Route::get('{author}/{slug}', [
+				'as'	=> 'messages.index',
+				'uses'	=> 'ItemMessagesController@index']);
+		});
+		
 	}
 
 	protected function accountRoutes()

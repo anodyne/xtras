@@ -113,33 +113,34 @@ class XtrasServiceProvider extends ServiceProvider {
 
 	protected function registerEvents()
 	{
-		Event::listen('item.created', 'Xtras\Events\ItemEventHandler@onCreate');
-		Event::listen('item.comment', 'Xtras\Events\ItemEventHandler@onComment');
-		Event::listen('item.deleted', 'Xtras\Events\ItemEventHandler@onDelete');
-		Event::listen('item.updated', 'Xtras\Events\ItemEventHandler@onUpdate');
-		Event::listen('item.uploaded', 'Xtras\Events\ItemEventHandler@onUpload');
-		Event::listen('item.report.abuse', 'Xtras\Events\ItemEventHandler@onReportAbuse');
-		Event::listen('item.report.issue', 'Xtras\Events\ItemEventHandler@onReportIssue');
+		// Set the namespace
+		$namespace = 'Xtras\\Events\\';
 
-		Event::listen('user.created', 'Xtras\Events\UserEventHandler@onCreate');
-		Event::listen('user.deleted', 'Xtras\Events\UserEventHandler@onDelete');
-		Event::listen('user.registered', 'Xtras\Events\UserEventHandler@onRegister');
-		Event::listen('user.updated', 'Xtras\Events\UserEventHandler@onUpdate');
+		Event::listen('item.created', "{$namespace}ItemEventHandler@onCreate");
+		Event::listen('item.comment', "{$namespace}ItemEventHandler@onComment");
+		Event::listen('item.deleted', "{$namespace}ItemEventHandler@onDelete");
+		Event::listen('item.updated', "{$namespace}ItemEventHandler@onUpdate");
+		Event::listen('item.uploaded', "{$namespace}ItemEventHandler@onUpload");
+		Event::listen('item.report.abuse', "{$namespace}ItemEventHandler@onReportAbuse");
+		Event::listen('item.report.issue', "{$namespace}ItemEventHandler@onReportIssue");
+		Event::listen('item.message.created', "{$namespace}ItemEventHandler@onMessageCreate");
+		Event::listen('item.message.deleted', "{$namespace}ItemEventHandler@onMessageDelete");
+		Event::listen('item.message.updated', "{$namespace}ItemEventHandler@onMessageUpdate");
 
-		Event::listen('product.created', 'Xtras\Events\ProductEventHandler@onCreate');
-		Event::listen('product.deleted', 'Xtras\Events\ProductEventHandler@onDelete');
-		Event::listen('product.updated', 'Xtras\Events\ProductEventHandler@onUpdate');
+		Event::listen('product.created', "{$namespace}ProductEventHandler@onCreate");
+		Event::listen('product.deleted', "{$namespace}ProductEventHandler@onDelete");
+		Event::listen('product.updated', "{$namespace}ProductEventHandler@onUpdate");
 
-		Event::listen('type.created', 'Xtras\Events\TypeEventHandler@onCreate');
-		Event::listen('type.deleted', 'Xtras\Events\TypeEventHandler@onDelete');
-		Event::listen('type.updated', 'Xtras\Events\TypeEventHandler@onUpdate');
+		Event::listen('type.created', "{$namespace}TypeEventHandler@onCreate");
+		Event::listen('type.deleted', "{$namespace}TypeEventHandler@onDelete");
+		Event::listen('type.updated', "{$namespace}TypeEventHandler@onUpdate");
 	}
 
 	protected function registerFlashNotifier()
 	{
 		$this->app['flash'] = $this->app->share(function($app)
 		{
-			return new \Xtras\Foundation\Services\FlashNotiferService($app['session.store']);
+			return new \Xtras\Foundation\Services\FlashNotifierService($app['session.store']);
 		});
 	}
 

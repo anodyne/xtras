@@ -78,11 +78,19 @@ class ItemController extends BaseController {
 
 		if ($item)
 		{
+			$user = $this->currentUser;
+
+			$userRating = $item->ratings->filter(function($r) use ($user)
+			{
+				return (int) $user->id === (int) $r->user_id;
+			})->first();
+
 			return View::make('pages.item.show')
 				->withItem($item)
 				->withMeta($item->meta)
 				->withFiles($item->files->sortBy('version', SORT_REGULAR, true))
-				->withComments($item->comments->sortBy('created_at', SORT_REGULAR, true));
+				->withComments($item->comments->sortBy('created_at', SORT_REGULAR, true))
+				->with('userRating', $userRating);
 		}
 
 		return $this->errorNotFound("Xtra not found.");
@@ -240,6 +248,11 @@ class ItemController extends BaseController {
 		return json_encode(['code' => 1]);
 	}
 
+	public function ajaxStoreRating()
+	{
+		$this->items->rate($this->currentUser, Input::get('item'), Input::get('rating'));
+	}
+
 	public function skins()
 	{
 		// Find all the skins
@@ -376,21 +389,6 @@ class ItemController extends BaseController {
 		return Redirect::route('item.show', [$item->user->username, $item->slug])
 			->with('flashStatus', 'danger')
 			->with('flashMessage', "There was a problem and your comment could not be added.");
-	}
-
-	public function messages($author, $slug)
-	{
-		// Get the item
-		$item = $this->items->findByAuthorAndSlug($author, $slug);
-
-		if ($item)
-		{
-			return View::make('pages.item.messages')
-				->withItem($item)
-				->withMessages($item->messages);
-		}
-
-		return $this->errorNotFound("Xtra not found.");
 	}
 
 }

@@ -36,3 +36,13 @@ if ( ! function_exists('alert'))
 			->withContent($message);
 	}
 }
+
+if ( ! function_exists('label'))
+{
+	function label($level, $message)
+	{
+		return View::make('partials.label')
+			->withClass($level)
+			->withContent($message);
+	}
+}

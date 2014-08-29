@@ -74,6 +74,23 @@ class UserRepository implements UserRepositoryInterface {
 		return $filteredItems;
 	}
 
+	public function getItemsByType(UserModel $user)
+	{
+		$itemsArr = [];
+
+		// Make sure we're eager loaded what we need
+		$user = $user->load('items', 'items.type', 'items.product', 'items.user');
+
+		foreach ($user->items->sortBy('name') as $item)
+		{
+			$itemsArr[$item->type->name][$item->product->name][] = $item;
+
+			ksort($itemsArr[$item->type->name]);
+		}
+
+		return $itemsArr;
+	}
+
 	public function update($id, array $data = [])
 	{
 		// Get the user

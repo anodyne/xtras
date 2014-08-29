@@ -13,6 +13,12 @@
 		<div class="btn-group">
 			{{ $user->present()->siteBtn }}
 		</div>
+
+		<div class="btn-group">
+			{{ $user->present()->twitterBtn() }}
+			{{ $user->present()->facebookBtn() }}
+			{{ $user->present()->googleBtn() }}
+		</div>
 	</div>
 
 	{{ $user->present()->bio }}

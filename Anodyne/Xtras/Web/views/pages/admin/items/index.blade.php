@@ -23,10 +23,10 @@
 				<div class="col-md-3 col-lg-3">
 					<div class="btn-toolbar pull-right">
 						<div class="btn-group">
-							<a href="{{ route('admin.items.edit', [$item->id]) }}" class="btn btn-default">{{ $_icons['edit'] }}</a>
+							<a href="{{ route('admin.items.edit', [$item->id]) }}" class="btn btn-default">Edit</a>
 						</div>
 						<div class="btn-group">
-							<a href="#" class="btn btn-danger js-delete-item" data-id="{{ $item->id }}">{{ $_icons['remove'] }}</a>
+							<a href="#" class="btn btn-danger js-delete-item" data-id="{{ $item->id }}">Remove</a>
 						</div>
 					</div>
 				</div>
@@ -36,7 +36,7 @@
 
 		{{ $items->links() }}
 	@else
-		<p class="alert alert-warning">No items found.</p>
+		{{ alert('warning', "No items found.") }}
 	@endif
 @stop
 

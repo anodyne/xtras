@@ -24,7 +24,7 @@
 						<h2 class="panel-title"><span class="tab-icon tab-icon-up2">{{ $_icons['warning'] }}</span>Report an Issue</h2>
 					</div>
 					<div class="panel-body">
-						<p>Found an issue with this xtra? Let the developer know by sending them a message. Make sure to be specific about what's wrong, how to reproduce the issue, and any other information you think is pertinent (MODs you have installed, what skin you're using, what browser(s) you've run across the issue in, etc.).</p>
+						<p>Found an issue with this Xtra? Let the developer know by sending them a message. Make sure to be specific about what's wrong, how to reproduce the issue, and any other information you think is pertinent (MODs you have installed, what skin you're using, what browser(s) you've run across the issue in, etc.).</p>
 
 						{{ Form::open(['route' => ['item.reportIssue', $item->id]]) }}
 							<div class="row">
@@ -51,7 +51,7 @@
 						<h2 class="panel-title"><span class="tab-icon tab-icon-up2">{{ $_icons['warning'] }}</span>Report Abuse to Anodyne</h2>
 					</div>
 					<div class="panel-body">
-						<p>If you think this xtra is doing something malicious, has a virus attached to it, or is doing something that violates the Terms of Use, let Anodyne know and we'll look in to the issue further. Please include all relevant information about the abuse and any information you think is pertinent for Anodyne to know.</p>
+						<p>If you think this Xtra is doing something malicious, has a virus attached to it, or is doing something that violates the Terms of Use, let Anodyne know and we'll look in to the issue further. Please include all relevant information about the abuse and any information you think is pertinent for Anodyne to know.</p>
 
 						{{ Form::open(['route' => ['item.reportAbuse', $item->id]]) }}
 							<div class="row">
@@ -123,31 +123,6 @@
 			</ul>
 
 			<div class="tab-content">
-				<div id="details" class="tab-pane">
-					<h2>Details</h2>
-
-					<dl>
-						<dt>Author</dt>
-						<dd>{{ $item->present()->author }}</dd>
-
-						<dt>Downloads</dt>
-						<dd>{{ $item->present()->downloads }}</dd>
-
-						@if ($item->present()->rating !== false)
-							<dt>Rating</dt>
-							<dd>{{ $item->present()->rating }}</dd>
-						@endif
-
-						<dt>Added</dt>
-						<dd>{{ $item->present()->created }}</dd>
-
-						@if ($item->present()->created != $item->present()->updated)
-							<dt>Last Updated</dt>
-							<dd>{{ $item->present()->updated }}</dd>
-						@endif
-					</dl>
-				</div>
-
 				@if ($meta)
 					@if ( ! empty($meta->installation))
 						<div id="install" class="tab-pane">
@@ -204,7 +179,7 @@
 								<h2 class="panel-title"><span class="tab-icon tab-icon-up1">{{ $_icons['comment'] }}</span>Add a Comment</h2>
 							</div>
 							<div class="panel-body">
-								<p>If you have an issue with this xtra, please use the Report Issue button at the top of the page. Comments should be used to ask questions or commend the author on their work.</p>
+								<p>If you have an issue with this Xtra, please use the Report Issue button at the top of the page. Comments should be used to ask questions or commend the author on their work.</p>
 								
 								<form ng-submit="addComment()">
 									<div class="row">
@@ -253,6 +228,12 @@
 				</a></p>
 
 				<hr>
+
+				@if ($item->user->id != $_currentUser->id)
+					{{ partial('rating', ['id' => $item->id, 'r' => $userRating]) }}
+
+					<hr>
+				@endif
 			@else
 				<p class="alert alert-warning">In order to download Xtras, you must have an AnodyneID. You can <a href="{{ route('login') }}">log in</a> or <a href="http://anodyne-productions.com/register">register</a> your AnodyneID.</p>
 			@endif
@@ -268,7 +249,7 @@
 
 				@if ($item->present()->rating !== false)
 					<dt>Rating</dt>
-					<dd>{{ $item->present()->rating }}</dd>
+					<dd>{{ $item->present()->ratingAsLabel }}</dd>
 				@endif
 
 				<dt>Added</dt>
@@ -284,6 +265,7 @@
 @stop
 
 @section('scripts')
+	{{ partial('js/rate-item') }}
 	<script>
 		@if (Auth::check())
 			window.url = "{{ Request::root() }}";

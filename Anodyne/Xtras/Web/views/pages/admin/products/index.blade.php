@@ -23,10 +23,10 @@
 				<div class="col-md-3 col-lg-3">
 					<div class="btn-toolbar pull-right">
 						<div class="btn-group">
-							<a href="#" class="btn btn-default js-edit-product" data-id="{{ $product->id }}">{{ $_icons['edit'] }}</a>
+							<a href="#" class="btn btn-default js-edit-product" data-id="{{ $product->id }}">Edit</a>
 						</div>
 						<div class="btn-group">
-							<a href="#" class="btn btn-danger js-delete-product" data-id="{{ $product->id }}">{{ $_icons['remove'] }}</a>
+							<a href="#" class="btn btn-danger js-delete-product" data-id="{{ $product->id }}">Remove</a>
 						</div>
 					</div>
 				</div>
@@ -34,7 +34,7 @@
 		@endforeach
 		</div>
 	@else
-		<p class="alert alert-warning">No products found.</p>
+		{{ alert('warning', "No products found.") }}
 	@endif
 @stop
 

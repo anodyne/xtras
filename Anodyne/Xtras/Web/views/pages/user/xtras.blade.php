@@ -15,7 +15,7 @@
 		</div>
 	@endif
 
-	@if (count($skins) == 0 and count($ranks) == 0 and count($mods) == 0)
+	@if (count($xtras) == 0)
 		<p class="alert alert-warning">It looks like you don't have any Xtras. Go ahead and change that, create your first!</p>
 	@else
 		<ul class="nav nav-tabs">
@@ -26,19 +26,22 @@
 
 		<div class="tab-content">
 			<div id="skins" class="active tab-pane">
-				@if (count($skins) > 0)
-					@foreach ($skins as $product => $items)
+				@if (array_key_exists('Skin', $xtras))
+					@foreach ($xtras['Skin'] as $product => $items)
 						<h2>{{ $product }}</h2>
 						<div class="data-table data-table-striped data-table-bordered">
 						@foreach ($items as $item)
 							<div class="row {{ $item->product->present()->nameAsSlug }}">
-								<div class="col-md-8">
+								<div class="col-md-7">
 									<p class="lead">{{ $item->present()->name }}</p>
 								</div>
-								<div class="col-md-4">
+								<div class="col-md-5">
 									<div class="btn-toolbar pull-right">
 										<div class="btn-group">
-											<a href="{{ route('item.messages', [$item->user->username, $item->slug]) }}" class="btn btn-default">Messages</a>
+											<a href="{{ route('item.show', [$item->user->username, $item->slug]) }}" class="btn btn-default">View</a>
+										</div>
+										<div class="btn-group">
+											<a href="{{ route('messages.index', [$item->user->username, $item->slug]) }}" class="btn btn-default">Messages</a>
 											<a href="{{ route('item.edit', [$item->user->username, $item->slug]) }}" class="btn btn-default">Edit</a>
 										</div>
 										<div class="btn-group">
@@ -56,23 +59,26 @@
 			</div>
 
 			<div id="mods" class="tab-pane">
-				@if (count($mods) > 0)
-					@foreach ($mods as $product => $items)
+				@if (array_key_exists('MOD', $xtras))
+					@foreach ($xtras['MOD'] as $product => $items)
 						<h2>{{ $product }}</h2>
 						<div class="data-table data-table-striped data-table-bordered">
 						@foreach ($items as $item)
 							<div class="row">
-								<div class="col-md-8">
+								<div class="col-md-7">
 									<p class="lead">{{ $item->present()->name }}</p>
 								</div>
-								<div class="col-md-4">
+								<div class="col-md-5">
 									<div class="btn-toolbar pull-right">
 										<div class="btn-group">
-											<a href="#" class="btn btn-default">{{ $_icons['warning'] }}</a>
-											<a href="{{ route('item.edit', [$item->user->username, $item->slug]) }}" class="btn btn-default">{{ $_icons['edit'] }}</a>
+											<a href="{{ route('item.show', [$item->user->username, $item->slug]) }}" class="btn btn-default">View</a>
 										</div>
 										<div class="btn-group">
-											<a href="#" class="btn btn-danger">{{ $_icons['remove'] }}</a>
+											<a href="#" class="btn btn-default">Messages</a>
+											<a href="{{ route('item.edit', [$item->user->username, $item->slug]) }}" class="btn btn-default">Edit</a>
+										</div>
+										<div class="btn-group">
+											<a href="#" class="btn btn-danger">Remove</a>
 										</div>
 									</div>
 								</div>
@@ -86,23 +92,26 @@
 			</div>
 
 			<div id="ranks" class="tab-pane">
-				@if (count($ranks) > 0)
-					@foreach ($ranks as $product => $items)
+				@if (array_key_exists('Rank Set', $xtras))
+					@foreach ($xtras['Rank Set'] as $product => $items)
 						<h2>{{ $product }}</h2>
 						<div class="data-table data-table-striped data-table-bordered">
 						@foreach ($items as $item)
 							<div class="row">
-								<div class="col-md-8">
+								<div class="col-md-7">
 									<p class="lead">{{ $item->present()->name }}</p>
 								</div>
-								<div class="col-md-4">
+								<div class="col-md-5">
 									<div class="btn-toolbar pull-right">
 										<div class="btn-group">
-											<a href="#" class="btn btn-default">{{ $_icons['warning'] }}</a>
-											<a href="{{ route('item.edit', [$item->user->username, $item->slug]) }}" class="btn btn-default">{{ $_icons['edit'] }}</a>
+											<a href="{{ route('item.show', [$item->user->username, $item->slug]) }}" class="btn btn-default">View</a>
 										</div>
 										<div class="btn-group">
-											<a href="#" class="btn btn-danger">{{ $_icons['remove'] }}</a>
+											<a href="#" class="btn btn-default">Messages</a>
+											<a href="{{ route('item.edit', [$item->user->username, $item->slug]) }}" class="btn btn-default">Edit</a>
+										</div>
+										<div class="btn-group">
+											<a href="#" class="btn btn-danger">Remove</a>
 										</div>
 									</div>
 								</div>

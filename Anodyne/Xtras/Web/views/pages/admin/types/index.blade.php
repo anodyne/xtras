@@ -23,10 +23,10 @@
 				<div class="col-md-3 col-lg-3">
 					<div class="btn-toolbar pull-right">
 						<div class="btn-group">
-							<a href="#" class="btn btn-default js-edit-type" data-id="{{ $type->id }}">{{ $_icons['edit'] }}</a>
+							<a href="#" class="btn btn-default js-edit-type" data-id="{{ $type->id }}">Edit</a>
 						</div>
 						<div class="btn-group">
-							<a href="#" class="btn btn-danger js-delete-type" data-id="{{ $type->id }}">{{ $_icons['remove'] }}</a>
+							<a href="#" class="btn btn-danger js-delete-type" data-id="{{ $type->id }}">Remove</a>
 						</div>
 					</div>
 				</div>

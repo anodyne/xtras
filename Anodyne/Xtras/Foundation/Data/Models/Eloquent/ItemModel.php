@@ -53,8 +53,13 @@ class ItemModel extends Model {
 		'ratings'	=> [self::HAS_MANY, 'ItemRatingModel', 'foreignKey' => 'item_id'],
 		'comments'	=> [self::HAS_MANY, 'CommentModel', 'foreignKey' => 'item_id'],
 		'orders'	=> [self::HAS_MANY, 'OrderModel', 'foreignKey' => 'item_id'],
-		'files'		=> [self::HAS_MANY, 'ItemFileModel', 'foreignKey' => 'item_id'],
 	];
+
+	public function files()
+	{
+		return $this->hasMany('ItemFileModel', 'item_id')
+			->orderBy('created_at', 'desc');
+	}
 
 	/*
 	|---------------------------------------------------------------------------

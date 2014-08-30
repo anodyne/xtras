@@ -5,9 +5,8 @@ use View,
 	Input,
 	Redirect,
 	ProductRepositoryInterface;
-use Xtras\Controllers\BaseController;
 
-class ProductsController extends BaseController {
+class ProductsController extends \BaseController {
 
 	protected $products;
 

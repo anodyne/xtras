@@ -5,9 +5,8 @@ use View,
 	Input,
 	Redirect,
 	TypeRepositoryInterface;
-use Xtras\Controllers\BaseController;
 
-class TypesController extends BaseController {
+class TypesController extends \BaseController {
 
 	protected $types;
 

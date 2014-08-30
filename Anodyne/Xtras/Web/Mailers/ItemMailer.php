@@ -78,4 +78,16 @@ class ItemMailer extends BaseMailer {
 		return false;
 	}
 
+	public function firstXtra($item)
+	{
+		$emailData = [
+			'subject' => "Congratulations!",
+			'from' => Config::get('xtras.abuseEmail'),
+			'replyTo' => Config::get('xtras.abuseEmail'),
+			'to' => $item->user->email,
+		];
+
+		return $this->send('first-xtra', $emailData);
+	}
+
 }

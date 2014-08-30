@@ -1,6 +1,6 @@
-<?php namespace Xtras\Controllers;
+<?php namespace Xtras\Controllers\Items;
 
-class CommentController extends BaseController {
+class CommentsController extends \BaseController {
 
 	protected $items;
 

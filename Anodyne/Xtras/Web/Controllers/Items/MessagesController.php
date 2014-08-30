@@ -1,4 +1,4 @@
-<?php namespace Xtras\Controllers;
+<?php namespace Xtras\Controllers\Items;
 
 use View,
 	Event,
@@ -7,7 +7,7 @@ use View,
 	Redirect,
 	ItemRepositoryInterface;
 
-class ItemMessagesController extends BaseController {
+class MessagesController extends \BaseController {
 
 	protected $items;
 

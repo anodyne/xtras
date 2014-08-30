@@ -265,7 +265,7 @@
 @stop
 
 @section('scripts')
-	{{ partial('js/rate-item') }}
+	{{ partial('js/item-rate') }}
 	<script>
 		@if (Auth::check())
 			window.url = "{{ Request::root() }}";

@@ -92,19 +92,18 @@
 		{{ Form::hidden('slug', '') }}
 		{{ Form::hidden('user_id', $_currentUser->id) }}
 
-		<div class="row">
-			<div class="col-md-3 col-lg-3">
-				{{ Form::button('Create and Continue', ['type' => 'submit', 'class' => 'btn btn-lg btn-block btn-primary']) }}
+		<div class="btn-toolbar">
+			<div class="btn-group">
+				{{ Form::button('<span class="tab-icon tab-icon-right">'.$_icons['upload'].'</span>Create and go to Upload Zip File', ['type' => 'submit', 'class' => 'btn btn-lg btn-primary']) }}
 			</div>
-			<div class="col-md-9 col-lg-9">
-				<button class="btn btn-lg btn-link" disabled="disabled">Next Step: Upload Item Zip File</button>
+			<div class="btn-group">
+				<a href="{{ route('account.xtras') }}" class="btn btn-lg btn-default"><span class="tab-icon tab-icon-down1 tab-icon-right">{{ $_icons['close'] }}</span>Cancel</a>
 			</div>
 		</div>
 	{{ Form::close() }}
 @stop
 
 @section('scripts')
-
 	<script>
 		$('[name="name"]').on('change', function()
 		{
@@ -122,5 +121,4 @@
 			});
 		});
 	</script>
-
 @stop

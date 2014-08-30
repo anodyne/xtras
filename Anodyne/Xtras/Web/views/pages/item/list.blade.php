@@ -20,5 +20,10 @@
 
 		{{ $items->links() }}
 	@else
+		@if ($type != 'MODs')
+			{{ alert('warning', "No ".Str::lower($type)." found.") }}
+		@else
+			{{ alert('warning', "No ".$type." found.") }}
+		@endif
 	@endif
 @stop

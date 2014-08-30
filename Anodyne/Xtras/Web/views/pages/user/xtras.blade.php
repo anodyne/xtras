@@ -16,7 +16,7 @@
 	@endif
 
 	@if (count($xtras) == 0)
-		<p class="alert alert-warning">It looks like you don't have any Xtras. Go ahead and change that, create your first!</p>
+		{{ alert('warning', "It looks like you don't have any Xtras. Go ahead and change that, create your first!") }}
 	@else
 		<ul class="nav nav-tabs">
 			<li class="active"><a href="#skins" data-toggle="tab">Skins</a></li>
@@ -32,20 +32,24 @@
 						<div class="data-table data-table-striped data-table-bordered">
 						@foreach ($items as $item)
 							<div class="row {{ $item->product->present()->nameAsSlug }}">
-								<div class="col-md-7">
+								<div class="col-md-6">
 									<p class="lead">{{ $item->present()->name }}</p>
 								</div>
-								<div class="col-md-5">
+								<div class="col-md-6">
 									<div class="btn-toolbar pull-right">
 										<div class="btn-group">
 											<a href="{{ route('item.show', [$item->user->username, $item->slug]) }}" class="btn btn-default">View</a>
 										</div>
 										<div class="btn-group">
-											<a href="{{ route('messages.index', [$item->user->username, $item->slug]) }}" class="btn btn-default">Messages</a>
 											<a href="{{ route('item.edit', [$item->user->username, $item->slug]) }}" class="btn btn-default">Edit</a>
 										</div>
 										<div class="btn-group">
-											<a href="#" class="btn btn-danger">Remove</a>
+											<a href="{{ route('item.messages.index', [$item->user->username, $item->slug]) }}" class="btn btn-default">Messages</a>
+											<a href="{{ route('item.files.index', [$item->user->username, $item->slug]) }}" class="btn btn-default">Files</a>
+											<a href="{{ route('item.images.index', [$item->user->username, $item->slug]) }}" class="btn btn-default">Images</a>
+										</div>
+										<div class="btn-group">
+											<a href="#" class="btn btn-danger js-remove-item" data-id="{{ $item->id }}">Remove</a>
 										</div>
 									</div>
 								</div>
@@ -54,7 +58,7 @@
 						</div>
 					@endforeach
 				@else
-					<p class="alert alert-warning">You don't have any skins.</p>
+					{{ alert('warning', "You don't have any skins.") }}
 				@endif
 			</div>
 
@@ -65,20 +69,24 @@
 						<div class="data-table data-table-striped data-table-bordered">
 						@foreach ($items as $item)
 							<div class="row">
-								<div class="col-md-7">
+								<div class="col-md-6">
 									<p class="lead">{{ $item->present()->name }}</p>
 								</div>
-								<div class="col-md-5">
+								<div class="col-md-6">
 									<div class="btn-toolbar pull-right">
 										<div class="btn-group">
 											<a href="{{ route('item.show', [$item->user->username, $item->slug]) }}" class="btn btn-default">View</a>
 										</div>
 										<div class="btn-group">
-											<a href="#" class="btn btn-default">Messages</a>
 											<a href="{{ route('item.edit', [$item->user->username, $item->slug]) }}" class="btn btn-default">Edit</a>
 										</div>
 										<div class="btn-group">
-											<a href="#" class="btn btn-danger">Remove</a>
+											<a href="{{ route('item.messages.index', [$item->user->username, $item->slug]) }}" class="btn btn-default">Messages</a>
+											<a href="{{ route('item.files.index', [$item->user->username, $item->slug]) }}" class="btn btn-default">Files</a>
+											<a href="{{ route('item.images.index', [$item->user->username, $item->slug]) }}" class="btn btn-default">Images</a>
+										</div>
+										<div class="btn-group">
+											<a href="#" class="btn btn-danger js-remove-item" data-id="{{ $item->id }}">Remove</a>
 										</div>
 									</div>
 								</div>
@@ -87,7 +95,7 @@
 						</div>
 					@endforeach
 				@else
-					<p class="alert alert-warning">You don't have any MODs.</p>
+					{{ alert('warning', "You don't have any MODs.") }}
 				@endif
 			</div>
 
@@ -98,20 +106,24 @@
 						<div class="data-table data-table-striped data-table-bordered">
 						@foreach ($items as $item)
 							<div class="row">
-								<div class="col-md-7">
+								<div class="col-md-6">
 									<p class="lead">{{ $item->present()->name }}</p>
 								</div>
-								<div class="col-md-5">
+								<div class="col-md-6">
 									<div class="btn-toolbar pull-right">
 										<div class="btn-group">
 											<a href="{{ route('item.show', [$item->user->username, $item->slug]) }}" class="btn btn-default">View</a>
 										</div>
 										<div class="btn-group">
-											<a href="#" class="btn btn-default">Messages</a>
 											<a href="{{ route('item.edit', [$item->user->username, $item->slug]) }}" class="btn btn-default">Edit</a>
 										</div>
 										<div class="btn-group">
-											<a href="#" class="btn btn-danger">Remove</a>
+											<a href="{{ route('item.messages.index', [$item->user->username, $item->slug]) }}" class="btn btn-default">Messages</a>
+											<a href="{{ route('item.files.index', [$item->user->username, $item->slug]) }}" class="btn btn-default">Files</a>
+											<a href="{{ route('item.images.index', [$item->user->username, $item->slug]) }}" class="btn btn-default">Images</a>
+										</div>
+										<div class="btn-group">
+											<a href="#" class="btn btn-danger js-remove-item" data-id="{{ $item->id }}">Remove</a>
 										</div>
 									</div>
 								</div>
@@ -120,9 +132,17 @@
 						</div>
 					@endforeach
 				@else
-					<p class="alert alert-warning">You don't have any rank sets.</p>
+					{{ alert('warning', "You don't have any rank sets.") }}
 				@endif
 			</div>
 		</div>
 	@endif
+@stop
+
+@section('modals')
+	{{ modal(['id' => 'removeItem', 'header' => 'Remove Xtra']) }}
+@stop
+
+@section('scripts')
+	{{ partial('js/item-remove') }}
 @stop

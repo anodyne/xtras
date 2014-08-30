@@ -19,7 +19,11 @@ class ItemEventHandler {
 
 	public function onCreate($item)
 	{
-		//
+		// If this is the first Xtra for the user, send them an email
+		if ($item->user->items->count() == 1)
+		{
+			$this->mailer->firstXtra($item);
+		}
 	}
 
 	public function onDelete($item)
@@ -44,24 +48,29 @@ class ItemEventHandler {
 		//
 	}
 
-	public function onUpload($item)
+	public function onFileDelete($file)
+	{
+		//
+	}
+
+	public function onFileUpload($item)
 	{
 		// If this is an update, grab the orders and notify anyone who's grabbed this before
 	}
 
 	public function onMessageCreate($message)
 	{
-		# code...
+		//
 	}
 
 	public function onMessageDelete($message)
 	{
-		# code...
+		//
 	}
 
 	public function onMessageUpdate($message)
 	{
-		# code...
+		//
 	}
 
 }

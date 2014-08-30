@@ -51,7 +51,7 @@
 
 										@if ($_currentUser->can('xtras.admin'))
 											<li class="divider"></li>
-											<li><a href="{{ route('admin.items.index') }}">Manage Items</a></li>
+											<li><a href="{{ route('item.admin.index') }}">Manage Items</a></li>
 											<li><a href="{{ route('admin.products.index') }}">Manage Products</a></li>
 											<li><a href="{{ route('admin.types.index') }}">Manage Item Types</a></li>
 										@endif

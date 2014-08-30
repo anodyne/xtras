@@ -67,6 +67,7 @@ class XtrasServiceProvider extends ServiceProvider {
 		// Make sure we some variables available on all views
 		View::share('_currentUser', Auth::user());
 		View::share('_icons', Config::get('icons'));
+		View::share('_browser', App::make('browser'));
 	}
 
 	protected function registerBrowser()
@@ -120,9 +121,13 @@ class XtrasServiceProvider extends ServiceProvider {
 		Event::listen('item.comment', "{$namespace}ItemEventHandler@onComment");
 		Event::listen('item.deleted', "{$namespace}ItemEventHandler@onDelete");
 		Event::listen('item.updated', "{$namespace}ItemEventHandler@onUpdate");
-		Event::listen('item.uploaded', "{$namespace}ItemEventHandler@onUpload");
+		
+		Event::listen('item.file.deleted', "{$namespace}ItemEventHandler@onFileDelete");
+		Event::listen('item.file.uploaded', "{$namespace}ItemEventHandler@onFileUpload");
+		
 		Event::listen('item.report.abuse', "{$namespace}ItemEventHandler@onReportAbuse");
 		Event::listen('item.report.issue', "{$namespace}ItemEventHandler@onReportIssue");
+		
 		Event::listen('item.message.created', "{$namespace}ItemEventHandler@onMessageCreate");
 		Event::listen('item.message.deleted', "{$namespace}ItemEventHandler@onMessageDelete");
 		Event::listen('item.message.updated', "{$namespace}ItemEventHandler@onMessageUpdate");

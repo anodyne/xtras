@@ -77,18 +77,21 @@ class ItemRepository implements ItemRepositoryInterface {
 		return ItemModel::all();
 	}
 
-	public function create(array $data = [])
+	public function create(array $data)
 	{
+		// Create the item
 		$item = ItemModel::create($data);
 
-		if (Input::has('meta'))
+		// If there's metadata, update it
+		if (array_key_exists('meta', $data))
 		{
-			$this->updateMetaData($item->id, Input::get('meta'));
+			$this->updateMetaData($item->id, $data['meta']);
 		}
 
-		if (Input::has('files'))
+		// If there are file metadata, create that data
+		if (array_key_exists('files', $data))
 		{
-			$this->updateFileData($item->id, Input::get('files'));
+			$this->updateFileData($item->id, $data['files']);
 		}
 
 		return $item;
@@ -97,6 +100,21 @@ class ItemRepository implements ItemRepositoryInterface {
 	public function delete($id)
 	{
 		# code...
+	}
+
+	public function deleteFile($id)
+	{
+		// Get the file
+		$file = $this->findFile($id);
+
+		if ($file)
+		{
+			$file->delete();
+
+			return $file;
+		}
+
+		return false;
 	}
 
 	public function deleteMessage($id)
@@ -207,6 +225,11 @@ class ItemRepository implements ItemRepositoryInterface {
 		return $sortedItems;
 	}
 
+	public function findFile($id)
+	{
+		return ItemFileModel::with('item')->where('id', $id)->first();
+	}
+
 	public function findMessage($id)
 	{
 		return ItemMessageModel::with('item')->where('id', $id)->first();
@@ -254,11 +277,6 @@ class ItemRepository implements ItemRepositoryInterface {
 		}
 
 		return new Collection;
-	}
-
-	public function getFile($id)
-	{
-		return ItemFileModel::find($id);
 	}
 
 	public function getMessage($id)
@@ -385,7 +403,7 @@ class ItemRepository implements ItemRepositoryInterface {
 		return $search->paginate(25);
 	}
 
-	public function update($id, array $data = [])
+	public function update($id, array $data)
 	{
 		# code...
 	}

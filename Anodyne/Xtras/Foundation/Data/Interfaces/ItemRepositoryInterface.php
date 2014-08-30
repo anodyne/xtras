@@ -6,16 +6,17 @@ interface ItemRepositoryInterface extends BaseRepositoryInterface {
 
 	public function addComment($id, array $data);
 	public function addMessage($itemId, array $data);
+	public function deleteFile($id);
 	public function deleteMessage($id);
 	public function findByAuthor($author);
 	public function findByAuthorAndSlug($author, $name);
 	public function findByName($name);
 	public function findBySlug($slug);
 	public function findByType($type, $paginate = false, $splitByProduct = false);
+	public function findFile($id);
 	public function findMessage($id);
 	public function getByPage($type, $page = 1, $limit = 15, $order = 'created_at', $direction = 'desc');
 	public function getComments($id);
-	public function getFile($id);
 	public function getMessage($id);
 	public function getProducts();
 	public function getRecentlyAdded($number);

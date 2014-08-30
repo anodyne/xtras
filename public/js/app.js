@@ -6,7 +6,7 @@ var xtrasApp = angular.module('xtrasApp', ['ngSanitize'], function($interpolateP
 
 xtrasApp.controller('CommentsController', function($scope, $http, $window)
 {
-	$http.get($window.url + '/comments/' + $window.itemId).success(function(comments)
+	$http.get($window.url + '/item/comments/' + $window.itemId).success(function(comments)
 	{
 		$scope.comments = comments.data;
 	});
@@ -32,10 +32,10 @@ xtrasApp.controller('CommentsController', function($scope, $http, $window)
 		};
 
 		// Post the data
-		$http.post($window.url + '/comments/' + $window.itemId, comment);
+		$http.post($window.url + '/item/comments/' + $window.itemId, comment);
 
 		// Refresh all the comments
-		$http.get($window.url + '/comments/' + $window.itemId).success(function(comments)
+		$http.get($window.url + '/item/comments/' + $window.itemId).success(function(comments)
 		{
 			$scope.comments = comments.data;
 		});

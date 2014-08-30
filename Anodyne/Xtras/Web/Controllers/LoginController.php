@@ -1,57 +1,48 @@
 <?php namespace Xtras\Controllers;
 
 use Auth,
-	View,
-	Flash,
 	Input,
-	Session,
-	Redirect,
-	Validator,
-	UserRepositoryInterface;
+	Redirect;
 
-class LoginController extends BaseController {
-
-	protected $user;
-	
-	public function __construct(UserRepositoryInterface $user)
-	{
-		parent::__construct();
-
-		$this->user = $user;
-	}
+class LoginController extends \BaseController {
 
 	public function index()
 	{
-		return View::make('pages.login');
+		return \View::make('pages.login');
 	}
 
 	public function doLogin()
 	{
-		$validator = Validator::make(Input::all(), array(
+		// Validate
+		$validator = \Validator::make(Input::all(), [
 			'email'		=> 'required',
 			'password'	=> 'required',
-		));
+		], [
+			'email.required' => "Email address is required.",
+			'password.required' => "Passwords cannot be blank.",
+		]);
 
 		if ( ! $validator->passes())
 		{
-			Flash::error("Your information couldn't be validated. Please correct the issue(s) and try again.");
+			Flash::error("Please enter your email address and password and try again.");
 
-			return Redirect::route('login')->withInput()->withErrors($validator->errors());
+			return Redirect::route('login')
+				->withInput()
+				->withErrors($validator->errors());
 		}
 
+		// Grab the values and trim them
 		$email = trim(Input::get('email'));
 		$password = trim(Input::get('password'));
 
-		if (Auth::attempt(array('email' => $email, 'password' => $password), true))
+		if (Auth::attempt(['email' => $email, 'password' => $password], true))
 		{
-			if (Session::has('url.intended'))
+			if (\Session::has('url.intended'))
 			{
 				return Redirect::intended('home');
 			}
-			else
-			{
-				return Redirect::route('home');
-			}
+			
+			return Redirect::route('home');
 		}
 
 		Flash::error("Either your email address or password were incorrect. Please try again.");
@@ -61,20 +52,9 @@ class LoginController extends BaseController {
 
 	public function logout()
 	{
-		// Log the user out
 		Auth::logout();
-
+		
 		return Redirect::route('home');
-	}
-
-	public function register()
-	{
-		return View::make('pages.register');
-	}
-
-	public function doRegistration()
-	{
-		# code...
 	}
 
 }

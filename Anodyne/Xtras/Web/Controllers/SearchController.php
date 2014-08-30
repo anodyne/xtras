@@ -4,7 +4,7 @@ use View,
 	Input,
 	ItemRepositoryInterface;
 
-class SearchController extends BaseController {
+class SearchController extends \BaseController {
 
 	protected $items;
 

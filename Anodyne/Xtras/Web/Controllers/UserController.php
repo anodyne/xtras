@@ -1,12 +1,9 @@
 <?php namespace Xtras\Controllers;
 
-use Auth,
-	View,
-	Event,
-	Redirect,
+use View,
 	UserRepositoryInterface;
 
-class UserController extends BaseController {
+class UserController extends \BaseController {
 
 	protected $users;
 

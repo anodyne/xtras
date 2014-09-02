@@ -101,6 +101,18 @@ class ItemPresenter extends Presenter {
 		return $this->entity->name;
 	}
 
+	public function nameWithVersion()
+	{
+		$output = $this->name();
+
+		if ( ! empty($this->entity->version))
+		{
+			$output.= " {$this->version()}";
+		}
+
+		return $output;
+	}
+
 	public function product()
 	{
 		return $this->entity->product->present()->name;
@@ -182,6 +194,11 @@ class ItemPresenter extends Presenter {
 		return View::make('partials.label')
 			->withClass($class)
 			->withContent($this->entity->type->present()->name);
+	}
+
+	public function version()
+	{
+		return $this->entity->version;
 	}
 
 	public function updated()

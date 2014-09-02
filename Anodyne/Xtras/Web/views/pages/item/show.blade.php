@@ -138,7 +138,11 @@
 
 					@if ( ! empty($meta->image1) or ! empty($meta->image2) or ! empty($meta->image3))
 						<div id="images" class="tab-pane">
-							{{ $meta->present()->history }}
+							<div class="row gallery">
+								<a class="col-lg-4" href="{{ $meta->present()->image1 }}"><p><img src="{{ $meta->present()->thumbnail1 }}"></p></a>
+								<a class="col-lg-4" href="{{ $meta->present()->image2 }}"><p><img src="{{ $meta->present()->thumbnail2 }}"></p></a>
+								<a class="col-lg-4" href="{{ $meta->present()->image3 }}"><p><img src="{{ $meta->present()->thumbnail3 }}"></p></a>
+							</div>
 						</div>
 					@endif
 				@endif
@@ -264,7 +268,12 @@
 	</div>
 @stop
 
+@section('styles')
+	{{ HTML::style('css/bootstrap-gallery.min.css') }}
+@stop
+
 @section('scripts')
+	{{ HTML::script('js/bootstrap-gallery.js') }}
 	{{ partial('js/item-rate') }}
 	<script>
 		@if (Auth::check())
@@ -298,7 +307,13 @@
 
 		$(document).ready(function()
 		{
+			// Show the first tab
 			$('.nav-tabs a:first').tab('show');
+
+			// Activate the gallery
+			$('.gallery').bootstrapGallery({
+				iconset: "fontawesome"
+			});
 		});
 	</script>
 @stop

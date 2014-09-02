@@ -139,9 +139,9 @@
 					@if ( ! empty($meta->image1) or ! empty($meta->image2) or ! empty($meta->image3))
 						<div id="images" class="tab-pane">
 							<div class="row gallery">
-								<a class="col-lg-4" href="{{ $meta->present()->image1 }}"><p><img src="{{ $meta->present()->thumbnail1 }}"></p></a>
-								<a class="col-lg-4" href="{{ $meta->present()->image2 }}"><p><img src="{{ $meta->present()->thumbnail2 }}"></p></a>
-								<a class="col-lg-4" href="{{ $meta->present()->image3 }}"><p><img src="{{ $meta->present()->thumbnail3 }}"></p></a>
+								{{ $meta->present()->image1 }}
+								{{ $meta->present()->image2 }}
+								{{ $meta->present()->image3 }}
 							</div>
 						</div>
 					@endif

@@ -117,6 +117,25 @@ class ItemRepository implements ItemRepositoryInterface {
 		return false;
 	}
 
+	public function deleteImage($itemId, $imageNumber)
+	{
+		// Get the item
+		$item = $this->find($itemId);
+
+		if ($item)
+		{
+			// Get the meta data
+			$meta = $item->meta;
+
+			// Update the values
+			$meta->{"image{$imageNumber}"} = null;
+			$meta->{"thumbnail{$imageNumber}"} = null;
+			$meta->save();
+		}
+
+		return false;
+	}
+
 	public function deleteMessage($id)
 	{
 		// Get the message

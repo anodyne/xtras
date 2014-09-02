@@ -146,18 +146,18 @@ class XtrasRoutingServiceProvider extends ServiceProvider {
 
 		Route::group($imagesOptions, function()
 		{
-			Route::get('{author}/{slug}/create', [
-				'as'	=> 'item.images.create',
-				'uses'	=> 'ImagesController@create']);
-			Route::post('{itemId}/upload', [
+			Route::post('{itemId}/{image}/upload', [
 				'as'	=> 'item.images.upload',
 				'uses'	=> 'ImagesController@upload']);
-			Route::get('{imageId}/remove', [
+			Route::get('{itemId}/{imageNumber}/remove', [
 				'as'	=> 'item.images.remove',
 				'uses'	=> 'ImagesController@remove']);
-			Route::delete('{imageId}', [
+			Route::delete('{itemId}/{imageNumber}', [
 				'as'	=> 'item.images.destroy',
 				'uses'	=> 'ImagesController@destroy']);
+			Route::post('make-primary', [
+				'as'	=> 'item.images.primary',
+				'uses'	=> 'ImagesController@primary']);
 			Route::get('{author}/{slug}', [
 				'as'	=> 'item.images.index',
 				'uses'	=> 'ImagesController@index']);

@@ -302,6 +302,10 @@ section {
 			}
 		}
 	}
+
+	strong {
+		font-weight: 600;
+	}
 }
 
 footer, .push {
@@ -953,4 +957,16 @@ blockquote {
 }
 .rating-star:before {
 	content: attr(data-icon);
+}
+
+.preview-image {
+	padding: 5px;
+
+	border: 2px solid transparent;
+
+	.rounded;
+
+	&.preview-image-primary {
+		border-color: @color-primary-light;
+	}
 }

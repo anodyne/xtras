@@ -18,14 +18,16 @@
 	- Version: 0.1.4
 - [Guzzle](http://guzzlephp.org/)
 	- Version: 4.2.1
-- [Sanitizer](https://github.com/daylerees/sanitizer)
-	- Version: 1.0.1
 - [Entrust](https://github.com/Zizaco/entrust)
 	- Version: 1.2.3
 - [Ardent](https://github.com/laravelbook/ardent)
 	- Version: 2.4.2
 - [Gravatar](https://github.com/forxer/gravatar)
 	- Version: 1.2.0
+- [Image](http://image.intervention.io/)
+	- Version: 2.0.8
+- [IronMQ](https://github.com/iron-io/iron_mq_php)
+	- Version: 1.5.1
 
 ## Javascript
 
@@ -42,6 +44,8 @@
 	- Version: 1.3.0-beta.19
 - [jQuery Validate](http://jqueryvalidation.org/)
 	- Version: 1.13.0
+- [Bootstrap Gallery](https://github.com/iekadou/bootstrap-gallery)
+	- Version: 0.5
 
 ## Others
 

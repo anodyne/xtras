@@ -33,7 +33,7 @@
 						@foreach ($items as $item)
 							<div class="row {{ $item->product->present()->nameAsSlug }}">
 								<div class="col-md-6">
-									<p class="lead">{{ $item->present()->name }}</p>
+									<p class="lead">{{ $item->present()->nameWithVersion }}</p>
 								</div>
 								<div class="col-md-6">
 									<div class="btn-toolbar pull-right">
@@ -70,7 +70,7 @@
 						@foreach ($items as $item)
 							<div class="row">
 								<div class="col-md-6">
-									<p class="lead">{{ $item->present()->name }}</p>
+									<p class="lead">{{ $item->present()->nameWithVersion }}</p>
 								</div>
 								<div class="col-md-6">
 									<div class="btn-toolbar pull-right">
@@ -107,7 +107,7 @@
 						@foreach ($items as $item)
 							<div class="row">
 								<div class="col-md-6">
-									<p class="lead">{{ $item->present()->name }}</p>
+									<p class="lead">{{ $item->present()->nameWithVersion }}</p>
 								</div>
 								<div class="col-md-6">
 									<div class="btn-toolbar pull-right">

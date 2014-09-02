@@ -73,4 +73,14 @@ class ItemEventHandler {
 		//
 	}
 
+	public function onImageDelete($item)
+	{
+		//
+	}
+
+	public function onImageUpload($item)
+	{
+		//
+	}
+
 }

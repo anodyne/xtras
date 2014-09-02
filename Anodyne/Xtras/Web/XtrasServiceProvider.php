@@ -124,6 +124,9 @@ class XtrasServiceProvider extends ServiceProvider {
 		
 		Event::listen('item.file.deleted', "{$namespace}ItemEventHandler@onFileDelete");
 		Event::listen('item.file.uploaded', "{$namespace}ItemEventHandler@onFileUpload");
+
+		Event::listen('item.image.deleted', "{$namespace}ItemEventHandler@onImageDelete");
+		Event::listen('item.image.uploaded', "{$namespace}ItemEventHandler@onImageUpload");
 		
 		Event::listen('item.report.abuse', "{$namespace}ItemEventHandler@onReportAbuse");
 		Event::listen('item.report.issue', "{$namespace}ItemEventHandler@onReportIssue");

@@ -78,6 +78,9 @@ class CreateItems extends Migration {
 			$table->string('image1')->nullable();
 			$table->string('image2')->nullable();
 			$table->string('image3')->nullable();
+			$table->string('thumbnail1')->nullable();
+			$table->string('thumbnail2')->nullable();
+			$table->string('thumbnail3')->nullable();
 			$table->timestamps();
 			$table->softDeletes();
 		});

@@ -12,7 +12,7 @@ class ItemMetaModel extends Model {
 	protected $table = 'items_meta';
 
 	protected $fillable = ['item_id', 'installation', 'history', 'image1', 'image2',
-		'image3'];
+		'image3', 'thumbnail1', 'thumbnail2', 'thumbnail3'];
 
 	protected $dates = ['created_at', 'updated_at', 'deleted_at'];
 

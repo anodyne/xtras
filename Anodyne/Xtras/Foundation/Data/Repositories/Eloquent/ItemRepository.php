@@ -424,7 +424,30 @@ class ItemRepository implements ItemRepositoryInterface {
 
 	public function update($id, array $data)
 	{
-		# code...
+		// Get the item
+		$item = $this->find($id);
+
+		if ($item)
+		{
+			$item->fill($data);
+			$item->save();
+
+			// If there's metadata, update it
+			if (array_key_exists('meta', $data))
+			{
+				$this->updateMetaData($item->id, $data['meta']);
+			}
+
+			// If there are file metadata, create that data
+			if (array_key_exists('files', $data))
+			{
+				$this->updateFileData($item->id, $data['files']);
+			}
+
+			return $item;
+		}
+
+		return false;
 	}
 
 	public function updateFileData($id, array $data)

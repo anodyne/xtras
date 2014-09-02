@@ -112,6 +112,7 @@ return array(
 		'Xtras\XtrasServiceProvider',
 		'Xtras\XtrasRoutingServiceProvider',
 		'Zizaco\Entrust\EntrustServiceProvider',
+		'Intervention\Image\ImageServiceProvider',
 
 	),
 
@@ -188,6 +189,7 @@ return array(
 		'Entrust'			=> 'Zizaco\Entrust\EntrustFacade',
 		'Flash'				=> 'Xtras\Foundation\Facades\FlashFacade',
 		'Gravatar'			=> 'forxer\Gravatar\Gravatar',
+		'Image'				=> 'Intervention\Image\Facades\Image',
 		'Markdown'			=> 'Xtras\Foundation\Facades\MarkdownFacade',
 		'Model'				=> 'Xtras\Extensions\Laravel\Database\Eloquent\Model',
 		

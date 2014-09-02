@@ -7,7 +7,7 @@
 @section('content')
 	<h1>{{ $item->present()->name }} <small>Edit Xtra</small></h1>
 
-	{{ Form::model($item, ['route' => ['item.update', $item->id], 'method' => 'put']) }}
+	{{ Form::model($item, ['route' => ['item.update', $item->user->username, $item->slug], 'method' => 'put']) }}
 		<div class="row">
 			<div class="col-md-4 col-lg-4">
 				<div class="form-group">

@@ -138,7 +138,7 @@ class AdminController extends \BaseController {
 				// Set the flash message
 				Flash::success("Xtra was successfully updated.");
 
-				return Redirect::route('item.admin');
+				return Redirect::route('item.admin.index');
 			}
 
 			return $this->errorUnauthorized("You do not have permissions to edit Xtras other than your own!");

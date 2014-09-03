@@ -12,7 +12,7 @@
 			<a href="{{ route('account.xtras') }}" class="btn btn-default">My Xtras</a>
 		</div>
 		<div class="btn-group">
-			<a href="{{ route('messages.create', [$item->user->username, $item->slug]) }}" class="btn btn-primary">Create New Message</a>
+			<a href="{{ route('item.messages.create', [$item->user->username, $item->slug]) }}" class="btn btn-primary">Create New Message</a>
 		</div>
 	</div>
 
@@ -35,7 +35,7 @@
 				<div class="col-md-3">
 					<div class="btn-toolbar pull-right">
 						<div class="btn-group">
-							<a href="{{ route('messages.edit', [$message->id]) }}" class="btn btn-default">Edit</a>
+							<a href="{{ route('item.messages.edit', [$message->id]) }}" class="btn btn-default">Edit</a>
 						</div>
 						<div class="btn-group">
 							<a href="#" class="btn btn-danger">Remove</a>

@@ -244,6 +244,11 @@ class ItemRepository implements ItemRepositoryInterface {
 		return $sortedItems;
 	}
 
+	public function findComment($id)
+	{
+		return CommentModel::with('item', 'item.user', 'item.type', 'user')->find($id);
+	}
+
 	public function findFile($id)
 	{
 		return ItemFileModel::with('item')->where('id', $id)->first();

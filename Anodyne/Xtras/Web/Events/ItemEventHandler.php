@@ -11,10 +11,10 @@ class ItemEventHandler {
 		$this->mailer = $mailer;
 	}
 
-	public function onComment($comment)
+	public function onComment($commentId)
 	{
 		// Send the email
-		$this->mailer->addedComment($comment);
+		$this->mailer->addedComment($commentId);
 	}
 
 	public function onCreate($item)

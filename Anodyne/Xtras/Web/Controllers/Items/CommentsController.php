@@ -22,7 +22,7 @@ class CommentsController extends \BaseController {
 		$comment = $this->items->addComment($itemId, \Input::all());
 
 		// Fire the event
-		\Event::fire('item.comment', [$comment]);
+		\Event::fire('item.comment', [$comment->id]);
 
 		return $comment;
 	}

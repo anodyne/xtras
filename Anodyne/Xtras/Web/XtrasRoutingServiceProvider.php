@@ -98,19 +98,19 @@ class XtrasRoutingServiceProvider extends ServiceProvider {
 		{
 			Route::get('{author}/{slug}/create', [
 				'as'	=> 'item.messages.create',
-				'uses'	=> 'ItemMessagesController@create']);
+				'uses'	=> 'MessagesController@create']);
 			Route::post('{author}/{slug}', [
 				'as'	=> 'item.messages.store',
-				'uses'	=> 'ItemMessagesController@store']);
+				'uses'	=> 'MessagesController@store']);
 			Route::get('{id}/edit', [
 				'as'	=> 'item.messages.edit',
-				'uses'	=> 'ItemMessagesController@edit']);
+				'uses'	=> 'MessagesController@edit']);
 			Route::put('{id}', [
 				'as'	=> 'item.messages.update',
-				'uses'	=> 'ItemMessagesController@update']);
+				'uses'	=> 'MessagesController@update']);
 			Route::get('{author}/{slug}', [
 				'as'	=> 'item.messages.index',
-				'uses'	=> 'ItemMessagesController@index']);
+				'uses'	=> 'MessagesController@index']);
 		});
 		
 		$filesOptions = [

@@ -2,19 +2,16 @@
 
 use Input,
 	TypeModel,
-	UtilityTrait,
 	TypeRepositoryInterface;
 
 class TypeRepository implements TypeRepositoryInterface {
-
-	use UtilityTrait;
 
 	public function all()
 	{
 		return TypeModel::get();
 	}
 
-	public function create(array $data = [])
+	public function create(array $data)
 	{
 		return TypeModel::create($data);
 	}
@@ -39,7 +36,7 @@ class TypeRepository implements TypeRepositoryInterface {
 		return TypeModel::find($id);
 	}
 
-	public function update($id, array $data = [])
+	public function update($id, array $data)
 	{
 		// Get the type
 		$type = $this->find($id);

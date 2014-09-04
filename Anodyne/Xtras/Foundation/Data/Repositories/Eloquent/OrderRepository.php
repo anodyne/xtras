@@ -2,13 +2,10 @@
 
 use UserModel,
 	OrderModel,
-	UtilityTrait,
 	ItemFileModel,
 	OrderRepositoryInterface;
 
 class OrderRepository implements OrderRepositoryInterface {
-
-	use UtilityTrait;
 
 	public function create(UserModel $user, ItemFileModel $file)
 	{

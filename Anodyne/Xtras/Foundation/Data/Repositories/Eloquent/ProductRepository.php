@@ -2,19 +2,16 @@
 
 use Input,
 	ProductModel,
-	UtilityTrait,
 	ProductRepositoryInterface;
 
 class ProductRepository implements ProductRepositoryInterface {
-
-	use UtilityTrait;
 
 	public function all()
 	{
 		return ProductModel::get();
 	}
 
-	public function create(array $data = [])
+	public function create(array $data)
 	{
 		return ProductModel::create($data);
 	}
@@ -39,7 +36,7 @@ class ProductRepository implements ProductRepositoryInterface {
 		return ProductModel::find($id);
 	}
 
-	public function update($id, array $data = [])
+	public function update($id, array $data)
 	{
 		// Get the product
 		$product = $this->find($id);

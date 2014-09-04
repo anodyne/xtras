@@ -1,16 +1,8 @@
 <?php namespace Xtras\Extensions\Laravel\Database\Eloquent;
 
 use Date;
-use LaravelBook\Ardent\Ardent;
 
-class Model extends Ardent {
-
-	// Hydrate models from the input array
-	public $autoHydrateEntityFromInput = true;
-	public $forceEntityHydrationFromInput = true;
-
-	// Get rid of attributes we don't need
-	public $autoPurgeRedundantAttributes = true;
+class Model extends \Eloquent {
 	
 	/*
 	|--------------------------------------------------------------------------

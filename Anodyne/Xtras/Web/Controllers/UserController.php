@@ -1,14 +1,12 @@
 <?php namespace Xtras\Controllers;
 
-use View,
-	Input,
-	UserRepositoryInterface;
+use View, Input;
 
 class UserController extends \BaseController {
 
 	protected $users;
 
-	public function __construct(UserRepositoryInterface $users)
+	public function __construct(\UserRepositoryInterface $users)
 	{
 		parent::__construct();
 
@@ -42,25 +40,31 @@ class UserController extends \BaseController {
 
 	public function addNotification()
 	{
-		// Get the values
-		$user = Input::get('user');
-		$item = Input::get('item');
-
-		if ((int) $this->currentUser->id === (int) $user)
+		if ($this->currentUser)
 		{
-			$this->users->addNotification($user, $item);
+			// Get the values
+			$user = Input::get('user');
+			$item = Input::get('item');
+
+			if ((int) $this->currentUser->id === (int) $user)
+			{
+				$this->users->addNotification($user, $item);
+			}
 		}
 	}
 
 	public function removeNotification()
 	{
-		// Get the values
-		$user = Input::get('user');
-		$item = Input::get('item');
-
-		if ((int) $this->currentUser->id === (int) $user)
+		if ($this->currentUser)
 		{
-			$this->users->removeNotification($user, $item);
+			// Get the values
+			$user = Input::get('user');
+			$item = Input::get('item');
+
+			if ((int) $this->currentUser->id === (int) $user)
+			{
+				$this->users->removeNotification($user, $item);
+			}
 		}
 	}
 

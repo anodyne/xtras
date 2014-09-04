@@ -1,14 +1,12 @@
 <?php namespace Xtras\Controllers;
 
-use View,
-	Input,
-	ItemRepositoryInterface;
+use View, Input;
 
 class MainController extends \BaseController {
 
 	protected $items;
 
-	public function __construct(ItemRepositoryInterface $items)
+	public function __construct(\ItemRepositoryInterface $items)
 	{
 		parent::__construct();
 

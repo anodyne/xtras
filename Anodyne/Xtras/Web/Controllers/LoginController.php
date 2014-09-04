@@ -1,8 +1,6 @@
 <?php namespace Xtras\Controllers;
 
-use Auth,
-	Input,
-	Redirect;
+use Auth, Input, Redirect;
 
 class LoginController extends \BaseController {
 
@@ -13,7 +11,6 @@ class LoginController extends \BaseController {
 
 	public function doLogin()
 	{
-		// Validate
 		$validator = \Validator::make(Input::all(), [
 			'email'		=> 'required',
 			'password'	=> 'required',

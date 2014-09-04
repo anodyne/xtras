@@ -24,7 +24,7 @@ class ItemModel extends Model {
 	|---------------------------------------------------------------------------
 	*/
 
-	public static $rules = [
+	/*public static $rules = [
 		'type_id'		=> 'required|integer',
 		'product_id'	=> 'required|integer',
 		'name'			=> 'required',
@@ -36,7 +36,7 @@ class ItemModel extends Model {
 		'product_id.required' => "You must enter a product",
 		'product_id.integer' => "You have entered an invalid value for the product. Please select the product from the dropdown.",
 		'name.required' => "You must enter a name",
-	];
+	];*/
 
 	/*
 	|---------------------------------------------------------------------------
@@ -44,21 +44,50 @@ class ItemModel extends Model {
 	|---------------------------------------------------------------------------
 	*/
 
-	public static $relationsData = [
-		'product'	=> [self::BELONGS_TO, 'ProductModel'],
-		'type'		=> [self::BELONGS_TO, 'TypeModel'],
-		'user'		=> [self::BELONGS_TO, 'UserModel'],
-		'messages'	=> [self::HAS_MANY, 'ItemMessageModel', 'foreignKey' => 'item_id'],
-		'meta'		=> [self::HAS_ONE, 'ItemMetaModel', 'foreignKey' => 'item_id'],
-		'ratings'	=> [self::HAS_MANY, 'ItemRatingModel', 'foreignKey' => 'item_id'],
-		'comments'	=> [self::HAS_MANY, 'CommentModel', 'foreignKey' => 'item_id'],
-		'orders'	=> [self::HAS_MANY, 'OrderModel', 'foreignKey' => 'item_id'],
-	];
+	public function product()
+	{
+		return $this->belongsTo('ProductModel');
+	}
+
+	public function type()
+	{
+		return $this->belongsTo('TypeModel');
+	}
+
+	public function user()
+	{
+		return $this->belongsTo('UserModel');
+	}
+
+	public function messages()
+	{
+		return $this->hasMany('ItemMessageModel', 'item_id');
+	}
+
+	public function meta()
+	{
+		return $this->hasOne('ItemMetaModel', 'item_id');
+	}
+
+	public function comments()
+	{
+		return $this->hasMany('CommentModel', 'item_id');
+	}
+
+	public function orders()
+	{
+		return $this->hasMany('OrderModel', 'item_id');
+	}
 
 	public function files()
 	{
 		return $this->hasMany('ItemFileModel', 'item_id')
 			->orderBy('created_at', 'desc');
+	}
+
+	public function ratings()
+	{
+		return $this->hasMany('ItemRatingModel', 'item_id');
 	}
 
 	/*

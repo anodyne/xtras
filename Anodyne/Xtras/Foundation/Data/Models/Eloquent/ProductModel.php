@@ -23,9 +23,10 @@ class ProductModel extends Model {
 	|---------------------------------------------------------------------------
 	*/
 
-	public static $relationsData = [
-		'items' => [self::HAS_MANY, 'ItemModel', 'foreignKey' => 'product_id'],
-	];
+	public function items()
+	{
+		return $this->hasMany('ItemModel', 'product_id');
+	}
 
 	/*
 	|---------------------------------------------------------------------------

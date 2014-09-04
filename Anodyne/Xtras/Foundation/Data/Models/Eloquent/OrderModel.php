@@ -16,10 +16,19 @@ class OrderModel extends Model {
 	|---------------------------------------------------------------------------
 	*/
 
-	public static $relationsData = [
-		'item'	=> [self::BELONGS_TO, 'ItemModel'],
-		'file'	=> [self::BELONGS_TO, 'ItemFileModel'],
-		'user'	=> [self::BELONGS_TO, 'UserModel'],
-	];
+	public function item()
+	{
+		return $this->belongsTo('ItemModel');
+	}
+
+	public function file()
+	{
+		return $this->belongsTo('ItemFileModel');
+	}
+
+	public function user()
+	{
+		return $this->belongsTo('UserModel');
+	}
 
 }

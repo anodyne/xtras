@@ -23,10 +23,15 @@ class ItemFileModel extends Model {
 	|---------------------------------------------------------------------------
 	*/
 
-	public static $relationsData = [
-		'item' => [self::BELONGS_TO, 'ItemModel'],
-		'orders' => [self::HAS_MANY, 'OrderModel', 'foreignKey' => 'file_id'],
-	];
+	public function item()
+	{
+		return $this->belongsTo('ItemModel');
+	}
+
+	public function orders()
+	{
+		return $this->hasMany('OrderModel', 'file_id');
+	}
 
 	/*
 	|---------------------------------------------------------------------------

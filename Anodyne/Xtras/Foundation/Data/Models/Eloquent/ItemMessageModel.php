@@ -25,9 +25,10 @@ class ItemMessageModel extends Model {
 	|---------------------------------------------------------------------------
 	*/
 
-	public static $relationsData = [
-		'item' => [self::BELONGS_TO, 'ItemModel'],
-	];
+	public function item()
+	{
+		return $this->belongsTo('ItemModel');
+	}
 
 	/*
 	|---------------------------------------------------------------------------

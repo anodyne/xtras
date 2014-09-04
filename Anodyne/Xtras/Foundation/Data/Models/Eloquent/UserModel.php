@@ -24,8 +24,7 @@ class UserModel extends Model implements UserInterface, RemindableInterface {
 
 	protected $table = 'users';
 
-	protected $fillable = ['name', 'email', 'password', 'url', 'bio', 'username',
-		'remember_token'];
+	protected $fillable = ['remember_token'];
 
 	protected $hidden = ['password', 'remember_token'];
 
@@ -33,20 +32,21 @@ class UserModel extends Model implements UserInterface, RemindableInterface {
 
 	protected $presenter = 'Xtras\Foundation\Data\Presenters\UserPresenter';
 
-	// Hash the password automatically
-	public static $passwordAttributes  = ['password'];
-	public $autoHashPasswordAttributes = true;
-
 	/*
 	|--------------------------------------------------------------------------
 	| Relationships
 	|--------------------------------------------------------------------------
 	*/
 
-	public static $relationsData = [
-		'items'		=> [self::HAS_MANY, 'ItemModel', 'foreignKey' => 'user_id'],
-		'orders'	=> [self::HAS_MANY, 'OrderModel', 'foreignKey' => 'user_id'],
-	];
+	public function items()
+	{
+		return $this->hasMany('ItemModel', 'user_id');
+	}
+
+	public function orders()
+	{
+		return $this->hasMany('OrderModel', 'user_id');
+	}
 
 	/*
 	|--------------------------------------------------------------------------

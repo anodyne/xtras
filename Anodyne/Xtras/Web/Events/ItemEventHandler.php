@@ -43,9 +43,10 @@ class ItemEventHandler {
 		$this->mailer->reportIssue($input);
 	}
 
-	public function onUpdate($item)
+	public function onUpdate($itemId)
 	{
-		//
+		// Send the email
+		$this->mailer->notify($itemId);
 	}
 
 	public function onFileDelete($file)

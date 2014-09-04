@@ -33,7 +33,7 @@ class ItemMailer extends BaseMailer {
 			$emailData = [
 				'subject' => "Comment Added - ".$item->present()->name,
 				'content' => $comment->present()->content,
-				'from' => Config::get('xtras.abuseEmail'),
+				'from' => Config::get('xtras.email.general'),
 				'replyTo' => $user->email,
 				'to' => $item->user->email,
 				'name' => HTML::link(route('item.show', [$item->user->username, $item->slug]), $item->present()->name),
@@ -42,6 +42,45 @@ class ItemMailer extends BaseMailer {
 			];
 
 			return $this->send('comment', $emailData);
+		}
+
+		return false;
+	}
+
+	public function notify($itemId)
+	{
+		// Get the item
+		$item = $this->items->find($itemId);
+
+		if ($item)
+		{
+			// Get the people who want to be notified
+			$users = $item->notifications;
+
+			if ($users->count() > 0)
+			{
+				// Get the users' email addresses
+				foreach ($users as $user)
+				{
+					$emails[$user->id] = $user->email;
+				}
+
+				// Make sure we only have the values
+				$emailsArr = array_values($emails);
+
+				$emailData = [
+					'subject' => "Xtra Updated - ".$item->present()->name,
+					'from' => Config::get('xtras.email.general'),
+					'replyTo' => $user->present()->email,
+					'bcc' => $emailsArr,
+					'name' => HTML::link(route('item.show', [$item->user->username, $item->slug]), $item->present()->name),
+					'type' => $item->present()->type,
+					'history' => $item->meta->present()->history,
+					'version' => $item->present()->version,
+				];
+
+				return $this->send('notify-update', $emailData);
+			}
 		}
 
 		return false;
@@ -58,11 +97,11 @@ class ItemMailer extends BaseMailer {
 			$user = $this->users->find($data['user_id']);
 
 			$emailData = [
-				'subject' => "Abuse Reported - ".$item->present()->name,
+				'subject' => "[Abuse] Xtra Abuse Report - ".$item->present()->name,
 				'content' => $data['content'],
 				'from' => $user->present()->email,
 				'replyTo' => $user->present()->email,
-				'to' => Config::get('xtras.abuseEmail'),
+				'to' => Config::get('xtras.email.abuse'),
 				'name' => HTML::link(route('item.show', [$item->user->username, $item->slug]), $item->present()->name),
 				'type' => $item->present()->type,
 				'userName' => $user->present()->name,
@@ -112,8 +151,8 @@ class ItemMailer extends BaseMailer {
 	{
 		$emailData = [
 			'subject' => "Congratulations!",
-			'from' => Config::get('xtras.abuseEmail'),
-			'replyTo' => Config::get('xtras.abuseEmail'),
+			'from' => Config::get('xtras.email.general'),
+			'replyTo' => Config::get('xtras.email.general'),
 			'to' => $item->user->email,
 		];
 

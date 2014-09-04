@@ -1,13 +1,10 @@
 <?php namespace Xtras\Foundation\Data\Repositories\Eloquent;
 
 use UserModel,
-	UtilityTrait,
 	NotificationModel,
 	UserRepositoryInterface;
 
 class UserRepository implements UserRepositoryInterface {
-
-	use UtilityTrait;
 
 	public function addNotification($user, $item)
 	{

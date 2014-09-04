@@ -2,6 +2,13 @@
 
 return [
 
-	'abuseEmail' => "admin@anodyne-productions.com",
+	'email' => [
+
+		'abuse'		=> 'admin@anodyne-productions.com',
+		'general'	=> 'xtras@anodyne-productions.com',
+
+		'subject'	=> "[AnodyneXtras]",
+
+	],
 
 ];

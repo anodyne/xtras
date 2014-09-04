@@ -11,7 +11,8 @@
 		"zizaco/entrust": "1.2.*",
 		"forxer/Gravatar": "~1.2",
 		"intervention/image": "~2.0",
-		"iron-io/iron_mq": "1.5.*"
+		"iron-io/iron_mq": "1.5.*",
+		"dingo/api": "~0.1"
 	},
 
 	"require-dev": {
@@ -40,9 +41,5 @@
 	},
 
 	"minimum-stability": "dev",
-	"prefer-stable": true,
-
-	"post-update-cmd": [
-		"php artisan debugbar:publish"
-	]
+	"prefer-stable": true
 }

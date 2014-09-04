@@ -7,7 +7,7 @@
 - [Flysystem](http://flysystem.thephpleague.com/)
 	- Version: 0.5.5
 - [Fractal](http://fractal.thephpleague.com/)
-	- Version: 0.9.1
+	- Version: 0.8.3
 - [AWS SDK](https://aws.amazon.com/sdkforphp/)
 	- Version: 2.6.15
 - [Parsedown](http://parsedown.org/)
@@ -28,6 +28,8 @@
 	- Version: 2.0.8
 - [IronMQ](https://github.com/iron-io/iron_mq_php)
 	- Version: 1.5.1
+- [API](https://github.com/dingo/api)
+	- Version: 0.6.5
 
 ## Javascript
 

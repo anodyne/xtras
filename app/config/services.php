@@ -3,7 +3,9 @@
 return [
 
 	'mandrill' => [
-		'secret' => '',
+
+		'secret' => $_ENV['MAIL_PASSWORD'],
+
 	],
 
 ];

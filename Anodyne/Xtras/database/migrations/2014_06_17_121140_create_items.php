@@ -108,8 +108,14 @@ class CreateItems extends Migration {
 			$table->unsignedBigInteger('user_id');
 			$table->unsignedBigInteger('item_id');
 			$table->unsignedBigInteger('file_id');
-			$table->boolean('notify')->default((int) true);
 			$table->timestamps();
+		});
+
+		Schema::create('notifications', function(Blueprint $table)
+		{
+			$table->bigIncrements('id');
+			$table->unsignedBigInteger('user_id');
+			$table->unsignedBigInteger('item_id');
 		});
 	}
 
@@ -129,6 +135,7 @@ class CreateItems extends Migration {
 		Schema::dropIfExists('items_meta');
 		Schema::dropIfExists('comments');
 		Schema::dropIfExists('orders');
+		Schema::dropIfExists('notifications');
 	}
 
 }

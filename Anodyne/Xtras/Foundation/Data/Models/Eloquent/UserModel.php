@@ -48,6 +48,21 @@ class UserModel extends Model implements UserInterface, RemindableInterface {
 		return $this->hasMany('OrderModel', 'user_id');
 	}
 
+	public function notifications()
+	{
+		return $this->hasMany('NotificationModel', 'user_id');
+	}
+
+	public function roles()
+	{
+		return $this->belongsToMany(
+			Config::get('entrust::role'),
+			Config::get('entrust::assigned_roles_table'),
+			'user_id',
+			'role_id'
+		);
+	}
+
 	/*
 	|--------------------------------------------------------------------------
 	| Model Scopes
@@ -65,14 +80,19 @@ class UserModel extends Model implements UserInterface, RemindableInterface {
 	|--------------------------------------------------------------------------
 	*/
 
-	public function roles()
-    {
-        return $this->belongsToMany(
-        	Config::get('entrust::role'),
-        	Config::get('entrust::assigned_roles_table'),
-        	'user_id',
-        	'role_id'
-        );
-    }
+	public function itemNotify(ItemModel $item)
+	{
+		$notification = $this->notifications->filter(function($n) use ($item)
+		{
+			return (int) $n->item_id === (int) $item->id;
+		})->first();
+
+		if ($notification)
+		{
+			return true;
+		}
+
+		return false;
+	}
 
 }

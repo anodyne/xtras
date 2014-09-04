@@ -2,13 +2,13 @@
 
 use Model;
 
-class OrderModel extends Model {
+class NotificationModel extends Model {
 
-	protected $table = 'orders';
+	public $timestamps = false;
 
-	protected $fillable = ['user_id', 'item_id', 'file_id'];
+	protected $table = 'notifications';
 
-	protected $dates = ['created_at', 'updated_at'];
+	protected $fillable = ['user_id', 'item_id'];
 
 	/*
 	|---------------------------------------------------------------------------
@@ -19,11 +19,6 @@ class OrderModel extends Model {
 	public function item()
 	{
 		return $this->belongsTo('ItemModel');
-	}
-
-	public function file()
-	{
-		return $this->belongsTo('ItemFileModel');
 	}
 
 	public function user()

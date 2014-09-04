@@ -219,10 +219,10 @@
 				@endif
 
 				<p>
-					@if (empty($item->support))
-						<a href="#" rel="issue" class="btn btn-block btn-default">Report an Issue</a>
+					@if ( ! empty($item->support) and ! filter_var($item->support, FILTER_VALIDATE_EMAIL))
+						<a href="{{ $item->support }}" class="btn btn-block btn-default">Get Help</a>
 					@else
-						<a href="{{ $item->present()->support }}" class="btn btn-block btn-default">Get Help</a>
+						<a href="#" rel="issue" class="btn btn-block btn-default">Report an Issue</a>
 					@endif
 				</p>
 
@@ -233,8 +233,17 @@
 
 				<hr>
 
-				@if ($item->user->id != $_currentUser->id)
+				@if ( ! $item->isOwner($_currentUser))
 					{{ partial('rating', ['id' => $item->id, 'r' => $userRating]) }}
+
+					<hr>
+
+					{{ Form::open() }}
+						<div class="pull-right">
+							<label class="checkbox-inline">{{ Form::checkbox('notify', 1, $notify, ['class' => 'js-notification']) }} Notify me of releases</label>
+						</div>
+					{{ Form::close() }}
+					<div class="clearfix"></div>
 
 					<hr>
 				@endif
@@ -303,6 +312,32 @@
 		{
 			e.preventDefault();
 			$('#commentPanel').removeClass('hide');
+		});
+
+		$('.js-notification').on('change', function(e)
+		{
+			var send = {
+				item: "{{ $item->id }}",
+				user: "{{ $_currentUser->id }}",
+				'_token': "{{ csrf_token() }}"
+			};
+
+			if ($(this).is(':checked'))
+			{
+				$.ajax({
+					url: "{{ route('account.notifications.add') }}",
+					type: "POST",
+					data: send
+				});
+			}
+			else
+			{
+				$.ajax({
+					url: "{{ route('account.notifications.remove') }}",
+					type: "POST",
+					data: send
+				});
+			}
 		});
 
 		$(document).ready(function()

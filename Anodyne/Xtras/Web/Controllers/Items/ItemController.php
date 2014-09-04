@@ -45,7 +45,8 @@ class ItemController extends \BaseController {
 				->withMeta($item->meta)
 				->withFiles($item->files->sortBy('version', SORT_REGULAR, true))
 				->withComments($item->comments->sortBy('created_at', SORT_REGULAR, true))
-				->with('userRating', $userRating);
+				->with('userRating', $userRating)
+				->withNotify($this->currentUser->itemNotify($item));
 		}
 
 		return $this->errorNotFound("We couldn't find the Xtra you're looking for.");

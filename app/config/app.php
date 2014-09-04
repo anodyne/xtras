@@ -205,6 +205,7 @@ return array(
 		'ItemRatingModel'	=> 'Xtras\Foundation\Data\Models\Eloquent\ItemRatingModel',
 		'TypeModel'			=> 'Xtras\Foundation\Data\Models\Eloquent\TypeModel',
 		'CommentModel'		=> 'Xtras\Foundation\Data\Models\Eloquent\CommentModel',
+		'NotificationModel'	=> 'Xtras\Foundation\Data\Models\Eloquent\NotificationModel',
 		'OrderModel'		=> 'Xtras\Foundation\Data\Models\Eloquent\OrderModel',
 		'RoleModel'			=> 'Xtras\Foundation\Data\Models\Eloquent\RoleModel',
 		'PermissionModel'	=> 'Xtras\Foundation\Data\Models\Eloquent\PermissionModel',

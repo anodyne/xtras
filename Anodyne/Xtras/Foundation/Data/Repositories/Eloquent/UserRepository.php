@@ -2,18 +2,27 @@
 
 use UserModel,
 	UtilityTrait,
+	NotificationModel,
 	UserRepositoryInterface;
 
 class UserRepository implements UserRepositoryInterface {
 
 	use UtilityTrait;
 
+	public function addNotification($user, $item)
+	{
+		return NotificationModel::firstOrCreate([
+			'user_id' => $user,
+			'item_id' => $item,
+		]);
+	}
+
 	public function all()
 	{
 		return UserModel::all();
 	}
 
-	public function create(array $data = []){}
+	public function create(array $data){}
 
 	public function delete($id){}
 
@@ -91,20 +100,29 @@ class UserRepository implements UserRepositoryInterface {
 		return $itemsArr;
 	}
 
-	public function update($id, array $data = [])
+	public function getNotifications(UserModel $user)
 	{
-		// Get the user
-		$user = $this->find($id);
+		// Eager loading
+		$user = $user->load('notifications', 'notifications.item', 'notifications.item.user');
 
-		if ($user)
+		return $user->notifications;
+	}
+
+	public function removeNotification($user, $item)
+	{
+		// Get the notification
+		$notification = NotificationModel::where('user_id', $user)
+			->where('item_id', $item)
+			->first();
+
+		if ($notification)
 		{
-			$user->fill($data);
-			$user->save();
-
-			return $user;
+			$notification->delete();
 		}
 
 		return false;
 	}
+
+	public function update($id, array $data){}
 
 }

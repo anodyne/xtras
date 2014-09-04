@@ -239,14 +239,25 @@ class XtrasRoutingServiceProvider extends ServiceProvider {
 	{
 		Route::group(['namespace' => 'Xtras\Controllers'], function()
 		{
-			Route::get('profile/{name}', array(
+			Route::get('profile/{name}', [
 				'as'	=> 'account.profile',
-				'uses'	=> 'UserController@show'
-			));
+				'uses'	=> 'UserController@show']);
 			Route::get('my-xtras', [
 				'before'	=> 'auth',
 				'as'		=> 'account.xtras',
 				'uses'		=> 'UserController@xtras']);
+			Route::get('notifications', [
+				'before'	=> 'auth',
+				'as'		=> 'account.notifications',
+				'uses'		=> 'UserController@notifications']);
+			Route::post('notifications/add', [
+				'before'	=> 'auth',
+				'as'		=> 'account.notifications.add',
+				'uses'		=> 'UserController@addNotification']);
+			Route::post('notifications/remove', [
+				'before'	=> 'auth',
+				'as'		=> 'account.notifications.remove',
+				'uses'		=> 'UserController@removeNotification']);
 		});
 	}
 

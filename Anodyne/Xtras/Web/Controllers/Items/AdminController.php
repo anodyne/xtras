@@ -126,7 +126,7 @@ class AdminController extends \BaseController {
 				$item = $this->items->update($xtra->id, Input::all());
 
 				// Fire the item update event
-				Event::fire('item.updated', [$item]);
+				Event::fire('item.updated', [$item->id]);
 
 				if ( ! $admin)
 				{

@@ -1,12 +1,10 @@
 <?php namespace Xtras\Mailers;
 
-use Mail;
-
 abstract class BaseMailer {
 
 	public function send($view, array $data)
 	{
-		return Mail::queue("emails.{$view}", $data, function($msg) use ($data)
+		return \Mail::send("emails.{$view}", $data, function($msg) use ($data)
 		{
 			// Set the TO
 			if (array_key_exists('to', $data))
@@ -33,7 +31,7 @@ abstract class BaseMailer {
 			}
 
 			// Set the subject
-			$msg->subject("[AnodyneXtras] {$data['subject']}");
+			$msg->subject(\Config::get('xtras.email.subject')." {$data['subject']}");
 
 			// Set who it's coming from
 			if (array_key_exists('from', $data))

@@ -3,14 +3,13 @@
 use View,
 	Event,
 	Input,
-	Redirect,
-	TypeRepositoryInterface;
+	Redirect;
 
 class TypesController extends \BaseController {
 
 	protected $types;
 
-	public function __construct(TypeRepositoryInterface $types)
+	public function __construct(\TypeRepositoryInterface $types)
 	{
 		parent::__construct();
 

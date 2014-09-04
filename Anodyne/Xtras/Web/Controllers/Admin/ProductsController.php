@@ -3,14 +3,13 @@
 use View,
 	Event,
 	Input,
-	Redirect,
-	ProductRepositoryInterface;
+	Redirect;
 
 class ProductsController extends \BaseController {
 
 	protected $products;
 
-	public function __construct(ProductRepositoryInterface $products)
+	public function __construct(\ProductRepositoryInterface $products)
 	{
 		parent::__construct();
 
@@ -96,7 +95,7 @@ class ProductsController extends \BaseController {
 	{
 		if ( ! $this->currentUser->can('xtras.admin'))
 		{
-			return $this->errorUnauthorized("You do not have permissions to manage products.");
+			return $this->errorUnauthorized("You do not have permission to manage products!");
 		}
 	}
 

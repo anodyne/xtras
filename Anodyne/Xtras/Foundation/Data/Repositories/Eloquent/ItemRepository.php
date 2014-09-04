@@ -77,6 +77,11 @@ class ItemRepository implements ItemRepositoryInterface {
 		return ItemModel::all();
 	}
 
+	public function allPaginated($number)
+	{
+		return ItemModel::active()->paginate($number);
+	}
+
 	public function create(array $data)
 	{
 		// Create the item

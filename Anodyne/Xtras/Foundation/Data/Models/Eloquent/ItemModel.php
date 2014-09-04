@@ -4,9 +4,10 @@ use Str,
 	Model,
 	Collection;
 use Laracasts\Presenter\PresentableTrait;
+use Dingo\Api\Transformer\TransformableInterface;
 use Illuminate\Database\Eloquent\SoftDeletingTrait;
 
-class ItemModel extends Model {
+class ItemModel extends Model implements TransformableInterface {
 
 	use PresentableTrait;
 	use SoftDeletingTrait;
@@ -92,6 +93,11 @@ class ItemModel extends Model {
 		return $this->hasMany('ItemRatingModel', 'item_id');
 	}
 
+	public function notifications()
+	{
+		return $this->hasMany('NotificationModel', 'item_id');
+	}
+
 	/*
 	|---------------------------------------------------------------------------
 	| Model Accessors/Mutators
@@ -110,6 +116,11 @@ class ItemModel extends Model {
 	| Model Scopes
 	|---------------------------------------------------------------------------
 	*/
+
+	public function scopeActive($query)
+	{
+		$query->where('status', (int) true);
+	}
 
 	public function scopeItemType($query, $typeId)
 	{
@@ -169,6 +180,11 @@ class ItemModel extends Model {
 			: (float) 0;
 
 		return true;
+	}
+
+	public function getTransformer()
+	{
+		return new \Xtras\Api\Transformers\ItemTransformer;
 	}
 
 }

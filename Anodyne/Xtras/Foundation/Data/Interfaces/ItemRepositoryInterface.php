@@ -6,6 +6,7 @@ interface ItemRepositoryInterface extends BaseRepositoryInterface {
 
 	public function addComment($id, array $data);
 	public function addMessage($itemId, array $data);
+	public function allPaginated($number);
 	public function deleteFile($id);
 	public function deleteImage($itemId, $imageNumber);
 	public function deleteMessage($id);

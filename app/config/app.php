@@ -109,10 +109,12 @@ return array(
 		'Illuminate\View\ViewServiceProvider',
 		'Illuminate\Workbench\WorkbenchServiceProvider',
 
-		'Xtras\XtrasServiceProvider',
-		'Xtras\XtrasRoutingServiceProvider',
 		'Zizaco\Entrust\EntrustServiceProvider',
 		'Intervention\Image\ImageServiceProvider',
+		//'Dingo\Api\ApiServiceProvider',
+		'Xtras\XtrasServiceProvider',
+		'Xtras\XtrasRoutingServiceProvider',
+		//'Xtras\Api\XtrasApiServiceProvider',
 
 	),
 
@@ -183,6 +185,8 @@ return array(
 		/**
 		 * Classes
 		 */
+		//'API'				=> 'Dingo\Api\Facades\API',
+		//'ApiController'		=> 'Dingo\Api\Routing\Controller',
 		'BaseController'	=> 'Xtras\Controllers\BaseController',
 		'Browser'			=> 'Ikimea\Browser\Browser',
 		'Date'				=> 'Carbon\Carbon',
@@ -227,11 +231,6 @@ return array(
 		'ProductRepository'	=> 'Xtras\Foundation\Data\Repositories\Eloquent\ProductRepository',
 		'TypeRepository'	=> 'Xtras\Foundation\Data\Repositories\Eloquent\TypeRepository',
 		'UserRepository'	=> 'Xtras\Foundation\Data\Repositories\Eloquent\UserRepository',
-
-		/**
-		 * Traits
-		 */
-		'UtilityTrait'	=> 'Xtras\Traits\UtilityTrait',
 
 		/**
 		 * Mailers

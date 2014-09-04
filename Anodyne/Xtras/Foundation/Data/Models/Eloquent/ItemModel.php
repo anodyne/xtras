@@ -1,6 +1,8 @@
 <?php namespace Xtras\Foundation\Data\Models\Eloquent;
 
-use Str, Model, Collection;
+use Str,
+	Model,
+	Collection;
 use Laracasts\Presenter\PresentableTrait;
 use Illuminate\Database\Eloquent\SoftDeletingTrait;
 
@@ -123,6 +125,11 @@ class ItemModel extends Model {
 	public function isActive()
 	{
 		return ( ! empty($this->meta->toArray()['file']));
+	}
+
+	public function isOwner(UserModel $user)
+	{
+		return (int) $this->user_id === (int) $user->id;
 	}
 
 	public function getLatestVersion()

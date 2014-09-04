@@ -13,5 +13,3 @@ public/assets/*
 
 app/config/packages/barryvdh/*
 app/storage/debugbar/
-public/packages/barryvdh/*
-public/packages/maximebf/*

@@ -4,10 +4,9 @@ use Str,
 	Model,
 	Collection;
 use Laracasts\Presenter\PresentableTrait;
-use Dingo\Api\Transformer\TransformableInterface;
 use Illuminate\Database\Eloquent\SoftDeletingTrait;
 
-class ItemModel extends Model implements TransformableInterface {
+class ItemModel extends Model {
 
 	use PresentableTrait;
 	use SoftDeletingTrait;
@@ -180,11 +179,6 @@ class ItemModel extends Model implements TransformableInterface {
 			: (float) 0;
 
 		return true;
-	}
-
-	public function getTransformer()
-	{
-		return new \Xtras\Api\Transformers\ItemTransformer;
 	}
 
 }

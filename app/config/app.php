@@ -111,10 +111,8 @@ return array(
 
 		'Zizaco\Entrust\EntrustServiceProvider',
 		'Intervention\Image\ImageServiceProvider',
-		//'Dingo\Api\ApiServiceProvider',
 		'Xtras\XtrasServiceProvider',
 		'Xtras\XtrasRoutingServiceProvider',
-		//'Xtras\Api\XtrasApiServiceProvider',
 
 	),
 
@@ -185,8 +183,6 @@ return array(
 		/**
 		 * Classes
 		 */
-		//'API'				=> 'Dingo\Api\Facades\API',
-		//'ApiController'		=> 'Dingo\Api\Routing\Controller',
 		'BaseController'	=> 'Xtras\Controllers\BaseController',
 		'Browser'			=> 'Ikimea\Browser\Browser',
 		'Date'				=> 'Carbon\Carbon',

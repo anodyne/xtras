@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "45b79b2d778c8d0104b21841bef4bbd9",
+    "hash": "6d20a7df48738b54f7e47c1b258ae4e5",
     "packages": [
         {
             "name": "aws/aws-sdk-php",
@@ -154,69 +154,6 @@
             },
             "notification-url": "https://packagist.org/downloads/",
             "time": "2014-01-17 12:21:18"
-        },
-        {
-            "name": "dingo/api",
-            "version": "v0.6.5",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/dingo/api.git",
-                "reference": "e19389d18bd3956fcec29a8e2ee743f466b30d98"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/dingo/api/zipball/e19389d18bd3956fcec29a8e2ee743f466b30d98",
-                "reference": "e19389d18bd3956fcec29a8e2ee743f466b30d98",
-                "shasum": ""
-            },
-            "require": {
-                "illuminate/support": "~4.1",
-                "league/fractal": "0.8.*",
-                "php": ">=5.4.0"
-            },
-            "require-dev": {
-                "illuminate/auth": "~4.1",
-                "illuminate/database": "~4.1",
-                "illuminate/events": "~4.1",
-                "illuminate/pagination": "~4.1",
-                "illuminate/routing": "~4.1",
-                "lucadegasperi/oauth2-server-laravel": "1.0.*",
-                "mockery/mockery": "~0.9",
-                "phpunit/phpunit": "~4.0",
-                "squizlabs/php_codesniffer": "1.*"
-            },
-            "suggest": {
-                "lucadegasperi/oauth2-server-laravel": "Use the League OAuth 2.0 server to protect your API."
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "0.7-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Dingo\\Api\\": "src"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "BSD-3-Clause"
-            ],
-            "authors": [
-                {
-                    "name": "Jason Lewis",
-                    "email": "jason.lewis1991@gmail.com"
-                }
-            ],
-            "description": "A RESTful API package for the Laravel framework.",
-            "keywords": [
-                "api",
-                "dingo",
-                "laravel",
-                "restful"
-            ],
-            "time": "2014-08-19 10:44:01"
         },
         {
             "name": "erusev/parsedown",
@@ -709,100 +646,6 @@
             "time": "2013-04-30 19:58:08"
         },
         {
-            "name": "iron-io/iron_core",
-            "version": "0.2.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/iron-io/iron_core_php.git",
-                "reference": "bf399c13a42a78079b3fe56d0e2e1791290521c4"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/iron-io/iron_core_php/zipball/bf399c13a42a78079b3fe56d0e2e1791290521c4",
-                "reference": "bf399c13a42a78079b3fe56d0e2e1791290521c4",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.2.0"
-            },
-            "type": "library",
-            "autoload": {
-                "classmap": [
-                    "IronCore.class.php"
-                ]
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Alexander S",
-                    "email": "alexander@iron.io",
-                    "homepage": "http://iron.io",
-                    "role": "Developer"
-                },
-                {
-                    "name": "Iron.io",
-                    "email": "support@iron.io",
-                    "homepage": "http://iron.io",
-                    "role": "Developer"
-                }
-            ],
-            "description": "Collection of common functions for all iron.io client libraries",
-            "homepage": "http://github.com/iron-io/iron_core_php",
-            "keywords": [
-                "iron",
-                "iron_core"
-            ],
-            "time": "2014-08-05 13:53:05"
-        },
-        {
-            "name": "iron-io/iron_mq",
-            "version": "1.5.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/iron-io/iron_mq_php.git",
-                "reference": "82dde27337801a914a5ac88cd5f1ba7739f85f19"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/iron-io/iron_mq_php/zipball/82dde27337801a914a5ac88cd5f1ba7739f85f19",
-                "reference": "82dde27337801a914a5ac88cd5f1ba7739f85f19",
-                "shasum": ""
-            },
-            "require": {
-                "iron-io/iron_core": "*",
-                "php": ">=5.2.0"
-            },
-            "type": "library",
-            "autoload": {
-                "files": [
-                    "IronMQ.class.php"
-                ]
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Alexander S",
-                    "email": "alexander@iron.io",
-                    "homepage": "http://iron.io",
-                    "role": "Developer"
-                }
-            ],
-            "description": "Client binding for IronMQ (hosted message queue)",
-            "homepage": "http://github.com/iron-io/iron_mq_php",
-            "keywords": [
-                "MQ",
-                "iron",
-                "iron_mq"
-            ],
-            "time": "2014-02-19 14:02:39"
-        },
-        {
             "name": "jeremeamia/SuperClosure",
             "version": "1.0.1",
             "source": {
@@ -1148,16 +991,16 @@
         },
         {
             "name": "league/fractal",
-            "version": "0.8.3",
+            "version": "0.9.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/thephpleague/fractal.git",
-                "reference": "9985eee7efc42ef472da07856cdd3fd29c57642c"
+                "reference": "a91cdcfe399a6d330a9285885a9a2a1a7855a915"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/thephpleague/fractal/zipball/9985eee7efc42ef472da07856cdd3fd29c57642c",
-                "reference": "9985eee7efc42ef472da07856cdd3fd29c57642c",
+                "url": "https://api.github.com/repos/thephpleague/fractal/zipball/a91cdcfe399a6d330a9285885a9a2a1a7855a915",
+                "reference": "a91cdcfe399a6d330a9285885a9a2a1a7855a915",
                 "shasum": ""
             },
             "require": {
@@ -1175,7 +1018,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "0.8-dev"
+                    "dev-master": "0.9-dev"
                 }
             },
             "autoload": {
@@ -1203,7 +1046,7 @@
                 "league",
                 "rest"
             ],
-            "time": "2014-06-14 11:11:41"
+            "time": "2014-07-06 16:48:26"
         },
         {
             "name": "monolog/monolog",

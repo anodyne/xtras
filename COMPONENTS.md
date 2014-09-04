@@ -20,16 +20,10 @@
 	- Version: 4.2.1
 - [Entrust](https://github.com/Zizaco/entrust)
 	- Version: 1.2.3
-- [Ardent](https://github.com/laravelbook/ardent)
-	- Version: 2.4.2
 - [Gravatar](https://github.com/forxer/gravatar)
 	- Version: 1.2.0
 - [Image](http://image.intervention.io/)
 	- Version: 2.0.8
-- [IronMQ](https://github.com/iron-io/iron_mq_php)
-	- Version: 1.5.1
-- [API](https://github.com/dingo/api)
-	- Version: 0.6.5
 
 ## Javascript
 

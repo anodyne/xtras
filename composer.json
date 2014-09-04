@@ -10,9 +10,7 @@
 		"guzzlehttp/guzzle": "~4.0",
 		"zizaco/entrust": "1.2.*",
 		"forxer/Gravatar": "~1.2",
-		"intervention/image": "~2.0",
-		"iron-io/iron_mq": "1.5.*",
-		"dingo/api": "~0.1"
+		"intervention/image": "~2.0"
 	},
 
 	"require-dev": {
@@ -29,7 +27,6 @@
 		
 		"psr-4": {
 			"Xtras\\": "Anodyne\\Xtras\\Web",
-			"Xtras\\Api\\": "Anodyne\\Xtras\\Api",
 			"Xtras\\Extensions\\": "Anodyne\\Xtras\\Extensions",
 			"Xtras\\Foundation\\": "Anodyne\\Xtras\\Foundation"
 		}

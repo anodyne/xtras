@@ -39,7 +39,7 @@
 					<div class="btn-toolbar pull-right">
 						@if (Auth::check() and $_currentUser->can('xtras.admin'))
 							<div class="btn-group">
-								<a href="{{ route('admin.items.edit', [$item->id]) }}" class="btn btn-default">Edit</a>
+								<a href="{{ route('item.edit', [$item->user->username, $item->slug, 'admin']) }}" class="btn btn-default">Edit</a>
 							</div>
 						@endif
 

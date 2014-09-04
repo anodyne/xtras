@@ -7,7 +7,15 @@
 @section('content')
 	<h1>{{ $item->present()->name }} <small>Edit Xtra</small></h1>
 
-	{{ Form::model($item, ['route' => ['item.update', $item->user->username, $item->slug], 'method' => 'put']) }}
+	@if ($_currentUser->can('xtras.admin') and $admin)
+		<div class="btn-toolbar">
+			<div class="btn-group">
+				<a href="{{ route('item.admin') }}" class="btn btn-default">Back</a>
+			</div>
+		</div>
+	@endif
+
+	{{ Form::model($item, ['route' => ['item.update', $item->user->username, $item->slug, $admin], 'method' => 'put']) }}
 		<div class="row">
 			<div class="col-md-4 col-lg-4">
 				<div class="form-group">

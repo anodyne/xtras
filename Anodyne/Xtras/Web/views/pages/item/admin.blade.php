@@ -23,10 +23,10 @@
 				<div class="col-md-3 col-lg-3">
 					<div class="btn-toolbar pull-right">
 						<div class="btn-group">
-							<a href="{{ route('item.edit', [$item->user->username, $item->slug]) }}" class="btn btn-default">Edit</a>
+							<a href="{{ route('item.edit', [$item->user->username, $item->slug, 'admin']) }}" class="btn btn-default">Edit</a>
 						</div>
 						<div class="btn-group">
-							<a href="#" class="btn btn-danger js-remove-item" data-id="{{ $item->id }}">Remove</a>
+							<a href="#" class="btn btn-danger js-remove-item" data-id="{{ $item->id }}" data-admin="admin">Remove</a>
 						</div>
 					</div>
 				</div>

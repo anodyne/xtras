@@ -172,7 +172,7 @@ class XtrasRoutingServiceProvider extends ServiceProvider {
 		{
 			Route::get('admin', [
 				'before'	=> 'auth',
-				'as'		=> 'item.admin.index',
+				'as'		=> 'item.admin',
 				'uses'		=> 'AdminController@index']);
 			Route::get('create', [
 				'before'	=> 'auth',
@@ -182,19 +182,19 @@ class XtrasRoutingServiceProvider extends ServiceProvider {
 				'before'	=> 'auth',
 				'as'		=> 'item.store',
 				'uses'		=> 'AdminController@store']);
-			Route::get('{author}/{slug}/edit', [
+			Route::get('{author}/{slug}/edit/{admin?}', [
 				'before'	=> 'auth',
 				'as'		=> 'item.edit',
 				'uses'		=> 'AdminController@edit']);
-			Route::put('{author}/{slug}', [
+			Route::put('{author}/{slug}/{admin?}', [
 				'before'	=> 'auth',
 				'as'		=> 'item.update',
 				'uses'		=> 'AdminController@update']);
-			Route::get('{itemId}/remove', [
+			Route::get('{itemId}/remove/{admin?}', [
 				'before'	=> 'auth',
 				'as'		=> 'item.remove',
 				'uses'		=> 'AdminController@remove']);
-			Route::delete('{itemId}', [
+			Route::delete('{itemId}/{admin?}', [
 				'before'	=> 'auth',
 				'as'		=> 'item.destroy',
 				'uses'		=> 'AdminController@destroy']);

@@ -84,7 +84,7 @@ class AdminController extends \BaseController {
 		return $this->errorUnauthorized("You do not have permission to create Xtras.");
 	}
 
-	public function edit($author, $slug)
+	public function edit($author, $slug, $admin = false)
 	{
 		if ($this->currentUser->can('xtras.item.edit') or $this->currentUser->can('xtras.admin'))
 		{
@@ -97,7 +97,8 @@ class AdminController extends \BaseController {
 				{
 					return View::make('pages.item.edit')
 						->withItem($item)
-						->withMeta($item->meta);
+						->withMeta($item->meta)
+						->withAdmin($admin);
 				}
 
 				return $this->errorUnauthorized("You do not have permissions to edit Xtras other than your own!");
@@ -109,7 +110,7 @@ class AdminController extends \BaseController {
 		return $this->errorUnauthorized("You do not have permission to edit Xtras.");
 	}
 
-	public function update($author, $slug)
+	public function update($author, $slug, $admin = false)
 	{
 		if ($this->currentUser->can('xtras.item.edit') or $this->currentUser->can('xtras.admin'))
 		{
@@ -127,7 +128,7 @@ class AdminController extends \BaseController {
 				// Fire the item update event
 				Event::fire('item.updated', [$item]);
 
-				if ( ! $this->currentUser->can('xtras.admin'))
+				if ( ! $admin)
 				{
 					// Set the flash message
 					Flash::success("Your Xtra was successfully updated. If you're releasing a new version of this Xtra, make sure you upload the new zip file.");
@@ -138,7 +139,7 @@ class AdminController extends \BaseController {
 				// Set the flash message
 				Flash::success("Xtra was successfully updated.");
 
-				return Redirect::route('item.admin.index');
+				return Redirect::route('item.admin');
 			}
 
 			return $this->errorUnauthorized("You do not have permissions to edit Xtras other than your own!");
@@ -147,7 +148,7 @@ class AdminController extends \BaseController {
 		return $this->errorUnauthorized("You do not have permission to edit Xtras.");
 	}
 
-	public function remove($itemId)
+	public function remove($itemId, $admin = false)
 	{
 		if ($this->currentUser->can('xtras.item.delete') or $this->currentUser->can('xtras.admin'))
 		{
@@ -156,7 +157,7 @@ class AdminController extends \BaseController {
 
 			return partial('modal_content', [
 				'modalHeader'	=> "Remove Xtra",
-				'modalBody'		=> View::make('pages.item.remove')->withItem($item),
+				'modalBody'		=> View::make('pages.item.remove')->with(compact('item', 'admin')),
 				'modalFooter'	=> false,
 			]);
 		}
@@ -168,7 +169,7 @@ class AdminController extends \BaseController {
 		]);
 	}
 
-	public function destroy($itemId)
+	public function destroy($itemId, $admin = false)
 	{
 		if ($this->currentUser->can('xtras.item.delete') or $this->currentUser->can('xtras.admin'))
 		{
@@ -187,6 +188,11 @@ class AdminController extends \BaseController {
 
 					// Set the flash message
 					Flash::success("Xtra has been successfully removed.");
+
+					if ($admin and $this->currentUser->can('xtras.admin'))
+					{
+						return Redirect::route('item.admin');
+					}
 
 					return Redirect::route('account.xtras');
 				}

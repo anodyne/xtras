@@ -1,6 +1,6 @@
 <p>Are you sure you want to delete the Xtra <strong>{{ $item->present()->name }}</strong>? This action is permanent and cannot be undone!</p>
 
-{{ Form::open(['route' => ['item.destroy', $item->id], 'method' => 'delete']) }}
+{{ Form::open(['route' => ['item.destroy', $item->id, $admin], 'method' => 'delete']) }}
 	<div class="form-group">
 		{{ Form::button('Remove', ['type' => 'submit', 'class' => 'btn btn-lg btn-danger']) }}
 	</div>

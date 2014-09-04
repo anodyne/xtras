@@ -99,7 +99,70 @@ class ItemRepository implements ItemRepositoryInterface {
 
 	public function delete($id)
 	{
-		# code...
+		// Get the item
+		$item = $this->find($id);
+
+		if ($item)
+		{
+			// Remove all the messages
+			if ($item->messages->count() > 0)
+			{
+				foreach ($item->messages as $message)
+				{
+					$message->forceDelete();
+				}
+			}
+
+			// Remove all the files
+			if ($item->files->count() > 0)
+			{
+				// Get an instance of the filesystem
+				$fs = \App::make('xtras.filesystem');
+
+				foreach ($item->files as $file)
+				{
+					// Delete the file
+					if ($fs->has($file->filename))
+					{
+						$fs->delete($file->filename);
+					}
+
+					// Remove the database record
+					$file->forceDelete();
+				}
+			}
+
+			// Remove all the ratings
+			if ($item->ratings->count() > 0)
+			{
+				foreach ($item->ratings as $rating)
+				{
+					$rating->delete();
+				}
+			}
+
+			// Remove all the comments
+			if ($item->comments->count() > 0)
+			{
+				foreach ($item->comments as $comment)
+				{
+					$comment->delete();
+				}
+			}
+
+			// Remove all the meta data
+			if ($item->meta->count() > 0)
+			{
+				$item->meta->forceDelete();
+			}
+
+			// Remove the item
+			$item->delete();
+
+			return $item;
+		}
+
+		return false;
 	}
 
 	public function deleteFile($id)
@@ -109,7 +172,7 @@ class ItemRepository implements ItemRepositoryInterface {
 
 		if ($file)
 		{
-			$file->delete();
+			$file->forceDelete();
 
 			return $file;
 		}
@@ -143,7 +206,7 @@ class ItemRepository implements ItemRepositoryInterface {
 
 		if ($message)
 		{
-			$message->delete();
+			$message->forceDelete();
 
 			return $message;
 		}
@@ -275,13 +338,16 @@ class ItemRepository implements ItemRepositoryInterface {
 		{
 			$items = ItemModel::with('meta', 'type', 'user', 'product')
 				->itemType($itemType->id)
+				->where('deleted_at', null)
 				->orderBy($order, $direction)
 				->skip($limit * ($page - 1))->take($limit)->get();
 		}
 		else
 		{
 			$items = ItemModel::with('meta', 'type', 'user', 'product')
-				->orderBy($order, $direction)->skip($limit * ($page - 1))->take($limit)->get();
+				->where('deleted_at', null)
+				->orderBy($order, $direction)
+				->skip($limit * ($page - 1))->take($limit)->get();
 		}
 
 		$results->items = $items->all();

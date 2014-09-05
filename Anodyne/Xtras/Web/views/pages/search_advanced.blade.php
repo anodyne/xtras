@@ -41,11 +41,11 @@
 					{{ Form::text('q', null, ['class' => 'form-control input-lg']) }}
 				</div>
 			</div>
-		</div>
-
-		<div class="row">
-			<div class="col-md-6">
-				{{ Form::button('Search', ['type' => 'submit', 'class' => 'btn btn-lg btn-primary']) }}
+			<div class="col-md-2">
+				<div class="form-group">
+					<label>&nbsp;</label>
+					{{ Form::button('Search', ['type' => 'submit', 'class' => 'btn btn-lg btn-block btn-primary']) }}
+				</div>
 			</div>
 		</div>
 	{{ Form::close() }}

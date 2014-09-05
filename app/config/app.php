@@ -111,6 +111,7 @@ return array(
 
 		'Zizaco\Entrust\EntrustServiceProvider',
 		'Intervention\Image\ImageServiceProvider',
+		'Rees\Sanitizer\SanitizerServiceProvider',
 		'Xtras\XtrasServiceProvider',
 		'Xtras\XtrasRoutingServiceProvider',
 
@@ -192,23 +193,24 @@ return array(
 		'Image'				=> 'Intervention\Image\Facades\Image',
 		'Markdown'			=> 'Xtras\Foundation\Facades\MarkdownFacade',
 		'Model'				=> 'Xtras\Extensions\Laravel\Database\Eloquent\Model',
+		'Sanitizer'			=> 'Rees\Sanitizer\Facade',
 		
 		/**
 		 * Models
 		 */
-		'ProductModel'		=> 'Xtras\Foundation\Data\Models\Eloquent\ProductModel',
-		'UserModel'			=> 'Xtras\Foundation\Data\Models\Eloquent\UserModel',
-		'ItemModel'			=> 'Xtras\Foundation\Data\Models\Eloquent\ItemModel',
-		'ItemFileModel'		=> 'Xtras\Foundation\Data\Models\Eloquent\ItemFileModel',
-		'ItemMessageModel'	=> 'Xtras\Foundation\Data\Models\Eloquent\ItemMessageModel',
-		'ItemMetaModel'		=> 'Xtras\Foundation\Data\Models\Eloquent\ItemMetaModel',
-		'ItemRatingModel'	=> 'Xtras\Foundation\Data\Models\Eloquent\ItemRatingModel',
-		'TypeModel'			=> 'Xtras\Foundation\Data\Models\Eloquent\TypeModel',
-		'CommentModel'		=> 'Xtras\Foundation\Data\Models\Eloquent\CommentModel',
-		'NotificationModel'	=> 'Xtras\Foundation\Data\Models\Eloquent\NotificationModel',
-		'OrderModel'		=> 'Xtras\Foundation\Data\Models\Eloquent\OrderModel',
-		'RoleModel'			=> 'Xtras\Foundation\Data\Models\Eloquent\RoleModel',
-		'PermissionModel'	=> 'Xtras\Foundation\Data\Models\Eloquent\PermissionModel',
+		'Comment'		=> 'Xtras\Foundation\Data\Models\Comment',
+		'Item'			=> 'Xtras\Foundation\Data\Models\Item',
+		'ItemFile'		=> 'Xtras\Foundation\Data\Models\ItemFile',
+		'ItemMessage'	=> 'Xtras\Foundation\Data\Models\ItemMessage',
+		'ItemMetadata'	=> 'Xtras\Foundation\Data\Models\ItemMetadata',
+		'ItemRating'	=> 'Xtras\Foundation\Data\Models\ItemRating',
+		'Notification'	=> 'Xtras\Foundation\Data\Models\Notification',
+		'Order'			=> 'Xtras\Foundation\Data\Models\Order',
+		'Permission'	=> 'Xtras\Foundation\Data\Models\Permission',
+		'Product'		=> 'Xtras\Foundation\Data\Models\Product',
+		'Role'			=> 'Xtras\Foundation\Data\Models\Role',
+		'Type'			=> 'Xtras\Foundation\Data\Models\Type',
+		'User'			=> 'Xtras\Foundation\Data\Models\User',
 
 		/**
 		 * Repository Interfaces
@@ -222,11 +224,11 @@ return array(
 		/**
 		 * Repositories
 		 */
-		'ItemRepository'	=> 'Xtras\Foundation\Data\Repositories\Eloquent\ItemRepository',
-		'OrderRepository'	=> 'Xtras\Foundation\Data\Repositories\Eloquent\OrderRepository',
-		'ProductRepository'	=> 'Xtras\Foundation\Data\Repositories\Eloquent\ProductRepository',
-		'TypeRepository'	=> 'Xtras\Foundation\Data\Repositories\Eloquent\TypeRepository',
-		'UserRepository'	=> 'Xtras\Foundation\Data\Repositories\Eloquent\UserRepository',
+		'ItemRepository'	=> 'Xtras\Foundation\Data\Repositories\ItemRepository',
+		'OrderRepository'	=> 'Xtras\Foundation\Data\Repositories\OrderRepository',
+		'ProductRepository'	=> 'Xtras\Foundation\Data\Repositories\ProductRepository',
+		'TypeRepository'	=> 'Xtras\Foundation\Data\Repositories\TypeRepository',
+		'UserRepository'	=> 'Xtras\Foundation\Data\Repositories\UserRepository',
 
 		/**
 		 * Mailers
@@ -236,7 +238,7 @@ return array(
 		/**
 		 * Transformers
 		 */
-		'CommentTransformer'	=> 'Xtras\Transformers\CommentTransformer',
+		'CommentTransformer'	=> 'Xtras\Foundation\Data\Transformers\CommentTransformer',
 
 		/**
 		 * Validators

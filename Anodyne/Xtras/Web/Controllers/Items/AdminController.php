@@ -78,7 +78,7 @@ class AdminController extends \BaseController {
 			// Set the flash message
 			Flash::success("Xtra was successfully created. Use the page below to upload your Xtra's zip file.");
 
-			return Redirect::route('files.create', [$item->user->username, $item->slug]);
+			return Redirect::route('item.files.create', [$item->user->username, $item->slug]);
 		}
 
 		return $this->errorUnauthorized("You do not have permission to create Xtras.");
@@ -218,6 +218,16 @@ class AdminController extends \BaseController {
 		}
 
 		return json_encode(['code' => 1]);
+	}
+
+	public function itemSizeReport()
+	{
+		# code...
+	}
+
+	public function userSizeReport()
+	{
+		# code...
 	}
 
 }

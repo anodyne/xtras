@@ -11,7 +11,7 @@ class ItemFileModel extends Model {
 
 	protected $table = 'items_files';
 
-	protected $fillable = ['item_id', 'filename', 'version'];
+	protected $fillable = ['item_id', 'filename', 'version', 'size'];
 
 	protected $dates = ['created_at', 'updated_at', 'deleted_at'];
 

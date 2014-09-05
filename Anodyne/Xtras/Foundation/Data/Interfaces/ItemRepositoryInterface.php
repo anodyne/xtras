@@ -24,6 +24,8 @@ interface ItemRepositoryInterface extends BaseRepositoryInterface {
 	public function getProducts();
 	public function getRecentlyAdded($number);
 	public function getRecentlyUpdated($number);
+	public function getItemSizeReport();
+	public function getUserSizeReport();
 	public function getTypes();
 	public function getTypesByPermissions(UserModel $user);
 	public function rate(UserModel $user, $itemId, $rating);

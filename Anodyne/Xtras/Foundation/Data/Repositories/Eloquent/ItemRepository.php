@@ -396,6 +396,31 @@ class ItemRepository implements ItemRepositoryInterface {
 			->orderBy('updated_at', 'desc')->take($number)->get();
 	}
 
+	public function getItemSizeReport()
+	{
+		// Get all the items
+		$items = $this->all();
+	}
+
+	public function getUserSizeReport()
+	{
+		// Get all the users
+		$users = UserModel::all();
+
+		$total = 0;
+
+		foreach ($users as $user)
+		{
+			foreach ($user->items as $item)
+			{
+				foreach ($item->files as $file)
+				{
+					$total += $file->size;
+				}
+			}
+		}
+	}
+
 	public function getTypes()
 	{
 		return TypeModel::active()->lists('name', 'id');

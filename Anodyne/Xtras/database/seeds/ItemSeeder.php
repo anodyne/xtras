@@ -84,6 +84,7 @@ class ItemSeeder extends Seeder {
 					'item_id' => $item->id,
 					'filename' => $filename,
 					'version' => $version,
+					'size' => $faker->numberBetween(1, 999999),
 				]);
 			}
 

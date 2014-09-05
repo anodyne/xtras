@@ -54,6 +54,7 @@ class CreateItems extends Migration {
 			$table->unsignedBigInteger('item_id');
 			$table->string('filename');
 			$table->string('version');
+			$table->unsignedBigInteger('size');
 			$table->timestamps();
 			$table->softDeletes();
 		});

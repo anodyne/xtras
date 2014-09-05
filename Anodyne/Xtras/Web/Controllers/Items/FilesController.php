@@ -156,6 +156,7 @@ class FilesController extends \BaseController {
 						$this->items->updateFileData($item->id, [
 							'filename' => $filename,
 							'version' => $item->version,
+							'size' => $fs->getSize($filename),
 						]);
 
 						// Fire the event

@@ -174,6 +174,15 @@ class XtrasRoutingServiceProvider extends ServiceProvider {
 				'before'	=> 'auth',
 				'as'		=> 'item.admin',
 				'uses'		=> 'AdminController@index']);
+			Route::get('admin/item-size-report', [
+				'before'	=> 'auth',
+				'as'		=> 'item.admin.item-size-report',
+				'uses'		=> 'AdminController@itemSizeReport']);
+			Route::get('admin/user-size-report', [
+				'before'	=> 'auth',
+				'as'		=> 'item.admin.user-size-report',
+				'uses'		=> 'AdminController@userSizeReport']);
+
 			Route::get('create', [
 				'before'	=> 'auth',
 				'as'		=> 'item.create',

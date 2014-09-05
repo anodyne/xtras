@@ -249,7 +249,7 @@ class XtrasRoutingServiceProvider extends ServiceProvider {
 	{
 		Route::group(['namespace' => 'Xtras\Controllers'], function()
 		{
-			Route::get('profile/{name}', [
+			Route::get('profile/{username}', [
 				'as'	=> 'account.profile',
 				'uses'	=> 'UserController@show']);
 			Route::get('my-xtras', [

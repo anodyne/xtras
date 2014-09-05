@@ -8,12 +8,15 @@ use View,
 class TypesController extends \BaseController {
 
 	protected $types;
+	protected $validator;
 
-	public function __construct(\TypeRepositoryInterface $types)
+	public function __construct(\TypeRepositoryInterface $types,
+			\TypeValidator $validator)
 	{
 		parent::__construct();
 
 		$this->types = $types;
+		$this->validator = $validator;
 
 		// Before filter to check if the user has permissions
 		$this->beforeFilter('@checkPermissions');
@@ -36,6 +39,9 @@ class TypesController extends \BaseController {
 
 	public function store()
 	{
+		// Validate the item type
+		$this->validator->validate(Input::all());
+
 		// Create the product
 		$type = $this->types->create(Input::all());
 
@@ -59,6 +65,9 @@ class TypesController extends \BaseController {
 
 	public function update($id)
 	{
+		// Validate the item type
+		$this->validator->validate(Input::all());
+
 		// Update the product
 		$type = $this->types->update($id, Input::all());
 
@@ -74,7 +83,7 @@ class TypesController extends \BaseController {
 		$type = $this->types->find($id);
 
 		return partial('modal_content', [
-			'modalHeader'	=> "Delete Item Type",
+			'modalHeader'	=> "Remove Item Type",
 			'modalBody'		=> View::make('pages.admin.types.remove')->withType($type),
 			'modalFooter'	=> false,
 		]);
@@ -95,7 +104,7 @@ class TypesController extends \BaseController {
 	{
 		if ( ! $this->currentUser->can('xtras.admin'))
 		{
-			return $this->errorUnauthorized("You do not have permissions to manage item types.");
+			return $this->errorUnauthorized("You do not have permission to manage item types.");
 		}
 	}
 

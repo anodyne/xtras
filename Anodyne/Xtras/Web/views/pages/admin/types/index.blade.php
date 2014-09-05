@@ -17,10 +17,10 @@
 		<div class="data-table data-table-striped data-table-bordered">
 		@foreach ($types as $type)
 			<div class="row">
-				<div class="col-md-9 col-lg-9">
+				<div class="col-md-9">
 					<p class="lead{{ ((bool) $type->display === false) ? ' text-muted' : '' }}">{{ $type->present()->name }}</p>
 				</div>
-				<div class="col-md-3 col-lg-3">
+				<div class="col-md-3">
 					<div class="btn-toolbar pull-right">
 						<div class="btn-group">
 							<a href="#" class="btn btn-default js-edit-type" data-id="{{ $type->id }}">Edit</a>
@@ -40,7 +40,7 @@
 
 @section('modals')
 	{{ modal(['id' => 'createType', 'header' => 'Create Item Type']) }}
-	{{ modal(['id' => 'deleteType', 'header' => 'Delete Item Type']) }}
+	{{ modal(['id' => 'removeType', 'header' => 'Remove Item Type']) }}
 	{{ modal(['id' => 'editType', 'header' => 'Edit Item Type']) }}
 @stop
 
@@ -55,13 +55,13 @@
 			}).modal('show');
 		});
 
-		$('.js-delete-type').on('click', function(e)
+		$('.js-remove-type').on('click', function(e)
 		{
 			e.preventDefault();
 
 			var type = $(this).data('id');
 
-			$('#deleteType').modal({
+			$('#removeType').modal({
 				remote: "{{ URL::to('admin/types') }}/" + type + "/remove"
 			}).modal('show');
 		});

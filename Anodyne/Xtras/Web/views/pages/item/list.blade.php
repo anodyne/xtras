@@ -12,7 +12,7 @@
 
 		<div class="row">
 			@foreach ($items as $item)
-				<div class="col-md-4 col-lg-4">
+				<div class="col-md-4">
 					{{ View::make('partials.media')->withItem($item) }}
 				</div>
 			@endforeach

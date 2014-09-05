@@ -13,14 +13,14 @@
 		<div class="data-table data-table-striped data-table-bordered">
 		@foreach ($items as $item)
 			<div class="row">
-				<div class="col-md-9 col-lg-9">
+				<div class="col-md-9">
 					<p class="lead">{{ $item->present()->name }}</p>
 					<p>
 						{{ $item->present()->productAsLabel }}
 						{{ $item->present()->typeAsLabel }}
 					</p>
 				</div>
-				<div class="col-md-3 col-lg-3">
+				<div class="col-md-3">
 					<div class="btn-toolbar pull-right">
 						<div class="btn-group">
 							<a href="{{ route('item.edit', [$item->user->username, $item->slug, 'admin']) }}" class="btn btn-default">Edit</a>

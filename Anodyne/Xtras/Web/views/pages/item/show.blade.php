@@ -6,7 +6,7 @@
 
 @section('content')
 	<div class="row" ng-controller="CommentsController">
-		<div class="col-md-9 col-lg-9">
+		<div class="col-md-9">
 			<h1>{{ $item->present()->name }} <small>{{ $item->present()->type }}</small></h1>
 
 			<h4>by {{ $item->present()->author }}</h4>
@@ -38,7 +38,7 @@
 
 						{{ Form::open(['route' => ['item.reportIssue', $item->id]]) }}
 							<div class="row">
-								<div class="col-md-10 col-lg-10">
+								<div class="col-md-10">
 									<div class="form-group">
 										<label>Message</label>
 										{{ Form::textarea('content', null, ['class' => 'form-control', 'rows' => 5]) }}
@@ -47,7 +47,7 @@
 								</div>
 							</div>
 							<div class="row">
-								<div class="col-lg-12">
+								<div class="col-md-12">
 									{{ Form::button('Report Issue', ['type' => 'submit', 'class' => 'btn btn-default']) }}
 								</div>
 							</div>
@@ -65,7 +65,7 @@
 
 						{{ Form::open(['route' => ['item.reportAbuse', $item->id]]) }}
 							<div class="row">
-								<div class="col-md-10 col-lg-10">
+								<div class="col-md-10">
 									<div class="form-group">
 										<label>Message</label>
 										{{ Form::textarea('content', null, ['class' => 'form-control', 'rows' => 5]) }}
@@ -74,7 +74,7 @@
 								</div>
 							</div>
 							<div class="row">
-								<div class="col-lg-12">
+								<div class="col-md-12">
 									{{ Form::button('Report Abuse', ['type' => 'submit', 'class' => 'btn btn-default']) }}
 								</div>
 							</div>
@@ -162,11 +162,11 @@
 						<div class="data-table data-table-striped data-table-bordered">
 						@foreach ($files as $file)
 							<div class="row">
-								<div class="col-md-9 col-lg-9">
+								<div class="col-md-9">
 									<p class="lead"><strong>{{ $file->present()->version }}</strong></p>
 									<p class="text-sm text-muted">{{ $file->present()->added }}</p>
 								</div>
-								<div class="col-md-3 col-lg-3">
+								<div class="col-md-3">
 									@if ($item->present()->active)
 										<div class="btn-toolbar pull-right">
 											<div class="btn-group">
@@ -197,7 +197,7 @@
 								
 								<form ng-submit="addComment()">
 									<div class="row">
-										<div class="col-md-10 col-lg-10">
+										<div class="col-md-10">
 											<div class="form-group">
 												{{ Form::textarea('content', null, ['class' => 'form-control', 'rows' => 5, 'ng-model' => 'newCommentContent']) }}
 												<p class="help-block text-sm">{{ $_icons['markdown'] }} Parsed as Markdown</p>
@@ -205,7 +205,7 @@
 										</div>
 									</div>
 									<div class="row">
-										<div class="col-lg-12">
+										<div class="col-md-12">
 											{{ Form::button('Submit', ['type' => 'submit', 'id' => 'commentSubmit', 'class' => 'btn btn-default']) }}
 										</div>
 									</div>

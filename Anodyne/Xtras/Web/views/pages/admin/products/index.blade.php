@@ -17,10 +17,10 @@
 		<div class="data-table data-table-striped data-table-bordered">
 		@foreach ($products as $product)
 			<div class="row">
-				<div class="col-md-9 col-lg-9">
+				<div class="col-md-9">
 					<p class="lead{{ ((bool) $product->display === false) ? ' text-muted' : '' }}">{{ $product->present()->name }}</p>
 				</div>
-				<div class="col-md-3 col-lg-3">
+				<div class="col-md-3">
 					<div class="btn-toolbar pull-right">
 						<div class="btn-group">
 							<a href="#" class="btn btn-default js-edit-product" data-id="{{ $product->id }}">Edit</a>
@@ -40,7 +40,7 @@
 
 @section('modals')
 	{{ modal(['id' => 'createProduct', 'header' => 'Create Product']) }}
-	{{ modal(['id' => 'deleteProduct', 'header' => 'Delete Product']) }}
+	{{ modal(['id' => 'removeProduct', 'header' => 'Remove Product']) }}
 	{{ modal(['id' => 'editProduct', 'header' => 'Edit Product']) }}
 @stop
 
@@ -55,13 +55,13 @@
 			}).modal('show');
 		});
 
-		$('.js-delete-product').on('click', function(e)
+		$('.js-remove-product').on('click', function(e)
 		{
 			e.preventDefault();
 
 			var product = $(this).data('id');
 
-			$('#deleteProduct').modal({
+			$('#removeProduct').modal({
 				remote: "{{ URL::to('admin/products') }}/" + product + "/remove"
 			}).modal('show');
 		});

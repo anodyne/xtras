@@ -37,7 +37,7 @@
 				@if ($user->present()->itemsSkins->count() > 0)
 					<div class="row">
 					@foreach ($user->present()->itemsSkins as $item)
-						<div class="col-lg-4">
+						<div class="col-md-4">
 							{{ View::make('partials.media')->withItem($item) }}<br>
 						</div>
 					@endforeach
@@ -51,7 +51,7 @@
 				@if ($user->present()->itemsMods->count() > 0)
 					<div class="row">
 					@foreach ($user->present()->itemsMods as $item)
-						<div class="col-lg-4">
+						<div class="col-md-4">
 							{{ View::make('partials.media')->withItem($item) }}<br>
 						</div>
 					@endforeach
@@ -65,7 +65,7 @@
 				@if ($user->present()->itemsRanks->count() > 0)
 					<div class="row">
 					@foreach ($user->present()->itemsRanks as $item)
-						<div class="col-lg-4">
+						<div class="col-md-4">
 							{{ View::make('partials.media')->withItem($item) }}<br>
 						</div>
 					@endforeach

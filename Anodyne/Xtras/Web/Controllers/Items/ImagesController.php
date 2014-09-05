@@ -31,7 +31,7 @@ class ImagesController extends \BaseController {
 			{
 				return View::make('pages.item.images')
 					->withItem($item)
-					->withMeta($item->meta);
+					->withMetadata($item->metadata);
 			}
 
 			return $this->unauthorized("You do not have permission to manage images for this Xtra!");
@@ -67,8 +67,8 @@ class ImagesController extends \BaseController {
 				$fs = App::make('xtras.filesystem');
 
 				// Delete the image from the filesystem
-				$fs->delete($item->meta->{"image{$imageNumber}"});
-				$fs->delete($item->meta->{"thumbnail{$imageNumber}"});
+				$fs->delete($item->metadata->{"image{$imageNumber}"});
+				$fs->delete($item->metadata->{"thumbnail{$imageNumber}"});
 
 				// Remove the image
 				$this->items->deleteImage($itemId, $imageNumber);
@@ -168,21 +168,21 @@ class ImagesController extends \BaseController {
 				$fs = App::make('xtras.filesystem');
 
 				// Build the temporary image names
-				$tempExt = substr($item->meta->{"image{$imageNumber}"}, -4);
+				$tempExt = substr($item->metadata->{"image{$imageNumber}"}, -4);
 				$tempImage = "{$item->user->username}/{$item->slug}-image0{$tempExt}";
 				$tempThumb = "{$item->user->username}/{$item->slug}-image0_thumb{$tempExt}";
 
 				// 1. Rename the one we're changing to 0
-				$fs->rename($item->meta->{"image{$imageNumber}"}, $tempImage);
-				$fs->rename($item->meta->{"thumbnail{$imageNumber}"}, $tempThumb);
+				$fs->rename($item->metadata->{"image{$imageNumber}"}, $tempImage);
+				$fs->rename($item->metadata->{"thumbnail{$imageNumber}"}, $tempThumb);
 
 				// 2. Rename the primary to the one we just renamed
-				$fs->rename($item->meta->image1, $item->meta->{"image{$imageNumber}"});
-				$fs->rename($item->meta->thumbnail1, $item->meta->{"thumbnail{$imageNumber}"});
+				$fs->rename($item->metadata->image1, $item->metadata->{"image{$imageNumber}"});
+				$fs->rename($item->metadata->thumbnail1, $item->metadata->{"thumbnail{$imageNumber}"});
 
 				// 3. Rename 0 to 1
-				$fs->rename($tempImage, $item->meta->image1);
-				$fs->rename($tempThumb, $item->meta->thumbnail1);
+				$fs->rename($tempImage, $item->metadata->image1);
+				$fs->rename($tempThumb, $item->metadata->thumbnail1);
 
 				return Response::json("Success", 200);
 			}

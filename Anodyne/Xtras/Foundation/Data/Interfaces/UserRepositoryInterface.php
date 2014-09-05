@@ -1,16 +1,19 @@
 <?php namespace Xtras\Foundation\Data\Interfaces;
 
-use UserModel;
+use User;
 
-interface UserRepositoryInterface extends BaseRepositoryInterface {
+interface UserRepositoryInterface {
 
-	public function addNotification($user, $item);
+	public function addNotification($userId, $itemId);
+	public function all();
+	public function find($userId);
 	public function findByUsername($username);
-	public function findItemsByName(UserModel $user, $value);
-	public function findItemsBySlug(UserModel $user, $value);
-	public function findItemsByType(UserModel $user, $value, $splitByProduct = false);
-	public function getItemsByType(UserModel $user);
-	public function getNotifications(UserModel $user);
-	public function removeNotification($user, $item);
+	public function findItemsByName(User $user, $value);
+	public function findItemsBySlug(User $user, $value);
+	public function findItemsByType(User $user, $value, $splitByProduct = false);
+	public function getItemsByType(User $user);
+	public function getNotifications(User $user);
+	public function getOrders(User $user);
+	public function removeNotification($userId, $itemId);
 
 }

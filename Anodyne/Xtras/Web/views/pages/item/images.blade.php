@@ -18,9 +18,9 @@
 	<div class="row">
 		<div class="col-md-4">
 			<div class="preview-image preview-image-primary">
-				@if ( ! empty($meta->image1))
+				@if ( ! empty($metadata->image1))
 					<div class="text-center">
-						<p><img src="{{ $meta->present()->thumbnail1 }}"></p>
+						<p><img src="{{ $metadata->present()->thumbnail1 }}"></p>
 						<p><a href="#" class="btn btn-sm btn-danger js-remove-image" data-item="{{ $item->id }}" data-image="1">Remove Image</a></p>
 					</div>
 				@endif
@@ -30,9 +30,9 @@
 		</div>
 		<div class="col-md-4">
 			<div class="preview-image">
-				@if ( ! empty($meta->image2))
+				@if ( ! empty($metadata->image2))
 					<div class="text-center">
-						<p><img src="{{ $meta->present()->thumbnail2 }}"></p>
+						<p><img src="{{ $metadata->present()->thumbnail2 }}"></p>
 						<p>
 							<a href="#" class="btn btn-sm btn-danger js-remove-image" data-item="{{ $item->id }}" data-image="2">Remove Image</a>
 							&nbsp;
@@ -46,9 +46,9 @@
 		</div>
 		<div class="col-md-4">
 			<div class="preview-image">
-				@if ( ! empty($meta->image3))
+				@if ( ! empty($metadata->image3))
 					<div class="text-center">
-						<p><img src="{{ $meta->present()->thumbnail3 }}"></p>
+						<p><img src="{{ $metadata->present()->thumbnail3 }}"></p>
 						<p>
 							<a href="#" class="btn btn-sm btn-danger js-remove-image" data-item="{{ $item->id }}" data-image="3">Remove Image</a>
 							&nbsp;

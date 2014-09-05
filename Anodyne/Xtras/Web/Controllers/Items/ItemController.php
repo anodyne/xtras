@@ -50,7 +50,7 @@ class ItemController extends \BaseController {
 
 			return View::make('pages.item.show')
 				->withItem($item)
-				->withMeta($item->meta)
+				->withMetadata($item->metadata)
 				->withFiles($item->files->sortBy('version', SORT_REGULAR, true))
 				->withComments($item->comments->sortBy('created_at', SORT_REGULAR, true))
 				->with('userRating', $userRating)
@@ -107,7 +107,7 @@ class ItemController extends \BaseController {
 	public function download($author, $slug, $fileId)
 	{
 		// Get the specific file record
-		$file = $this->items->getFile($fileId);
+		$file = $this->items->findFile($fileId);
 
 		if ((bool) $file->item->status)
 		{

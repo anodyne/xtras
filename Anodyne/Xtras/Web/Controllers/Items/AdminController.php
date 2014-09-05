@@ -66,11 +66,13 @@ class AdminController extends \BaseController {
 	{
 		if ($this->currentUser->can('xtras.item.create') or $this->currentUser->can('xtras.admin'))
 		{
+			$input = Input::all() + ['user_id' => $this->currentUser->id];
+
 			// Validate the form
-			$this->itemCreate->validate(Input::all());
+			$this->itemCreate->validate($input);
 
 			// Create the item
-			$item = $this->items->create(Input::all());
+			$item = $this->items->create($input);
 
 			// Fire the item creation event
 			Event::fire('item.created', [$item]);
@@ -81,7 +83,7 @@ class AdminController extends \BaseController {
 			return Redirect::route('item.files.create', [$item->user->username, $item->slug]);
 		}
 
-		return $this->errorUnauthorized("You do not have permission to create Xtras.");
+		return $this->errorUnauthorized("You do not have permission to create Xtras!");
 	}
 
 	public function edit($author, $slug, $admin = false)
@@ -97,7 +99,7 @@ class AdminController extends \BaseController {
 				{
 					return View::make('pages.item.edit')
 						->withItem($item)
-						->withMeta($item->meta)
+						->withMetadata($item->metadata)
 						->withAdmin($admin);
 				}
 

@@ -12,10 +12,10 @@
 			<h4>by {{ $item->present()->author }}</h4>
 
 			@if (Auth::check())
-				@if ($_currentUser->can('xtras.admin') or $item->isOwner($_currentUser)))
+				@if ($_currentUser->can('xtras.admin') or $item->isOwner($_currentUser))
 					<div class="btn-toolbar">
 						<div class="btn-group">
-							<a href="{{ route('item.edit', [$item->user->username, $item->slug]) }}" class="btn btn-default">Edit Xtra</a>
+							<a href="{{ route('item.edit', [$item->user->username, $item->slug]) }}" class="btn btn-default">Edit</a>
 						</div>
 					</div>
 				@endif
@@ -93,8 +93,8 @@
 					</li>
 				@endif
 
-				@if ($meta)
-					@if ( ! empty($meta->installation))
+				@if ($metadata)
+					@if ( ! empty($metadata->installation))
 						<li>
 							<a href="#install" data-toggle="tab">
 								<span class="visible-md tooltip-top" data-title="Installation">{{ $_icons['new'] }}</span>
@@ -103,7 +103,7 @@
 						</li>
 					@endif
 
-					@if ( ! empty($meta->history))
+					@if ( ! empty($metadata->history))
 						<li>
 							<a href="#versions" data-toggle="tab">
 								<span class="visible-md tooltip-top" data-title="Versions">{{ $_icons['clock'] }}</span>
@@ -112,7 +112,7 @@
 						</li>
 					@endif
 
-					@if ( ! empty($meta->image1) or ! empty($meta->image2) or ! empty($meta->image3))
+					@if ( ! empty($metadata->image1) or ! empty($metadata->image2) or ! empty($metadata->image3))
 						<li>
 							<a href="#images" data-toggle="tab">
 								<span class="visible-md tooltip-top" data-title="Images">{{ $_icons['images'] }}</span>
@@ -133,25 +133,25 @@
 			</ul>
 
 			<div class="tab-content">
-				@if ($meta)
-					@if ( ! empty($meta->installation))
+				@if ($metadata)
+					@if ( ! empty($metadata->installation))
 						<div id="install" class="tab-pane">
-							{{ $meta->present()->installation }}
+							{{ $metadata->present()->installation }}
 						</div>
 					@endif
 
-					@if ( ! empty($meta->history))
+					@if ( ! empty($metadata->history))
 						<div id="versions" class="tab-pane">
-							{{ $meta->present()->history }}
+							{{ $metadata->present()->history }}
 						</div>
 					@endif
 
-					@if ( ! empty($meta->image1) or ! empty($meta->image2) or ! empty($meta->image3))
+					@if ( ! empty($metadata->image1) or ! empty($metadata->image2) or ! empty($metadata->image3))
 						<div id="images" class="tab-pane">
 							<div class="row gallery">
-								{{ $meta->present()->image1 }}
-								{{ $meta->present()->image2 }}
-								{{ $meta->present()->image3 }}
+								{{ $metadata->present()->image1 }}
+								{{ $metadata->present()->image2 }}
+								{{ $metadata->present()->image3 }}
 							</div>
 						</div>
 					@endif
@@ -170,7 +170,7 @@
 									@if ($item->present()->active)
 										<div class="btn-toolbar pull-right">
 											<div class="btn-group">
-												<a href="{{ URL::route('item.download', [$item->id, $file->id]) }}" class="btn btn-default">Download</a>
+												<a href="{{ URL::route('item.download', [$item->user->username, $item->slug, $file->id]) }}" class="btn btn-default">Download</a>
 											</div>
 										</div>
 									@endif
@@ -299,6 +299,7 @@
 			window.url = "{{ Request::root() }}";
 			window.itemId = "{{ $item->id }}";
 			window.userId = "{{ (Auth::check()) ? $_currentUser->id : false }}";
+			window.token = "{{ csrf_token() }}";
 		@endif
 
 		$('.close').on('click', function()

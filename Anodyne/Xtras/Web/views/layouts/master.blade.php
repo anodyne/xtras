@@ -47,9 +47,10 @@
 										@endif
 										<li class="divider"></li>
 										<li><a href="{{ route('account.profile', [$_currentUser->username]) }}">My Profile</a></li>
+										<li><a href="http://anodyne-productions.com/admin/users/{{ $_currentUser->username }}/edit">Edit My Profile</a></li>
+										<li class="divider"></li>
 										<li><a href="{{ route('account.downloads') }}">My Downloads</a></li>
 										<li><a href="{{ route('account.notifications') }}">My Notifications</a></li>
-										<li><a href="http://anodyne-productions.com/admin/users/{{ $_currentUser->username }}/edit">Edit My Profile</a></li>
 
 										@if ($_currentUser->can('xtras.admin'))
 											<li class="divider"></li>
@@ -114,6 +115,14 @@
 						</div>
 					</div>
 				</header>
+
+				@if ($_currentUser and $_currentUser->daysSinceRegistration() <= 7)
+					<div class="no-xtras">
+						<div class="container">
+							Welcome to AnodyneXtras! Be sure to check out <a href="{{ route('account.xtras') }}">My Xtras</a> to create and manage your Xtras.
+						</div>
+					</div>
+				@endif
 
 				<section>
 					<div class="container">

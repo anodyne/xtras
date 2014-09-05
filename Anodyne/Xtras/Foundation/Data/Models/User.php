@@ -74,6 +74,11 @@ class User extends \Model implements UserInterface {
 	|--------------------------------------------------------------------------
 	*/
 
+	public function daysSinceRegistration()
+	{
+		return (int) \Date::now()->diffInDays($this->created_at);
+	}
+
 	public function itemNotify(Item $item)
 	{
 		$notification = $this->notifications->filter(function($n) use ($item)

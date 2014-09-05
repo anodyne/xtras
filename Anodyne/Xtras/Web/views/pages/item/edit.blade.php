@@ -73,8 +73,6 @@
 			</div>
 		</div>
 
-		{{ Form::hidden('user_id', $_currentUser->id) }}
-
 		<div class="btn-toolbar">
 			<div class="btn-group">
 				{{ Form::button('<span class="tab-icon tab-icon-up1 tab-icon-right">'.$_icons['check'].'</span>Update', ['type' => 'submit', 'class' => 'btn btn-lg btn-primary']) }}

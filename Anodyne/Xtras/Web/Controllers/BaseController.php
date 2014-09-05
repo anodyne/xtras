@@ -20,6 +20,7 @@ abstract class BaseController extends \Controller {
 
 	protected function errorUnauthorized($message = false)
 	{
+		// Log the error
 		Log::error("{$this->currentUser->name} attempted to access {$this->request->fullUrl()}");
 
 		if ($message)

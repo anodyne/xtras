@@ -4,12 +4,7 @@ use View,
 	Event,
 	Flash,
 	Input,
-	Redirect,
-	ItemUpdateValidator,
-	ItemCreationValidator,
-	ItemRepositoryInterface,
-	UserRepositoryInterface,
-	OrderRepositoryInterface;
+	Redirect;
 
 class AdminController extends \BaseController {
 
@@ -18,9 +13,9 @@ class AdminController extends \BaseController {
 	protected $itemCreate;
 	protected $itemUpdate;
 
-	public function __construct(ItemRepositoryInterface $items,
-			UserRepositoryInterface $users, ItemCreationValidator $itemCreate,
-			ItemUpdateValidator $itemUpdate)
+	public function __construct(\ItemRepositoryInterface $items,
+			\UserRepositoryInterface $users, \ItemCreationValidator $itemCreate,
+			\ItemUpdateValidator $itemUpdate)
 	{
 		parent::__construct();
 

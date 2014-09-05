@@ -4,14 +4,13 @@ use View,
 	Event,
 	Flash,
 	Input,
-	Redirect,
-	ItemRepositoryInterface;
+	Redirect;
 
 class MessagesController extends \BaseController {
 
 	protected $items;
 
-	public function __construct(ItemRepositoryInterface $items)
+	public function __construct(\ItemRepositoryInterface $items)
 	{
 		parent::__construct();
 

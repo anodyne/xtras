@@ -5,10 +5,7 @@ use View,
 	Flash,
 	Input,
 	Redirect,
-	Paginator,
-	ItemRepositoryInterface,
-	UserRepositoryInterface,
-	OrderRepositoryInterface;
+	Paginator;
 
 class ItemController extends \BaseController {
 
@@ -16,8 +13,8 @@ class ItemController extends \BaseController {
 	protected $users;
 	protected $orders;
 
-	public function __construct(ItemRepositoryInterface $items,
-			UserRepositoryInterface $users, OrderRepositoryInterface $orders)
+	public function __construct(\ItemRepositoryInterface $items,
+			\UserRepositoryInterface $users, \OrderRepositoryInterface $orders)
 	{
 		parent::__construct();
 

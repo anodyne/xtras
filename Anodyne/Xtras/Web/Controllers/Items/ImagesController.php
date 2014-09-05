@@ -6,14 +6,13 @@ use App,
 	Flash,
 	Input,
 	Redirect,
-	Response,
-	ItemRepositoryInterface;
+	Response;
 
 class ImagesController extends \BaseController {
 
 	protected $items;
 
-	public function __construct(ItemRepositoryInterface $items)
+	public function __construct(\ItemRepositoryInterface $items)
 	{
 		parent::__construct();
 

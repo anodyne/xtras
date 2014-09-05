@@ -13,6 +13,7 @@ class CommentsController extends \BaseController {
 
 	public function index($itemId)
 	{
+		// Get the comments
 		return $this->respondWithCollection($this->items->getComments($itemId), new \CommentTransformer);
 	}
 

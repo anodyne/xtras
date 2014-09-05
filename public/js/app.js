@@ -28,7 +28,8 @@ xtrasApp.controller('CommentsController', function($scope, $http, $window)
 		var comment = {
 			user_id: $window.userId,
 			item_id: $window.itemId,
-			content: $scope.newCommentContent
+			content: $scope.newCommentContent,
+			'_token': $window.token
 		};
 
 		// Post the data
@@ -41,6 +42,6 @@ xtrasApp.controller('CommentsController', function($scope, $http, $window)
 		});
 
 		// Hide the panel
-		$('#commentPanel').fadeOut('normal');
+		$('#commentPanel').addClass('hide');
 	}
 });

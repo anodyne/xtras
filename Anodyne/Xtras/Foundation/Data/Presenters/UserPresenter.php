@@ -16,7 +16,7 @@ class UserPresenter extends Presenter {
 
 		// Build the URL for the avatar
 		$url = ( ! empty($this->entity->avatar))
-			? "{$_ENV['FS_URL']}/images/avatars/{$this->entity->avatar}"
+			? "http://s3.amazonaws.com/anodyne-productions/avatars/{$this->entity->avatar}"
 			: Gravatar::image($this->entity->email, 500, $defaultImg, 'pg');
 
 		// Merge all the options to pass them to the partial

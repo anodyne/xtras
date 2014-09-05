@@ -40,6 +40,16 @@ class ItemPresenter extends Presenter {
 		return '<p>'.Str::words(strip_tags($this->description()), 25).'</p>';
 	}
 
+	public function disabled()
+	{
+		if ( ! (bool) $this->entity->status)
+		{
+			return '<p>'.label('danger', "This Xtra has been disabled by Anodyne Productions").'</p>';
+		}
+
+		return false;
+	}
+
 	public function downloads()
 	{
 		$entity = $this->entity;

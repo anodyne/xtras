@@ -8,12 +8,15 @@ use View,
 class ProductsController extends \BaseController {
 
 	protected $products;
+	protected $validator;
 
-	public function __construct(\ProductRepositoryInterface $products)
+	public function __construct(\ProductRepositoryInterface $products,
+			\ProductValidator $validator)
 	{
 		parent::__construct();
 
 		$this->products = $products;
+		$this->validator = $validator;
 
 		// Before filter to check if the user has permissions
 		$this->beforeFilter('@checkPermissions');
@@ -36,6 +39,9 @@ class ProductsController extends \BaseController {
 
 	public function store()
 	{
+		// Validate the product
+		$this->validator->validate(Input::all());
+
 		// Create the product
 		$product = $this->products->create(Input::all());
 
@@ -59,6 +65,9 @@ class ProductsController extends \BaseController {
 
 	public function update($id)
 	{
+		// Validate the product
+		$this->validator->validate(Input::all());
+
 		// Update the product
 		$product = $this->products->update($id, Input::all());
 
@@ -74,7 +83,7 @@ class ProductsController extends \BaseController {
 		$product = $this->products->find($id);
 
 		return partial('modal_content', [
-			'modalHeader'	=> "Delete Product",
+			'modalHeader'	=> "Remove Product",
 			'modalBody'		=> View::make('pages.admin.products.remove')->withProduct($product),
 			'modalFooter'	=> false,
 		]);
@@ -95,7 +104,7 @@ class ProductsController extends \BaseController {
 	{
 		if ( ! $this->currentUser->can('xtras.admin'))
 		{
-			return $this->errorUnauthorized("You do not have permission to manage products!");
+			return $this->errorUnauthorized("You do not have permission to manage products.");
 		}
 	}
 

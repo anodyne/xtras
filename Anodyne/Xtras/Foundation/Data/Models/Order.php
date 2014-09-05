@@ -1,14 +1,18 @@
-<?php namespace Xtras\Foundation\Data\Models\Eloquent;
+<?php namespace Xtras\Foundation\Data\Models;
 
-use Model;
+use Laracasts\Presenter\PresentableTrait;
 
-class OrderModel extends Model {
+class Order extends \Model {
+
+	use PresentableTrait;
 
 	protected $table = 'orders';
 
 	protected $fillable = ['user_id', 'item_id', 'file_id'];
 
 	protected $dates = ['created_at', 'updated_at'];
+
+	protected $presenter = 'Xtras\Foundation\Data\Presenters\OrderPresenter';
 
 	/*
 	|---------------------------------------------------------------------------
@@ -18,17 +22,17 @@ class OrderModel extends Model {
 
 	public function item()
 	{
-		return $this->belongsTo('ItemModel');
+		return $this->belongsTo('Item');
 	}
 
 	public function file()
 	{
-		return $this->belongsTo('ItemFileModel');
+		return $this->belongsTo('ItemFile');
 	}
 
 	public function user()
 	{
-		return $this->belongsTo('UserModel');
+		return $this->belongsTo('User');
 	}
 
 }

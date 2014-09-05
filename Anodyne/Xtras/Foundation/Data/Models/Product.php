@@ -1,10 +1,9 @@
-<?php namespace Xtras\Foundation\Data\Models\Eloquent;
+<?php namespace Xtras\Foundation\Data\Models;
 
-use Model;
 use Laracasts\Presenter\PresentableTrait;
 use Illuminate\Database\Eloquent\SoftDeletingTrait;
 
-class ProductModel extends Model {
+class Product extends \Model {
 
 	use PresentableTrait;
 	use SoftDeletingTrait;
@@ -25,7 +24,7 @@ class ProductModel extends Model {
 
 	public function items()
 	{
-		return $this->hasMany('ItemModel', 'product_id');
+		return $this->hasMany('Item');
 	}
 
 	/*

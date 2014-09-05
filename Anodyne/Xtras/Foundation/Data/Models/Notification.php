@@ -1,8 +1,6 @@
-<?php namespace Xtras\Foundation\Data\Models\Eloquent;
+<?php namespace Xtras\Foundation\Data\Models;
 
-use Model;
-
-class NotificationModel extends Model {
+class Notification extends \Model {
 
 	public $timestamps = false;
 
@@ -18,12 +16,12 @@ class NotificationModel extends Model {
 
 	public function item()
 	{
-		return $this->belongsTo('ItemModel');
+		return $this->belongsTo('Item');
 	}
 
 	public function user()
 	{
-		return $this->belongsTo('UserModel');
+		return $this->belongsTo('User');
 	}
 
 }

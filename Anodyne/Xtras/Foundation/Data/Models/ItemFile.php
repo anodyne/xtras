@@ -1,23 +1,20 @@
-<?php namespace Xtras\Foundation\Data\Models\Eloquent;
+<?php namespace Xtras\Foundation\Data\Models;
 
-use Model;
 use Laracasts\Presenter\PresentableTrait;
 use Illuminate\Database\Eloquent\SoftDeletingTrait;
 
-class ItemMessageModel extends Model {
+class ItemFile extends \Model {
 
 	use PresentableTrait;
 	use SoftDeletingTrait;
 
-	protected $table = 'items_messages';
+	protected $table = 'items_files';
 
-	protected $fillable = ['item_id', 'type', 'content', 'expires'];
+	protected $fillable = ['item_id', 'filename', 'version', 'size'];
 
-	protected $dates = ['expires', 'created_at', 'updated_at', 'deleted_at'];
+	protected $dates = ['created_at', 'updated_at', 'deleted_at'];
 
-	protected $presenter = 'Xtras\Foundation\Data\Presenters\ItemMessagePresenter';
-
-	protected $touches = ['item'];
+	protected $presenter = 'Xtras\Foundation\Data\Presenters\ItemFilePresenter';
 
 	/*
 	|---------------------------------------------------------------------------
@@ -27,18 +24,23 @@ class ItemMessageModel extends Model {
 
 	public function item()
 	{
-		return $this->belongsTo('ItemModel');
+		return $this->belongsTo('Item');
+	}
+
+	public function orders()
+	{
+		return $this->hasMany('Order');
 	}
 
 	/*
 	|---------------------------------------------------------------------------
-	| Model Scopes
+	| Model Methods
 	|---------------------------------------------------------------------------
 	*/
 
-	public function scopeItem($query, $item)
+	public function isLatest()
 	{
-		$query->where('item_id', $item);
+		return $this->version == $this->item->version;
 	}
 
 }

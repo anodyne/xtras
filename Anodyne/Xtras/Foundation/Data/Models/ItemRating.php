@@ -1,8 +1,6 @@
-<?php namespace Xtras\Foundation\Data\Models\Eloquent;
+<?php namespace Xtras\Foundation\Data\Models;
 
-use Model;
-
-class ItemRatingModel extends Model {
+class ItemRating extends \Model {
 
 	public $timestamps = false;
 
@@ -18,7 +16,7 @@ class ItemRatingModel extends Model {
 
 	public function item()
 	{
-		return $this->belongsTo('ItemModel');
+		return $this->belongsTo('Item');
 	}
 
 	/*

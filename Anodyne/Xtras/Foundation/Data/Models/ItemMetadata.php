@@ -1,22 +1,21 @@
-<?php namespace Xtras\Foundation\Data\Models\Eloquent;
+<?php namespace Xtras\Foundation\Data\Models;
 
-use Model;
 use Laracasts\Presenter\PresentableTrait;
 use Illuminate\Database\Eloquent\SoftDeletingTrait;
 
-class ItemMetaModel extends Model {
+class ItemMetadata extends \Model {
 
 	use PresentableTrait;
 	use SoftDeletingTrait;
 
-	protected $table = 'items_meta';
+	protected $table = 'items_metadata';
 
 	protected $fillable = ['item_id', 'installation', 'history', 'image1', 'image2',
 		'image3', 'thumbnail1', 'thumbnail2', 'thumbnail3'];
 
 	protected $dates = ['created_at', 'updated_at', 'deleted_at'];
 
-	protected $presenter = 'Xtras\Foundation\Data\Presenters\ItemMetaPresenter';
+	protected $presenter = 'Xtras\Foundation\Data\Presenters\ItemMetadataPresenter';
 
 	/*
 	|---------------------------------------------------------------------------
@@ -26,7 +25,7 @@ class ItemMetaModel extends Model {
 
 	public function item()
 	{
-		return $this->belongsTo('ItemModel');
+		return $this->belongsTo('Item');
 	}
 
 }

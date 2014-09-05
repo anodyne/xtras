@@ -1,26 +1,20 @@
-<?php namespace Xtras\Foundation\Data\Models\Eloquent;
+<?php namespace Xtras\Foundation\Data\Models;
 
-use Str,
-	Hash,
-	Model,
-	Config;
+use Config;
 use Zizaco\Entrust\HasRole;
 use Illuminate\Auth\UserTrait,
-	Illuminate\Auth\UserInterface,
-	Illuminate\Auth\Reminders\RemindableTrait,
-	Illuminate\Auth\Reminders\RemindableInterface;
+	Illuminate\Auth\UserInterface;
 use Laracasts\Presenter\PresentableTrait;
 use Illuminate\Database\Eloquent\SoftDeletingTrait;
 
-class UserModel extends Model implements UserInterface, RemindableInterface {
+class User extends \Model implements UserInterface {
 
 	use HasRole;
 	use UserTrait;
-	use RemindableTrait;
 	use PresentableTrait;
 	use SoftDeletingTrait;
 
-	protected $connection = 'anodyneUsers';
+	protected $connection = 'users';
 
 	protected $table = 'users';
 
@@ -40,17 +34,17 @@ class UserModel extends Model implements UserInterface, RemindableInterface {
 
 	public function items()
 	{
-		return $this->hasMany('ItemModel', 'user_id');
+		return $this->hasMany('Item');
 	}
 
 	public function orders()
 	{
-		return $this->hasMany('OrderModel', 'user_id');
+		return $this->hasMany('Order');
 	}
 
 	public function notifications()
 	{
-		return $this->hasMany('NotificationModel', 'user_id');
+		return $this->hasMany('Notification');
 	}
 
 	public function roles()
@@ -80,7 +74,7 @@ class UserModel extends Model implements UserInterface, RemindableInterface {
 	|--------------------------------------------------------------------------
 	*/
 
-	public function itemNotify(ItemModel $item)
+	public function itemNotify(Item $item)
 	{
 		$notification = $this->notifications->filter(function($n) use ($item)
 		{

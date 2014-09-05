@@ -1,10 +1,9 @@
-<?php namespace Xtras\Foundation\Data\Models\Eloquent;
+<?php namespace Xtras\Foundation\Data\Models;
 
-use Model;
 use Laracasts\Presenter\PresentableTrait;
 use Illuminate\Database\Eloquent\SoftDeletingTrait;
 
-class TypeModel extends Model {
+class Type extends \Model {
 
 	use PresentableTrait;
 	use SoftDeletingTrait;
@@ -25,7 +24,7 @@ class TypeModel extends Model {
 
 	public function items()
 	{
-		return $this->hasMany('ItemModel', 'type_id');
+		return $this->hasMany('Item');
 	}
 
 	/*

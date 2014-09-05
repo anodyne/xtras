@@ -1,9 +1,8 @@
-<?php namespace Xtras\Foundation\Data\Models\Eloquent;
+<?php namespace Xtras\Foundation\Data\Models;
 
-use Model;
 use Laracasts\Presenter\PresentableTrait;
 
-class CommentModel extends Model {
+class Comment extends \Model {
 
 	use PresentableTrait;
 
@@ -23,12 +22,12 @@ class CommentModel extends Model {
 
 	public function item()
 	{
-		return $this->belongsTo('ItemModel');
+		return $this->belongsTo('Item');
 	}
 
 	public function user()
 	{
-		return $this->belongsTo('UserModel');
+		return $this->belongsTo('User');
 	}
 
 }

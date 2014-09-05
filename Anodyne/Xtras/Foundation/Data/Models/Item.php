@@ -1,12 +1,10 @@
-<?php namespace Xtras\Foundation\Data\Models\Eloquent;
+<?php namespace Xtras\Foundation\Data\Models;
 
-use Str,
-	Model,
-	Collection;
+use Str;
 use Laracasts\Presenter\PresentableTrait;
 use Illuminate\Database\Eloquent\SoftDeletingTrait;
 
-class ItemModel extends Model {
+class Item extends \Model {
 
 	use PresentableTrait;
 	use SoftDeletingTrait;
@@ -22,79 +20,58 @@ class ItemModel extends Model {
 
 	/*
 	|---------------------------------------------------------------------------
-	| Validation
-	|---------------------------------------------------------------------------
-	*/
-
-	/*public static $rules = [
-		'type_id'		=> 'required|integer',
-		'product_id'	=> 'required|integer',
-		'name'			=> 'required',
-	];
-
-	public static $customMessages = [
-		'type_id.required' => "You must enter a type",
-		'type_id.integer' => "You have entered an invalid value for the type. Please select the type from the dropdown.",
-		'product_id.required' => "You must enter a product",
-		'product_id.integer' => "You have entered an invalid value for the product. Please select the product from the dropdown.",
-		'name.required' => "You must enter a name",
-	];*/
-
-	/*
-	|---------------------------------------------------------------------------
 	| Relationships
 	|---------------------------------------------------------------------------
 	*/
 
 	public function product()
 	{
-		return $this->belongsTo('ProductModel');
+		return $this->belongsTo('Product');
 	}
 
 	public function type()
 	{
-		return $this->belongsTo('TypeModel');
+		return $this->belongsTo('Type');
 	}
 
 	public function user()
 	{
-		return $this->belongsTo('UserModel');
+		return $this->belongsTo('User');
 	}
 
 	public function messages()
 	{
-		return $this->hasMany('ItemMessageModel', 'item_id');
+		return $this->hasMany('ItemMessage');
 	}
 
-	public function meta()
+	public function metadata()
 	{
-		return $this->hasOne('ItemMetaModel', 'item_id');
+		return $this->hasOne('ItemMetadata');
 	}
 
 	public function comments()
 	{
-		return $this->hasMany('CommentModel', 'item_id');
+		return $this->hasMany('Comment');
 	}
 
 	public function orders()
 	{
-		return $this->hasMany('OrderModel', 'item_id');
+		return $this->hasMany('Order');
 	}
 
 	public function files()
 	{
-		return $this->hasMany('ItemFileModel', 'item_id')
-			->orderBy('created_at', 'desc');
+		return $this->hasMany('ItemFile')->orderBy('created_at', 'desc');
 	}
 
 	public function ratings()
 	{
-		return $this->hasMany('ItemRatingModel', 'item_id');
+		return $this->hasMany('ItemRating');
 	}
 
 	public function notifications()
 	{
-		return $this->hasMany('NotificationModel', 'item_id');
+		return $this->hasMany('Notification');
 	}
 
 	/*
@@ -134,10 +111,10 @@ class ItemModel extends Model {
 
 	public function isActive()
 	{
-		return ( ! empty($this->meta->toArray()['file']));
+		return ( ! empty($this->metadata->toArray()['file']));
 	}
 
-	public function isOwner(UserModel $user)
+	public function isOwner(User $user)
 	{
 		return (int) $this->user_id === (int) $user->id;
 	}
@@ -159,7 +136,7 @@ class ItemModel extends Model {
 		$collection = $this->newCollection();
 
 		// Put the meta record in
-		$collection->put('meta', $this->meta);
+		$collection->put('metadata', $this->metadata);
 		$collection->put('files', $file);
 
 		return $collection;

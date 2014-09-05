@@ -1,11 +1,11 @@
-<?php namespace Xtras\Foundation\Data\Models\Eloquent;
+<?php namespace Xtras\Foundation\Data\Models;
 
 use Config;
 use Zizaco\Entrust\EntrustRole;
 
-class RoleModel extends EntrustRole {
+class Role extends EntrustRole {
 
-    protected $connection = 'anodyneUsers';
+    protected $connection = 'users';
 
 	protected $table = 'roles';
 

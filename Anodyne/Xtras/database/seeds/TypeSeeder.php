@@ -17,7 +17,7 @@ class TypeSeeder extends Seeder {
 
 		foreach ($types as $type)
 		{
-			TypeModel::create($type);
+			Type::create($type);
 		}
 	}
 

@@ -27,7 +27,7 @@ class ItemSeeder extends Seeder {
 				break;
 			}
 
-			$item = ItemModel::create([
+			$item = Item::create([
 				'user_id' => $faker->numberBetween(1, 50),
 				'type_id' => $type,
 				'product_id' => $faker->numberBetween(1, 3),
@@ -37,20 +37,19 @@ class ItemSeeder extends Seeder {
 			]);
 
 			// Create a new meta model
-			$meta = new ItemMetaModel;
-			$meta->fill([
+			$metadata = new ItemMetadata;
+			$metadata->fill([
 				'item_id' => $item->id,
 				'installation' => implode("\r\n\r\n", $faker->paragraphs(3)),
 				'history' => $faker->paragraph,
-			]);
-			$meta->save();
+			])->save();
 
 			// Determine how many times we're looping through ratings
 			$ratingsLoop = $faker->numberBetween(1, 10);
 
 			for ($j = 1; $j < $ratingsLoop; $j++)
 			{
-				ItemRatingModel::create([
+				ItemRating::create([
 					'user_id' => $faker->numberBetween(1, 50),
 					'item_id' => $item->id,
 					'rating' => $faker->numberBetween(1, 5),
@@ -65,7 +64,7 @@ class ItemSeeder extends Seeder {
 
 			for ($c = 1; $c < $commentsLoop; $c++)
 			{
-				CommentModel::create([
+				Comment::create([
 					'user_id' => $faker->numberBetween(1, 50),
 					'item_id' => $item->id,
 					'content' => $faker->paragraph,
@@ -80,7 +79,7 @@ class ItemSeeder extends Seeder {
 				$version = $faker->randomFloat(1, 1, 9);
 				$filename = "{$item->user->username}/{$item->slug}-{$version}.zip";
 
-				ItemFileModel::create([
+				ItemFile::create([
 					'item_id' => $item->id,
 					'filename' => $filename,
 					'version' => $version,
@@ -95,7 +94,7 @@ class ItemSeeder extends Seeder {
 
 			for ($o = 1; $o < $ordersLoop; $o++)
 			{
-				OrderModel::create([
+				Order::create([
 					'user_id' => $faker->numberBetween(1, 50),
 					'item_id' => $item->id,
 					'file_id' => $faker->numberBetween(1, 400),

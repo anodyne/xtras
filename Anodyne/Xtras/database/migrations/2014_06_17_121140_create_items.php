@@ -70,7 +70,7 @@ class CreateItems extends Migration {
 			$table->softDeletes();
 		});
 
-		Schema::create('items_meta', function(Blueprint $table)
+		Schema::create('items_metadata', function(Blueprint $table)
 		{
 			$table->bigIncrements('id');
 			$table->unsignedBigInteger('item_id');
@@ -133,7 +133,7 @@ class CreateItems extends Migration {
 		Schema::dropIfExists('items_files');
 		Schema::dropIfExists('items_messages');
 		Schema::dropIfExists('items_ratings');
-		Schema::dropIfExists('items_meta');
+		Schema::dropIfExists('items_metadata');
 		Schema::dropIfExists('comments');
 		Schema::dropIfExists('orders');
 		Schema::dropIfExists('notifications');

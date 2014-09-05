@@ -23,7 +23,7 @@ class ProductSeeder extends Seeder {
 
 		foreach ($products as $product)
 		{
-			ProductModel::create($product);
+			Product::create($product);
 		}
 	}
 

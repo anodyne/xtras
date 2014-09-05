@@ -75,7 +75,7 @@ class ItemMailer extends BaseMailer {
 					'bcc' => $emailsArr,
 					'name' => HTML::link(route('item.show', [$item->user->username, $item->slug]), $item->present()->name),
 					'type' => $item->present()->type,
-					'history' => $item->meta->present()->history,
+					'history' => $item->metadata->present()->history,
 					'version' => $item->present()->version,
 				];
 

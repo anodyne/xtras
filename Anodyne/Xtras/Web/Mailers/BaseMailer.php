@@ -9,7 +9,7 @@ abstract class BaseMailer {
 			// Set the TO
 			if (array_key_exists('to', $data))
 			{
-				$msg->to($recipients['to']);
+				$msg->to($data['to']);
 			}
 
 			// If there's a reply to, add it
@@ -21,13 +21,13 @@ abstract class BaseMailer {
 			// If there's a CC, add it
 			if (array_key_exists('cc', $data))
 			{
-				$msg->cc($recipients['cc']);
+				$msg->cc($data['cc']);
 			}
 
 			// If there's a BCC, add it
 			if (array_key_exists('bcc', $data))
 			{
-				$msg->bcc($recipients['bcc']);
+				$msg->bcc($data['bcc']);
 			}
 
 			// Set the subject

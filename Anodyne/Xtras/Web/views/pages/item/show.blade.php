@@ -11,6 +11,16 @@
 
 			<h4>by {{ $item->present()->author }}</h4>
 
+			@if (Auth::check())
+				@if ($_currentUser->can('xtras.admin') or $item->isOwner($_currentUser)))
+					<div class="btn-toolbar">
+						<div class="btn-group">
+							<a href="{{ route('item.edit', [$item->user->username, $item->slug]) }}" class="btn btn-default">Edit Xtra</a>
+						</div>
+					</div>
+				@endif
+			@endif
+
 			{{ $item->present()->inactiveMessage }}
 
 			<div>{{ $item->present()->messages }}</div>
@@ -212,7 +222,7 @@
 			</div>
 		</div>
 
-		<div class="col-md-3 col-lg-3">
+		<div class="col-md-3">
 			@if (Auth::check())
 				@if ($item->present()->active)
 					<p>{{ $item->present()->downloadBtn }}</p>
@@ -288,7 +298,7 @@
 		@if (Auth::check())
 			window.url = "{{ Request::root() }}";
 			window.itemId = "{{ $item->id }}";
-			window.userId = "{{ $_currentUser->id }}";
+			window.userId = "{{ (Auth::check()) ? $_currentUser->id : false }}";
 		@endif
 
 		$('.close').on('click', function()
@@ -318,7 +328,7 @@
 		{
 			var send = {
 				item: "{{ $item->id }}",
-				user: "{{ $_currentUser->id }}",
+				user: "{{ (Auth::check()) ? $_currentUser->id : false }}",
 				'_token': "{{ csrf_token() }}"
 			};
 

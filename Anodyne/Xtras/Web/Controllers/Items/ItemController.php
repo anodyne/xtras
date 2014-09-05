@@ -33,12 +33,20 @@ class ItemController extends \BaseController {
 
 		if ($item)
 		{
-			$user = $this->currentUser;
+			$userRating = false;
+			$notify = false;
 
-			$userRating = $item->ratings->filter(function($r) use ($user)
+			if ($this->currentUser)
 			{
-				return (int) $user->id === (int) $r->user_id;
-			})->first();
+				$user = $this->currentUser;
+
+				$userRating = $item->ratings->filter(function($r) use ($user)
+				{
+					return (int) $user->id === (int) $r->user_id;
+				})->first();
+
+				$notify = $this->currentUser->itemNotify($item);
+			}
 
 			return View::make('pages.item.show')
 				->withItem($item)
@@ -46,7 +54,7 @@ class ItemController extends \BaseController {
 				->withFiles($item->files->sortBy('version', SORT_REGULAR, true))
 				->withComments($item->comments->sortBy('created_at', SORT_REGULAR, true))
 				->with('userRating', $userRating)
-				->withNotify($this->currentUser->itemNotify($item));
+				->withNotify($notify);
 		}
 
 		return $this->errorNotFound("We couldn't find the Xtra you're looking for.");

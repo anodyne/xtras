@@ -47,6 +47,7 @@
 										@endif
 										<li class="divider"></li>
 										<li><a href="{{ route('account.profile', [$_currentUser->username]) }}">My Profile</a></li>
+										<li><a href="{{ route('account.downloads') }}">My Downloads</a></li>
 										<li><a href="{{ route('account.notifications') }}">My Notifications</a></li>
 										<li><a href="http://anodyne-productions.com/admin/users/{{ $_currentUser->username }}/edit">Edit My Profile</a></li>
 

@@ -23,7 +23,7 @@ class UserController extends \BaseController {
 			return View::make('pages.user.show')->withUser($user);
 		}
 
-		return $this->errorNotFound('No profile exists with that name!');
+		return $this->errorNotFound("We couldn't find the user you're looking for.");
 	}
 
 	public function xtras()
@@ -66,6 +66,12 @@ class UserController extends \BaseController {
 				$this->users->removeNotification($user, $item);
 			}
 		}
+	}
+
+	public function downloads()
+	{
+		return View::make('pages.user.downloads')
+			->withOrders($this->users->getOrders($this->currentUser));
 	}
 
 }

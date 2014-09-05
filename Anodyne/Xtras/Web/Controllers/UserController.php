@@ -13,10 +13,10 @@ class UserController extends \BaseController {
 		$this->users = $users;
 	}
 
-	public function show($name)
+	public function show($username)
 	{
 		// Get the user from their username
-		$user = $this->users->findByUsername($name);
+		$user = $this->users->findByUsername($username);
 
 		if ($user)
 		{
@@ -40,31 +40,25 @@ class UserController extends \BaseController {
 
 	public function addNotification()
 	{
-		if ($this->currentUser)
-		{
-			// Get the values
-			$user = Input::get('user');
-			$item = Input::get('item');
+		// Get the values
+		$user = Input::get('user');
+		$item = Input::get('item');
 
-			if ((int) $this->currentUser->id === (int) $user)
-			{
-				$this->users->addNotification($user, $item);
-			}
+		if ((int) $this->currentUser->id === (int) $user)
+		{
+			$this->users->addNotification($user, $item);
 		}
 	}
 
 	public function removeNotification()
 	{
-		if ($this->currentUser)
-		{
-			// Get the values
-			$user = Input::get('user');
-			$item = Input::get('item');
+		// Get the values
+		$user = Input::get('user');
+		$item = Input::get('item');
 
-			if ((int) $this->currentUser->id === (int) $user)
-			{
-				$this->users->removeNotification($user, $item);
-			}
+		if ((int) $this->currentUser->id === (int) $user)
+		{
+			$this->users->removeNotification($user, $item);
 		}
 	}
 

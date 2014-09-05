@@ -28,10 +28,6 @@ class MainController extends \BaseController {
 				$view = 'pages.policies.browsers';
 			break;
 
-			case 'dmca':
-				$view = 'pages.policies.dmca';
-			break;
-
 			case 'privacy':
 				$view = 'pages.policies.privacy';
 			break;

@@ -34,6 +34,7 @@
 							<div class="row {{ $item->product->present()->nameAsSlug }}">
 								<div class="col-md-6">
 									<p class="lead">{{ $item->present()->nameWithVersion }}</p>
+									{{ $item->present()->disabled }}
 								</div>
 								<div class="col-md-6">
 									<div class="btn-toolbar pull-right">
@@ -71,6 +72,7 @@
 							<div class="row">
 								<div class="col-md-6">
 									<p class="lead">{{ $item->present()->nameWithVersion }}</p>
+									{{ $item->present()->disabled }}
 								</div>
 								<div class="col-md-6">
 									<div class="btn-toolbar pull-right">
@@ -108,6 +110,7 @@
 							<div class="row">
 								<div class="col-md-6">
 									<p class="lead">{{ $item->present()->nameWithVersion }}</p>
+									{{ $item->present()->disabled }}
 								</div>
 								<div class="col-md-6">
 									<div class="btn-toolbar pull-right">

@@ -75,5 +75,7 @@
 				@endif
 			</div>
 		</div>
+	@else
+		{{ alert('warning', $user->present()->name." doesn't have any Xtras yet.") }}
 	@endif
 @stop

@@ -34,8 +34,9 @@ class XtrasRoutingServiceProvider extends ServiceProvider {
 			'as'	=> 'login.do',
 			'uses'	=> 'Xtras\Controllers\LoginController@doLogin']);
 		Route::get('logout', [
-			'as'	=> 'logout',
-			'uses'	=> 'Xtras\Controllers\LoginController@logout']);
+			'before'	=> 'auth',
+			'as'		=> 'logout',
+			'uses'		=> 'Xtras\Controllers\LoginController@logout']);
 	}
 
 	protected function pagesRoutes()
@@ -53,8 +54,8 @@ class XtrasRoutingServiceProvider extends ServiceProvider {
 				'as'	=> 'ranks',
 				'uses'	=> 'Items\ItemController@ranks']);
 			Route::get('mods', [
-				'as'		=> 'mods',
-				'uses'		=> 'Items\ItemController@mods']);
+				'as'	=> 'mods',
+				'uses'	=> 'Items\ItemController@mods']);
 
 			Route::get('policies/{type?}', [
 				'as'	=> 'policies',
@@ -255,6 +256,10 @@ class XtrasRoutingServiceProvider extends ServiceProvider {
 				'before'	=> 'auth',
 				'as'		=> 'account.xtras',
 				'uses'		=> 'UserController@xtras']);
+			Route::get('my-downloads', [
+				'before'	=> 'auth',
+				'as'		=> 'account.downloads',
+				'uses'		=> 'UserController@downloads']);
 			Route::get('notifications', [
 				'before'	=> 'auth',
 				'as'		=> 'account.notifications',
@@ -280,11 +285,11 @@ class XtrasRoutingServiceProvider extends ServiceProvider {
 
 		Route::group($groupOptions, function()
 		{
-			Route::get('products/{id}/remove', 'ProductsController@remove');
-			Route::get('types/{id}/remove', 'TypesController@remove');
-
 			Route::resource('products', 'ProductsController', ['except' => ['show']]);
 			Route::resource('types', 'TypesController', ['except' => ['show']]);
+
+			Route::get('products/{id}/remove', 'ProductsController@remove');
+			Route::get('types/{id}/remove', 'TypesController@remove');
 		});
 	}
 

@@ -10,13 +10,17 @@
 
 		<h1>Newest Xtras</h1>
 
-		<div class="row">
-			@foreach ($new as $item)
-				<div class="col-md-4 col-lg-4">
-					{{ View::make('partials.media')->withItem($item) }}
-				</div>
-			@endforeach
-		</div>
+		@if (count($new) > 0)
+			<div class="row">
+				@foreach ($new as $item)
+					<div class="col-md-4">
+						{{ View::make('partials.media')->withItem($item) }}
+					</div>
+				@endforeach
+			</div>
+		@else
+			{{ alert('warning', "No recently created Xtras found.") }}
+		@endif
 	</div>
 		
 	<div id="updated" class="hide">
@@ -24,13 +28,17 @@
 
 		<h1>Recently Updated Xtras</h1>
 
-		<div class="row">
-			@foreach ($updated as $item)
-				<div class="col-md-4 col-lg-4">
-					{{ View::make('partials.media')->withItem($item) }}
-				</div>
-			@endforeach
-		</div>
+		@if (count($updated) > 0)
+			<div class="row">
+				@foreach ($updated as $item)
+					<div class="col-md-4">
+						{{ View::make('partials.media')->withItem($item) }}
+					</div>
+				@endforeach
+			</div>
+		@else
+			{{ alert('warning', "No recently updated Xtras found.") }}
+		@endif
 	</div>
 @stop
 

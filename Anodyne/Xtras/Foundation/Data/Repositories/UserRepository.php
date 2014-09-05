@@ -1,41 +1,36 @@
-<?php namespace Xtras\Foundation\Data\Repositories\Eloquent;
+<?php namespace Xtras\Foundation\Data\Repositories;
 
-use UserModel,
-	NotificationModel,
-	UserRepositoryInterface;
+use User,
+	Notification;
 
-class UserRepository implements UserRepositoryInterface {
+class UserRepository implements \UserRepositoryInterface {
 
-	public function addNotification($user, $item)
+	public function addNotification($userId, $itemId)
 	{
-		return NotificationModel::firstOrCreate([
-			'user_id' => $user,
-			'item_id' => $item,
+		return Notification::firstOrCreate([
+			'user_id' => $userId,
+			'item_id' => $itemId,
 		]);
 	}
 
 	public function all()
 	{
-		return UserModel::all();
+		return User::all();
 	}
 
-	public function create(array $data){}
-
-	public function delete($id){}
-
-	public function find($id)
+	public function find($userId)
 	{
-		return UserModel::with('items', 'items.meta', 'items.type', 'items.product', 'items.user')
-			->find($id);
+		return User::with('items', 'items.metadata', 'items.type', 'items.product', 'items.user')
+			->find($userId);
 	}
 
 	public function findByUsername($username)
 	{
-		return UserModel::with('items', 'items.meta', 'items.type', 'items.product', 'items.user')
+		return User::with('items', 'items.metadata', 'items.type', 'items.product', 'items.user')
 			->where('username', $username)->first();
 	}
 
-	public function findItemsByName(UserModel $user, $value)
+	public function findItemsByName(User $user, $value)
 	{
 		return $user->items->filter(function($i) use ($value)
 		{
@@ -43,7 +38,7 @@ class UserRepository implements UserRepositoryInterface {
 		});
 	}
 
-	public function findItemsBySlug(UserModel $user, $value)
+	public function findItemsBySlug(User $user, $value)
 	{
 		return $user->items->filter(function($i) use ($value)
 		{
@@ -51,7 +46,7 @@ class UserRepository implements UserRepositoryInterface {
 		});
 	}
 
-	public function findItemsByType(UserModel $user, $value, $splitByProduct = false)
+	public function findItemsByType(User $user, $value, $splitByProduct = false)
 	{
 		// Eager loading
 		$user = $user->load('items', 'items.type', 'items.product', 'items.user');
@@ -80,12 +75,12 @@ class UserRepository implements UserRepositoryInterface {
 		return $filteredItems;
 	}
 
-	public function getItemsByType(UserModel $user)
+	public function getItemsByType(User $user)
 	{
-		$itemsArr = [];
-
 		// Make sure we're eager loaded what we need
 		$user = $user->load('items', 'items.type', 'items.product', 'items.user');
+
+		$itemsArr = [];
 
 		foreach ($user->items->sortBy('name') as $item)
 		{
@@ -97,7 +92,7 @@ class UserRepository implements UserRepositoryInterface {
 		return $itemsArr;
 	}
 
-	public function getNotifications(UserModel $user)
+	public function getNotifications(User $user)
 	{
 		// Eager loading
 		$user = $user->load('notifications', 'notifications.item', 'notifications.item.user');
@@ -105,11 +100,18 @@ class UserRepository implements UserRepositoryInterface {
 		return $user->notifications;
 	}
 
-	public function removeNotification($user, $item)
+	public function getOrders(User $user)
+	{
+		$user = $user->load('orders', 'orders.item', 'orders.item.user');
+
+		return $user->orders->sortBy('created_at');
+	}
+
+	public function removeNotification($userId, $itemId)
 	{
 		// Get the notification
-		$notification = NotificationModel::where('user_id', $user)
-			->where('item_id', $item)
+		$notification = Notification::where('user_id', $userId)
+			->where('item_id', $itemId)
 			->first();
 
 		if ($notification)
@@ -119,7 +121,5 @@ class UserRepository implements UserRepositoryInterface {
 
 		return false;
 	}
-
-	public function update($id, array $data){}
 
 }

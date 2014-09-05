@@ -1,41 +1,39 @@
-<?php namespace Xtras\Foundation\Data\Repositories\Eloquent;
+<?php namespace Xtras\Foundation\Data\Repositories;
 
-use Auth,
-	Input,
-	ItemModel,
-	TypeModel,
-	UserModel,
-	CommentModel,
-	ProductModel,
-	ItemFileModel,
-	ItemMetaModel,
-	ItemRatingModel,
-	ItemMessageModel,
-	CommentTransformer,
-	ItemRepositoryInterface,
-	UserRepositoryInterface;
+use Item,
+	Type,
+	User,
+	Comment,
+	ItemFile,
+	ItemMessage;
+use Rees\Sanitizer\Sanitizer;
 use Illuminate\Support\Collection;
 
-class ItemRepository implements ItemRepositoryInterface {
+class ItemRepository implements \ItemRepositoryInterface {
 
 	protected $users;
 
-	public function __construct(UserRepositoryInterface $users)
+	public function __construct(\UserRepositoryInterface $users)
 	{
 		$this->users = $users;
 	}
 
-	public function addComment($id, array $data)
+	public function addComment($itemId, array $data)
 	{
 		// Get the item
-		$item = $this->find($id);
+		$item = $this->find($itemId);
 
 		if ($item)
 		{
+			$sanitizer = new Sanitizer;
+			$sanitizer->sanitize([
+				'user_id'	=> 'trim',
+				'item_id'	=> 'trim',
+				'content'	=> 'trim|strip_tags'
+			], $data);
+
 			// Create a comment record
-			$comment = new CommentModel;
-			$comment->fill($data);
-			$comment->save();
+			$comment = Comment::create($data);
 
 			// Attach the comment to the item
 			$item->comments()->save($comment);
@@ -51,46 +49,52 @@ class ItemRepository implements ItemRepositoryInterface {
 		// Get the item
 		$item = $this->find($itemId);
 
-		// Setup the expiration
-		if ( ! empty($data['expires']))
+		if ($item)
 		{
-			$expires = \Date::createFromFormat('m/d/Y', $data['expires']);
+			// Setup the expiration
+			if ( ! empty($data['expires']))
+			{
+				$expires = \Date::createFromFormat('m/d/Y', $data['expires']);
 
-			$data['expires'] = $expires->endOfDay();
+				$data['expires'] = $expires->endOfDay();
+			}
+			else
+			{
+				unset($data['expires']);
+			}
+
+			$sanitizer = new Sanitizer;
+			$sanitizer->sanitize([
+				'item_id'	=> 'trim',
+				'content'	=> 'trim|strip_tags'
+			], $data);
+
+			// Create the message
+			$message = ItemMessage::create($data);
+
+			// Associate the message with the item
+			$item->messages()->save($message);
+
+			return $message;
 		}
-		else
-		{
-			unset($data['expires']);
-		}
 
-		// Create the message
-		$message = ItemMessageModel::create($data);
-
-		// Associate the message with the item
-		$item->messages()->save($message);
-
-		return $message;
+		return false;
 	}
 
 	public function all()
 	{
-		return ItemModel::all();
-	}
-
-	public function allPaginated($number)
-	{
-		return ItemModel::active()->paginate($number);
+		return Item::all();
 	}
 
 	public function create(array $data)
 	{
 		// Create the item
-		$item = ItemModel::create($data);
+		$item = Item::create($data);
 
 		// If there's metadata, update it
-		if (array_key_exists('meta', $data))
+		if (array_key_exists('metadata', $data))
 		{
-			$this->updateMetaData($item->id, $data['meta']);
+			$this->updateMetaData($item->id, $data['metadata']);
 		}
 
 		// If there are file metadata, create that data
@@ -155,10 +159,10 @@ class ItemRepository implements ItemRepositoryInterface {
 				}
 			}
 
-			// Remove all the meta data
-			if ($item->meta->count() > 0)
+			// Remove all the metadata
+			if ($item->metadata->count() > 0)
 			{
-				$item->meta->forceDelete();
+				$item->metadata->forceDelete();
 			}
 
 			// Remove the item
@@ -192,13 +196,13 @@ class ItemRepository implements ItemRepositoryInterface {
 
 		if ($item)
 		{
-			// Get the meta data
-			$meta = $item->meta;
+			// Get the metadata
+			$metadata = $item->metadata;
 
 			// Update the values
-			$meta->{"image{$imageNumber}"} = null;
-			$meta->{"thumbnail{$imageNumber}"} = null;
-			$meta->save();
+			$metadata->{"image{$imageNumber}"} = null;
+			$metadata->{"thumbnail{$imageNumber}"} = null;
+			$metadata->save();
 		}
 
 		return false;
@@ -221,7 +225,7 @@ class ItemRepository implements ItemRepositoryInterface {
 
 	public function find($id)
 	{
-		return ItemModel::find($id);
+		return Item::find($id);
 	}
 
 	public function findByAuthor($author)
@@ -258,12 +262,12 @@ class ItemRepository implements ItemRepositoryInterface {
 
 	public function findByName($name)
 	{
-		return ItemModel::where('name', $name)->get();
+		return Item::where('name', $name)->get();
 	}
 
 	public function findBySlug($slug)
 	{
-		return ItemModel::where('slug', 'like', "%{$slug}%")->get();
+		return Item::where('slug', 'like', "%{$slug}%")->get();
 	}
 
 	public function findByType($type, $paginate = false, $splitByProduct = false)
@@ -271,17 +275,17 @@ class ItemRepository implements ItemRepositoryInterface {
 		switch ($type)
 		{
 			case 'mods':
-				$type = TypeModel::with('items.user', 'items.meta', 'items.product', 'items.type')
+				$type = Type::with('items.user', 'items.metadata', 'items.product', 'items.type')
 					->where('name', 'MOD')->first();
 			break;
 
 			case 'ranks':
-				$type = TypeModel::with('items.user', 'items.meta', 'items.product', 'items.type')
+				$type = Type::with('items.user', 'items.metadata', 'items.product', 'items.type')
 					->where('name', 'Rank Set')->first();
 			break;
 
 			case 'skins':
-				$type = TypeModel::with('items.user', 'items.meta', 'items.product', 'items.type')
+				$type = Type::with('items.user', 'items.metadata', 'items.product', 'items.type')
 					->where('name', 'Skin')->first();
 			break;
 		}
@@ -314,43 +318,45 @@ class ItemRepository implements ItemRepositoryInterface {
 
 	public function findComment($id)
 	{
-		return CommentModel::with('item', 'item.user', 'item.type', 'user')->find($id);
+		return Comment::with('item', 'item.user', 'item.type', 'user')->find($id);
 	}
 
 	public function findFile($id)
 	{
-		return ItemFileModel::with('item')->where('id', $id)->first();
+		return ItemFile::with('item')->where('id', $id)->first();
 	}
 
 	public function findMessage($id)
 	{
-		return ItemMessageModel::with('item')->where('id', $id)->first();
+		return ItemMessage::with('item')->where('id', $id)->first();
 	}
 
 	public function getByPage($type, $page = 1, $limit = 15, $order = 'created_at', $direction = 'desc')
 	{
 		// Get the type
-		$itemType = ($type) ? TypeModel::name($type)->first() : false;
+		$itemType = ($type) ? Type::active()->name($type)->first() : false;
 
 		// Build the results
 		$results = new \stdClass;
 		$results->page = $page;
 		$results->limit = $limit;
-		$results->totalItems = ($type) ? ItemModel::itemType($itemType->id)->count() : ItemModel::count();
+		$results->totalItems = ($type) 
+			? Item::active()->itemType($itemType->id)->count() 
+			: Item::active()->count();
 		$results->items = [];
 
 		if ($type)
 		{
-			$items = ItemModel::with('meta', 'type', 'user', 'product')
+			$items = Item::with('metadata', 'type', 'user', 'product')
+				->active()
 				->itemType($itemType->id)
-				->where('deleted_at', null)
 				->orderBy($order, $direction)
 				->skip($limit * ($page - 1))->take($limit)->get();
 		}
 		else
 		{
-			$items = ItemModel::with('meta', 'type', 'user', 'product')
-				->where('deleted_at', null)
+			$items = Item::with('metadata', 'type', 'user', 'product')
+				->active()
 				->orderBy($order, $direction)
 				->skip($limit * ($page - 1))->take($limit)->get();
 		}
@@ -374,62 +380,43 @@ class ItemRepository implements ItemRepositoryInterface {
 		return new Collection;
 	}
 
-	public function getMessage($id)
+	public function getMessage($messageId)
 	{
-		return ItemMessageModel::with('item')->where('id', $id)->first();
+		return ItemMessage::with('item')->active()->find($messageId);
 	}
 
 	public function getProducts()
 	{
-		return ProductModel::active()->lists('name', 'id');
+		return \Product::active()->lists('name', 'id');
 	}
 
 	public function getRecentlyAdded($number)
 	{
-		return ItemModel::with('product', 'type', 'user', 'meta')
-			->orderBy('created_at', 'desc')->take($number)->get();
+		return Item::with('product', 'type', 'user', 'metadata')
+			->active()
+			->orderBy('created_at', 'desc')
+			->take($number)
+			->get();
 	}
 
 	public function getRecentlyUpdated($number)
 	{
-		return ItemModel::with('product', 'type', 'user', 'meta')
-			->orderBy('updated_at', 'desc')->take($number)->get();
-	}
-
-	public function getItemSizeReport()
-	{
-		// Get all the items
-		$items = $this->all();
-	}
-
-	public function getUserSizeReport()
-	{
-		// Get all the users
-		$users = UserModel::all();
-
-		$total = 0;
-
-		foreach ($users as $user)
-		{
-			foreach ($user->items as $item)
-			{
-				foreach ($item->files as $file)
-				{
-					$total += $file->size;
-				}
-			}
-		}
+		return Item::with('product', 'type', 'user', 'metadata')
+			->active()
+			->orderBy('updated_at', 'desc')
+			->take($number)
+			->get();
 	}
 
 	public function getTypes()
 	{
-		return TypeModel::active()->lists('name', 'id');
+		return Type::active()->lists('name', 'id');
 	}
 
-	public function getTypesByPermissions(UserModel $user)
+	public function getTypesByPermissions(User $user)
 	{
 		// Get all the types
-		$types = TypeModel::active()->get();
+		$types = Type::active()->get();
 
 		// Start an array of items
 		$finalTypes = [];
@@ -464,7 +451,7 @@ class ItemRepository implements ItemRepositoryInterface {
 		return $finalTypes;
 	}
 
-	public function rate(UserModel $user, $itemId, $input)
+	public function rate(User $user, $itemId, $input)
 	{
 		// Get the item
 		$item = $this->find($itemId);
@@ -473,11 +460,10 @@ class ItemRepository implements ItemRepositoryInterface {
 		if ($item and $item->user->id != $user->id)
 		{
 			// Create a new rating
-			$rating = ItemRatingModel::firstOrCreate([
+			$rating = \ItemRating::firstOrCreate([
 				'item_id'	=> $item->id,
 				'user_id'	=> $user->id
 			]);
-
 			$rating->fill(['rating' => (int) $input])->save();
 
 			// Update the overall rating
@@ -491,15 +477,17 @@ class ItemRepository implements ItemRepositoryInterface {
 
 	public function search($input)
 	{
-		return ItemModel::with('product', 'type', 'user')
-			->where('name', 'like', "%{$input}%")
-			->orWhere('desc', 'like', "%{$input}%")
-			->paginate(25);
+		return Item::with('product', 'type', 'user')
+			->where(function($query) use ($input)
+			{
+				$query->where('name', 'like', "%{$input}%")
+					->orWhere('desc', 'like', "%{$input}%");
+			})->active()->paginate(25);
 	}
 
 	public function searchAdvanced(array $input)
 	{
-		$search = ItemModel::query()->with('product', 'type', 'user');
+		$search = Item::query()->with('product', 'type', 'user');
 
 		if (array_key_exists('t', $input) and count($input['t']) > 0)
 		{
@@ -520,23 +508,22 @@ class ItemRepository implements ItemRepositoryInterface {
 			});
 		}
 
-		return $search->paginate(25);
+		return $search->active()->paginate(25);
 	}
 
-	public function update($id, array $data)
+	public function update($itemId, array $data)
 	{
 		// Get the item
-		$item = $this->find($id);
+		$item = $this->find($itemId);
 
 		if ($item)
 		{
-			$item->fill($data);
-			$item->save();
+			$item->fill($data)->save();
 
 			// If there's metadata, update it
-			if (array_key_exists('meta', $data))
+			if (array_key_exists('metadata', $data))
 			{
-				$this->updateMetaData($item->id, $data['meta']);
+				$this->updateMetaData($item->id, $data['metadata']);
 			}
 
 			// If there are file metadata, create that data
@@ -551,28 +538,31 @@ class ItemRepository implements ItemRepositoryInterface {
 		return false;
 	}
 
-	public function updateFileData($id, array $data)
+	public function updateFileData($itemId, array $data)
 	{
 		// Get the item
-		$item = $this->find($id);
+		$item = $this->find($itemId);
 
-		// Create a new instance
-		$file = new ItemFileModel;
-		$file->fill($data);
-		$file->save();
+		if ($item)
+		{
+			$file = ItemFile::create($data);
 
-		$item->files()->save($file);
+			$item->files()->save($file);
+
+			return $file;
+		}
+
+		return false;
 	}
 
-	public function updateMessage($id, array $data)
+	public function updateMessage($messageId, array $data)
 	{
 		// Get the message
-		$message = $this->findMessage($id);
+		$message = $this->findMessage($messageId);
 
 		if ($message)
 		{
-			$message->fill($data);
-			$message->save();
+			$message->fill($data)->save();
 
 			return $message;
 		}
@@ -580,26 +570,24 @@ class ItemRepository implements ItemRepositoryInterface {
 		return false;
 	}
 
-	public function updateMetaData($id, array $data)
+	public function updateMetaData($itemId, array $data)
 	{
 		// Get the item
-		$item = $this->find($id);
+		$item = $this->find($itemId);
 
-		if ($item->meta)
+		if ($item)
 		{
-			// Get the meta data
-			$meta = $item->meta;
-			$meta->update($data);
+			if ($item->metadata)
+			{
+				$item->metadata->update($data);
+			}
+			else
+			{
+				$item->metadata()->save(\ItemMetadata::create($data));
+			}
 		}
-		else
-		{
-			// Create a new instance
-			$meta = new ItemMetaModel;
-			$meta->fill($data);
-			$meta->save();
 
-			$item->meta()->save($meta);
-		}
+		return false;
 	}
 
 }

@@ -18,6 +18,11 @@ class UserRepository implements \UserRepositoryInterface {
 		return User::all();
 	}
 
+	public function allForDropdown()
+	{
+		return User::orderBy('username', 'asc')->lists('username', 'id');
+	}
+
 	public function find($userId)
 	{
 		return User::with('items', 'items.metadata', 'items.type', 'items.product', 'items.user')

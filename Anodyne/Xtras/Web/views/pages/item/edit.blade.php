@@ -34,6 +34,17 @@
 			</div>
 		</div>
 
+		@if ($_currentUser->can('xtras.admin'))
+			<div class="row">
+				<div class="col-md-4">
+					<div class="form-group">
+						<label>User</label>
+						{{ Form::select('user_id', $users, null, ['class' => 'form-control']) }}
+					</div>
+				</div>
+			</div>
+		@endif
+
 		<div class="row">
 			<div class="col-md-6">
 				<div class="form-group">

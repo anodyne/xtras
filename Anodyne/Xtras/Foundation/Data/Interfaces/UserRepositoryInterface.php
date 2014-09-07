@@ -6,6 +6,7 @@ interface UserRepositoryInterface {
 
 	public function addNotification($userId, $itemId);
 	public function all();
+	public function allForDropdown();
 	public function find($userId);
 	public function findByUsername($username);
 	public function findItemsByName(User $user, $value);

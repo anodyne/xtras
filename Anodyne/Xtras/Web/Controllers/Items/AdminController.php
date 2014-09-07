@@ -95,7 +95,8 @@ class AdminController extends \BaseController {
 					return View::make('pages.item.edit')
 						->withItem($item)
 						->withMetadata($item->metadata)
-						->withAdmin($admin);
+						->withAdmin($admin)
+						->withUsers($this->users->allForDropdown());
 				}
 
 				return $this->errorUnauthorized("You do not have permissions to edit Xtras other than your own!");

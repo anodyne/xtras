@@ -75,7 +75,6 @@
 							<li><a href="http://forums.anodyne-productions.com">Forums<div class="arrow"></div></a></li>
 							<!--<li><a href="http://help.anodyne-productions.com">Help<div class="arrow"></div></a></li>
 							<li><a href="http://learn.anodyne-productions.com">Learn<div class="arrow"></div></a></li>-->
-							<li><a href="http://docs.anodyne-productions.com">Docs<div class="arrow"></div></a></li>
 						</ul>
 					</div>
 				</nav>

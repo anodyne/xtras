@@ -8,8 +8,6 @@
 	- Version: 0.5.5
 - [Fractal](http://fractal.thephpleague.com/)
 	- Version: 0.8.3
-- [AWS SDK](https://aws.amazon.com/sdkforphp/)
-	- Version: 2.6.15
 - [Parsedown](http://parsedown.org/)
 	- Version: 1.0.1
 - [Browser](https://github.com/Ikimea/Browser)

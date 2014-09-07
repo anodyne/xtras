@@ -6,10 +6,8 @@ use App,
 	Event,
 	Config;
 use Parsedown;
-use Aws\S3\S3Client;
 use Ikimea\Browser\Browser;
 use League\Flysystem\Filesystem,
-	League\Flysystem\Adapter\AwsS3,
 	League\Flysystem\Adapter\Local;
 use Illuminate\Support\ServiceProvider;
 
@@ -82,25 +80,7 @@ class XtrasServiceProvider extends ServiceProvider {
 	{
 		$this->app['xtras.filesystem'] = $this->app->share(function($app)
 		{
-			switch ($app->environment())
-			{
-				case 'local':
-
-					return new Filesystem(new Local($_ENV['FS_PATH']));
-
-				break;
-
-				case 'production':
-
-					$client = S3Client::factory(array(
-						'key'		=> $_ENV['FS_KEY'],
-						'secret'	=> $_ENV['FS_SECRET'],
-					));
-
-					return new Filesystem(new AwsS3($client, $_ENV['FS_BUCKET'], $_ENV['FS_PREFIX']));
-
-				break;
-			}
+			return new Filesystem(new Local($_ENV['FS_PATH']));
 		});
 	}
 

@@ -64,6 +64,7 @@
 									</ul>
 								</li>
 							@else
+								<li><a href="http://anodyne-productions.com/register">Register</a></li>
 								<li><a href="{{ route('login') }}">Log In</a></li>
 							@endif
 						</ul>

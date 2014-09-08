@@ -15,9 +15,7 @@ class UserPresenter extends Presenter {
 		$defaultImg = (\App::environment() == 'local') ? 'retro' : asset('images/avatars/no-avatar.jpg');
 
 		// Build the URL for the avatar
-		$url = ( ! empty($this->entity->avatar))
-			? "http://s3.amazonaws.com/anodyne-productions/avatars/{$this->entity->avatar}"
-			: Gravatar::image($this->entity->email, 500, $defaultImg, 'pg');
+		$url = Gravatar::image($this->entity->email, 500, $defaultImg, 'pg');
 
 		// Merge all the options to pass them to the partial
 		$mergedOptions = $options + ['url' => $url];

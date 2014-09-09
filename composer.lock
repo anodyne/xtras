@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "a8df156613b5fcf3094058b7d23c36e3",
+    "hash": "4c5cece61d079437c6649df89c3ca87d",
     "packages": [
         {
             "name": "classpreloader/classpreloader",
@@ -86,47 +86,6 @@
             },
             "notification-url": "https://packagist.org/downloads/",
             "time": "2014-01-17 12:21:18"
-        },
-        {
-            "name": "daylerees/sanitizer",
-            "version": "1.0.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/daylerees/sanitizer.git",
-                "reference": "78f2cd58b16613ce0eb789c1e7ebe712dd75ff29"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/daylerees/sanitizer/zipball/78f2cd58b16613ce0eb789c1e7ebe712dd75ff29",
-                "reference": "78f2cd58b16613ce0eb789c1e7ebe712dd75ff29",
-                "shasum": ""
-            },
-            "require": {
-                "illuminate/container": "4.*",
-                "illuminate/support": "4.*",
-                "php": ">=5.3.0"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "4.0.*"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Rees\\Sanitizer\\": "src"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Dayle Rees",
-                    "email": "me@daylerees.com",
-                    "homepage": "http://daylerees.com"
-                }
-            ],
-            "time": "2014-06-13 10:00:45"
         },
         {
             "name": "erusev/parsedown",

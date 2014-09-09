@@ -15,13 +15,13 @@
 - [Presenter](https://github.com/laracasts/Presenter)
 	- Version: 0.1.4
 - [Guzzle](http://guzzlephp.org/)
-	- Version: 4.2.1
+	- Version: 4.2.2
 - [Entrust](https://github.com/Zizaco/entrust)
 	- Version: 1.2.3
 - [Gravatar](https://github.com/forxer/gravatar)
 	- Version: 1.2.0
 - [Image](http://image.intervention.io/)
-	- Version: 2.0.8
+	- Version: 2.0.9
 
 ## Javascript
 

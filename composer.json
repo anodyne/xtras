@@ -9,8 +9,7 @@
 		"guzzlehttp/guzzle": "~4.0",
 		"zizaco/entrust": "1.2.*",
 		"forxer/Gravatar": "~1.2",
-		"intervention/image": "~2.0",
-		"daylerees/sanitizer": "~1.0"
+		"intervention/image": "~2.0"
 	},
 
 	"require-dev": {

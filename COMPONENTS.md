@@ -5,7 +5,7 @@
 - [Laravel](http://laravel.com)
 	- Version: 4.2.8
 - [Flysystem](http://flysystem.thephpleague.com/)
-	- Version: 0.5.5
+	- Version: 0.5.6
 - [Fractal](http://fractal.thephpleague.com/)
 	- Version: 0.8.3
 - [Parsedown](http://parsedown.org/)

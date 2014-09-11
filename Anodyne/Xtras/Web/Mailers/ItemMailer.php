@@ -47,43 +47,35 @@ class ItemMailer extends BaseMailer {
 		return false;
 	}
 
-	public function notify($itemId)
+	public function notifyForNewVersion($item)
 	{
-		// Get the item
-		$item = $this->items->find($itemId);
+		// Get the people who want to be notified
+		$users = $item->notifications;
 
-		if ($item)
+		if ($users->count() > 0)
 		{
-			// Get the people who want to be notified
-			$users = $item->notifications;
-
-			if ($users->count() > 0)
+			// Get the users' email addresses
+			foreach ($users as $user)
 			{
-				// Get the users' email addresses
-				foreach ($users as $user)
-				{
-					$emails[$user->id] = $user->email;
-				}
-
-				// Make sure we only have the values
-				$emailsArr = array_values($emails);
-
-				$emailData = [
-					'subject' => "Xtra Updated - ".$item->present()->name,
-					'from' => Config::get('xtras.email.general'),
-					'replyTo' => $user->present()->email,
-					'bcc' => $emailsArr,
-					'name' => HTML::link(route('item.show', [$item->user->username, $item->slug]), $item->present()->name),
-					'type' => $item->present()->type,
-					'history' => $item->metadata->present()->history,
-					'version' => $item->present()->version,
-				];
-
-				return $this->send('notify-update', $emailData);
+				$emails[$user->id] = $user->email;
 			}
-		}
 
-		return false;
+			// Make sure we only have the values
+			$emailsArr = array_values($emails);
+
+			$emailData = [
+				'subject' => "Xtra Updated - ".$item->present()->name,
+				'from' => Config::get('xtras.email.general'),
+				'replyTo' => $user->present()->email,
+				'bcc' => $emailsArr,
+				'name' => HTML::link(route('item.show', [$item->user->username, $item->slug]), $item->present()->name),
+				'type' => $item->present()->type,
+				'history' => $item->metadata->present()->history,
+				'version' => $item->present()->version,
+			];
+
+			return $this->send('notify-update', $emailData);
+		}
 	}
 
 	public function reportAbuse($data)

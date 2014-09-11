@@ -125,50 +125,64 @@ class FilesController extends \BaseController {
 			// Get the item
 			$item = $this->items->find($itemId);
 
-			if (Input::hasFile('file'))
+			if ($item)
 			{
-				// Get an instance of the filesystem
-				$fs = App::make('xtras.filesystem');
+				// Figure out if this is a new version we need to notify for
+				$notifyForNewVersion = ($item->getLatestVersion()['files'] === null);
 
-				// Get the uploaded file
-				$file = Input::file('file');
-
-				// Set the filename
-				$filename = "{$item->user->username}/{$item->slug}-{$item->version}";
-				$filename.= ".{$file->getClientOriginalExtension()}";
-
-				if ($fs->has($filename))
+				if (Input::hasFile('file'))
 				{
-					return Response::json('File already exists', 409);
-				}
-				else
-				{
-					// Get the contents of the uploaded file
-					$contents = \File::get($file->getRealPath());
+					// Get an instance of the filesystem
+					$fs = App::make('xtras.filesystem');
 
-					// Upload the file
-					$result = $fs->write($filename, $contents);
+					// Get the uploaded file
+					$file = Input::file('file');
 
-					if ($result)
+					// Set the filename
+					$filename = "{$item->user->username}/{$item->slug}-{$item->version}";
+					$filename.= ".{$file->getClientOriginalExtension()}";
+
+					if ($fs->has($filename))
 					{
-						// Update the database record
-						$this->items->updateFileData($item->id, [
-							'filename' => $filename,
-							'version' => $item->version,
-							'size' => $fs->getSize($filename),
-						]);
-
-						// Fire the event
-						Event::fire('item.file.uploaded', [$item]);
-
-						return Response::json('Success', 200);
+						return Response::json('File already exists', 409);
 					}
+					else
+					{
+						// Get the contents of the uploaded file
+						$contents = \File::get($file->getRealPath());
 
-					return Response::json('Could not upload file', 400);
+						// Upload the file
+						$result = $fs->write($filename, $contents);
+
+						if ($result)
+						{
+							// Update the database record
+							$this->items->updateFileData($item->id, [
+								'filename' => $filename,
+								'version' => $item->version,
+								'size' => $fs->getSize($filename),
+							]);
+
+							// Fire the event
+							Event::fire('item.file.uploaded', [$item]);
+
+							// Fire the notify event if we need to
+							if ($notifyForNewVersion)
+							{
+								Event::fire('item.notify', [$item]);
+							}
+
+							return Response::json('Success', 200);
+						}
+
+						return Response::json('Could not upload file', 400);
+					}
 				}
+
+				return Response::json('No file input', 500);
 			}
 
-			return Response::json('No file input', 500);
+			return $this->errorNotFound("Sorry, we couldn't find the Xtra you're looking for!");
 		}
 
 		return $this->errorUnauthorized("You do not have permission to create Xtras.");

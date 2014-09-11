@@ -84,4 +84,10 @@ class ItemEventHandler {
 		//
 	}
 
+	public function notifyForNewVersion($item)
+	{
+		// Send the email
+		$this->mailer->notifyForNewVersion($item);
+	}
+
 }

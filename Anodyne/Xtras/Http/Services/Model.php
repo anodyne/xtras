@@ -1,4 +1,4 @@
-<?php namespace Xtras\Extensions\Laravel\Database\Eloquent;
+<?php namespace Xtras\Services;
 
 use Date;
 

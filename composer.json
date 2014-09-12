@@ -26,9 +26,7 @@
 		],
 		
 		"psr-4": {
-			"Xtras\\": "Anodyne\\Xtras\\Web",
-			"Xtras\\Extensions\\": "Anodyne\\Xtras\\Extensions",
-			"Xtras\\Foundation\\": "Anodyne\\Xtras\\Foundation"
+			"Xtras\\": "Anodyne\\Xtras\\Http"
 		}
 	},
 	

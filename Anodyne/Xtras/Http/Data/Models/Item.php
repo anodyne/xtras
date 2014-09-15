@@ -2,7 +2,7 @@
 
 use Str,
 	Model,
-	Sanitize
+	Sanitize,
 	SoftDeletingTrait;
 use Laracasts\Presenter\PresentableTrait;
 

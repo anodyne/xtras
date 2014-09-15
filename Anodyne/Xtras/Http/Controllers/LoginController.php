@@ -1,6 +1,9 @@
 <?php namespace Xtras\Controllers;
 
-use Auth, Input, Redirect;
+use Auth,
+	Flash,
+	Input,
+	Redirect;
 
 class LoginController extends \BaseController {
 

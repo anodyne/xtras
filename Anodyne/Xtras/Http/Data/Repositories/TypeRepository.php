@@ -6,7 +6,7 @@ class TypeRepository implements \TypeRepositoryInterface {
 
 	public function all()
 	{
-		return Type::active()->all();
+		return Type::active()->get();
 	}
 
 	public function create(array $data)

@@ -1,6 +1,6 @@
 <?php namespace Xtras\Data\Models;
 
-use Str;
+use Str, Sanitize;
 use Laracasts\Presenter\PresentableTrait;
 use Illuminate\Database\Eloquent\SoftDeletingTrait;
 
@@ -80,11 +80,58 @@ class Item extends \Model {
 	|---------------------------------------------------------------------------
 	*/
 
+	public function setDescAttribute($value)
+	{
+		$this->attributes['desc'] = Sanitize::string($value);
+	}
+
+	public function setNameAttribute($value)
+	{
+		$this->attributes['name'] = Sanitize::string($value);
+	}
+
+	public function setProductIdAttribute($value)
+	{
+		$this->attributes['product_id'] = Sanitize::integer($value);
+	}
+
+	public function setRatingAttribute($value)
+	{
+		$this->attributes['rating'] = Sanitize::float($value);
+	}
+
 	public function setSlugAttribute($value)
 	{
 		$this->attributes['slug'] = ( ! empty($value)) 
-			? $value 
+			? Sanitize::string($value)
 			: Str::slug(Str::lower($this->attributes['name']));
+	}
+
+	public function setStatusAttribute($value)
+	{
+		$this->attributes['status'] = Sanitize::integer($value);
+	}
+
+	public function setSupportAttribute($value)
+	{
+		$this->attributes['support'] = (filter_var($value, FILTER_VALIDATE_EMAIL))
+			? Sanitize::email($value)
+			: Sanitize::url($value);
+	}
+
+	public function setTypeIdAttribute($value)
+	{
+		$this->attributes['type_id'] = Sanitize::integer($value);
+	}
+
+	public function setUserIdAttribute($value)
+	{
+		$this->attributes['user_id'] = Sanitize::integer($value);
+	}
+
+	public function setVersionAttribute($value)
+	{
+		$this->attributes['version'] = Sanitize::string($value);
 	}
 
 	/*

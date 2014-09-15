@@ -68,7 +68,7 @@ class ItemPresenter extends Presenter {
 		// Get the latest version
 		$latest = $this->entity->getLatestVersion()->toArray();
 
-		$link = \URL::route('item.download', [$this->entity->id, $latest['files']['id']]);
+		$link = route('item.download', [$this->entity->id, $latest['files']['id']]);
 		$title = '<span class="tab-icon tab-icon-up2 tab-icon-right">'.$downloadIcon.'</span>';
 		$title.= '<span class="visible-md">Download</span>';
 		$title.= '<span class="visible-lg">Download Latest Version</span>';

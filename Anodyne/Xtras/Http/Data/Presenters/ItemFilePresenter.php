@@ -17,7 +17,7 @@ class ItemFilePresenter extends Presenter {
 
 	public function version()
 	{
-		return htmlspecialchars($this->entity->version);
+		return $this->entity->version;
 	}
 
 }

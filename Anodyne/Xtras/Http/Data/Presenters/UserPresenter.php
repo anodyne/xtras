@@ -1,6 +1,6 @@
 <?php namespace Xtras\Data\Presenters;
 
-use URL,
+use App,
 	HTML,
 	View,
 	Gravatar,
@@ -12,7 +12,7 @@ class UserPresenter extends Presenter {
 	public function avatar(array $options)
 	{
 		// Figure out the fallback image
-		$defaultImg = (\App::environment() == 'local') ? 'retro' : asset('images/avatars/no-avatar.jpg');
+		$defaultImg = (App::environment() == 'local') ? 'retro' : asset('images/avatars/no-avatar.jpg');
 
 		// Build the URL for the avatar
 		$url = Gravatar::image($this->entity->email, 500, $defaultImg, 'pg');

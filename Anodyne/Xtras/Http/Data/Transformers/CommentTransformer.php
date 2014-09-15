@@ -1,8 +1,11 @@
 <?php namespace Xtras\Data\Transformers;
 
-class CommentTransformer extends \League\Fractal\TransformerAbstract {
+use Comment;
+use League\Fractal\TransformerAbstract;
 
-	public function transform(\Comment $comment)
+class CommentTransformer extends TransformerAbstract {
+
+	public function transform(Comment $comment)
 	{
 		return [
 			'id'		=> (int) $comment->id,

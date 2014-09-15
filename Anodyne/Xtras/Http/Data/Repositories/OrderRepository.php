@@ -1,13 +1,18 @@
 <?php namespace Xtras\Data\Repositories;
 
-class OrderRepository implements \OrderRepositoryInterface {
+use User,
+	Order,
+	ItemFile,
+	OrderRepositoryInterface;
 
-	public function create(\User $user, \ItemFile $file)
+class OrderRepository implements OrderRepositoryInterface {
+
+	public function create(User $user, ItemFile $file)
 	{
 		// Create a new order
-		$order = \Order::create([
-			'item_id'	=> $file->item->id,
-			'file_id'	=> $file->id,
+		$order = Order::create([
+			'item_id'	=> (int) $file->item->id,
+			'file_id'	=> (int) $file->id,
 		]);
 
 		// Attach it to the user

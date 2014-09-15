@@ -1,12 +1,20 @@
 <?php namespace Xtras\Data\Models;
 
-class ItemRating extends \Model {
+use Model;
+
+class ItemRating extends Model {
 
 	public $timestamps = false;
 
 	protected $table = 'items_ratings';
 
 	protected $fillable = ['user_id', 'item_id', 'rating'];
+
+	public static $sanitizeRules = [
+		'item_id'	=> 'integer',
+		'user_id'	=> 'integer',
+		'rating'	=> 'integer',
+	];
 
 	/*
 	|---------------------------------------------------------------------------

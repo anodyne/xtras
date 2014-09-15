@@ -1,9 +1,9 @@
 <?php namespace Xtras\Data\Models;
 
+use Model, SoftDeletingTrait;
 use Laracasts\Presenter\PresentableTrait;
-use Illuminate\Database\Eloquent\SoftDeletingTrait;
 
-class Product extends \Model {
+class Product extends Model {
 
 	use PresentableTrait;
 	use SoftDeletingTrait;
@@ -15,6 +15,12 @@ class Product extends \Model {
 	protected $dates = ['created_at', 'updated_at', 'deleted_at'];
 
 	protected $presenter = 'Xtras\Data\Presenters\ProductPresenter';
+
+	public static $sanitizeRules = [
+		'name'		=> 'string',
+		'desc'		=> 'string',
+		'display'	=> 'integer',
+	];
 
 	/*
 	|---------------------------------------------------------------------------

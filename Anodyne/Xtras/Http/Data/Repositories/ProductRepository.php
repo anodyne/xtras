@@ -1,8 +1,10 @@
 <?php namespace Xtras\Data\Repositories;
 
-use Product;
+use Product,
+	Sanitize,
+	ProductRepositoryInterface;
 
-class ProductRepository implements \ProductRepositoryInterface {
+class ProductRepository implements ProductRepositoryInterface {
 
 	public function all()
 	{
@@ -11,6 +13,8 @@ class ProductRepository implements \ProductRepositoryInterface {
 
 	public function create(array $data)
 	{
+		$data = Sanitize::clean($data, Product::$sanitizeRules);
+
 		return Product::create($data);
 	}
 
@@ -41,6 +45,8 @@ class ProductRepository implements \ProductRepositoryInterface {
 
 		if ($product)
 		{
+			$data = Sanitize::clean($data, Product::$sanitizeRules);
+			
 			$product->fill($data)->save();
 
 			return $product;

@@ -1,9 +1,9 @@
 <?php namespace Xtras\Data\Models;
 
+use Model, SoftDeletingTrait;
 use Laracasts\Presenter\PresentableTrait;
-use Illuminate\Database\Eloquent\SoftDeletingTrait;
 
-class ItemMessage extends \Model {
+class ItemMessage extends Model {
 
 	use PresentableTrait;
 	use SoftDeletingTrait;
@@ -17,6 +17,13 @@ class ItemMessage extends \Model {
 	protected $presenter = 'Xtras\Data\Presenters\ItemMessagePresenter';
 
 	protected $touches = ['item'];
+
+	public static $sanitizeRules = [
+		'item_id'	=> 'integer',
+		'type'		=> 'string',
+		'content'	=> 'string',
+		'expires'	=> 'date',
+	];
 
 	/*
 	|---------------------------------------------------------------------------

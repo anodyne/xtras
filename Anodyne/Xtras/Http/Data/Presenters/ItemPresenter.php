@@ -2,6 +2,7 @@
 
 use Str,
 	URL,
+	Date,
 	HTML,
 	View,
 	Config,
@@ -63,7 +64,7 @@ class ItemPresenter extends Presenter {
 	public function downloadBtn()
 	{
 		// Get the icons
-		$downloadIcon = \Config::get('icons.download');
+		$downloadIcon = Config::get('icons.download');
 
 		// Get the latest version
 		$latest = $this->entity->getLatestVersion()->toArray();
@@ -87,7 +88,7 @@ class ItemPresenter extends Presenter {
 	public function messages()
 	{
 		// Get right now...
-		$now = \Date::now();
+		$now = Date::now();
 
 		// Start the output
 		$output = "";
@@ -130,9 +131,7 @@ class ItemPresenter extends Presenter {
 
 	public function productAsLabel()
 	{
-		return View::make('partials.label')
-			->withClass('default')
-			->withContent($this->product());
+		return label('default', $this->product());
 	}
 
 	public function rating()
@@ -159,9 +158,7 @@ class ItemPresenter extends Presenter {
 			$text = 'No ratings';
 		}
 
-		return View::make('partials.label')
-			->withClass($type)
-			->withContent($text);
+		return label($type, $text);
 	}
 
 	public function status()
@@ -201,9 +198,7 @@ class ItemPresenter extends Presenter {
 			break;
 		}
 
-		return View::make('partials.label')
-			->withClass($class)
-			->withContent($this->entity->type->present()->name);
+		return label($class, $this->entity->type->present()->name);
 	}
 
 	public function version()

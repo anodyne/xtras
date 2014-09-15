@@ -1,29 +1,63 @@
 <?php namespace Xtras\Services;
 
+use InvalidArgumentException;
+
 class SanitizerService {
 
-	public function email($input)
+	public function clean(array $input, array $rules)
+	{
+		$cleanArr = [];
+
+		foreach ($input as $field => $value)
+		{
+			if (array_key_exists($field, $rules))
+			{
+				$cleanArr[$field] = $this->{$rules[$field]}($value, $field);
+			}
+		}
+
+		return $cleanArr;
+	}
+
+	public function date($input, $field)
+	{
+		if (substr_count($input, '/') == 2)
+		{
+			// Get variables for each part of the date
+			list($month, $day, $year) = explode('/', $input);
+
+			if (checkdate($month, $day, sprintf('%04u', $year)))
+			{
+				return $input;
+			}
+
+			throw new InvalidArgumentException("Invalid date [{$input}] provided for [{$field}].");
+		}
+
+		throw new InvalidArgumentException("Invalid date format provided for [{$field}]. Dates must be formatted as MM/DD/YYYY.");
+	}
+
+	public function email($input, $field = false)
 	{
 		return $this->sanitize(strip_tags($input), FILTER_SANITIZE_EMAIL);
 	}
 
-	public function float($input)
+	public function float($input, $field = false)
 	{
-		return $this->sanitize($input, FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION | FILTER_FLAG_ALLOW_THOUSAND | FILTER_FLAG_ALLOW_SCIENTIFIC);
+		return (float) $this->sanitize($input, FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION | FILTER_FLAG_ALLOW_THOUSAND | FILTER_FLAG_ALLOW_SCIENTIFIC);
 	}
 
-	public function integer($input)
+	public function integer($input, $field = false)
 	{
-		return $this->sanitize($input, FILTER_SANITIZE_NUMBER_INT);
+		return (int) $this->sanitize($input, FILTER_SANITIZE_NUMBER_INT);
 	}
 
-	public function string($input)
+	public function string($input, $field = false)
 	{
 		return $this->sanitize(strip_tags($input), FILTER_SANITIZE_FULL_SPECIAL_CHARS, FILTER_FLAG_NO_ENCODE_QUOTES);
-		//return $this->sanitize($input, FILTER_SANITIZE_STRING, FILTER_FLAG_STRIP_LOW | FILTER_FLAG_STRIP_HIGH | FILTER_FLAG_ENCODE_AMP);
 	}
 
-	public function url($input)
+	public function url($input, $field = false)
 	{
 		return $this->sanitize(strip_tags($input), FILTER_SANITIZE_URL);
 	}

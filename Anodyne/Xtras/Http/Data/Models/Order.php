@@ -1,8 +1,9 @@
 <?php namespace Xtras\Data\Models;
 
+use Model;
 use Laracasts\Presenter\PresentableTrait;
 
-class Order extends \Model {
+class Order extends Model {
 
 	use PresentableTrait;
 
@@ -13,6 +14,12 @@ class Order extends \Model {
 	protected $dates = ['created_at', 'updated_at'];
 
 	protected $presenter = 'Xtras\Data\Presenters\OrderPresenter';
+
+	public static $sanitizeRules = [
+		'file_id'	=> 'integer',
+		'item_id'	=> 'integer',
+		'user_id'	=> 'integer',
+	];
 
 	/*
 	|---------------------------------------------------------------------------

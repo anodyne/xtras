@@ -1,21 +1,23 @@
 <?php namespace Xtras\Data\Repositories;
 
 use User,
-	Notification;
+	Sanitize,
+	Notification,
+	UserRepositoryInterface;
 
-class UserRepository implements \UserRepositoryInterface {
+class UserRepository implements UserRepositoryInterface {
 
 	public function addNotification($userId, $itemId)
 	{
 		return Notification::firstOrCreate([
-			'user_id' => $userId,
-			'item_id' => $itemId,
+			'user_id' => (int) $userId,
+			'item_id' => (int) $itemId,
 		]);
 	}
 
 	public function all()
 	{
-		return User::all();
+		return User::get();
 	}
 
 	public function allForDropdown()

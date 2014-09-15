@@ -1,8 +1,10 @@
 <?php namespace Xtras\Data\Repositories;
 
-use Type;
+use Type
+	Sanitize,
+	TypeRepositoryInterface;
 
-class TypeRepository implements \TypeRepositoryInterface {
+class TypeRepository implements TypeRepositoryInterface {
 
 	public function all()
 	{
@@ -11,6 +13,8 @@ class TypeRepository implements \TypeRepositoryInterface {
 
 	public function create(array $data)
 	{
+		$data = Sanitize::clean($data, Type::$sanitizeRules);
+
 		return Type::create($data);
 	}
 
@@ -41,6 +45,8 @@ class TypeRepository implements \TypeRepositoryInterface {
 
 		if ($type)
 		{
+			$data = Sanitize::clean($data, Type::$sanitizeRules);
+			
 			$type->fill($data)->save();
 
 			return $type;

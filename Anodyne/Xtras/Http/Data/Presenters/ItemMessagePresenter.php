@@ -1,13 +1,13 @@
 <?php namespace Xtras\Data\Presenters;
 
-use Markdown;
+use Date, Markdown;
 use Laracasts\Presenter\Presenter;
 
 class ItemMessagePresenter extends Presenter {
 
 	public function content()
 	{
-		return Markdown::parse(htmlspecialchars($this->entity->content));
+		return Markdown::parse($this->entity->content);
 	}
 
 	public function expires()
@@ -18,7 +18,7 @@ class ItemMessagePresenter extends Presenter {
 	public function expiresRelative()
 	{
 		// Get the dates
-		$now = \Date::now();
+		$now = Date::now();
 		$expires = $this->entity->expires;
 		$diff = $now->diffInHours($expires);
 		$output = '';
@@ -43,7 +43,7 @@ class ItemMessagePresenter extends Presenter {
 
 	public function type()
 	{
-		return htmlspecialchars($this->entity->type);
+		return $this->entity->type;
 	}
 
 	public function typeAsLabel()
@@ -66,9 +66,7 @@ class ItemMessagePresenter extends Presenter {
 			break;
 		}
 
-		return \View::make('partials.label')
-			->withClass($type)
-			->withContent($content);
+		return label($type, $content);
 	}
 
 }

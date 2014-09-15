@@ -1,9 +1,9 @@
 <?php namespace Xtras\Data\Models;
 
+use Model, SoftDeletingTrait;
 use Laracasts\Presenter\PresentableTrait;
-use Illuminate\Database\Eloquent\SoftDeletingTrait;
 
-class ItemFile extends \Model {
+class ItemFile extends Model {
 
 	use PresentableTrait;
 	use SoftDeletingTrait;
@@ -15,6 +15,13 @@ class ItemFile extends \Model {
 	protected $dates = ['created_at', 'updated_at', 'deleted_at'];
 
 	protected $presenter = 'Xtras\Data\Presenters\ItemFilePresenter';
+
+	public static $sanitizeRules = [
+		'item_id'	=> 'integer',
+		'filename'	=> 'string',
+		'version'	=> 'string',
+		'size'		=> 'integer',
+	];
 
 	/*
 	|---------------------------------------------------------------------------

@@ -193,6 +193,7 @@ return array(
 		'Markdown'			=> 'Xtras\Facades\MarkdownFacade',
 		'Model'				=> 'Xtras\Services\Model',
 		'Sanitize'			=> 'Xtras\Facades\SanitizerFacade',
+		'SoftDeletingTrait'	=> 'Illuminate\Database\Eloquent\SoftDeletingTrait',
 		
 		/**
 		 * Models

@@ -1,18 +1,28 @@
 <?php namespace Xtras\Data\Repositories;
 
-use Item,
+use App,
+	Date,
+	Item,
 	Type,
 	User,
 	Comment,
+	Product,
 	ItemFile,
-	ItemMessage;
+	Sanitize,
+	Paginator,
+	ItemRating,
+	ItemMessage,
+	ItemMetadata,
+	ItemRepositoryInterface,
+	UserRepositoryInterface;
+use stdClass;
 use Illuminate\Support\Collection;
 
-class ItemRepository implements \ItemRepositoryInterface {
+class ItemRepository implements ItemRepositoryInterface {
 
 	protected $users;
 
-	public function __construct(\UserRepositoryInterface $users)
+	public function __construct(UserRepositoryInterface $users)
 	{
 		$this->users = $users;
 	}
@@ -24,6 +34,8 @@ class ItemRepository implements \ItemRepositoryInterface {
 
 		if ($item)
 		{
+			$data = Sanitize::clean($data, Comment::$sanitizeRules);
+
 			// Create a comment record
 			$comment = Comment::create($data);
 
@@ -43,10 +55,12 @@ class ItemRepository implements \ItemRepositoryInterface {
 
 		if ($item)
 		{
+			$data = Sanitize::clean($data, ItemMessage::$sanitizeRules);
+
 			// Setup the expiration
 			if ( ! empty($data['expires']))
 			{
-				$expires = \Date::createFromFormat('m/d/Y', $data['expires']);
+				$expires = Date::createFromFormat('m/d/Y', $data['expires']);
 
 				$data['expires'] = $expires->endOfDay();
 			}
@@ -69,11 +83,13 @@ class ItemRepository implements \ItemRepositoryInterface {
 
 	public function all()
 	{
-		return Item::all();
+		return Item::get();
 	}
 
 	public function create(array $data)
 	{
+		$data = Sanitize::clean($data, Item::$sanitizeRules);
+
 		// Create the item
 		$item = Item::create($data);
 
@@ -112,7 +128,7 @@ class ItemRepository implements \ItemRepositoryInterface {
 			if ($item->files->count() > 0)
 			{
 				// Get an instance of the filesystem
-				$fs = \App::make('xtras.filesystem');
+				$fs = App::make('xtras.filesystem');
 
 				foreach ($item->files as $file)
 				{
@@ -296,7 +312,7 @@ class ItemRepository implements \ItemRepositoryInterface {
 
 		if ($paginate)
 		{
-			return \Paginator::make($sortedItems->toArray(), $sortedItems->count(), 25);
+			return Paginator::make($sortedItems->toArray(), $sortedItems->count(), 25);
 		}
 
 		return $sortedItems;
@@ -323,7 +339,7 @@ class ItemRepository implements \ItemRepositoryInterface {
 		$itemType = ($type) ? Type::active()->name($type)->first() : false;
 
 		// Build the results
-		$results = new \stdClass;
+		$results = new stdClass;
 		$results->page = $page;
 		$results->limit = $limit;
 		$results->totalItems = ($type) 
@@ -373,7 +389,7 @@ class ItemRepository implements \ItemRepositoryInterface {
 
 	public function getProducts()
 	{
-		return \Product::active()->lists('name', 'id');
+		return Product::active()->lists('name', 'id');
 	}
 
 	public function getRecentlyAdded($number)
@@ -446,9 +462,9 @@ class ItemRepository implements \ItemRepositoryInterface {
 		if ($item and $item->user->id != $user->id)
 		{
 			// Create a new rating
-			$rating = \ItemRating::firstOrCreate([
-				'item_id'	=> $item->id,
-				'user_id'	=> $user->id
+			$rating = ItemRating::firstOrCreate([
+				'item_id'	=> (int) $item->id,
+				'user_id'	=> (int) $user->id
 			]);
 			$rating->fill(['rating' => (int) $input])->save();
 
@@ -504,6 +520,8 @@ class ItemRepository implements \ItemRepositoryInterface {
 
 		if ($item)
 		{
+			$data = Sanitize::clean($data, Item::$sanitizeRules);
+
 			$item->fill($data)->save();
 
 			// If there's metadata, update it
@@ -531,6 +549,8 @@ class ItemRepository implements \ItemRepositoryInterface {
 
 		if ($item)
 		{
+			$data = Sanitize::clean($data, ItemFile::$sanitizeRules);
+
 			$file = ItemFile::create($data);
 
 			$item->files()->save($file);
@@ -548,6 +568,8 @@ class ItemRepository implements \ItemRepositoryInterface {
 
 		if ($message)
 		{
+			$data = Sanitize::clean($data, ItemMessage::$sanitizeRules);
+			
 			$message->fill($data)->save();
 
 			return $message;
@@ -563,13 +585,15 @@ class ItemRepository implements \ItemRepositoryInterface {
 
 		if ($item)
 		{
+			$data = Sanitize::clean($data, ItemMetadata::$sanitizeRules);
+
 			if ($item->metadata)
 			{
 				$item->metadata->update($data);
 			}
 			else
 			{
-				$item->metadata()->save(\ItemMetadata::create($data));
+				$item->metadata()->save(ItemMetadata::create($data));
 			}
 		}
 

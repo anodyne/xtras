@@ -1,13 +1,15 @@
 <?php namespace Xtras\Data\Models;
 
-use Config;
+use Date,
+	Model,
+	Config,
+	SoftDeletingTrait;
 use Zizaco\Entrust\HasRole;
 use Illuminate\Auth\UserTrait,
 	Illuminate\Auth\UserInterface;
 use Laracasts\Presenter\PresentableTrait;
-use Illuminate\Database\Eloquent\SoftDeletingTrait;
 
-class User extends \Model implements UserInterface {
+class User extends Model implements UserInterface {
 
 	use HasRole;
 	use UserTrait;
@@ -25,6 +27,10 @@ class User extends \Model implements UserInterface {
 	protected $dates = ['created_at', 'updated_at', 'deleted_at'];
 
 	protected $presenter = 'Xtras\Data\Presenters\UserPresenter';
+
+	public static $sanitizeRules = [
+		'remember_token' => 'string',
+	];
 
 	/*
 	|--------------------------------------------------------------------------
@@ -76,7 +82,7 @@ class User extends \Model implements UserInterface {
 
 	public function daysSinceRegistration()
 	{
-		return (int) \Date::now()->diffInDays($this->created_at);
+		return (int) Date::now()->diffInDays($this->created_at);
 	}
 
 	public function itemNotify(Item $item)

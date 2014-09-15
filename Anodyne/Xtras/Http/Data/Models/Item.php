@@ -1,10 +1,12 @@
 <?php namespace Xtras\Data\Models;
 
-use Str, Sanitize;
+use Str,
+	Model,
+	Sanitize
+	SoftDeletingTrait;
 use Laracasts\Presenter\PresentableTrait;
-use Illuminate\Database\Eloquent\SoftDeletingTrait;
 
-class Item extends \Model {
+class Item extends Model {
 
 	use PresentableTrait;
 	use SoftDeletingTrait;
@@ -17,6 +19,19 @@ class Item extends \Model {
 	protected $dates = ['created_at', 'updated_at', 'deleted_at'];
 
 	protected $presenter = 'Xtras\Data\Presenters\ItemPresenter';
+
+	public static $sanitizeRules = [
+		'user_id'		=> 'integer',
+		'type_id'		=> 'integer',
+		'product_id'	=> 'integer',
+		'name'			=> 'string',
+		'slug'			=> 'string',
+		'desc'			=> 'string',
+		'support'		=> 'string',
+		'version'		=> 'string',
+		'rating'		=> 'float',
+		'status'		=> 'integer',
+	];
 
 	/*
 	|---------------------------------------------------------------------------
@@ -80,58 +95,11 @@ class Item extends \Model {
 	|---------------------------------------------------------------------------
 	*/
 
-	public function setDescAttribute($value)
-	{
-		$this->attributes['desc'] = Sanitize::string($value);
-	}
-
-	public function setNameAttribute($value)
-	{
-		$this->attributes['name'] = Sanitize::string($value);
-	}
-
-	public function setProductIdAttribute($value)
-	{
-		$this->attributes['product_id'] = Sanitize::integer($value);
-	}
-
-	public function setRatingAttribute($value)
-	{
-		$this->attributes['rating'] = Sanitize::float($value);
-	}
-
 	public function setSlugAttribute($value)
 	{
 		$this->attributes['slug'] = ( ! empty($value)) 
-			? Sanitize::string($value)
+			? $value
 			: Str::slug(Str::lower($this->attributes['name']));
-	}
-
-	public function setStatusAttribute($value)
-	{
-		$this->attributes['status'] = Sanitize::integer($value);
-	}
-
-	public function setSupportAttribute($value)
-	{
-		$this->attributes['support'] = (filter_var($value, FILTER_VALIDATE_EMAIL))
-			? Sanitize::email($value)
-			: Sanitize::url($value);
-	}
-
-	public function setTypeIdAttribute($value)
-	{
-		$this->attributes['type_id'] = Sanitize::integer($value);
-	}
-
-	public function setUserIdAttribute($value)
-	{
-		$this->attributes['user_id'] = Sanitize::integer($value);
-	}
-
-	public function setVersionAttribute($value)
-	{
-		$this->attributes['version'] = Sanitize::string($value);
 	}
 
 	/*

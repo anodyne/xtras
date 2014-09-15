@@ -12,7 +12,7 @@ class CommentPresenter extends Presenter {
 
 	public function content()
 	{
-		return Markdown::parse(htmlspecialchars($this->entity->content));
+		return Markdown::parse($this->entity->content);
 	}
 
 }

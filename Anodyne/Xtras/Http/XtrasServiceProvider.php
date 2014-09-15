@@ -20,6 +20,7 @@ class XtrasServiceProvider extends ServiceProvider {
 		$this->registerFilesystem();
 		$this->registerEvents();
 		$this->registerFlashNotifier();
+		$this->registerSanitizer();
 	}
 
 	public function boot()
@@ -88,7 +89,7 @@ class XtrasServiceProvider extends ServiceProvider {
 	{
 		$this->app['markdown'] = $this->app->share(function($app)
 		{
-			return new \Xtras\Foundation\Services\MarkdownService(new Parsedown);
+			return new Services\MarkdownService(new Parsedown);
 		});
 	}
 
@@ -129,7 +130,15 @@ class XtrasServiceProvider extends ServiceProvider {
 	{
 		$this->app['flash'] = $this->app->share(function($app)
 		{
-			return new \Xtras\Foundation\Services\FlashNotifierService($app['session.store']);
+			return new Services\FlashNotifierService($app['session.store']);
+		});
+	}
+
+	protected function registerSanitizer()
+	{
+		$this->app['sanitizer'] = $this->app->share(function($app)
+		{
+			return new Services\SanitizerService;
 		});
 	}
 

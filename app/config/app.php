@@ -192,6 +192,7 @@ return array(
 		'Image'				=> 'Intervention\Image\Facades\Image',
 		'Markdown'			=> 'Xtras\Facades\MarkdownFacade',
 		'Model'				=> 'Xtras\Services\Model',
+		'Sanitize'			=> 'Xtras\Facades\SanitizerFacade',
 		
 		/**
 		 * Models

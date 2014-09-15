@@ -40,7 +40,7 @@
 							<div class="row">
 								<div class="col-md-10">
 									<div class="form-group">
-										<label>Message</label>
+										<label class="control-label">Message</label>
 										{{ Form::textarea('content', null, ['class' => 'form-control', 'rows' => 5]) }}
 										<p class="help-block text-sm">{{ $_icons['markdown'] }} Parsed as Markdown</p>
 									</div>
@@ -67,7 +67,7 @@
 							<div class="row">
 								<div class="col-md-10">
 									<div class="form-group">
-										<label>Message</label>
+										<label class="control-label">Message</label>
 										{{ Form::textarea('content', null, ['class' => 'form-control', 'rows' => 5]) }}
 										<p class="help-block text-sm">{{ $_icons['markdown'] }} Parsed as Markdown</p>
 									</div>

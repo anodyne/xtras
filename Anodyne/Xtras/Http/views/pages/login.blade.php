@@ -15,13 +15,13 @@
 
 			{{ Form::open(['url' => 'login']) }}
 				<div class="form-group{{ ($errors->has('email')) ? ' has-error' : '' }}">
-					<label>Email Address</label>
+					<label class="control-label">Email Address</label>
 					{{ Form::text('email', null, ['type' => 'email', 'class' => 'form-control input-with-feedback input-lg']) }}
 					{{ $errors->first('email', '<p class="help-block">:message</p>') }}
 				</div>
 
 				<div class="form-group{{ ($errors->has('password')) ? ' has-error' : '' }}">
-					<label>Password</label>
+					<label class="control-label">Password</label>
 					{{ Form::password('password', ['class' => 'form-control input-with-feedback input-lg']) }}
 					{{ $errors->first('password', '<p class="help-block">:message</p>') }}
 				</div>

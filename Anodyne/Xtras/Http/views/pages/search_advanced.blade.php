@@ -11,7 +11,7 @@
 		<div class="row">
 			<div class="col-md-4">
 				<div class="form-group">
-					<label>Type</label>
+					<label class="control-label">Type</label>
 					<div>
 					@foreach ($types as $id => $name)
 						<label class="checkbox-inline">{{ Form::checkbox('t[]', $id, true) }} {{ $name }}</label>
@@ -24,7 +24,7 @@
 		<div class="row">
 			<div class="col-md-6">
 				<div class="form-group">
-					<label>Product</label>
+					<label class="control-label">Product</label>
 					<div>
 					@foreach ($products as $id => $name)
 						<label class="checkbox-inline">{{ Form::checkbox('p[]', $id, true) }} {{ $name }}</label>
@@ -37,7 +37,7 @@
 		<div class="row">
 			<div class="col-md-6">
 				<div class="form-group">
-					<label>Search Term</label>
+					<label class="control-label">Search Term</label>
 					{{ Form::text('q', null, ['class' => 'form-control input-lg']) }}
 				</div>
 			</div>

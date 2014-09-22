@@ -581,16 +581,16 @@
         },
         {
             "name": "laravel/framework",
-            "version": "v4.2.8",
+            "version": "v4.2.9",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/framework.git",
-                "reference": "e60ea917ab862254a6db37fa9cb8933138c1e73c"
+                "reference": "14665bc3c38c3ec24a12c904d013a663dc4a1d8f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/e60ea917ab862254a6db37fa9cb8933138c1e73c",
-                "reference": "e60ea917ab862254a6db37fa9cb8933138c1e73c",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/14665bc3c38c3ec24a12c904d013a663dc4a1d8f",
+                "reference": "14665bc3c38c3ec24a12c904d013a663dc4a1d8f",
                 "shasum": ""
             },
             "require": {
@@ -692,7 +692,7 @@
                 "framework",
                 "laravel"
             ],
-            "time": "2014-08-05 19:52:17"
+            "time": "2014-09-15 02:45:24"
         },
         {
             "name": "laravelbook/ardent",
@@ -755,16 +755,16 @@
         },
         {
             "name": "league/flysystem",
-            "version": "0.5.6",
+            "version": "0.5.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/thephpleague/flysystem.git",
-                "reference": "6f626418670641bc643962cd85b2d33ec4c87137"
+                "reference": "63759ca1f3bb25d52946f684b54fe3821d084215"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/thephpleague/flysystem/zipball/6f626418670641bc643962cd85b2d33ec4c87137",
-                "reference": "6f626418670641bc643962cd85b2d33ec4c87137",
+                "url": "https://api.github.com/repos/thephpleague/flysystem/zipball/63759ca1f3bb25d52946f684b54fe3821d084215",
+                "reference": "63759ca1f3bb25d52946f684b54fe3821d084215",
                 "shasum": ""
             },
             "require": {
@@ -775,14 +775,14 @@
                 "barracuda/copy": "~1.1.4",
                 "dropbox/dropbox-sdk": "~1.1.1",
                 "guzzlehttp/guzzle": "~4.0",
-                "league/event": "~0.3",
+                "league/event": "~1.0",
                 "league/phpunit-coverage-listener": "~1.1",
-                "mockery/mockery": "~0.9@dev",
+                "mockery/mockery": "~0.9",
                 "phpseclib/phpseclib": "~0.3.5",
                 "phpspec/phpspec": "~2.0",
                 "phpunit/phpunit": "~4.0",
                 "predis/predis": "~1.0",
-                "rackspace/php-opencloud": "~1.9.1",
+                "rackspace/php-opencloud": "~1.10.0",
                 "sabre/dav": "~2.0.2"
             },
             "suggest": {
@@ -831,7 +831,7 @@
                 "sftp",
                 "storage"
             ],
-            "time": "2014-09-06 17:49:44"
+            "time": "2014-09-16 06:55:04"
         },
         {
             "name": "league/fractal",
@@ -1345,16 +1345,16 @@
         },
         {
             "name": "swiftmailer/swiftmailer",
-            "version": "v5.2.1",
+            "version": "v5.2.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/swiftmailer/swiftmailer.git",
-                "reference": "2b9af56cc676c338d52fca4c657e5bdff73bb7af"
+                "reference": "e02f71a35436af4bd58a1bd90116089e632e29e1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/swiftmailer/swiftmailer/zipball/2b9af56cc676c338d52fca4c657e5bdff73bb7af",
-                "reference": "2b9af56cc676c338d52fca4c657e5bdff73bb7af",
+                "url": "https://api.github.com/repos/swiftmailer/swiftmailer/zipball/e02f71a35436af4bd58a1bd90116089e632e29e1",
+                "reference": "e02f71a35436af4bd58a1bd90116089e632e29e1",
                 "shasum": ""
             },
             "require": {
@@ -1380,13 +1380,11 @@
             ],
             "authors": [
                 {
-                    "name": "Fabien Potencier",
-                    "email": "fabien@symfony.com",
-                    "homepage": "http://fabien.potencier.org",
-                    "role": "Lead Developer"
+                    "name": "Chris Corbyn"
                 },
                 {
-                    "name": "Chris Corbyn"
+                    "name": "Fabien Potencier",
+                    "email": "fabien@symfony.com"
                 }
             ],
             "description": "Swiftmailer, free feature-rich PHP mailer",
@@ -1395,7 +1393,7 @@
                 "mail",
                 "mailer"
             ],
-            "time": "2014-06-13 11:44:54"
+            "time": "2014-09-20 07:17:36"
         },
         {
             "name": "symfony/browser-kit",
@@ -2240,20 +2238,20 @@
     "packages-dev": [
         {
             "name": "barryvdh/laravel-debugbar",
-            "version": "v1.7.6",
+            "version": "v1.7.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/barryvdh/laravel-debugbar.git",
-                "reference": "a6b5f3e93e7539473ff7940f87f2e3e0c6e097c2"
+                "reference": "1f6f74832546841915a052b535dfb3d6957ac7c9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/barryvdh/laravel-debugbar/zipball/a6b5f3e93e7539473ff7940f87f2e3e0c6e097c2",
-                "reference": "a6b5f3e93e7539473ff7940f87f2e3e0c6e097c2",
+                "url": "https://api.github.com/repos/barryvdh/laravel-debugbar/zipball/1f6f74832546841915a052b535dfb3d6957ac7c9",
+                "reference": "1f6f74832546841915a052b535dfb3d6957ac7c9",
                 "shasum": ""
             },
             "require": {
-                "laravel/framework": "~4.0",
+                "laravel/framework": "~4.0|5.0",
                 "maximebf/debugbar": "~1.9.15",
                 "php": ">=5.3.0",
                 "symfony/finder": "~2.3"
@@ -2290,7 +2288,7 @@
                 "profiler",
                 "webprofiler"
             ],
-            "time": "2014-09-12 13:48:09"
+            "time": "2014-09-15 09:59:30"
         },
         {
             "name": "fzaninotto/faker",

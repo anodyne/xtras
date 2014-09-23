@@ -15,7 +15,7 @@ return [
 
 	'download' => '<span class="icn" data-icon="d"></span>',
 
-	//'edit' => '<span class="icn" data-icon="e"></span>',
+	'edit' => '<span class="icn" data-icon="e"></span>',
 	//'email' => '<span class="icn" data-icon="m"></span>',
 	//'external' => '<span class="octicon octicon-link-external"></span>',
 
@@ -36,9 +36,9 @@ return [
 	//'notify' => '<span class="icn" data-icon="n"></span>',
 	'new' => '<span class="icn" data-icon="w"></span>',
 
-	//'question' => '<span class="icn" data-icon="?"></span>',
+	'question' => '<span class="icn" data-icon="?"></span>',
 
-	//'remove' => '<span class="icn" data-icon="-"></span>',
+	'remove' => '<span class="icn" data-icon="-"></span>',
 
 	'star' => '<span class="octicon octicon-star"></span>',
 	'starFull' => '<span class="icn" data-icon="s"></span>',

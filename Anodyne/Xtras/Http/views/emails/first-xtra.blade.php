@@ -7,3 +7,23 @@
 
 	<p>Now that you've got one Xtra under your belt, branch out and submit some more! We're always here to help, so if you have questions about any of our products or AnodyneXtras, be sure to drop us a line by email or our forums and we'll be happy to give you a hand!</p>
 @stop
+
+@section('schema')
+	<script type="application/ld+json">
+		{
+			"@context": "http://schema.org",
+			"@type": "EmailMessage",
+			"description": "View your first Xtra",
+			"action": {
+				"@type": "ViewAction",
+				"url": "{{ $url }}",
+				"name": "View Xtra"
+			},
+			"publisher": {
+				"@type": "Organization",
+				"name": "AnodyneXtras",
+				"url": "http://xtras.anodyne-productions.com"
+			}
+		}
+	</script>
+@stop

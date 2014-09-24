@@ -86,14 +86,26 @@
 			</div>
 		</div>
 
+		<div class="row">
+			<div class="col-md-4">
+				<div class="form-group">
+					<label class="control-label">Status</label>
+					<div>
+						<label class="radio-inline">{{ Form::radio('status', (int) true) }} Active</label>
+						<label class="radio-inline">{{ Form::radio('status', (int) false) }} Inactive</label>
+					</div>
+				</div>
+			</div>
+		</div>
+
 		@if ($_currentUser->can('xtras.admin'))
 			<div class="row">
 				<div class="col-md-4">
 					<div class="form-group">
-						<label class="control-label">Status</label>
+						<label class="control-label">Admin Status</label>
 						<div>
-							<label class="radio-inline">{{ Form::radio('status', (int) true) }} Active</label>
-							<label class="radio-inline">{{ Form::radio('status', (int) false) }} Inactive</label>
+							<label class="radio-inline">{{ Form::radio('admin_status', (int) true) }} Active</label>
+							<label class="radio-inline">{{ Form::radio('admin_status', (int) false) }} Inactive</label>
 						</div>
 					</div>
 				</div>

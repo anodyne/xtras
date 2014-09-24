@@ -44,6 +44,7 @@ class CreateItems extends Migration {
 			$table->string('support')->nullable();
 			$table->float('rating')->default(0);
 			$table->boolean('status')->default((int) true);
+			$table->boolean('admin_status')->default((int) true);
 			$table->timestamps();
 			$table->softDeletes();
 		});

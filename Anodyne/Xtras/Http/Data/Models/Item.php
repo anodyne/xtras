@@ -14,7 +14,7 @@ class Item extends Model {
 	protected $table = 'items';
 
 	protected $fillable = ['user_id', 'type_id', 'product_id', 'name', 'slug',
-		'desc', 'support', 'version', 'rating', 'status'];
+		'desc', 'support', 'version', 'rating', 'status', 'admin_status'];
 
 	protected $dates = ['created_at', 'updated_at', 'deleted_at'];
 
@@ -31,6 +31,7 @@ class Item extends Model {
 		'version'		=> 'string',
 		'rating'		=> 'float',
 		'status'		=> 'integer',
+		'admin_status'	=> 'integer',
 	];
 
 	/*
@@ -110,7 +111,8 @@ class Item extends Model {
 
 	public function scopeActive($query)
 	{
-		$query->where('status', (int) true);
+		$query->where('status', (int) true)
+			->where('admin_status', (int) true);
 	}
 
 	public function scopeItemType($query, $typeId)
@@ -155,6 +157,16 @@ class Item extends Model {
 		$collection->put('files', $file);
 
 		return $collection;
+	}
+
+	public function supportIsEmail()
+	{
+		if (filter_var($this->support, FILTER_VALIDATE_EMAIL))
+		{
+			return true;
+		}
+
+		return false;
 	}
 
 	public function updateRating()

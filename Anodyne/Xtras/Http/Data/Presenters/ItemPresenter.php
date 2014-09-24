@@ -16,6 +16,21 @@ class ItemPresenter extends Presenter {
 		return (bool) $this->entity->status;
 	}
 
+	public function adminActive()
+	{
+		return (bool) $this->entity->admin_status;
+	}
+
+	public function adminDisabledLabel()
+	{
+		if ( ! $this->adminActive())
+		{
+			return '<p>'.label('danger', "This Xtra has been disabled by Anodyne Productions").'</p>';
+		}
+
+		return false;
+	}
+
 	public function author()
 	{
 		return HTML::link("profile/{$this->entity->user->username}", $this->entity->user->present()->name);
@@ -41,11 +56,11 @@ class ItemPresenter extends Presenter {
 		return '<p>'.Str::words(strip_tags($this->description()), 25).'</p>';
 	}
 
-	public function disabled()
+	public function disabledLabel()
 	{
-		if ( ! (bool) $this->entity->status)
+		if ( ! $this->active())
 		{
-			return '<p>'.label('danger', "This Xtra has been disabled by Anodyne Productions").'</p>';
+			return '<p>'.label('warning', "This Xtra has been disabled").'</p>';
 		}
 
 		return false;
@@ -85,7 +100,7 @@ class ItemPresenter extends Presenter {
 
 	public function inactiveMessage()
 	{
-		if ( ! $this->active())
+		if ( ! $this->active() or ! $this->adminActive())
 		{
 			return alert('danger', "This Xtra is not available at this time.");
 		}
@@ -174,9 +189,9 @@ class ItemPresenter extends Presenter {
 
 	public function support()
 	{
-		if (Str::contains($this->entity->support, '@'))
+		if (filter_var($this->entity->support, FILTER_VALIDATE_EMAIL))
 		{
-			return "mailto:{$this->entity->support}";
+			return 'email';
 		}
 
 		return $this->entity->support;

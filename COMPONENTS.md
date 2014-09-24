@@ -17,7 +17,7 @@
 - [Guzzle](http://guzzlephp.org/)
 	- Version: 4.2.2
 - [Entrust](https://github.com/Zizaco/entrust)
-	- Version: 1.2.3
+	- Version: 1.2.5
 - [Gravatar](https://github.com/forxer/gravatar)
 	- Version: 1.2.0
 - [Image](http://image.intervention.io/)

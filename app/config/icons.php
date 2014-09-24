@@ -2,7 +2,7 @@
 
 return [
 
-	//'add' => '<span class="icn" data-icon="+"></span>',
+	'add' => '<span class="icn" data-icon="+"></span>',
 
 	//'back' => '<span class="icn" data-icon="<"></span>',
 	//'bug' => '<span class="octicon octicon-bug"></span>',

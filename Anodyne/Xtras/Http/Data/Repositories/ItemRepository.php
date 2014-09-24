@@ -1,6 +1,7 @@
 <?php namespace Xtras\Data\Repositories;
 
 use App,
+	Auth,
 	Date,
 	Item,
 	Type,
@@ -89,6 +90,11 @@ class ItemRepository implements ItemRepositoryInterface {
 	public function create(array $data)
 	{
 		$data = Sanitize::clean($data, Item::$sanitizeRules);
+
+		if (array_key_exists('admin_status', $data) and ! Auth::user()->can('xtras.admin'))
+		{
+			unset($data['admin_status']);
+		}
 
 		// Create the item
 		$item = Item::create($data);
@@ -521,6 +527,11 @@ class ItemRepository implements ItemRepositoryInterface {
 		if ($item)
 		{
 			$data = Sanitize::clean($data, Item::$sanitizeRules);
+
+			if (array_key_exists('admin_status', $data) and ! Auth::user()->can('xtras.admin'))
+			{
+				unset($data['admin_status']);
+			}
 
 			$item->fill($data)->save();
 

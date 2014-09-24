@@ -229,7 +229,7 @@
 				@endif
 
 				<p>
-					@if ( ! empty($item->support) and ! filter_var($item->support, FILTER_VALIDATE_EMAIL))
+					@if ( ! empty($item->support) and ! $item->supportIsEmail())
 						<a href="{{ $item->support }}" class="btn btn-block btn-default">Get Help</a>
 					@else
 						<a href="#" rel="issue" class="btn btn-block btn-default">Report an Issue</a>
@@ -241,12 +241,12 @@
 					<span class="visible-lg">Report Abuse to Anodyne</span>
 				</a></p>
 
-				<hr>
+				<hr class="partial-split">
 
 				@if ( ! $item->isOwner($_currentUser))
 					{{ partial('rating', ['id' => $item->id, 'r' => $userRating]) }}
 
-					<hr>
+					<hr class="partial-split">
 
 					{{ Form::open() }}
 						<div class="pull-right">

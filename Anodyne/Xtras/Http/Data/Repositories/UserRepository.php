@@ -109,9 +109,9 @@ class UserRepository implements UserRepositoryInterface {
 
 	public function getOrders(User $user)
 	{
-		$user = $user->load('orders', 'orders.item', 'orders.item.user');
+		$user = $user->load('orders', 'orders.item', 'orders.item.user', 'orders.file');
 
-		return $user->orders->sortBy('created_at');
+		return $user->orders->sortByDesc('created_at');
 	}
 
 	public function removeNotification($userId, $itemId)

@@ -1,6 +1,13 @@
 <?php namespace Xtras\Controllers;
 
-use Log, Auth, View;
+use Log,
+	Auth,
+	View,
+	Request,
+	Response;
+use League\Fractal\Manager as FractalManager,
+	League\Fractal\Resource\Collection as FractalCollection,
+	League\Fractal\Serializer\DataArraySerializer as FractalDataArraySerializer;
 
 abstract class BaseController extends \Controller {
 
@@ -12,10 +19,10 @@ abstract class BaseController extends \Controller {
 	public function __construct()
 	{
 		$this->currentUser	= (Auth::check()) ? Auth::getUser()->load('roles', 'roles.perms') : null;
-		$this->request		= \Request::instance();
-		$this->fractal		= new \League\Fractal\Manager;
+		$this->request		= Request::instance();
+		$this->fractal		= new FractalManager;
 
-		$this->fractal->setSerializer(new \League\Fractal\Serializer\DataArraySerializer);
+		$this->fractal->setSerializer(new FractalDataArraySerializer);
 	}
 
 	protected function errorUnauthorized($message = false)
@@ -41,7 +48,7 @@ abstract class BaseController extends \Controller {
 
 	protected function respondWithCollection($collection, $callback)
 	{
-		$resource = new \League\Fractal\Resource\Collection($collection, $callback);
+		$resource = new FractalCollection($collection, $callback);
 
 		$rootScope = $this->fractal->createData($resource);
 
@@ -50,7 +57,7 @@ abstract class BaseController extends \Controller {
 
 	protected function respondWithArray(array $data, array $headers = [])
 	{
-		return \Response::json($data, 200, $headers);
+		return Response::json($data, 200, $headers);
 	}
 
 }

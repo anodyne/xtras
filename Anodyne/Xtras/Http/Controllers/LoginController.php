@@ -1,20 +1,24 @@
 <?php namespace Xtras\Controllers;
 
 use Auth,
+	View,
 	Flash,
 	Input,
-	Redirect;
+	Session,
+	Redirect,
+	Validator,
+	BaseController;
 
-class LoginController extends \BaseController {
+class LoginController extends BaseController {
 
 	public function index()
 	{
-		return \View::make('pages.login');
+		return View::make('pages.login');
 	}
 
 	public function doLogin()
 	{
-		$validator = \Validator::make(Input::all(), [
+		$validator = Validator::make(Input::all(), [
 			'email'		=> 'required',
 			'password'	=> 'required',
 		], [
@@ -24,6 +28,7 @@ class LoginController extends \BaseController {
 
 		if ( ! $validator->passes())
 		{
+			// Set the flash message
 			Flash::error("Please enter your email address and password and try again.");
 
 			return Redirect::route('login')
@@ -37,7 +42,10 @@ class LoginController extends \BaseController {
 
 		if (Auth::attempt(['email' => $email, 'password' => $password], true))
 		{
-			if (\Session::has('url.intended'))
+			// Set the flash message
+			Flash::success("Welcome back to AnodyneXtras!");
+			
+			if (Session::has('url.intended'))
 			{
 				return Redirect::intended('home');
 			}

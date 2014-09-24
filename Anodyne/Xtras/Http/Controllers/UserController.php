@@ -1,12 +1,15 @@
 <?php namespace Xtras\Controllers;
 
-use View, Input;
+use View,
+	Input,
+	BaseController,
+	UserRepositoryInterface;
 
-class UserController extends \BaseController {
+class UserController extends BaseController {
 
 	protected $users;
 
-	public function __construct(\UserRepositoryInterface $users)
+	public function __construct(UserRepositoryInterface $users)
 	{
 		parent::__construct();
 

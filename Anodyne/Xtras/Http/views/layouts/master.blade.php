@@ -228,8 +228,8 @@
 
 			$(document).ready(function()
 			{
-				$('.tooltip-bottom').tooltip({ position: "bottom" });
-				$('.tooltip-top').tooltip({ position: "top" });
+				$('.tooltip-bottom').tooltip({ placement: "bottom" });
+				$('.tooltip-top').tooltip({ placement: "top" });
 			});
 		</script>
 		@yield('scripts')

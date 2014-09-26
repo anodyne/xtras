@@ -356,16 +356,16 @@
         },
         {
             "name": "ikimea/browser",
-            "version": "1.10.1",
+            "version": "1.11",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Ikimea/Browser.git",
-                "reference": "0c18f3c4ba6db77d7ad6fab7348d3354b69239bd"
+                "reference": "032b4a04ace39bd77e8ffc399f3ee63484890ae6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Ikimea/Browser/zipball/0c18f3c4ba6db77d7ad6fab7348d3354b69239bd",
-                "reference": "0c18f3c4ba6db77d7ad6fab7348d3354b69239bd",
+                "url": "https://api.github.com/repos/Ikimea/Browser/zipball/032b4a04ace39bd77e8ffc399f3ee63484890ae6",
+                "reference": "032b4a04ace39bd77e8ffc399f3ee63484890ae6",
                 "shasum": ""
             },
             "require": {
@@ -387,13 +387,12 @@
                     "homepage": "http://www.ikimea.com"
                 },
                 {
-                    "name": "Chris Schuld",
-                    "email": "chris@chrisschuld.com",
-                    "homepage": "http://chrisschuld.com"
-                },
-                {
                     "name": "Gary White",
                     "homepage": "http://www.apptools.com/phptools/browser/"
+                },
+                {
+                    "name": "Chris Schuld",
+                    "homepage": "http://chrisschuld.com"
                 }
             ],
             "description": "Detecting the user’s browser",
@@ -401,7 +400,7 @@
             "keywords": [
                 "browser"
             ],
-            "time": "2013-08-18 10:17:54"
+            "time": "2014-09-25 12:43:30"
         },
         {
             "name": "intervention/image",

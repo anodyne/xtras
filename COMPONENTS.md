@@ -9,7 +9,7 @@
 - [Fractal](http://fractal.thephpleague.com/)
 	- Version: 0.8.3
 - [Parsedown](http://parsedown.org/)
-	- Version: 1.0.1
+	- Version: 1.1.0
 - [Browser](https://github.com/Ikimea/Browser)
 	- Version: 1.11
 - [Presenter](https://github.com/laracasts/Presenter)

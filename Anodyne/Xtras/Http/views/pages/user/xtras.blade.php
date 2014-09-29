@@ -16,7 +16,7 @@
 	@endif
 
 	@if (count($xtras) == 0)
-		{{ alert('warning', "It looks like you don't have any Xtras. Go ahead and change that, create your first!") }}
+		{{ alert('warning', "It looks like you don't have any Xtras. Go ahead and change that, ".link_to_route('item.create', 'create your first')."!") }}
 	@else
 		<ul class="nav nav-tabs">
 			<li class="active"><a href="#skins" data-toggle="tab">Skins</a></li>
@@ -42,17 +42,23 @@
 										<div class="btn-group">
 											<a href="{{ route('item.show', [$item->user->username, $item->slug]) }}" class="btn btn-default">View</a>
 										</div>
-										<div class="btn-group">
-											<a href="{{ route('item.edit', [$item->user->username, $item->slug]) }}" class="btn btn-default">Edit</a>
-										</div>
-										<div class="btn-group">
-											<a href="{{ route('item.messages.index', [$item->user->username, $item->slug]) }}" class="btn btn-default">Messages</a>
-											<a href="{{ route('item.files.index', [$item->user->username, $item->slug]) }}" class="btn btn-default">Files</a>
-											<a href="{{ route('item.images.index', [$item->user->username, $item->slug]) }}" class="btn btn-default">Images</a>
-										</div>
-										<div class="btn-group">
-											<a href="#" class="btn btn-danger js-remove-item" data-id="{{ $item->id }}">Remove</a>
-										</div>
+										
+										@if ($_currentUser->can('xtras.item.edit'))
+											<div class="btn-group">
+												<a href="{{ route('item.edit', [$item->user->username, $item->slug]) }}" class="btn btn-default">Edit</a>
+											</div>
+											<div class="btn-group">
+												<a href="{{ route('item.messages.index', [$item->user->username, $item->slug]) }}" class="btn btn-default">Messages</a>
+												<a href="{{ route('item.files.index', [$item->user->username, $item->slug]) }}" class="btn btn-default">Files</a>
+												<a href="{{ route('item.images.index', [$item->user->username, $item->slug]) }}" class="btn btn-default">Images</a>
+											</div>
+										@endif
+
+										@if ($_currentUser->can('xtras.item.delete'))
+											<div class="btn-group">
+												<a href="#" class="btn btn-danger js-remove-item" data-id="{{ $item->id }}">Remove</a>
+											</div>
+										@endif
 									</div>
 								</div>
 							</div>
@@ -81,17 +87,23 @@
 										<div class="btn-group">
 											<a href="{{ route('item.show', [$item->user->username, $item->slug]) }}" class="btn btn-default">View</a>
 										</div>
-										<div class="btn-group">
-											<a href="{{ route('item.edit', [$item->user->username, $item->slug]) }}" class="btn btn-default">Edit</a>
-										</div>
-										<div class="btn-group">
-											<a href="{{ route('item.messages.index', [$item->user->username, $item->slug]) }}" class="btn btn-default">Messages</a>
-											<a href="{{ route('item.files.index', [$item->user->username, $item->slug]) }}" class="btn btn-default">Files</a>
-											<a href="{{ route('item.images.index', [$item->user->username, $item->slug]) }}" class="btn btn-default">Images</a>
-										</div>
-										<div class="btn-group">
-											<a href="#" class="btn btn-danger js-remove-item" data-id="{{ $item->id }}">Remove</a>
-										</div>
+
+										@if ($_currentUser->can('xtras.item.edit'))
+											<div class="btn-group">
+												<a href="{{ route('item.edit', [$item->user->username, $item->slug]) }}" class="btn btn-default">Edit</a>
+											</div>
+											<div class="btn-group">
+												<a href="{{ route('item.messages.index', [$item->user->username, $item->slug]) }}" class="btn btn-default">Messages</a>
+												<a href="{{ route('item.files.index', [$item->user->username, $item->slug]) }}" class="btn btn-default">Files</a>
+												<a href="{{ route('item.images.index', [$item->user->username, $item->slug]) }}" class="btn btn-default">Images</a>
+											</div>
+										@endif
+
+										@if ($_currentUser->can('xtras.item.delete'))
+											<div class="btn-group">
+												<a href="#" class="btn btn-danger js-remove-item" data-id="{{ $item->id }}">Remove</a>
+											</div>
+										@endif
 									</div>
 								</div>
 							</div>
@@ -120,17 +132,23 @@
 										<div class="btn-group">
 											<a href="{{ route('item.show', [$item->user->username, $item->slug]) }}" class="btn btn-default">View</a>
 										</div>
-										<div class="btn-group">
-											<a href="{{ route('item.edit', [$item->user->username, $item->slug]) }}" class="btn btn-default">Edit</a>
-										</div>
-										<div class="btn-group">
-											<a href="{{ route('item.messages.index', [$item->user->username, $item->slug]) }}" class="btn btn-default">Messages</a>
-											<a href="{{ route('item.files.index', [$item->user->username, $item->slug]) }}" class="btn btn-default">Files</a>
-											<a href="{{ route('item.images.index', [$item->user->username, $item->slug]) }}" class="btn btn-default">Images</a>
-										</div>
-										<div class="btn-group">
-											<a href="#" class="btn btn-danger js-remove-item" data-id="{{ $item->id }}">Remove</a>
-										</div>
+
+										@if ($_currentUser->can('xtras.item.edit'))
+											<div class="btn-group">
+												<a href="{{ route('item.edit', [$item->user->username, $item->slug]) }}" class="btn btn-default">Edit</a>
+											</div>
+											<div class="btn-group">
+												<a href="{{ route('item.messages.index', [$item->user->username, $item->slug]) }}" class="btn btn-default">Messages</a>
+												<a href="{{ route('item.files.index', [$item->user->username, $item->slug]) }}" class="btn btn-default">Files</a>
+												<a href="{{ route('item.images.index', [$item->user->username, $item->slug]) }}" class="btn btn-default">Images</a>
+											</div>
+										@endif
+
+										@if ($_currentUser->can('xtras.item.delete'))
+											<div class="btn-group">
+												<a href="#" class="btn btn-danger js-remove-item" data-id="{{ $item->id }}">Remove</a>
+											</div>
+										@endif
 									</div>
 								</div>
 							</div>

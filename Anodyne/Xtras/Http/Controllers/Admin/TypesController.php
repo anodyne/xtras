@@ -3,15 +3,18 @@
 use View,
 	Event,
 	Input,
-	Redirect;
+	Redirect,
+	TypeValidator,
+	BaseController,
+	TypeRepositoryInterface;
 
-class TypesController extends \BaseController {
+class TypesController extends BaseController {
 
 	protected $types;
 	protected $validator;
 
-	public function __construct(\TypeRepositoryInterface $types,
-			\TypeValidator $validator)
+	public function __construct(TypeRepositoryInterface $types,
+			TypeValidator $validator)
 	{
 		parent::__construct();
 

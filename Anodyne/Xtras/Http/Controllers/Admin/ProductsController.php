@@ -3,15 +3,18 @@
 use View,
 	Event,
 	Input,
-	Redirect;
+	Redirect,
+	BaseController,
+	ProductValidator,
+	ProductRepositoryInterface;
 
-class ProductsController extends \BaseController {
+class ProductsController extends BaseController {
 
 	protected $products;
 	protected $validator;
 
-	public function __construct(\ProductRepositoryInterface $products,
-			\ProductValidator $validator)
+	public function __construct(ProductRepositoryInterface $products,
+			ProductValidator $validator)
 	{
 		parent::__construct();
 

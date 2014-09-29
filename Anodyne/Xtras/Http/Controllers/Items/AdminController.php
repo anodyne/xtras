@@ -4,18 +4,24 @@ use View,
 	Event,
 	Flash,
 	Input,
-	Redirect;
+	Redirect,
+	Paginator,
+	BaseController,
+	ItemUpdateValidator,
+	ItemCreationValidator,
+	ItemRepositoryInterface,
+	UserRepositoryInterface;
 
-class AdminController extends \BaseController {
+class AdminController extends BaseController {
 
 	protected $items;
 	protected $users;
 	protected $itemCreate;
 	protected $itemUpdate;
 
-	public function __construct(\ItemRepositoryInterface $items,
-			\UserRepositoryInterface $users, \ItemCreationValidator $itemCreate,
-			\ItemUpdateValidator $itemUpdate)
+	public function __construct(ItemRepositoryInterface $items,
+			UserRepositoryInterface $users, ItemCreationValidator $itemCreate,
+			ItemUpdateValidator $itemUpdate)
 	{
 		parent::__construct();
 
@@ -33,12 +39,12 @@ class AdminController extends \BaseController {
 			$data = $this->items->getByPage(false, Input::get('page', 1), 25, 'name', 'asc');
 
 			// Build the paginator
-			$paginator = \Paginator::make($data->items, $data->totalItems, 25);
+			$paginator = Paginator::make($data->items, $data->totalItems, 25);
 
 			return View::make('pages.item.admin')->withItems($paginator);
 		}
 
-		return $this->unauthorized("You do not have permissions to manage Xtras!");
+		return $this->errorUnauthorized("You do not have permissions to manage Xtras!");
 	}
 
 	public function create()
@@ -51,7 +57,9 @@ class AdminController extends \BaseController {
 			$types[''] = "Choose a type";
 			$types += $this->items->getTypesByPermissions($this->currentUser);
 
-			return View::make('pages.item.create')->with(compact('products', 'types'));
+			return View::make('pages.item.create')
+				->withProducts($products)
+				->withTypes($types);
 		}
 
 		return $this->errorUnauthorized("You do not have permission to create Xtras.");
@@ -126,18 +134,21 @@ class AdminController extends \BaseController {
 				// Fire the item update event
 				Event::fire('item.updated', [$item->id]);
 
+				// Set the flash message and redirect
+				$flashMessage = "Xtra was successfully updated. Return to ".link_to_route('item.admin', 'item management').'.';
+				$flashRedirect = "item.admin";
+
 				if ( ! $admin)
 				{
-					// Set the flash message
-					Flash::success("Your Xtra was successfully updated. If you're releasing a new version of this Xtra, make sure you upload the new zip file.");
-
-					return Redirect::route('account.xtras');
+					// Set the flash message and redirect
+					$flashMessage = "Your Xtra was successfully updated. If you're releasing a new version of this Xtra, make sure you ".link_to_route('item.files.index', 'upload', [$item->user->username, $item->slug])." the new zip file now, or, return to ".link_to_route('account.xtras', 'My Xtras').".";
+					$flashRedirect = "account.xtras";
 				}
-
+				
 				// Set the flash message
-				Flash::success("Xtra was successfully updated.");
+				Flash::success($flashMessage);
 
-				return Redirect::route('item.admin');
+				return Redirect::back();
 			}
 
 			return $this->errorUnauthorized("You do not have permissions to edit Xtras other than your own!");

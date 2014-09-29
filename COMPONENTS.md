@@ -17,11 +17,11 @@
 - [Guzzle](http://guzzlephp.org/)
 	- Version: 4.2.2
 - [Entrust](https://github.com/Zizaco/entrust)
-	- Version: 1.2.5
+	- Version: 1.3.0
 - [Gravatar](https://github.com/forxer/gravatar)
 	- Version: 1.2.0
 - [Image](http://image.intervention.io/)
-	- Version: 2.0.10
+	- Version: 2.0.11
 
 ## Javascript
 

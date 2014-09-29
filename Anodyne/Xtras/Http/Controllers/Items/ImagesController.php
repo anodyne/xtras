@@ -4,6 +4,7 @@ use App,
 	View,
 	Event,
 	Flash,
+	Image,
 	Input,
 	Redirect,
 	Response;
@@ -118,7 +119,7 @@ class ImagesController extends \BaseController {
 				if ($result)
 				{
 					// Generate the thumbnails as well
-					$img = \Image::make($file->getRealPath())->resize(250, null, function($c)
+					$img = Image::make($file->getRealPath())->resize(250, null, function($c)
 					{
 						$c->aspectRatio();
 					});
@@ -130,7 +131,7 @@ class ImagesController extends \BaseController {
 					$fs->put($thumbnailFilename, $img->encode());
 
 					// Update the database record
-					$this->items->updateMetaData($item->id, [
+					$this->items->updateMetadata($item->id, [
 						$image => $fullFilename,
 						"thumbnail{$imageNumber}" => $thumbnailFilename,
 					]);

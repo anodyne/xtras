@@ -30,6 +30,6 @@ interface ItemRepositoryInterface extends BaseRepositoryInterface {
 	public function searchAdvanced(array $input);
 	public function updateFileData($id, array $data);
 	public function updateMessage($id, array $data);
-	public function updateMetaData($id, array $data);
+	public function updateMetadata($id, array $data);
 
 }

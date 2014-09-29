@@ -89,6 +89,8 @@ class ItemRepository implements ItemRepositoryInterface {
 
 	public function create(array $data)
 	{
+		$metadata = (array_key_exists('metadata', $data)) ? $data['metadata'] : false;
+		$filedata = (array_key_exists('files', $data)) ? $data['files'] : false;
 		$data = Sanitize::clean($data, Item::$sanitizeRules);
 
 		if (array_key_exists('admin_status', $data) and ! Auth::user()->can('xtras.admin'))
@@ -100,15 +102,15 @@ class ItemRepository implements ItemRepositoryInterface {
 		$item = Item::create($data);
 
 		// If there's metadata, update it
-		if (array_key_exists('metadata', $data))
+		if ($metadata)
 		{
-			$this->updateMetaData($item->id, $data['metadata']);
+			$this->updateMetadata($item->id, $metadata);
 		}
 
 		// If there are file metadata, create that data
-		if (array_key_exists('files', $data))
+		if ($filedata)
 		{
-			$this->updateFileData($item->id, $data['files']);
+			$this->updateFileData($item->id, $filedata);
 		}
 
 		return $item;
@@ -526,6 +528,8 @@ class ItemRepository implements ItemRepositoryInterface {
 
 		if ($item)
 		{
+			$metadata = (array_key_exists('metadata', $data)) ? $data['metadata'] : false;
+			$filedata = (array_key_exists('files', $data)) ? $data['files'] : false;
 			$data = Sanitize::clean($data, Item::$sanitizeRules);
 
 			if (array_key_exists('admin_status', $data) and ! Auth::user()->can('xtras.admin'))
@@ -536,15 +540,15 @@ class ItemRepository implements ItemRepositoryInterface {
 			$item->fill($data)->save();
 
 			// If there's metadata, update it
-			if (array_key_exists('metadata', $data))
+			if ($metadata)
 			{
-				$this->updateMetaData($item->id, $data['metadata']);
+				$this->updateMetadata($item->id, $metadata);
 			}
 
 			// If there are file metadata, create that data
-			if (array_key_exists('files', $data))
+			if ($filedata)
 			{
-				$this->updateFileData($item->id, $data['files']);
+				$this->updateFileData($item->id, $filedata);
 			}
 
 			return $item;
@@ -589,7 +593,7 @@ class ItemRepository implements ItemRepositoryInterface {
 		return false;
 	}
 
-	public function updateMetaData($itemId, array $data)
+	public function updateMetadata($itemId, array $data)
 	{
 		// Get the item
 		$item = $this->find($itemId);

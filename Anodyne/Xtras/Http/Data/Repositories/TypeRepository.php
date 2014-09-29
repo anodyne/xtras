@@ -1,6 +1,6 @@
 <?php namespace Xtras\Data\Repositories;
 
-use Type
+use Type,
 	Sanitize,
 	TypeRepositoryInterface;
 

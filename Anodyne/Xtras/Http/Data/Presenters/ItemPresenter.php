@@ -120,7 +120,7 @@ class ItemPresenter extends Presenter {
 			{
 				if ($message->expires === null or ($message->expires !== null and $now->lt($message->expires)))
 				{
-					$output .= alert($message->type, Markdown::parse($message->content));
+					$output .= alert($message->type, $message->present()->content);
 				}
 			}
 		}

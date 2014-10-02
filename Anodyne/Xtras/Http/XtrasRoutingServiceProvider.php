@@ -103,12 +103,18 @@ class XtrasRoutingServiceProvider extends ServiceProvider {
 			Route::post('{author}/{slug}', [
 				'as'	=> 'item.messages.store',
 				'uses'	=> 'MessagesController@store']);
-			Route::get('{id}/edit', [
+			Route::get('{messageId}/edit', [
 				'as'	=> 'item.messages.edit',
 				'uses'	=> 'MessagesController@edit']);
-			Route::put('{id}', [
+			Route::put('{messageId}', [
 				'as'	=> 'item.messages.update',
 				'uses'	=> 'MessagesController@update']);
+			Route::get('{messageId}/remove', [
+				'as'	=> 'item.messages.remove',
+				'uses'	=> 'MessagesController@remove']);
+			Route::delete('{messageId}', [
+				'as'	=> 'item.messages.destroy',
+				'uses'	=> 'MessagesController@destroy']);
 			Route::get('{author}/{slug}', [
 				'as'	=> 'item.messages.index',
 				'uses'	=> 'MessagesController@index']);

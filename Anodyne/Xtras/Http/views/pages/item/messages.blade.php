@@ -19,33 +19,45 @@
 	<p>Messages are blocks of text that will appear at the top of your public-facing Xtra page. You can use these messages to provided page visitors additional important information about your Xtra (e.g. "We are aware of the issue in the current version and are hoping to have a fix out in the next few days."). Messages can be <span class="text-info">informational</span>, <span class="text-warning">warnings</span>, or <span class="text-danger">critical</span>.</p>
 
 	@if ($messages->count() > 0)
-		<div class="data-table data-table-bordered data-table-striped">
+		<hr class="partial-split">
+
 		@foreach ($messages as $message)
 			<div class="row">
-				<div class="col-md-1">
-					<p>{{ $message->present()->typeAsLabel }}</p>
+				<div class="col-md-10">
+					<p class="alert alert-{{ $message->type }}">{{ $message->present()->content }}</p>
 				</div>
-				<div class="col-md-8">
-					{{ $message->present()->content }}
-
-					@if ( ! empty($message->expires))
-						<p class="text-sm text-muted">{{ $message->present()->expiresRelative }}</p>
-					@endif
-				</div>
-				<div class="col-md-3">
+				<div class="col-md-2">
 					<div class="btn-toolbar pull-right">
 						<div class="btn-group">
 							<a href="{{ route('item.messages.edit', [$message->id]) }}" class="btn btn-default">Edit</a>
 						</div>
 						<div class="btn-group">
-							<a href="#" class="btn btn-danger">Remove</a>
+							<a href="#" class="btn btn-danger js-remove-message" data-message="{{ $message->id }}">Remove</a>
 						</div>
 					</div>
 				</div>
 			</div>
 		@endforeach
-		</div>
 	@else
 		{{ alert('warning', "No messages found.") }}
 	@endif
+@stop
+
+@section('modals')
+	{{ modal(['id' => 'removeMessage', 'header' => 'Remove Message']) }}
+@stop
+
+@section('scripts')
+	<script>
+		$('.js-remove-message').on('click', function(e)
+		{
+			e.preventDefault();
+
+			var message = $(this).data('message');
+
+			$('#removeMessage').modal({
+				remote: "{{ URL::to('item/messages') }}/" + message + "/remove"
+			}).modal('show');
+		});
+	</script>
 @stop

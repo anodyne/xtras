@@ -7,12 +7,20 @@ class ItemMessagePresenter extends Presenter {
 
 	public function content()
 	{
-		return Markdown::parse($this->entity->content);
+		return $this->entity->content;
 	}
 
 	public function expires()
 	{
 		return $this->entity->expires->format('d F Y');
+	}
+
+	public function expiresFormal()
+	{
+		if ( ! empty($this->entity->expires))
+		{
+			return $this->entity->expires->format('m/d/Y');
+		}
 	}
 
 	public function expiresRelative()

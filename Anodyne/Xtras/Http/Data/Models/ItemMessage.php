@@ -1,6 +1,6 @@
 <?php namespace Xtras\Data\Models;
 
-use Model, SoftDeletingTrait;
+use Date, Model, SoftDeletingTrait;
 use Laracasts\Presenter\PresentableTrait;
 
 class ItemMessage extends Model {
@@ -41,6 +41,11 @@ class ItemMessage extends Model {
 	| Model Scopes
 	|---------------------------------------------------------------------------
 	*/
+
+	public function scopeActive($query)
+	{
+		$query->where('expires', '>=', Date::now()->startOfDay());
+	}
 
 	public function scopeItem($query, $item)
 	{

@@ -56,6 +56,13 @@ class ItemRepository implements ItemRepositoryInterface {
 
 		if ($item)
 		{
+			if (empty($data['expires']))
+			{
+				unset($data['expires']);
+			}
+
+			$data['item_id'] = (int) $item->id;
+
 			$data = Sanitize::clean($data, ItemMessage::$sanitizeRules);
 
 			// Setup the expiration
@@ -65,18 +72,9 @@ class ItemRepository implements ItemRepositoryInterface {
 
 				$data['expires'] = $expires->endOfDay();
 			}
-			else
-			{
-				unset($data['expires']);
-			}
 
 			// Create the message
-			$message = ItemMessage::create($data);
-
-			// Associate the message with the item
-			$item->messages()->save($message);
-
-			return $message;
+			return ItemMessage::create($data);
 		}
 
 		return false;
@@ -392,7 +390,7 @@ class ItemRepository implements ItemRepositoryInterface {
 
 	public function getMessage($messageId)
 	{
-		return ItemMessage::with('item')->active()->find($messageId);
+		return ItemMessage::with('item')->find($messageId);
 	}
 
 	public function getProducts()
@@ -583,7 +581,19 @@ class ItemRepository implements ItemRepositoryInterface {
 
 		if ($message)
 		{
+			if (empty($data['expires']))
+			{
+				unset($data['expires']);
+			}
+
 			$data = Sanitize::clean($data, ItemMessage::$sanitizeRules);
+
+			if ( ! empty($data['expires']))
+			{
+				$expires = Date::createFromFormat('m/d/Y', $data['expires']);
+
+				$data['expires'] = $expires->endOfDay();
+			}
 			
 			$message->fill($data)->save();
 

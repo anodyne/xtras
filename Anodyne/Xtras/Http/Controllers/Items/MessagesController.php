@@ -1,16 +1,19 @@
 <?php namespace Xtras\Controllers\Items;
 
-use View,
+use Item,
+	View,
 	Event,
 	Flash,
 	Input,
-	Redirect;
+	Redirect,
+	BaseController,
+	ItemRepositoryInterface;
 
-class MessagesController extends \BaseController {
+class MessagesController extends BaseController {
 
 	protected $items;
 
-	public function __construct(\ItemRepositoryInterface $items)
+	public function __construct(ItemRepositoryInterface $items)
 	{
 		parent::__construct();
 
@@ -24,17 +27,17 @@ class MessagesController extends \BaseController {
 
 		if ($item)
 		{
-			if ($item->user->id == $this->currentUser->id or $this->currentUser->can('xtras.admin'))
+			if ($this->checkPermissions($item))
 			{
 				return View::make('pages.item.messages')
 					->withItem($item)
 					->withMessages($item->messages);
 			}
 
-			return $this->unauthorized("You do not have permission to manage messages for this Xtra!");
+			return $this->errorUnauthorized("You do not have permission to manage messages for this Xtra!");
 		}
 
-		return $this->errorNotFound("Xtra not found.");
+		return $this->errorNotFound("We could not find the Xtra you were looking for.");
 	}
 
 	public function create($author, $slug)
@@ -44,7 +47,7 @@ class MessagesController extends \BaseController {
 
 		if ($item)
 		{
-			if ($item->user->id == $this->currentUser->id or $this->currentUser->can('xtras.admin'))
+			if ($this->checkPermissions($item))
 			{
 				return View::make('pages.item.messages-create')
 					->withItem($item)
@@ -54,7 +57,7 @@ class MessagesController extends \BaseController {
 			return $this->unauthorized("You do not have permission to create messages for this Xtra!");
 		}
 
-		return $this->errorNotFound("Xtra not found.");
+		return $this->errorNotFound("We could not find the Xtra you were looking for.");
 	}
 
 	public function store($author, $slug)
@@ -64,7 +67,7 @@ class MessagesController extends \BaseController {
 
 		if ($item)
 		{
-			if ($item->user->id == $this->currentUser->id)
+			if ($this->checkPermissions($item))
 			{
 				// Validate the data
 
@@ -86,39 +89,44 @@ class MessagesController extends \BaseController {
 		else
 		{
 			// Set the flash message
-			Flash::error("No Xtra found with that name.");
+			Flash::error("We could not find the Xtra you were looking for.");
 		}
 
-		return Redirect::route('messages.index', ['author' => $author, 'slug' => $slug]);
+		return Redirect::route('item.messages.index', [$author, $slug]);
 	}
 
-	public function edit($id)
+	public function edit($messageId)
 	{
 		// Get the message
-		$message = $this->items->getMessage($id);
+		$message = $this->items->getMessage($messageId);
 
 		if ($message)
 		{
-			return View::make('pages.item.messages-edit')
-				->withMessage($message)
-				->withItem($message->item)
-				->withTypes(['info' => "Info" , 'warning' => "Warning", 'danger' => "Critical"]);
+			if ($this->checkPermissions($message->item))
+			{
+				return View::make('pages.item.messages-edit')
+					->withMessage($message)
+					->withItem($message->item)
+					->withTypes(['info' => "Info" , 'warning' => "Warning", 'danger' => "Critical"]);
+			}
+
+			return $this->unauthorized("You do not have permission to update messages for this Xtra!");
 		}
 
-		return $this->errorNotFound("Message not found.");
+		return $this->errorNotFound("We could not find the message you were looking for.");
 	}
 
-	public function update($id)
+	public function update($messageId)
 	{
 		// Get the message
-		$message = $this->items->getMessage($id);
+		$message = $this->items->getMessage($messageId);
 
 		if ($message)
 		{
 			// Get the item
 			$item = $message->item;
 
-			if ($item->user->id == $this->currentUser->id)
+			if ($this->checkPermissions($item))
 			{
 				// Validate the data
 
@@ -137,10 +145,7 @@ class MessagesController extends \BaseController {
 				Flash::error("You do not have permission to update messages for this Xtra!");
 			}
 
-			return Redirect::route('messages.index', [
-				'author'	=> $item->user->username,
-				'slug'		=> $item->slug
-			]);
+			return Redirect::route('item.messages.index', [$item->user->username, $item->slug]);
 		}
 		else
 		{
@@ -151,9 +156,63 @@ class MessagesController extends \BaseController {
 		}
 	}
 
-	public function destroy($id)
+	public function remove($messageId)
 	{
-		//
+		// Get the message
+		$message = $this->items->getMessage($messageId);
+
+		$content = alert('danger', "You do not have permission to update messages for this Xtra!");
+
+		if ($this->checkPermissions($message->item))
+		{
+			$content = View::make('pages.item.messages-remove')->withMessage($message);
+		}
+
+		return partial('modal_content', [
+			'modalHeader'	=> "Remove Message",
+			'modalBody'		=> $content,
+			'modalFooter'	=> false,
+		]);
+	}
+
+	public function destroy($messageId)
+	{
+		// Get the message
+		$message = $this->items->getMessage($messageId);
+
+		if ($message)
+		{
+			if ($this->checkPermissions($message->item))
+			{
+				// Remove the message
+				$message = $this->items->deleteMessage($messageId);
+
+				// Fire the event
+				Event::fire('item.message.deleted', [$message]);
+
+				// Set the flash message
+				Flash::success("Message was successfully removed.");
+
+				return Redirect::route('item.messages.index', [
+					$message->item->user->username,
+					$message->item->slug
+				]);
+			}
+
+			return $this->errorUnauthorized("You do not have permissions to remove messages for this Xtra!");
+		}
+
+		return $this->errorNotFound("We could not find the message you were looking for.");
+	}
+
+	public function checkPermissions(Item $item)
+	{
+		if ($item->user->id == $this->currentUser->id or $this->currentUser->can('xtras.admin'))
+		{
+			return true;
+		}
+
+		return false;
 	}
 
 }

@@ -44,7 +44,7 @@ class AdminController extends BaseController {
 			return View::make('pages.item.admin')->withItems($paginator);
 		}
 
-		return $this->errorUnauthorized("You do not have permissions to manage Xtras!");
+		return $this->errorUnauthorized("You do not have permissions to manage all Xtras!");
 	}
 
 	public function create()
@@ -62,7 +62,7 @@ class AdminController extends BaseController {
 				->withTypes($types);
 		}
 
-		return $this->errorUnauthorized("You do not have permission to create Xtras.");
+		return $this->errorUnauthorized("You do not have permission to create Xtras!");
 	}
 
 	public function store()
@@ -81,7 +81,7 @@ class AdminController extends BaseController {
 			Event::fire('item.created', [$item]);
 
 			// Set the flash message
-			Flash::success("Xtra was successfully created. Use the page below to upload your Xtra's zip file.");
+			Flash::success("Xtra was successfully created! Use the page below to upload your Xtra's zip file.");
 
 			return Redirect::route('item.files.create', [$item->user->username, $item->slug]);
 		}
@@ -113,7 +113,7 @@ class AdminController extends BaseController {
 			return $this->errorNotFound("We couldn't find the Xtra you're looking for.");
 		}
 
-		return $this->errorUnauthorized("You do not have permission to edit Xtras.");
+		return $this->errorUnauthorized("You do not have permission to edit Xtras!");
 	}
 
 	public function update($author, $slug, $admin = false)
@@ -132,16 +132,16 @@ class AdminController extends BaseController {
 				$item = $this->items->update($xtra->id, Input::all());
 
 				// Fire the item update event
-				Event::fire('item.updated', [$item->id]);
+				Event::fire('item.updated', [$item]);
 
 				// Set the flash message and redirect
-				$flashMessage = "Xtra was successfully updated. Return to ".link_to_route('item.admin', 'item management').'.';
+				$flashMessage = "Xtra was successfully updated! Return to ".link_to_route('item.admin', 'item management').'.';
 				$flashRedirect = "item.admin";
 
 				if ( ! $admin)
 				{
 					// Set the flash message and redirect
-					$flashMessage = "Your Xtra was successfully updated. If you're releasing a new version of this Xtra, make sure you ".link_to_route('item.files.index', 'upload', [$item->user->username, $item->slug])." the new zip file now, or, return to ".link_to_route('account.xtras', 'My Xtras').".";
+					$flashMessage = "Your Xtra was successfully updated! If you're releasing a new version of this Xtra, make sure you ".link_to_route('item.files.index', 'upload', [$item->user->username, $item->slug])." the new zip file now, or, return to ".link_to_route('account.xtras', 'My Xtras').".";
 					$flashRedirect = "account.xtras";
 				}
 				
@@ -154,7 +154,7 @@ class AdminController extends BaseController {
 			return $this->errorUnauthorized("You do not have permissions to edit Xtras other than your own!");
 		}
 
-		return $this->errorUnauthorized("You do not have permission to edit Xtras.");
+		return $this->errorUnauthorized("You do not have permission to edit Xtras!");
 	}
 
 	public function remove($itemId, $admin = false)
@@ -166,7 +166,7 @@ class AdminController extends BaseController {
 
 			return partial('modal_content', [
 				'modalHeader'	=> "Remove Xtra",
-				'modalBody'		=> View::make('pages.item.remove')->with(compact('item', 'admin')),
+				'modalBody'		=> View::make('pages.item.remove')->withItem($item)->withAdmin($admin),
 				'modalFooter'	=> false,
 			]);
 		}
@@ -196,7 +196,7 @@ class AdminController extends BaseController {
 					Event::fire('item.deleted', [$item]);
 
 					// Set the flash message
-					Flash::success("Xtra has been successfully removed.");
+					Flash::success("Xtra has been successfully removed!");
 
 					if ($admin and $this->currentUser->can('xtras.admin'))
 					{

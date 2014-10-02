@@ -4,12 +4,13 @@ use Log,
 	Auth,
 	View,
 	Request,
-	Response;
+	Response,
+	Controller;
 use League\Fractal\Manager as FractalManager,
 	League\Fractal\Resource\Collection as FractalCollection,
 	League\Fractal\Serializer\DataArraySerializer as FractalDataArraySerializer;
 
-abstract class BaseController extends \Controller {
+abstract class BaseController extends Controller {
 
 	protected $currentUser;
 	protected $layout = 'layouts.master';

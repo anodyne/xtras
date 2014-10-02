@@ -1,20 +1,25 @@
 <?php namespace Xtras\Controllers\Items;
 
-use View,
+use App,
+	View,
 	Event,
 	Flash,
 	Input,
 	Redirect,
-	Paginator;
+	Paginator,
+	BaseController,
+	ItemRepositoryInterface,
+	UserRepositoryInterface,
+	OrderRepositoryInterface;
 
-class ItemController extends \BaseController {
+class ItemController extends BaseController {
 
 	protected $items;
 	protected $users;
 	protected $orders;
 
-	public function __construct(\ItemRepositoryInterface $items,
-			\UserRepositoryInterface $users, \OrderRepositoryInterface $orders)
+	public function __construct(ItemRepositoryInterface $items,
+			UserRepositoryInterface $users, OrderRepositoryInterface $orders)
 	{
 		parent::__construct();
 
@@ -64,41 +69,17 @@ class ItemController extends \BaseController {
 
 	public function skins()
 	{
-		// Find all the skins
-		$data = $this->items->getByPage('Skin', Input::get('page', 1), 15);
-
-		// Build the paginator
-		$paginator = Paginator::make($data->items, $data->totalItems, 15);
-
-		return View::make('pages.item.list')
-			->withType('Skins')
-			->withItems($paginator);
+		return $this->getItemsByType('Skin', 'Skins');
 	}
 
 	public function ranks()
 	{
-		// Find all the ranks
-		$data = $this->items->getByPage('Rank Set', Input::get('page', 1), 15);
-
-		// Build the paginator
-		$paginator = Paginator::make($data->items, $data->totalItems, 15);
-
-		return View::make('pages.item.list')
-			->withType('Rank Sets')
-			->withItems($paginator);
+		return $this->getItemsByType('Rank Set', 'Rank Sets');
 	}
 
 	public function mods()
 	{
-		// Find all the mods
-		$data = $this->items->getByPage('MOD', Input::get('page', 1), 15);
-
-		// Build the paginator
-		$paginator = Paginator::make($data->items, $data->totalItems, 15);
-
-		return View::make('pages.item.list')
-			->withType('MODs')
-			->withItems($paginator);
+		return $this->getItemsByType('MOD', 'MODs');
 	}
 
 	public function download($author, $slug, $fileId)
@@ -106,7 +87,7 @@ class ItemController extends \BaseController {
 		// Get the specific file record
 		$file = $this->items->findFile($fileId);
 
-		if ((bool) $file->item->status)
+		if ((bool) $file->item->status and (bool) $file->item->admin_status)
 		{
 			// Grab just the filename for easy use
 			$filename = $file->filename;
@@ -115,7 +96,7 @@ class ItemController extends \BaseController {
 			$this->orders->create($this->currentUser, $file);
 
 			// Get the filesystem out of the container
-			$fs = \App::make('xtras.filesystem');
+			$fs = App::make('xtras.filesystem');
 
 			// Start reading
 			$stream = $fs->readStream($filename);
@@ -179,6 +160,19 @@ class ItemController extends \BaseController {
 		}
 
 		return $this->errorNotFound("We couldn't find the Xtra you're looking for.");
+	}
+
+	protected function getItemsByType($type, $label)
+	{
+		// Find all the mods
+		$data = $this->items->getByPage($type, Input::get('page', 1), 15);
+
+		// Build the paginator
+		$paginator = Paginator::make($data->items, $data->totalItems, 15);
+
+		return View::make('pages.item.list')
+			->withType($label)
+			->withItems($paginator);
 	}
 
 }

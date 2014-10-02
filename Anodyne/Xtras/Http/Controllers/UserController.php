@@ -18,7 +18,6 @@ class UserController extends BaseController {
 
 	public function show($username)
 	{
-		// Get the user from their username
 		$user = $this->users->findByUsername($username);
 
 		if ($user)

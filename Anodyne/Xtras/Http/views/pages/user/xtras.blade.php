@@ -7,7 +7,7 @@
 @section('content')
 	<h1>My Xtras</h1>
 
-	@if ($_currentUser->can('xtras.item.create'))
+	@if ($_currentUser->can('xtras.item.create') or $_currentUser->can('xtras.admin'))
 		<div class="btn-toolbar">
 			<div class="btn-group">
 				<a href="{{ route('item.create') }}" class="btn btn-primary">Create New Xtra</a>

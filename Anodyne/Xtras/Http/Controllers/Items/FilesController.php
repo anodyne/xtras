@@ -6,13 +6,15 @@ use App,
 	Flash,
 	Input,
 	Redirect,
-	Response;
+	Response,
+	BaseController,
+	ItemRepositoryInterface;
 
-class FilesController extends \BaseController {
+class FilesController extends BaseController {
 
 	protected $items;
 
-	public function __construct(\ItemRepositoryInterface $items)
+	public function __construct(ItemRepositoryInterface $items)
 	{
 		parent::__construct();
 
@@ -36,7 +38,7 @@ class FilesController extends \BaseController {
 			return $this->unauthorized("You do not have permission to manage files for this Xtra!");
 		}
 
-		return $this->errorNotFound("Xtra not found.");
+		return $this->errorNotFound("We couldn't find the Xtra you were looking for.");
 	}
 
 	public function create($author, $slug)

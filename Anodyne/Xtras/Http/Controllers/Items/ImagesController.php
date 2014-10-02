@@ -90,7 +90,7 @@ class ImagesController extends \BaseController {
 
 	public function upload($itemId, $image)
 	{
-		if ($this->currentUser->can('xtras.item.create'))
+		if ($this->currentUser->can('xtras.item.create') or $this->currentUser->can('xtras.admin'))
 		{
 			// Get the item
 			$item = $this->items->find($itemId);

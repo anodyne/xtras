@@ -41,7 +41,7 @@ class FilesController extends \BaseController {
 
 	public function create($author, $slug)
 	{
-		if ($this->currentUser->can('xtras.item.create'))
+		if ($this->currentUser->can('xtras.item.create') or $this->currentUser->can('xtras.admin'))
 		{
 			// Get the item
 			$item = $this->items->findByAuthorAndSlug($author, $slug);
@@ -78,7 +78,7 @@ class FilesController extends \BaseController {
 
 	public function destroy($fileId)
 	{
-		if ($this->currentUser->can('xtras.item.delete'))
+		if ($this->currentUser->can('xtras.item.delete') or $this->currentUser->can('xtras.admin'))
 		{
 			// Get the file
 			$file = $this->items->findFile($fileId);
@@ -120,7 +120,7 @@ class FilesController extends \BaseController {
 
 	public function upload($itemId)
 	{
-		if ($this->currentUser->can('xtras.item.create'))
+		if ($this->currentUser->can('xtras.item.create') or $this->currentUser->can('xtras.admin'))
 		{
 			// Get the item
 			$item = $this->items->find($itemId);

@@ -109,7 +109,6 @@ return array(
 		'Illuminate\View\ViewServiceProvider',
 		'Illuminate\Workbench\WorkbenchServiceProvider',
 
-		'Krucas\Notification\NotificationServiceProvider',
 		'Zizaco\Entrust\EntrustServiceProvider',
 		'Intervention\Image\ImageServiceProvider',
 		'Xtras\XtrasServiceProvider',
@@ -193,7 +192,6 @@ return array(
 		'Image'				=> 'Intervention\Image\Facades\Image',
 		'Markdown'			=> 'Xtras\Facades\MarkdownFacade',
 		'Model'				=> 'Xtras\Services\Model',
-		'Notification'		=> 'Krucas\Notification\Facades\Notification',
 		'Sanitize'			=> 'Xtras\Facades\SanitizerFacade',
 		'SoftDeletingTrait'	=> 'Illuminate\Database\Eloquent\SoftDeletingTrait',
 		

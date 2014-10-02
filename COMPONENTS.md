@@ -22,8 +22,6 @@
 	- Version: 1.2.0
 - [Image](http://image.intervention.io/)
 	- Version: 2.0.11
-- [Notification](https://github.com/edvinaskrucas/notification)
-	- Version: 3.0.1
 
 ## Javascript
 

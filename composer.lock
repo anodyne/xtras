@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "39421fe6be1f46ecc6ad1d231a21a36f",
+    "hash": "8c91210b4f5139d1c891051b9a5041a8",
     "packages": [
         {
             "name": "classpreloader/classpreloader",
@@ -99,56 +99,6 @@
             },
             "notification-url": "https://packagist.org/downloads/",
             "time": "2014-01-17 12:21:18"
-        },
-        {
-            "name": "edvinaskrucas/notification",
-            "version": "3.0.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/edvinaskrucas/notification.git",
-                "reference": "fd3bdcc8b8c8f5e3933fd4551f7a06b3018e0957"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/edvinaskrucas/notification/zipball/fd3bdcc8b8c8f5e3933fd4551f7a06b3018e0957",
-                "reference": "fd3bdcc8b8c8f5e3933fd4551f7a06b3018e0957",
-                "shasum": ""
-            },
-            "require": {
-                "illuminate/config": "4.*",
-                "illuminate/events": "4.*",
-                "illuminate/session": "4.*",
-                "illuminate/support": "4.*",
-                "php": ">=5.4.0"
-            },
-            "require-dev": {
-                "mockery/mockery": "0.7.*"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-0": {
-                    "Krucas\\Notification": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Edvinas Kručas",
-                    "email": "edv.krucas@gmail.com"
-                }
-            ],
-            "description": "Package for Laravel for helping to manage flash / instant notifications / messages.",
-            "keywords": [
-                "flash",
-                "instant",
-                "laravel",
-                "messages",
-                "notifications"
-            ],
-            "time": "2014-08-07 13:53:35"
         },
         {
             "name": "erusev/parsedown",

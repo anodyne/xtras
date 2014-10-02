@@ -1,6 +1,8 @@
 <?php namespace Xtras\Events;
 
-use ItemMailer as Mailer;
+use Item,
+	Comment,
+	ItemMailer as Mailer;
 
 class ItemEventHandler {
 
@@ -11,13 +13,13 @@ class ItemEventHandler {
 		$this->mailer = $mailer;
 	}
 
-	public function onComment($commentId)
+	public function onComment(Comment $comment)
 	{
 		// Send the email
-		$this->mailer->addedComment($commentId);
+		$this->mailer->addedComment($comment);
 	}
 
-	public function onCreate($item)
+	public function onCreate(Item $item)
 	{
 		// If this is the first Xtra for the user, send them an email
 		if ($item->user->items->count() == 1)
@@ -26,24 +28,24 @@ class ItemEventHandler {
 		}
 	}
 
-	public function onDelete($item)
+	public function onDelete(Item $item)
 	{
 		//
 	}
 
-	public function onReportAbuse($item, $input)
+	public function onReportAbuse(Item $item, $input)
 	{
 		// Send the email
 		$this->mailer->reportAbuse($input);
 	}
 
-	public function onReportIssue($item, $input)
+	public function onReportIssue(Item $item, $input)
 	{
 		// Send the email
 		$this->mailer->reportIssue($input);
 	}
 
-	public function onUpdate($itemId)
+	public function onUpdate(Item $item)
 	{
 		//
 	}
@@ -55,7 +57,7 @@ class ItemEventHandler {
 
 	public function onFileUpload($item)
 	{
-		// If this is an update, grab the orders and notify anyone who's grabbed this before
+		//
 	}
 
 	public function onMessageCreate($message)
@@ -83,7 +85,7 @@ class ItemEventHandler {
 		//
 	}
 
-	public function notifyForNewVersion($item)
+	public function notifyForNewVersion(Item $item)
 	{
 		// Send the email
 		$this->mailer->notifyForNewVersion($item);

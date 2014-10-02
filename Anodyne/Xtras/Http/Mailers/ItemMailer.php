@@ -2,6 +2,7 @@
 
 use HTML,
 	Config,
+	Comment,
 	ItemRepositoryInterface,
 	UserRepositoryInterface;
 
@@ -17,35 +18,27 @@ class ItemMailer extends BaseMailer {
 		$this->users = $users;
 	}
 
-	public function addedComment($commentId)
+	public function addedComment(Comment $comment)
 	{
-		// Get the comment
-		$comment = $this->items->findComment($commentId);
+		// Get the user it's coming from
+		$user = $comment->user;
 
-		if ($comment)
-		{
-			// Get the user it's coming from
-			$user = $comment->user;
+		// Get the item we're dealing with
+		$item = $comment->item;
 
-			// Get the item we're dealing with
-			$item = $comment->item;
+		$emailData = [
+			'subject' => "Comment Added - ".$item->present()->name,
+			'content' => $comment->present()->content,
+			'from' => Config::get('xtras.email.general'),
+			'replyTo' => $user->email,
+			'to' => $item->user->email,
+			'name' => HTML::link(route('item.show', [$item->user->username, $item->slug]), $item->present()->name),
+			'type' => $item->present()->type,
+			'userName' => $user->present()->name,
+			'url' => route('item.show', [$item->user->username, $item->slug]),
+		];
 
-			$emailData = [
-				'subject' => "Comment Added - ".$item->present()->name,
-				'content' => $comment->present()->content,
-				'from' => Config::get('xtras.email.general'),
-				'replyTo' => $user->email,
-				'to' => $item->user->email,
-				'name' => HTML::link(route('item.show', [$item->user->username, $item->slug]), $item->present()->name),
-				'type' => $item->present()->type,
-				'userName' => $user->present()->name,
-				'url' => route('item.show', [$item->user->username, $item->slug]),
-			];
-
-			return $this->send('comment', $emailData);
-		}
-
-		return false;
+		return $this->send('comment', $emailData);
 	}
 
 	public function notifyForNewVersion($item)

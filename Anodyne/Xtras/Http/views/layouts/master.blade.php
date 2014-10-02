@@ -42,7 +42,7 @@
 									<ul class="dropdown-menu dropdown-menu-right dd">
 										<li><a href="{{ route('account.xtras') }}">My Xtras</a></li>
 										
-										@if ($_currentUser->can('xtras.item.create'))
+										@if ($_currentUser->can('xtras.item.create') or $_currentUser->can('xtras.admin'))
 											<li><a href="{{ route('item.create') }}">Create New Xtra</a></li>
 										@endif
 										<li class="divider"></li>

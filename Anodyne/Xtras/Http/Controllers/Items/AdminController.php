@@ -10,23 +10,32 @@ use View,
 	ItemUpdateValidator,
 	ItemCreationValidator,
 	ItemRepositoryInterface,
-	UserRepositoryInterface;
+	TypeRepositoryInterface,
+	UserRepositoryInterface,
+	ProductRepositoryInterface;
 
 class AdminController extends BaseController {
 
 	protected $items;
+	protected $types;
 	protected $users;
+	protected $products;
 	protected $itemCreate;
 	protected $itemUpdate;
 
 	public function __construct(ItemRepositoryInterface $items,
-			UserRepositoryInterface $users, ItemCreationValidator $itemCreate,
+			UserRepositoryInterface $users,
+			ProductRepositoryInterface $products,
+			TypeRepositoryInterface $types,
+			ItemCreationValidator $itemCreate,
 			ItemUpdateValidator $itemUpdate)
 	{
 		parent::__construct();
 
 		$this->items = $items;
+		$this->types = $types;
 		$this->users = $users;
+		$this->products = $products;
 		$this->itemCreate = $itemCreate;
 		$this->itemUpdate = $itemUpdate;
 	}
@@ -52,10 +61,10 @@ class AdminController extends BaseController {
 		if ($this->currentUser->can('xtras.item.create') or $this->currentUser->can('xtras.admin'))
 		{
 			$products[''] = "Choose a product";
-			$products += $this->items->getProducts();
+			$products += $this->products->listAll();
 
 			$types[''] = "Choose a type";
-			$types += $this->items->getTypesByPermissions($this->currentUser);
+			$types += $this->types->getByPermissions($this->currentUser);
 
 			return View::make('pages.item.create')
 				->withProducts($products)
@@ -104,7 +113,7 @@ class AdminController extends BaseController {
 						->withItem($item)
 						->withMetadata($item->metadata)
 						->withAdmin($admin)
-						->withUsers($this->users->allForDropdown());
+						->withUsers($this->users->listAll());
 				}
 
 				return $this->errorUnauthorized("You do not have permissions to edit Xtras other than your own!");

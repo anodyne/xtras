@@ -28,7 +28,7 @@ class TypesController extends BaseController {
 	public function index()
 	{
 		return View::make('pages.admin.types.index')
-			->withTypes($this->types->all());
+			->withTypes($this->types->all(false));
 	}
 
 	public function create()

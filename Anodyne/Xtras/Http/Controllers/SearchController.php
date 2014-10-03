@@ -3,24 +3,32 @@
 use View,
 	Input,
 	BaseController,
-	ItemRepositoryInterface;
+	ItemRepositoryInterface,
+	TypeRepositoryInterface,
+	ProductRepositoryInterface;
 
 class SearchController extends BaseController {
 
 	protected $items;
+	protected $types;
+	protected $products;
 
-	public function __construct(ItemRepositoryInterface $items)
+	public function __construct(ItemRepositoryInterface $items,
+			ProductRepositoryInterface $products,
+			TypeRepositoryInterface $types)
 	{
 		parent::__construct();
 
 		$this->items = $items;
+		$this->types = $types;
+		$this->products = $products;
 	}
 
 	public function advanced()
 	{
 		return View::make('pages.search_advanced')
-			->withTypes($this->items->getTypes())
-			->withProducts($this->items->getProducts());
+			->withTypes($this->types->listAll())
+			->withProducts($this->products->listAll());
 	}
 
 	public function doAdvancedSearch()

@@ -42,9 +42,6 @@ class LoginController extends BaseController {
 
 		if (Auth::attempt(['email' => $email, 'password' => $password], true))
 		{
-			// Set the flash message
-			Flash::success("Welcome back to AnodyneXtras!");
-			
 			if (Session::has('url.intended'))
 			{
 				return Redirect::intended('home');

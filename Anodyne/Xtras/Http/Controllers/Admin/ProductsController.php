@@ -28,7 +28,7 @@ class ProductsController extends BaseController {
 	public function index()
 	{
 		return View::make('pages.admin.products.index')
-			->withProducts($this->products->all());
+			->withProducts($this->products->all(false));
 	}
 
 	public function create()

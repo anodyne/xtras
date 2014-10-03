@@ -47,7 +47,7 @@ class ItemController extends BaseController {
 					return (int) $user->id === (int) $r->user_id;
 				})->first();
 
-				$notify = $this->currentUser->itemNotify($item);
+				$notify = $this->currentUser->isBeingNotified($item);
 			}
 
 			return View::make('pages.item.show')

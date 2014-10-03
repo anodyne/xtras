@@ -80,12 +80,23 @@ class User extends Model implements UserInterface {
 	|--------------------------------------------------------------------------
 	*/
 
+	/**
+	 * How many days since the user registered for their Anodyne ID?
+	 *
+	 * @return	int
+	 */
 	public function daysSinceRegistration()
 	{
 		return (int) Date::now()->diffInDays($this->created_at);
 	}
 
-	public function itemNotify(Item $item)
+	/**
+	 * Is the current user being notified of updates to the passed item?
+	 *
+	 * @param	Item	$item	The item to check against
+	 * @return	bool
+	 */
+	public function isBeingNotified(Item $item)
 	{
 		$notification = $this->notifications->filter(function($n) use ($item)
 		{

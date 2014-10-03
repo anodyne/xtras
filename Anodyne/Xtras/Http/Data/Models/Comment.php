@@ -1,6 +1,6 @@
 <?php namespace Xtras\Data\Models;
 
-use Model, Sanitize;
+use Model;
 use Laracasts\Presenter\PresentableTrait;
 
 class Comment extends Model {

@@ -2,7 +2,6 @@
 
 use Str,
 	Model,
-	Sanitize,
 	SoftDeletingTrait;
 use Laracasts\Presenter\PresentableTrait;
 
@@ -126,21 +125,44 @@ class Item extends Model {
 	|---------------------------------------------------------------------------
 	*/
 
+	/**
+	 * Is the item active? We base this on whether or not it has any files
+	 * attached to it.
+	 *
+	 * @return	bool
+	 */
 	public function isActive()
 	{
 		return ( ! empty($this->metadata->toArray()['file']));
 	}
 
+	/**
+	 * Is the passed user the owner of the item?
+	 *
+	 * @param	User	$user	The user to check against
+	 * @return	bool
+	 */
 	public function isOwner(User $user)
 	{
 		return (int) $this->user_id === (int) $user->id;
 	}
 
+	/**
+	 * Get the latest version of the item.
+	 *
+	 * @return	Collection
+	 */
 	public function getLatestVersion()
 	{
 		return $this->getVersion($this->version);
 	}
 
+	/**
+	 * Get a collection of information about the current version.
+	 *
+	 * @param	mixed	$version	The version to retrieve
+	 * @return	Collection
+	 */
 	public function getVersion($version)
 	{
 		// Get the appropriate files item
@@ -159,6 +181,11 @@ class Item extends Model {
 		return $collection;
 	}
 
+	/**
+	 * Is the support field an email address?
+	 *
+	 * @return	bool
+	 */
 	public function supportIsEmail()
 	{
 		if (filter_var($this->support, FILTER_VALIDATE_EMAIL))
@@ -169,6 +196,11 @@ class Item extends Model {
 		return false;
 	}
 
+	/**
+	 * Update the item's rating.
+	 *
+	 * @return	bool
+	 */
 	public function updateRating()
 	{
 		$total = 0;

@@ -45,6 +45,11 @@ class ItemFile extends Model {
 	|---------------------------------------------------------------------------
 	*/
 
+	/**
+	 * Is the file for the latest version of the item?
+	 *
+	 * @return	bool
+	 */
 	public function isLatest()
 	{
 		return $this->version == $this->item->version;

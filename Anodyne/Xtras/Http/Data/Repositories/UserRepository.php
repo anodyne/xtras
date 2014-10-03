@@ -7,6 +7,13 @@ use User,
 
 class UserRepository implements UserRepositoryInterface {
 
+	/**
+	 * Add a notification for a user for an item.
+	 *
+	 * @param	int		$userId
+	 * @param	int		$itemId
+	 * @return	Notification
+	 */
 	public function addNotification($userId, $itemId)
 	{
 		return Notification::firstOrCreate([
@@ -15,28 +22,47 @@ class UserRepository implements UserRepositoryInterface {
 		]);
 	}
 
+	/**
+	 * Get all users.
+	 *
+	 * @return	Collection
+	 */
 	public function all()
 	{
 		return User::get();
 	}
 
-	public function allForDropdown()
-	{
-		return User::orderBy('username', 'asc')->lists('username', 'id');
-	}
-
+	/**
+	 * Find a user by their ID.
+	 *
+	 * @param	int		$userId
+	 * @return	User
+	 */
 	public function find($userId)
 	{
 		return User::with('items', 'items.metadata', 'items.type', 'items.product', 'items.user')
 			->find($userId);
 	}
 
+	/**
+	 * Find a user by their username.
+	 *
+	 * @param	string	$username
+	 * @return	User
+	 */
 	public function findByUsername($username)
 	{
 		return User::with('items', 'items.metadata', 'items.type', 'items.product', 'items.user')
 			->where('username', $username)->first();
 	}
 
+	/**
+	 * Find a user's items by an item name.
+	 *
+	 * @param	User	$user
+	 * @param	string	$value
+	 * @return	Collection
+	 */
 	public function findItemsByName(User $user, $value)
 	{
 		return $user->items->filter(function($i) use ($value)
@@ -45,6 +71,13 @@ class UserRepository implements UserRepositoryInterface {
 		});
 	}
 
+	/**
+	 * Find a user's items by an item slug.
+	 *
+	 * @param	User	$user
+	 * @param	string	$value
+	 * @return	Collection
+	 */
 	public function findItemsBySlug(User $user, $value)
 	{
 		return $user->items->filter(function($i) use ($value)
@@ -53,35 +86,12 @@ class UserRepository implements UserRepositoryInterface {
 		});
 	}
 
-	public function findItemsByType(User $user, $value, $splitByProduct = false)
-	{
-		// Eager loading
-		$user = $user->load('items', 'items.type', 'items.product', 'items.user');
-
-		// Get just the items we want and sort them
-		$filteredItems = $user->items->filter(function($i) use ($value)
-		{
-			return $i->type->name == $value;
-		})->sortBy('name');
-
-		if ($splitByProduct)
-		{
-			// An array of all the data
-			$finalArray = [];
-
-			$filteredItems->each(function($s) use (&$finalArray)
-			{
-				$finalArray[$s->product->name][] = $s;
-			});
-
-			ksort($finalArray);
-
-			return $finalArray;
-		}
-
-		return $filteredItems;
-	}
-
+	/**
+	 * Get a user's items broken up by item type.
+	 *
+	 * @param	User	$user
+	 * @return	array
+	 */
 	public function getItemsByType(User $user)
 	{
 		// Make sure we're eager loaded what we need
@@ -99,21 +109,51 @@ class UserRepository implements UserRepositoryInterface {
 		return $itemsArr;
 	}
 
+	/**
+	 * Get all notifications for a user.
+	 *
+	 * @param	User	$user
+	 * @return	Collection
+	 */
 	public function getNotifications(User $user)
 	{
-		// Eager loading
+		// Eager load some relationships
 		$user = $user->load('notifications', 'notifications.item', 'notifications.item.user');
 
 		return $user->notifications;
 	}
 
+	/**
+	 * Get all orders for a user.
+	 *
+	 * @param	User	$user
+	 * @return	Collection
+	 */
 	public function getOrders(User $user)
 	{
+		// Eager load some relationships
 		$user = $user->load('orders', 'orders.item', 'orders.item.user', 'orders.file');
 
 		return $user->orders->sortByDesc('created_at');
 	}
 
+	/**
+	 * List all users in an array.
+	 *
+	 * @return	array
+	 */
+	public function listAll()
+	{
+		return User::orderBy('username', 'asc')->lists('username', 'id');
+	}
+
+	/**
+	 * Remove a notification for a user for an item.
+	 *
+	 * @param	int		$userId
+	 * @param	int		$itemId
+	 * @return	bool
+	 */
 	public function removeNotification($userId, $itemId)
 	{
 		// Get the notification
@@ -123,7 +163,10 @@ class UserRepository implements UserRepositoryInterface {
 
 		if ($notification)
 		{
+			// Remove the notification
 			$notification->delete();
+
+			return true;
 		}
 
 		return false;

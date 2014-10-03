@@ -1,7 +1,6 @@
 <?php namespace Xtras\Data\Interfaces;
 
-use User,
-	ItemFile;
+use User, ItemFile;
 
 interface OrderRepositoryInterface {
 

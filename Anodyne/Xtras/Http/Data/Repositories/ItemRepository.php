@@ -7,7 +7,6 @@ use App,
 	Type,
 	User,
 	Comment,
-	Product,
 	ItemFile,
 	Sanitize,
 	Paginator,
@@ -28,6 +27,13 @@ class ItemRepository implements ItemRepositoryInterface {
 		$this->users = $users;
 	}
 
+	/**
+	 * Add a comment to an item.
+	 *
+	 * @param	int		$itemId
+	 * @param	array	$data
+	 * @return	Comment
+	 */
 	public function addComment($itemId, array $data)
 	{
 		// Get the item
@@ -35,6 +41,7 @@ class ItemRepository implements ItemRepositoryInterface {
 
 		if ($item)
 		{
+			// Sanitize the data
 			$data = Sanitize::clean($data, Comment::$sanitizeRules);
 
 			// Create a comment record
@@ -49,6 +56,13 @@ class ItemRepository implements ItemRepositoryInterface {
 		return false;
 	}
 
+	/**
+	 * Add a message to an item.
+	 *
+	 * @param	int		$itemId
+	 * @param	array	$data
+	 * @return	ItemMessage
+	 */
 	public function addMessage($itemId, array $data)
 	{
 		// Get the item
@@ -56,20 +70,26 @@ class ItemRepository implements ItemRepositoryInterface {
 
 		if ($item)
 		{
+			// Clear out the expiration field if there's nothing in it
 			if (empty($data['expires']))
 			{
 				unset($data['expires']);
 			}
 
+			// Set the item ID
 			$data['item_id'] = (int) $item->id;
 
+			// Sanitize the data
 			$data = Sanitize::clean($data, ItemMessage::$sanitizeRules);
 
-			// Setup the expiration
+			// Setup the expiration. This has to happen after the data is
+			// sanitized otherwise we lose the Carbon object that we create
 			if ( ! empty($data['expires']))
 			{
+				// Build a Carbon object from the expiration date string
 				$expires = Date::createFromFormat('m/d/Y', $data['expires']);
 
+				// All messages expire at the end of the day selected
 				$data['expires'] = $expires->endOfDay();
 			}
 
@@ -80,17 +100,33 @@ class ItemRepository implements ItemRepositoryInterface {
 		return false;
 	}
 
+	/**
+	 * Get all the items.
+	 *
+	 * @return	Collection
+	 */
 	public function all()
 	{
 		return Item::get();
 	}
 
+	/**
+	 * Create a new item.
+	 *
+	 * @param	array	$data
+	 * @return	Item
+	 */
 	public function create(array $data)
 	{
+		// We need to store metadata and file data before sanitizing otherwise
+		// we lose that information during the sanitation process
 		$metadata = (array_key_exists('metadata', $data)) ? $data['metadata'] : false;
 		$filedata = (array_key_exists('files', $data)) ? $data['files'] : false;
+
+		// Sanitize the data
 		$data = Sanitize::clean($data, Item::$sanitizeRules);
 
+		// Make sure only the right people can change the admin status
 		if (array_key_exists('admin_status', $data) and ! Auth::user()->can('xtras.admin'))
 		{
 			unset($data['admin_status']);
@@ -105,7 +141,7 @@ class ItemRepository implements ItemRepositoryInterface {
 			$this->updateMetadata($item->id, $metadata);
 		}
 
-		// If there are file metadata, create that data
+		// If there are file data, update it
 		if ($filedata)
 		{
 			$this->updateFileData($item->id, $filedata);
@@ -114,6 +150,12 @@ class ItemRepository implements ItemRepositoryInterface {
 		return $item;
 	}
 
+	/**
+	 * Delete an item by its ID.
+	 *
+	 * @param	int		$id
+	 * @return	Item/bool
+	 */
 	public function delete($id)
 	{
 		// Get the item
@@ -182,13 +224,20 @@ class ItemRepository implements ItemRepositoryInterface {
 		return false;
 	}
 
-	public function deleteFile($id)
+	/**
+	 * Delete a file record by its ID.
+	 *
+	 * @param	int		$fileId
+	 * @return	ItemFile/bool
+	 */
+	public function deleteFile($fileId)
 	{
 		// Get the file
-		$file = $this->findFile($id);
+		$file = $this->findFile($fileId);
 
 		if ($file)
 		{
+			// Delete the file record for good
 			$file->forceDelete();
 
 			return $file;
@@ -197,7 +246,14 @@ class ItemRepository implements ItemRepositoryInterface {
 		return false;
 	}
 
-	public function deleteImage($itemId, $imageNumber)
+	/**
+	 * Remove an image from the metadata.
+	 *
+	 * @param	int		$itemId
+	 * @param	int		$imageNum	The number of the image to remove
+	 * @return	bool
+	 */
+	public function deleteImage($itemId, $imageNum)
 	{
 		// Get the item
 		$item = $this->find($itemId);
@@ -208,21 +264,30 @@ class ItemRepository implements ItemRepositoryInterface {
 			$metadata = $item->metadata;
 
 			// Update the values
-			$metadata->{"image{$imageNumber}"} = null;
-			$metadata->{"thumbnail{$imageNumber}"} = null;
+			$metadata->{"image{$imageNum}"} = null;
+			$metadata->{"thumbnail{$imageNum}"} = null;
 			$metadata->save();
+
+			return true;
 		}
 
 		return false;
 	}
 
-	public function deleteMessage($id)
+	/**
+	 * Delete an item message by its ID.
+	 *
+	 * @param	int		$msgId
+	 * @return	ItemMessage/bool
+	 */
+	public function deleteMessage($msgId)
 	{
 		// Get the message
-		$message = $this->findMessage($id);
+		$message = $this->findMessage($msgId);
 
 		if ($message)
 		{
+			// Delete the message for good
 			$message->forceDelete();
 
 			return $message;
@@ -231,11 +296,23 @@ class ItemRepository implements ItemRepositoryInterface {
 		return false;
 	}
 
+	/**
+	 * Find an item by its ID.
+	 *
+	 * @param	int		$id
+	 * @return	Item
+	 */
 	public function find($id)
 	{
 		return Item::find($id);
 	}
 
+	/**
+	 * Find all items by the author's username.
+	 *
+	 * @param	string	$author
+	 * @return	Collection/bool
+	 */
 	public function findByAuthor($author)
 	{
 		// Get the user
@@ -249,6 +326,13 @@ class ItemRepository implements ItemRepositoryInterface {
 		return false;
 	}
 
+	/**
+	 * Find an item by the author's username and the item's slug.
+	 *
+	 * @param	string	$author
+	 * @param	string	$slug
+	 * @return	Item/bool
+	 */
 	public function findByAuthorAndSlug($author, $slug)
 	{
 		// Get all items for the author
@@ -256,7 +340,7 @@ class ItemRepository implements ItemRepositoryInterface {
 
 		if ($items)
 		{
-			// Eager loading
+			// Eager load some relationships
 			$items = $items->load('files', 'comments', 'messages', 'orders');
 
 			return $items->filter(function($i) use ($slug)
@@ -268,17 +352,37 @@ class ItemRepository implements ItemRepositoryInterface {
 		return false;
 	}
 
+	/**
+	 * Find items by a name.
+	 *
+	 * @param	string	$name
+	 * @return	Item
+	 */
 	public function findByName($name)
 	{
 		return Item::where('name', $name)->get();
 	}
 
+	/**
+	 * Find items by a slug.
+	 *
+	 * @param	string	$slug
+	 * @return	Item
+	 */
 	public function findBySlug($slug)
 	{
 		return Item::where('slug', 'like', "%{$slug}%")->get();
 	}
 
-	public function findByType($type, $paginate = false, $splitByProduct = false)
+	/**
+	 * Find items by type.
+	 *
+	 * @param	string	$type
+	 * @param	bool	$paginate	Should the results be paginated?
+	 * @param	bool	$split		Should the results be split by product?
+	 * @return	array/Paginator/Collection
+	 */
+	public function findByType($type, $paginate = false, $split = false)
 	{
 		switch ($type)
 		{
@@ -303,7 +407,7 @@ class ItemRepository implements ItemRepositoryInterface {
 			return $s->name;
 		});
 
-		if ($splitByProduct)
+		if ($split)
 		{
 			// An array of all the data
 			$finalArray = [];
@@ -324,21 +428,49 @@ class ItemRepository implements ItemRepositoryInterface {
 		return $sortedItems;
 	}
 
-	public function findComment($id)
+	/**
+	 * Find a comment by its ID.
+	 *
+	 * @param	int		$commentId
+	 * @return	Comment
+	 */
+	public function findComment($commentId)
 	{
-		return Comment::with('item', 'item.user', 'item.type', 'user')->find($id);
+		return Comment::with('item', 'item.user', 'item.type', 'user')->find($commentId);
 	}
 
-	public function findFile($id)
+	/**
+	 * Find a file by its ID.
+	 *
+	 * @param	int		$fileId
+	 * @return	ItemFile
+	 */
+	public function findFile($fileId)
 	{
-		return ItemFile::with('item')->where('id', $id)->first();
+		return ItemFile::with('item')->find($fileId);
 	}
 
-	public function findMessage($id)
+	/**
+	 * Find a message by its ID.
+	 *
+	 * @param	int		$msgId
+	 * @return	ItemMessage
+	 */
+	public function findMessage($msgId)
 	{
-		return ItemMessage::with('item')->where('id', $id)->first();
+		return ItemMessage::with('item')->find($msgId);
 	}
 
+	/**
+	 * Get items by type and paginate them manually.
+	 *
+	 * @param	string	$type
+	 * @param	int		$page		The current page we're on
+	 * @param	int		$limit		How many items per page?
+	 * @param	string	$order		The field to use for ordering
+	 * @param	string	$direction	The direction to sort the $order field
+	 * @return	object
+	 */
 	public function getByPage($type, $page = 1, $limit = 15, $order = 'created_at', $direction = 'desc')
 	{
 		// Get the type
@@ -353,6 +485,7 @@ class ItemRepository implements ItemRepositoryInterface {
 			: Item::active()->count();
 		$results->items = [];
 
+		// Get the items based on the type (or lack thereof)
 		if ($type)
 		{
 			$items = Item::with('metadata', 'type', 'user', 'product')
@@ -369,15 +502,22 @@ class ItemRepository implements ItemRepositoryInterface {
 				->skip($limit * ($page - 1))->take($limit)->get();
 		}
 
+		// Dump all the items into the result set
 		$results->items = $items->all();
 
 		return $results;
 	}
 
-	public function getComments($id)
+	/**
+	 * Get all comments for an item.
+	 *
+	 * @param	int		$itemId
+	 * @return	Collection
+	 */
+	public function getComments($itemId)
 	{
 		// Get the item
-		$item = $this->find($id);
+		$item = $this->find($itemId);
 
 		if ($item)
 		{
@@ -388,16 +528,23 @@ class ItemRepository implements ItemRepositoryInterface {
 		return new Collection;
 	}
 
-	public function getMessage($messageId)
+	/**
+	 * Get a message by its ID.
+	 *
+	 * @param	int		$msgId
+	 * @return	ItemMessage
+	 */
+	public function getMessage($msgId)
 	{
-		return ItemMessage::with('item')->find($messageId);
+		return ItemMessage::with('item')->find($msgId);
 	}
 
-	public function getProducts()
-	{
-		return Product::active()->lists('name', 'id');
-	}
-
+	/**
+	 * Get the most recently added items.
+	 *
+	 * @param	int		$number	How many items to pull
+	 * @return	Collection
+	 */
 	public function getRecentlyAdded($number)
 	{
 		return Item::with('product', 'type', 'user', 'metadata')
@@ -407,6 +554,12 @@ class ItemRepository implements ItemRepositoryInterface {
 			->get();
 	}
 
+	/**
+	 * Get the most recently updated items.
+	 *
+	 * @param	int		$number	How many items to pull
+	 * @return	Collection
+	 */
 	public function getRecentlyUpdated($number)
 	{
 		return Item::with('product', 'type', 'user', 'metadata')
@@ -416,50 +569,15 @@ class ItemRepository implements ItemRepositoryInterface {
 			->get();
 	}
 
-	public function getTypes()
-	{
-		return Type::active()->lists('name', 'id');
-	}
-
-	public function getTypesByPermissions(User $user)
-	{
-		// Get all the types
-		$types = Type::active()->get();
-
-		// Start an array of items
-		$finalTypes = [];
-
-		foreach ($types as $type)
-		{
-			switch ($type->name)
-			{
-				case 'Skin':
-					if ($user->can('xtras.item.skins'))
-					{
-						$finalTypes[$type->id] = $type->name;
-					}
-				break;
-
-				case 'MOD':
-					if ($user->can('xtras.item.mods'))
-					{
-						$finalTypes[$type->id] = $type->name;
-					}
-				break;
-
-				case 'Rank Set':
-					if ($user->can('xtras.item.ranks'))
-					{
-						$finalTypes[$type->id] = $type->name;
-					}
-				break;
-			}
-		}
-
-		return $finalTypes;
-	}
-
-	public function rate(User $user, $itemId, $input)
+	/**
+	 * Rate an item.
+	 *
+	 * @param	User	$user
+	 * @param	int		$itemId
+	 * @param	array	$rating
+	 * @return	ItemRating/bool
+	 */
+	public function rate(User $user, $itemId, $rating)
 	{
 		// Get the item
 		$item = $this->find($itemId);
@@ -472,7 +590,7 @@ class ItemRepository implements ItemRepositoryInterface {
 				'item_id'	=> (int) $item->id,
 				'user_id'	=> (int) $user->id
 			]);
-			$rating->fill(['rating' => (int) $input])->save();
+			$rating->fill(['rating' => (int) $rating])->save();
 
 			// Update the overall rating
 			$item->updateRating();
@@ -483,6 +601,13 @@ class ItemRepository implements ItemRepositoryInterface {
 		return false;
 	}
 
+	/**
+	 * Search for an item by its name and/or description and paginate the
+	 * results.
+	 *
+	 * @param	string	$input
+	 * @return	Paginator
+	 */
 	public function search($input)
 	{
 		return Item::with('product', 'type', 'user')
@@ -493,6 +618,13 @@ class ItemRepository implements ItemRepositoryInterface {
 			})->active()->paginate(25);
 	}
 
+	/**
+	 * Do an advanced search for items based on multiple criteria and paginate
+	 * the results.
+	 *
+	 * @param	array	$input
+	 * @return	Paginator
+	 */
 	public function searchAdvanced(array $input)
 	{
 		$search = Item::query()->with('product', 'type', 'user');
@@ -519,6 +651,13 @@ class ItemRepository implements ItemRepositoryInterface {
 		return $search->active()->paginate(25);
 	}
 
+	/**
+	 * Update an item based on its ID.
+	 *
+	 * @param	int		$itemId
+	 * @param	array	$data
+	 * @return	Item/bool
+	 */
 	public function update($itemId, array $data)
 	{
 		// Get the item
@@ -526,15 +665,21 @@ class ItemRepository implements ItemRepositoryInterface {
 
 		if ($item)
 		{
+			// We need to store metadata and file data before sanitizing otherwise
+			// we lose that information during the sanitation process
 			$metadata = (array_key_exists('metadata', $data)) ? $data['metadata'] : false;
 			$filedata = (array_key_exists('files', $data)) ? $data['files'] : false;
+
+			// Sanitize the data
 			$data = Sanitize::clean($data, Item::$sanitizeRules);
 
+			// Make sure only the right people can change the admin status
 			if (array_key_exists('admin_status', $data) and ! Auth::user()->can('xtras.admin'))
 			{
 				unset($data['admin_status']);
 			}
 
+			// Fill and save the item
 			$item->fill($data)->save();
 
 			// If there's metadata, update it
@@ -543,7 +688,7 @@ class ItemRepository implements ItemRepositoryInterface {
 				$this->updateMetadata($item->id, $metadata);
 			}
 
-			// If there are file metadata, create that data
+			// If there are file data, update it
 			if ($filedata)
 			{
 				$this->updateFileData($item->id, $filedata);
@@ -555,6 +700,13 @@ class ItemRepository implements ItemRepositoryInterface {
 		return false;
 	}
 
+	/**
+	 * Update the file data for an item.
+	 *
+	 * @param	int		$itemId
+	 * @param	array	$data
+	 * @return	ItemFile/bool
+	 */
 	public function updateFileData($itemId, array $data)
 	{
 		// Get the item
@@ -562,10 +714,13 @@ class ItemRepository implements ItemRepositoryInterface {
 
 		if ($item)
 		{
+			// Sanitize the data
 			$data = Sanitize::clean($data, ItemFile::$sanitizeRules);
 
+			// Create a new file record (we can only have one file per version)
 			$file = ItemFile::create($data);
 
+			// Attach the file record to the item
 			$item->files()->save($file);
 
 			return $file;
@@ -574,27 +729,42 @@ class ItemRepository implements ItemRepositoryInterface {
 		return false;
 	}
 
-	public function updateMessage($messageId, array $data)
+	/**
+	 * Update a message.
+	 *
+	 * @param	int		$msgId
+	 * @param	array	$data
+	 * @return	ItemMessage/bool
+	 */
+	public function updateMessage($msgId, array $data)
 	{
 		// Get the message
-		$message = $this->findMessage($messageId);
+		$message = $this->findMessage($msgId);
 
 		if ($message)
 		{
+			// Clear out the expiration field if there's nothing in it
 			if (empty($data['expires']))
 			{
 				unset($data['expires']);
 			}
 
+			// Sanitize the data
 			$data = Sanitize::clean($data, ItemMessage::$sanitizeRules);
 
+
+			// Setup the expiration. This has to happen after the data is
+			// sanitized otherwise we lose the Carbon object that we create
 			if ( ! empty($data['expires']))
 			{
+				// Build a Carbon object from the expiration date string
 				$expires = Date::createFromFormat('m/d/Y', $data['expires']);
 
+				// All messages expire at the end of the day selected
 				$data['expires'] = $expires->endOfDay();
 			}
 			
+			// Fill and save the message
 			$message->fill($data)->save();
 
 			return $message;
@@ -603,6 +773,13 @@ class ItemRepository implements ItemRepositoryInterface {
 		return false;
 	}
 
+	/**
+	 * Update the metadata for an item.
+	 *
+	 * @param	int		$itemId
+	 * @param	array	$data
+	 * @return	ItemMetadata/bool
+	 */
 	public function updateMetadata($itemId, array $data)
 	{
 		// Get the item
@@ -610,15 +787,25 @@ class ItemRepository implements ItemRepositoryInterface {
 
 		if ($item)
 		{
+			// Sanitize the data
 			$data = Sanitize::clean($data, ItemMetadata::$sanitizeRules);
 
 			if ($item->metadata)
 			{
-				$item->metadata->update($data);
+				// There's already a record, so just update it
+				$item->metadata->fill($data)->save();
+
+				return $item->metadata;
 			}
 			else
 			{
-				$item->metadata()->save(ItemMetadata::create($data));
+				// Create a new metadata record
+				$metadata = ItemMetadata::create($data);
+
+				// Attach the metadata record to the item
+				$item->metadata()->save($metadata);
+
+				return $metadata;
 			}
 		}
 

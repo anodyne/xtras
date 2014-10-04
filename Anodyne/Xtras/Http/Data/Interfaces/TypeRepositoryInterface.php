@@ -1,5 +1,7 @@
 <?php namespace Xtras\Data\Interfaces;
 
+use User;
+
 interface TypeRepositoryInterface extends BaseRepositoryInterface {
 
 	public function all($onlyActive = true);

@@ -107,7 +107,7 @@ class ProductsController extends BaseController {
 	{
 		if ( ! $this->currentUser->can('xtras.admin'))
 		{
-			return $this->errorUnauthorized("You do not have permission to manage products.");
+			return $this->errorUnauthorized("You do not have permission to manage products!");
 		}
 	}
 

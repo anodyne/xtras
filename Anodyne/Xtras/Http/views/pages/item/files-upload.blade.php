@@ -20,7 +20,7 @@
 				@if ($_browser->getPlatform() == Browser::PLATFORM_WINDOWS)
 					<img src="{{ asset('images/windows-zip.jpg') }}">
 				@else
-					<img src="{{ asset('images/mac-zip.jpg') }}">
+					<img src="{{ asset('images/mac-zip.png') }}">
 				@endif
 			</li>
 			<li>Drag-and-drop your zip file to the area below.</li>

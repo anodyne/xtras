@@ -619,6 +619,7 @@ class ItemRepository implements ItemRepositoryInterface {
 		foreach ($items as $item)
 		{
 			$report[$item->id]['item'] = $item;
+			$report[$item->id]['prettySize'] = "N/A";
 
 			foreach ($item->files as $file)
 			{

@@ -182,6 +182,9 @@ class UserRepository implements UserRepositoryInterface {
 		// Get all users
 		$users = $this->all();
 
+		// Eager load some relationships
+		$users = $users->load('items', 'items.files');
+
 		$report = [];
 
 		foreach ($users as $user)

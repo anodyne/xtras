@@ -611,6 +611,9 @@ class ItemRepository implements ItemRepositoryInterface {
 		// Get all the items
 		$items = $this->all();
 
+		// Eager load some relationships
+		$items = $items->load('files', 'product', 'type', 'user');
+
 		$report = [];
 
 		foreach ($items as $item)

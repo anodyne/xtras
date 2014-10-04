@@ -57,6 +57,9 @@
 											<li><a href="{{ route('item.admin') }}">Manage Items</a></li>
 											<li><a href="{{ route('admin.products.index') }}">Manage Products</a></li>
 											<li><a href="{{ route('admin.types.index') }}">Manage Item Types</a></li>
+											<li class="divider"></li>
+											<li><a href="{{ route('admin.report.items') }}">Item Size Report</a></li>
+											<li><a href="{{ route('admin.report.users') }}">User Size Report</a></li>
 										@endif
 
 										<li class="divider"></li>

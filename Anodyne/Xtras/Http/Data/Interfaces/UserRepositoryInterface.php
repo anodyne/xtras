@@ -15,5 +15,6 @@ interface UserRepositoryInterface {
 	public function getOrders(User $user);
 	public function listAll();
 	public function removeNotification($userId, $itemId);
+	public function reportSizes();
 
 }

@@ -602,6 +602,45 @@ class ItemRepository implements ItemRepositoryInterface {
 	}
 
 	/**
+	 * Generate the report about item sizes.
+	 *
+	 * @return	object
+	 */
+	public function reportSizes()
+	{
+		// Get all the items
+		$items = $this->all();
+
+		$report = [];
+
+		foreach ($items as $item)
+		{
+			$report[$item->id]['item'] = $item;
+
+			foreach ($item->files as $file)
+			{
+				if (array_key_exists('size', $report[$item->id]))
+				{
+					$report[$item->id]['size'] += (int) $file->size;
+				}
+				else
+				{
+					$report[$item->id]['size'] = (int) $file->size;
+				}
+
+				$report[$item->id]['prettySize'] = convertFileSize($report[$item->id]['size']);
+			}
+		}
+
+		usort($report, function($a, $b)
+		{
+			return $b['prettySize'] - $a['prettySize'];
+		});
+
+		return $report;
+	}
+
+	/**
 	 * Search for an item by its name and/or description and paginate the
 	 * results.
 	 *

@@ -172,4 +172,47 @@ class UserRepository implements UserRepositoryInterface {
 		return false;
 	}
 
+	/**
+	 * Generate a report about how much space users are using.
+	 *
+	 * @return	array
+	 */
+	public function reportSizes()
+	{
+		// Get all users
+		$users = $this->all();
+
+		$report = [];
+
+		foreach ($users as $user)
+		{
+			$report[$user->id]['user'] = $user;
+			$report[$user->id]['prettySize'] = "N/A";
+
+			foreach ($user->items as $item)
+			{
+				foreach ($item->files as $file)
+				{
+					if (array_key_exists('size', $report[$user->id]))
+					{
+						$report[$user->id]['size'] += (int) $file->size;
+					}
+					else
+					{
+						$report[$user->id]['size'] = (int) $file->size;
+					}
+
+					$report[$user->id]['prettySize'] = convertFileSize($report[$user->id]['size']);
+				}
+			}
+		}
+
+		usort($report, function($a, $b)
+		{
+			return $b['prettySize'] - $a['prettySize'];
+		});
+
+		return $report;
+	}
+
 }

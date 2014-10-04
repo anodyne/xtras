@@ -23,6 +23,7 @@ interface ItemRepositoryInterface extends BaseRepositoryInterface {
 	public function getRecentlyAdded($number);
 	public function getRecentlyUpdated($number);
 	public function rate(User $user, $itemId, $rating);
+	public function reportSizes();
 	public function search($input);
 	public function searchAdvanced(array $input);
 	public function updateFileData($itemId, array $data);

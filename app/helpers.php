@@ -46,3 +46,28 @@ if ( ! function_exists('label'))
 			->withContent($message);
 	}
 }
+
+if ( ! function_exists('convertFileSize'))
+{
+	function convertFileSize($size)
+	{
+		switch ($size)
+		{
+			case ($size / 1073741824) > 1:
+				return round(($size/1073741824), 2) . "GB";
+			break;
+
+			case ($size / 1048576) > 1:
+				return round(($size/1048576), 2) . "MB";
+			break;
+
+			case ($size / 1024) > 1:
+				return round(($size/1024), 2) . "KB";
+			break;
+
+			default:
+				return $size . ' bytes';
+			break;
+		}
+	}
+}

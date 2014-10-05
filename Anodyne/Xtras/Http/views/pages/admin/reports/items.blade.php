@@ -14,6 +14,8 @@
 		<div class="row">
 			<div class="col-md-5">
 				<p class="lead">{{ $item['item']->present()->name }}</p>
+				{{ $item['item']->present()->disabledLabel }}
+				{{ $item['item']->present()->adminDisabledLabel }}
 			</div>
 			<div class="col-md-2">
 				<p>

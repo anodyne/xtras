@@ -577,7 +577,7 @@ class ItemRepository implements ItemRepositoryInterface {
 	 * @param	array	$rating
 	 * @return	ItemRating/bool
 	 */
-	public function rate(User $user, $itemId, $rating)
+	public function rate(User $user, $itemId, $value)
 	{
 		// Get the item
 		$item = $this->find($itemId);
@@ -590,7 +590,7 @@ class ItemRepository implements ItemRepositoryInterface {
 				'item_id'	=> (int) $item->id,
 				'user_id'	=> (int) $user->id
 			]);
-			$rating->fill(['rating' => (int) $rating])->save();
+			$rating->fill(['rating' => (int) $value])->save();
 
 			// Update the overall rating
 			$item->updateRating();

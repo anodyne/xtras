@@ -22,7 +22,7 @@ interface ItemRepositoryInterface extends BaseRepositoryInterface {
 	public function getMessage($msgId);
 	public function getRecentlyAdded($number);
 	public function getRecentlyUpdated($number);
-	public function rate(User $user, $itemId, $rating);
+	public function rate(User $user, $itemId, $value);
 	public function reportSizes();
 	public function search($input);
 	public function searchAdvanced(array $input);

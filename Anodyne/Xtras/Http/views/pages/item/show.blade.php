@@ -15,7 +15,12 @@
 				@if ($_currentUser->can('xtras.admin') or $item->isOwner($_currentUser))
 					<div class="btn-toolbar">
 						<div class="btn-group">
-							<a href="{{ route('item.edit', [$item->user->username, $item->slug]) }}" class="btn btn-default">Edit</a>
+							<a href="{{ route('item.edit', [$item->user->username, $item->slug]) }}" class="btn btn-default">Edit Xtra</a>
+						</div>
+						<div class="btn-group">
+							<a href="{{ route('item.messages.index', [$item->user->username, $item->slug]) }}" class="btn btn-default">Edit Messages</a>
+							<a href="{{ route('item.files.index', [$item->user->username, $item->slug]) }}" class="btn btn-default">Edit Files</a>
+							<a href="{{ route('item.images.index', [$item->user->username, $item->slug]) }}" class="btn btn-default">Edit Images</a>
 						</div>
 					</div>
 				@endif

@@ -158,6 +158,9 @@ class ItemRepository implements ItemRepositoryInterface {
 	 */
 	public function delete($id)
 	{
+		// Get an instance of the filesystem
+		$fs = App::make('xtras.filesystem');
+
 		// Get the item
 		$item = $this->find($id);
 
@@ -175,9 +178,6 @@ class ItemRepository implements ItemRepositoryInterface {
 			// Remove all the files
 			if ($item->files->count() > 0)
 			{
-				// Get an instance of the filesystem
-				$fs = App::make('xtras.filesystem');
-
 				foreach ($item->files as $file)
 				{
 					// Delete the file
@@ -212,7 +212,31 @@ class ItemRepository implements ItemRepositoryInterface {
 			// Remove all the metadata
 			if ($item->metadata->count() > 0)
 			{
-				$item->metadata->forceDelete();
+				// A list of columns to use for deleting
+				$filesToDelete = ['image1', 'image2', 'image3',
+					'thumbnail1', 'thumbnail2', 'thumbnail3'];
+
+				// Delete the file(s)
+				foreach ($filesToDelete as $name)
+				{
+					if ($fs->has($item->metadata->{$name}))
+					{
+						$fs->delete($item->metadata->{$name});
+					}
+				}
+
+				// Update the file fields to null
+				$item->metadata->update([
+					'image1' => null,
+					'image2' => null,
+					'image3' => null,
+					'thumbnail1' => null,
+					'thumbnail2' => null,
+					'thumbnail3' => null,
+				]);
+
+				// Soft delete the metadata field
+				$item->metadata->delete();
 			}
 
 			// Remove the item

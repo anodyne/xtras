@@ -7,7 +7,7 @@ class ItemMetadataPresenter extends Presenter {
 
 	public function image1()
 	{
-		$path = $_ENV['FS_URL']."assets/".$this->entity->image1;
+		$path = $_ENV['FS_URL'].$this->entity->image1;
 
 		if ( ! empty($this->entity->image1))
 		{
@@ -19,7 +19,7 @@ class ItemMetadataPresenter extends Presenter {
 
 	public function image2()
 	{
-		$path = $_ENV['FS_URL']."assets/".$this->entity->image2;
+		$path = $_ENV['FS_URL'].$this->entity->image2;
 
 		if ( ! empty($this->entity->image2))
 		{
@@ -31,7 +31,7 @@ class ItemMetadataPresenter extends Presenter {
 
 	public function image3()
 	{
-		$path = $_ENV['FS_URL']."assets/".$this->entity->image3;
+		$path = $_ENV['FS_URL'].$this->entity->image3;
 
 		if ( ! empty($this->entity->image3))
 		{
@@ -53,17 +53,17 @@ class ItemMetadataPresenter extends Presenter {
 
 	public function thumbnail1()
 	{
-		return $_ENV['FS_URL']."assets/".$this->entity->thumbnail1;
+		return $_ENV['FS_URL'].$this->entity->thumbnail1;
 	}
 
 	public function thumbnail2()
 	{
-		return $_ENV['FS_URL']."assets/".$this->entity->thumbnail2;
+		return $_ENV['FS_URL'].$this->entity->thumbnail2;
 	}
 
 	public function thumbnail3()
 	{
-		return $_ENV['FS_URL']."assets/".$this->entity->thumbnail3;
+		return $_ENV['FS_URL'].$this->entity->thumbnail3;
 	}
 
 }

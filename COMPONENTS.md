@@ -3,7 +3,7 @@
 ## PHP
 
 - [Laravel](http://laravel.com)
-	- Version: 4.2.9
+	- Version: 4.2.11
 - [Flysystem](http://flysystem.thephpleague.com/)
 	- Version: 0.5.7
 - [Fractal](http://fractal.thephpleague.com/)
@@ -15,7 +15,7 @@
 - [Presenter](https://github.com/laracasts/Presenter)
 	- Version: 0.1.4
 - [Guzzle](http://guzzlephp.org/)
-	- Version: 4.2.2
+	- Version: 4.2.3
 - [Entrust](https://github.com/Zizaco/entrust)
 	- Version: 1.3.0
 - [Gravatar](https://github.com/forxer/gravatar)
@@ -27,19 +27,17 @@
 
 - [jQuery](http://jquery.com/)
 	- Version: 1.11.1 (IE < 9), 2.1.1
-- [jQuery UI](http://jqueryui.com/)
-	- Version: 1.11.0
 - [Bootstrap](http://getbootstrap.com)
 	- Version: 3.2.0
 - [DropzoneJS](http://www.dropzonejs.com/)
 	- Version: 3.10.2
 - [HTML5Shiv](https://code.google.com/p/html5shiv/)
 - [AngularJS](https://angularjs.org/)
-	- Version: 1.3.0-beta.19
+	- Version: 1.3.0-rc.3
 - [jQuery Validate](http://jqueryvalidation.org/)
 	- Version: 1.13.0
 - [Bootstrap Gallery](https://github.com/iekadou/bootstrap-gallery)
-	- Version: 0.5
+	- Version: 0.0.5
 
 ## Others
 
@@ -50,4 +48,4 @@
 - Icons
 	- [Entypo](http://entypo.com/)
 	- [Octicons](http://octicons.github.com/)
-		- Version: 2.1.1
+		- Version: 2.1.2

@@ -21,12 +21,12 @@
 	
 	"autoload": {
 		"classmap": [
-			"Anodyne/Xtras/database/migrations",
-			"Anodyne/Xtras/database/seeds"
+			"Anodyne/database/migrations",
+			"Anodyne/database/seeds"
 		],
 		
 		"psr-4": {
-			"Xtras\\": "Anodyne\\Xtras\\Http"
+			"Xtras\\": "Anodyne\\Xtras"
 		}
 	},
 	

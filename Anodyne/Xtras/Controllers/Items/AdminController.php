@@ -107,7 +107,7 @@ class AdminController extends BaseController {
 
 			if ($item)
 			{
-				if ($item->user->id == $this->currentUser->id or $this->currentUser->can('xtras.admin'))
+				if ($item->isOwner($this->currentUser) or $this->currentUser->can('xtras.admin'))
 				{
 					return View::make('pages.item.edit')
 						->withItem($item)
@@ -131,36 +131,41 @@ class AdminController extends BaseController {
 		{
 			// Get the item
 			$xtra = $this->items->findByAuthorAndSlug($author, $slug);
-			
-			if ($xtra->user->id == $this->currentUser->id or $this->currentUser->can('xtras.admin'))
+
+			if ($xtra)
 			{
-				// Validate the form
-				$this->itemUpdate->validate(Input::all());
-				
-				// Update the item
-				$item = $this->items->update($xtra->id, Input::all());
-
-				// Fire the item update event
-				Event::fire('item.updated', [$item]);
-
-				// Set the flash message and redirect
-				$flashMessage = "Xtra was successfully updated! Return to ".link_to_route('item.admin', 'item management').'.';
-				$flashRedirect = "item.admin";
-
-				if ( ! $admin)
+				if ($xtra->isOwner($this->currentUser) or $this->currentUser->can('xtras.admin'))
 				{
-					// Set the flash message and redirect
-					$flashMessage = "Your Xtra was successfully updated! If you're releasing a new version of this Xtra, make sure you ".link_to_route('item.files.index', 'upload', [$item->user->username, $item->slug])." the new zip file now, or, return to ".link_to_route('account.xtras', 'My Xtras').".";
-					$flashRedirect = "account.xtras";
-				}
-				
-				// Set the flash message
-				Flash::success($flashMessage);
+					// Validate the form
+					$this->itemUpdate->validate(Input::all());
+					
+					// Update the item
+					$item = $this->items->update($xtra->id, Input::all());
 
-				return Redirect::back();
+					// Fire the item update event
+					Event::fire('item.updated', [$item]);
+
+					// Set the flash message and redirect
+					$flashMessage = "Xtra was successfully updated! Return to ".link_to_route('item.admin', 'item management').'.';
+					$flashRedirect = "item.admin";
+
+					if ( ! $admin)
+					{
+						// Set the flash message and redirect
+						$flashMessage = "Your Xtra was successfully updated! If you're releasing a new version of this Xtra, make sure you ".link_to_route('item.files.index', 'upload', [$item->user->username, $item->slug])." the new zip file now, or, return to ".link_to_route('account.xtras', 'My Xtras').".";
+						$flashRedirect = "account.xtras";
+					}
+					
+					// Set the flash message
+					Flash::success($flashMessage);
+
+					return Redirect::back();
+				}
+
+				return $this->errorUnauthorized("You do not have permissions to edit Xtras other than your own!");
 			}
 
-			return $this->errorUnauthorized("You do not have permissions to edit Xtras other than your own!");
+			return $this->errorNotFound("We couldn't find the Xtra you're looking for.");
 		}
 
 		return $this->errorUnauthorized("You do not have permission to edit Xtras!");
@@ -173,9 +178,18 @@ class AdminController extends BaseController {
 			// Get the item
 			$item = $this->items->find($itemId);
 
+			if ($item)
+			{
+				return partial('modal_content', [
+					'modalHeader'	=> "Remove Xtra",
+					'modalBody'		=> View::make('pages.item.remove')->withItem($item)->withAdmin($admin),
+					'modalFooter'	=> false,
+				]);
+			}
+
 			return partial('modal_content', [
 				'modalHeader'	=> "Remove Xtra",
-				'modalBody'		=> View::make('pages.item.remove')->withItem($item)->withAdmin($admin),
+				'modalBody'		=> alert('danger', "We couldn't find the Xtra you're looking for."),
 				'modalFooter'	=> false,
 			]);
 		}
@@ -196,7 +210,7 @@ class AdminController extends BaseController {
 
 			if ($xtra)
 			{
-				if ($xtra->user->id == $this->currentUser->id or $this->currentUser->can('xtras.admin'))
+				if ($xtra->isOwner($this->currentUser) or $this->currentUser->can('xtras.admin'))
 				{
 					// Remove the item
 					$item = $this->items->delete($itemId);
@@ -218,7 +232,7 @@ class AdminController extends BaseController {
 				return $this->errorUnauthorized("You do not have permissions to remove Xtras that are not your own!");
 			}
 
-			return $this->errorNotFound("We could not find the Xtra you were looking for.");
+			return $this->errorNotFound("We couldn't find the Xtra you're looking for.");
 		}
 
 		return $this->errorUnauthorized("You do not have permissions to remove Xtras!");
@@ -236,16 +250,6 @@ class AdminController extends BaseController {
 		}
 
 		return json_encode(['code' => 1]);
-	}
-
-	public function itemSizeReport()
-	{
-		# code...
-	}
-
-	public function userSizeReport()
-	{
-		# code...
 	}
 
 }

@@ -1,23 +1,30 @@
 <?php namespace Xtras\Controllers\Items;
 
 use App,
+	Item,
+	File,
 	View,
 	Event,
 	Flash,
 	Image,
 	Input,
 	Redirect,
-	Response;
+	Response,
+	BaseController,
+	ItemRepositoryInterface;
 
-class ImagesController extends \BaseController {
+class ImagesController extends BaseController {
 
 	protected $items;
 
-	public function __construct(\ItemRepositoryInterface $items)
+	public function __construct(ItemRepositoryInterface $items)
 	{
 		parent::__construct();
 
 		$this->items = $items;
+
+		// Before filter to check if the user has permissions
+		$this->beforeFilter('@checkEditPermissions');
 	}
 
 	public function index($author, $slug)
@@ -27,17 +34,17 @@ class ImagesController extends \BaseController {
 
 		if ($item)
 		{
-			if ($item->user->id == $this->currentUser->id or $this->currentUser->can('xtras.admin'))
+			if ($this->checkPermissions($item))
 			{
 				return View::make('pages.item.images')
 					->withItem($item)
 					->withMetadata($item->metadata);
 			}
 
-			return $this->unauthorized("You do not have permission to manage images for this Xtra!");
+			return $this->errorUnauthorized("You don't have access to manage images for this Xtra.");
 		}
 
-		return $this->errorNotFound("Xtra not found.");
+		return $this->errorNotFound("We couldn't find the Xtra you're looking for.");
 	}
 
 	public function remove($itemId, $image)
@@ -45,11 +52,20 @@ class ImagesController extends \BaseController {
 		// Get the item
 		$item = $this->items->find($itemId);
 
+		if ($item)
+		{
+			$content = ($this->checkPermissions($item))
+				? View::make('pages.item.images-remove')->withItem($item)->withImage($image)
+				: alert('danger', "You don't have access to manage images for this Xtra.");
+		}
+		else
+		{
+			$content = alert('danger', "We couldn't find the Xtra you're looking for.");
+		}
+
 		return partial('modal_content', [
 			'modalHeader'	=> "Remove Image",
-			'modalBody'		=> View::make('pages.item.images-remove')
-				->withItem($item)
-				->withImage($image),
+			'modalBody'		=> $content,
 			'modalFooter'	=> false,
 		]);
 	}
@@ -61,7 +77,7 @@ class ImagesController extends \BaseController {
 
 		if ($item)
 		{
-			if ($item->user->id == $this->currentUser->id or $this->currentUser->can('xtras.admin'))
+			if ($this->checkPermissions($item))
 			{
 				// Get an instance of the filesystem
 				$fs = App::make('xtras.filesystem');
@@ -73,82 +89,89 @@ class ImagesController extends \BaseController {
 				// Remove the image
 				$this->items->deleteImage($itemId, $imageNumber);
 
-				// Fire the event
 				Event::fire('item.image.deleted', [$item]);
 
-				// Set the flash message
 				Flash::success("Image has been successfully removed.");
 
 				return Redirect::route('item.images.index', [$item->user->username, $item->slug]);
 			}
 
-			return $this->errorUnauthorized("You do not have permission to manage images for this Xtra!");
+			return $this->errorUnauthorized("You don't have access to manage images for this Xtra.");
 		}
 
-		return $this->errorNotFound("Xtra could not be found!");
+		return $this->errorNotFound("We couldn't find the Xtra you're looking for.");
 	}
 
 	public function upload($itemId, $image)
 	{
-		if ($this->currentUser->can('xtras.item.create') or $this->currentUser->can('xtras.admin'))
+		if ($this->currentUser->can('xtras.item.upload') or $this->currentUser->can('xtras.admin'))
 		{
 			// Get the item
 			$item = $this->items->find($itemId);
 
-			if (Input::hasFile($image))
+			if ($item)
 			{
-				// Get the image number
-				$imageNumber = substr($image, -1);
-
-				// Get the uploaded file
-				$file = Input::file($image);
-
-				// Set the base filename and extension
-				$baseFilename = "{$item->user->username}/{$item->slug}-";
-				$extension = ".{$file->getClientOriginalExtension()}";
-
-				// Set the filename
-				$fullFilename = $baseFilename.$image.$extension;
-
-				// Get an instance of the filesystem
-				$fs = App::make('xtras.filesystem');
-
-				// Upload the file
-				$result = $fs->put($fullFilename, \File::get($file->getRealPath()));
-
-				if ($result)
+				if ($this->checkPermissions($item))
 				{
-					// Generate the thumbnails as well
-					$img = Image::make($file->getRealPath())->resize(250, null, function($c)
+					if (Input::hasFile($image))
 					{
-						$c->aspectRatio();
-					});
+						// Get the image number
+						$imageNumber = substr($image, -1);
 
-					// Set the thumbnail name
-					$thumbnailFilename = $baseFilename.$image."_thumb".$extension;
+						// Get the uploaded file
+						$file = Input::file($image);
 
-					// Save the thumbnail
-					$fs->put($thumbnailFilename, $img->encode());
+						// Set the base filename and extension
+						$baseFilename = "{$item->user->username}/{$item->slug}-";
+						$extension = ".{$file->getClientOriginalExtension()}";
 
-					// Update the database record
-					$this->items->updateMetadata($item->id, [
-						$image => $fullFilename,
-						"thumbnail{$imageNumber}" => $thumbnailFilename,
-					]);
+						// Set the filename
+						$fullFilename = $baseFilename.$image.$extension;
 
-					// Fire the event
-					Event::fire('item.image.uploaded', [$item]);
+						// Get an instance of the filesystem
+						$fs = App::make('xtras.filesystem');
 
-					return Response::json('Success', 200);
+						// Upload the file
+						$result = $fs->put($fullFilename, File::get($file->getRealPath()));
+
+						if ($result)
+						{
+							// Generate the thumbnails as well
+							$img = Image::make($file->getRealPath())->resize(250, null, function($c)
+							{
+								$c->aspectRatio();
+							});
+
+							// Set the thumbnail name
+							$thumbnailFilename = $baseFilename.$image."_thumb".$extension;
+
+							// Save the thumbnail
+							$fs->put($thumbnailFilename, $img->encode());
+
+							// Update the database record
+							$this->items->updateMetadata($item->id, [
+								$image => $fullFilename,
+								"thumbnail{$imageNumber}" => $thumbnailFilename,
+							]);
+
+							Event::fire('item.image.uploaded', [$item]);
+
+							return Response::json('Success', 200);
+						}
+
+						return Response::json('Failure', 400);
+					}
+
+					return Response::json('No file input found', 500);
 				}
 
-				return Response::json('Failure', 400);
+				return $this->errorUnauthorized("You don't have access to manage images for this Xtra.");
 			}
 
-			return Response::json('No file input', 500);
+			return $this->errorNotFound("We couldn't find the Xtra you're looking for.");
 		}
 
-		return $this->errorUnauthorized("You do not have permission to create Xtras.");
+		return $this->errorUnauthorized("You don't have access to upload files.");
 	}
 
 	public function primary()
@@ -162,7 +185,7 @@ class ImagesController extends \BaseController {
 
 		if ($item)
 		{
-			if ($item->user->id == $this->currentUser->id or $this->currentUser->can('xtras.admin'))
+			if ($this->checkPermissions($item))
 			{
 				// Get an instance of the filesystem
 				$fs = App::make('xtras.filesystem');
@@ -191,6 +214,24 @@ class ImagesController extends \BaseController {
 		}
 
 		return Response::json("Not found", 404);
+	}
+
+	public function checkPermissions(Item $item)
+	{
+		if ($item->isOwner($this->currentUser) or $this->currentUser->can('xtras.admin'))
+		{
+			return true;
+		}
+
+		return false;
+	}
+
+	public function checkEditPermissions()
+	{
+		if ( ! $this->currentUser->can('xtras.item.edit') and ! $this->currentUser->can('xtras.admin'))
+		{
+			return $this->errorUnauthorized("You don't have access to edit Xtras!");
+		}
 	}
 
 }

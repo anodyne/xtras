@@ -244,6 +244,7 @@ return array(
 		 * Validators
 		 */
 		'ItemCreationValidator'	=> 'Xtras\Validators\ItemCreationValidator',
+		'ItemMessageValidator'	=> 'Xtras\Validators\ItemMessageValidator',
 		'ItemUpdateValidator'	=> 'Xtras\Validators\ItemUpdateValidator',
 		'ProductValidator'		=> 'Xtras\Validators\ProductValidator',
 		'TypeValidator'			=> 'Xtras\Validators\TypeValidator',

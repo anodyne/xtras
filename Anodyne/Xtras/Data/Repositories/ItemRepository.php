@@ -30,15 +30,12 @@ class ItemRepository implements ItemRepositoryInterface {
 	/**
 	 * Add a comment to an item.
 	 *
-	 * @param	int		$itemId
+	 * @param	Item	$item
 	 * @param	array	$data
 	 * @return	Comment
 	 */
-	public function addComment($itemId, array $data)
+	public function addComment(Item $item, array $data)
 	{
-		// Get the item
-		$item = $this->find($itemId);
-
 		if ($item)
 		{
 			// Sanitize the data

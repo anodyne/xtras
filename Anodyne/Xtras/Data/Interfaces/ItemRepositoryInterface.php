@@ -1,10 +1,10 @@
 <?php namespace Xtras\Data\Interfaces;
 
-use User;
+use Item, User;
 
 interface ItemRepositoryInterface extends BaseRepositoryInterface {
 
-	public function addComment($itemId, array $data);
+	public function addComment(Item $item, array $data);
 	public function addMessage($itemId, array $data);
 	public function deleteFile($fileId);
 	public function deleteImage($itemId, $imageNum);

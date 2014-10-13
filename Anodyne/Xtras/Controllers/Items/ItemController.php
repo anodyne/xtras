@@ -55,6 +55,7 @@ class ItemController extends BaseController {
 				->withMetadata($item->metadata)
 				->withFiles($item->files->sortBy('version', SORT_REGULAR, true))
 				->withComments($item->comments->sortBy('created_at', SORT_REGULAR, true))
+				->with('commentCount', ($item->comments->count() > 0) ? "({$item->comments->count()})" : "")
 				->with('userRating', $userRating)
 				->withNotify($notify);
 		}

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" ng-app="xtrasApp">
+<html lang="en">
 	<head>
 		<meta charset="utf-8">
 		<title>@yield('title') &bull; AnodyneXtras</title>
@@ -188,8 +188,6 @@
 			<!--<![endif]-->
 
 			<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-			<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.0-rc.3/angular.min.js"></script>
-			<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.0-rc.3/angular-sanitize.min.js"></script>
 			<script src="//ajax.aspnetcdn.com/ajax/jquery.validate/1.13.0/jquery.validate.min.js"></script>
 			<script src="//ajax.aspnetcdn.com/ajax/jquery.validate/1.13.0/additional-methods.min.js"></script>
 		@else
@@ -201,12 +199,9 @@
 			<!--<![endif]-->
 
 			<script src="//localhost/global/bootstrap/3.2/js/bootstrap.min.js"></script>
-			<script src="//localhost/global/angular/1.3/angular.min.js"></script>
-			<script src="//localhost/global/angular/1.3/angular-sanitize.min.js"></script>
 			<script src="//localhost/global/jquery.validate/1.13/jquery.validate.min.js"></script>
 			<script src="//localhost/global/jquery.validate/1.13/additional-methods.min.js"></script>
 		@endif
-		{{ HTML::script('js/app.js') }}
 		<script>
 			// Destroy all modals when they're hidden
 			$('.modal').on('hidden.bs.modal', function()

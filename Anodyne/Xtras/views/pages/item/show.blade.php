@@ -5,7 +5,7 @@
 @stop
 
 @section('content')
-	<div class="row" ng-controller="CommentsController">
+	<div class="row">
 		<div class="col-md-9">
 			<h1>{{ $item->present()->name }} <small>{{ $item->present()->type }}</small></h1>
 
@@ -131,7 +131,7 @@
 					<li>
 						<a href="#comments" data-toggle="tab">
 							<span class="visible-md tooltip-top" data-title="Comments">{{ $_icons['comments'] }}</span>
-							<span class="visible-lg"><span class="tab-icon">{{ $_icons['comments'] }}</span> Comments <span ng-if="countComments()">(<% countComments() %>)</span></span>
+							<span class="visible-lg"><span class="tab-icon">{{ $_icons['comments'] }}</span> Comments {{ $commentCount }}</span>
 						</a>
 					</li>
 				@endif
@@ -200,28 +200,34 @@
 							<div class="panel-body">
 								<p>If you have an issue with this Xtra, please use the Report Issue button at the top of the page. Comments should be used to ask questions or commend the author on their work.</p>
 								
-								<form ng-submit="addComment()">
+								{{ Form::open(['id' => 'commentsModal', 'route' => ['item.comment.store', $item->id]]) }}
 									<div class="row">
 										<div class="col-md-10">
 											<div class="form-group">
-												{{ Form::textarea('content', null, ['class' => 'form-control', 'rows' => 5, 'ng-model' => 'newCommentContent']) }}
+												{{ Form::textarea('content', null, ['class' => 'form-control', 'rows' => 5]) }}
 												<p class="help-block text-sm">{{ $_icons['markdown'] }} Parsed as Markdown</p>
 											</div>
 										</div>
 									</div>
 									<div class="row">
 										<div class="col-md-12">
-											{{ Form::button('Submit', ['type' => 'submit', 'id' => 'commentSubmit', 'class' => 'btn btn-default']) }}
+											{{ Form::button('Submit', ['type' => 'submit', 'id' => 'commentSubmit', 'class' => 'btn btn-default', 'disabled' => 'disabled']) }}
 										</div>
 									</div>
-								</form>
+								{{ Form::close() }}
 							</div>
 						</div>
 
-						<blockquote ng-repeat="comment in comments">
-							<div ng-bind-html="comment.content"></div>
-							<div ng-bind-html="comment.author"></div>
-						</blockquote>
+						@foreach ($comments as $comment)
+							@if ($comment->user->id == $item->user->id)
+								<blockquote class="author">
+							@else
+								<blockquote>
+							@endif
+								{{ $comment->present()->content }}
+								{{ $comment->present()->author }}
+							</blockquote>
+						@endforeach
 					</div>
 				@endif
 			</div>
@@ -300,13 +306,6 @@
 	{{ HTML::script('js/bootstrap-gallery.js') }}
 	{{ partial('js/item-rate') }}
 	<script>
-		@if (Auth::check())
-			window.url = "{{ Request::root() }}";
-			window.itemId = "{{ $item->id }}";
-			window.userId = "{{ (Auth::check()) ? $_currentUser->id : false }}";
-			window.token = "{{ csrf_token() }}";
-		@endif
-
 		$('.close').on('click', function()
 		{
 			$(this).closest('.panel').addClass('hide');
@@ -354,6 +353,14 @@
 					data: send
 				});
 			}
+		});
+
+		$('#commentsModal [name="content"]').on('keyup', function(e)
+		{
+			if ($('#commentsModal [name="content"]').val() != "")
+				$('#commentSubmit').prop('disabled', '');
+			else
+				$('#commentSubmit').prop('disabled', 'disabled');
 		});
 
 		$(document).ready(function()

@@ -32,8 +32,6 @@
 - [DropzoneJS](http://www.dropzonejs.com/)
 	- Version: 3.10.2
 - [HTML5Shiv](https://code.google.com/p/html5shiv/)
-- [AngularJS](https://angularjs.org/)
-	- Version: 1.3.0-rc.3
 - [jQuery Validate](http://jqueryvalidation.org/)
 	- Version: 1.13.0
 - [Bootstrap Gallery](https://github.com/iekadou/bootstrap-gallery)

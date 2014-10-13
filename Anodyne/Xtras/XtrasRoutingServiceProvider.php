@@ -238,10 +238,8 @@ class XtrasRoutingServiceProvider extends ServiceProvider {
 				'as'		=> 'item.ajax.rate',
 				'uses'		=> 'ItemController@ajaxStoreRating']);
 
-			Route::get('comments/{itemId}', [
-				'before'	=> 'auth',
-				'uses'		=> 'CommentsController@index']);
 			Route::post('comments/{itemId}', [
+				'as'		=> 'item.comment.store',
 				'before'	=> 'auth',
 				'uses'		=> 'CommentsController@store']);
 

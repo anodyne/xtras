@@ -64,7 +64,17 @@
 				<div class="form-group">
 					<label class="control-label">Support</label>
 					{{ Form::text('support', null, ['class' => 'form-control']) }}
-					<p class="help-block">You can specify an email address or website URL to use for support of this item if you want.</p>
+					<p class="help-block">You can specify an email address or website URL to use for support of this item if you want. If you don't enter anything here, your account email address will be used.</p>
+				</div>
+			</div>
+			<div class="col-md-6">
+				<div class="form-group">
+					<label class="control-label">&nbsp;</label>
+					<div>
+						<span id="supportEmail">{{ label('muted', 'Email address') }}</span>
+						<span id="supportWebsite">{{ label('muted', 'Website') }}</span>
+						<span id="supportInvalid" class="hide">{{ label('danger', 'Invalid Support Option') }}</span>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -118,6 +128,30 @@
 					}
 				}
 			});
+		});
+
+		$('[name="support"]').on('change', function(e)
+		{
+			var value = $('[name="support"]').val();
+			var email = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+			var url = /^[a-z]+:\/\//i;
+
+			// Reset everything
+			$('#supportInvalid').addClass('hide');
+			$('#supportEmail .label').removeClass('label-default').addClass('label-muted');
+			$('#supportWebsite .label').removeClass('label-default').addClass('label-muted');
+
+			// Test for a valid email address format
+			if (email.test(value))
+				$('#supportEmail .label').removeClass('label-muted').addClass('label-default');
+
+			// Test for a valid URL format
+			if (url.test(value))
+				$('#supportWebsite .label').removeClass('label-muted').addClass('label-default');
+
+			// If there's something in the field and it doesn't validate, error out
+			if (value != "" && ! email.test(value) && ! url.test(value))
+				$('#supportInvalid').removeClass('hide');
 		});
 	</script>
 @stop

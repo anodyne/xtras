@@ -1,18 +1,23 @@
 <?php namespace Xtras\Controllers;
 
-use View,
+use App,
+	View,
 	Input,
 	BaseController,
+	ItemRepositoryInterface,
 	UserRepositoryInterface;
 
 class UserController extends BaseController {
 
+	protected $items;
 	protected $users;
 
-	public function __construct(UserRepositoryInterface $users)
+	public function __construct(UserRepositoryInterface $users,
+			ItemRepositoryInterface $items)
 	{
 		parent::__construct();
 
+		$this->items = $items;
 		$this->users = $users;
 	}
 
@@ -31,7 +36,8 @@ class UserController extends BaseController {
 	public function xtras()
 	{
 		return View::make('pages.user.xtras')
-			->withXtras($this->users->getItemsByType($this->currentUser));
+			->withXtras($this->users->getItemsByType($this->currentUser))
+			->withUsage($this->items->reportUserSizes($this->currentUser));
 	}
 
 	public function notifications()

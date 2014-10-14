@@ -36,6 +36,8 @@
 	- Version: 1.13.0
 - [Bootstrap Gallery](https://github.com/iekadou/bootstrap-gallery)
 	- Version: 0.0.5
+- [Chart.js](http://www.chartjs.org/)
+	- Version: 1.0.1-beta4
 
 ## Others
 

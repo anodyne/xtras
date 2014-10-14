@@ -26,6 +26,7 @@
 			<li class="active"><a href="#skins" data-toggle="tab">Skins</a></li>
 			<li><a href="#mods" data-toggle="tab">MODs</a></li>
 			<li><a href="#ranks" data-toggle="tab">Rank Sets</a></li>
+			<li><a href="#usage" data-toggle="tab">My Usage</a></li>
 		</ul>
 
 		<div class="tab-content">
@@ -36,7 +37,7 @@
 						{{ partial('my-xtras-row', ['items' => $items]) }}
 					@endforeach
 				@else
-					<p class="alert alert-warning">You don't have any skins.</p>
+					{{ alert('warning', "You don't have any skins.") }}
 				@endif
 			</div>
 
@@ -47,7 +48,7 @@
 						{{ partial('my-xtras-row', ['items' => $items]) }}
 					@endforeach
 				@else
-					<p class="alert alert-warning">You don't have any MODs.</p>
+					{{ alert('warning', "You don't have any MODs.") }}
 				@endif
 			</div>
 
@@ -58,8 +59,27 @@
 						{{ partial('my-xtras-row', ['items' => $items]) }}
 					@endforeach
 				@else
-					<p class="alert alert-warning">You don't have any rank sets.</p>
+					{{ alert('warning', "You don't have any rank sets.") }}
 				@endif
+			</div>
+
+			<div id="usage" class="tab-pane">
+				<h2>My Usage</h2>
+
+				<div class="row">
+					<div class="col-md-5">
+						<canvas id="xtraUsage" width="400" height="400"></canvas>
+					</div>
+					<div class="col-md-7">
+						<p>{{ label('info label-lg', $usage['Skin']['label'].': '.$usage['Skin']['prettySize']) }}</p>
+						<p>{{ label('danger label-lg', $usage['MOD']['label'].': '.$usage['MOD']['prettySize']) }}</p>
+						<p>{{ label('success label-lg', $usage['Rank Set']['label'].': '.$usage['Rank Set']['prettySize']) }}</p>
+
+						@if ($usage['Skin']['value'] + $usage['MOD']['value'] + $usage['Rank Set']['value'] > Config::get('xtras.usageWarning'))
+							{{ alert('warning', "You're currently using over 250mb of space on the server and are in danger of having your account suspended. Please contact Anodyne Productions to correct this issue.") }}
+						@endif
+					</div>
+				</div>
 			</div>
 		</div>
 	@endif
@@ -71,4 +91,15 @@
 
 @section('scripts')
 	{{ partial('js/item-remove') }}
+	{{ HTML::script('js/Chart.min.js') }}
+	<script>
+		var ctx = document.getElementById("xtraUsage").getContext("2d");
+		
+		new Chart(ctx).Doughnut({{ json_encode($usage) }}, {
+			segmentStrokeColor: "#fbfbfb",
+			segmentStrokeWidth : 5,
+			animateScale: true,
+			showTooltips: false
+		});
+	</script>
 @stop

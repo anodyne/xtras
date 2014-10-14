@@ -11,4 +11,6 @@ return [
 
 	],
 
+	'usageWarning' => 250000000,
+
 ];

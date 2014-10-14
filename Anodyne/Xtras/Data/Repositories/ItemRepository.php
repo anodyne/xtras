@@ -666,6 +666,64 @@ class ItemRepository implements ItemRepositoryInterface {
 	}
 
 	/**
+	 * Generate the report about item sizes.
+	 *
+	 * @return	object
+	 */
+	public function reportUserSizes(User $user)
+	{
+		// Get all the items
+		$items = $user->items;
+
+		// Eager load some relationships
+		$items = $items->load('files', 'product', 'type', 'user');
+
+		$report = [
+			'Skin' => [
+				'color' => '#03a9f4',
+				'highlight' => '#14b4fc',
+				'value' => 0,
+				'prettySize' => "N/A",
+				'label' => 'Skins',
+			],
+			'MOD' => [
+				'color' => '#e51c23',
+				'highlight' => '#ea4a4f',
+				'value' => 0,
+				'prettySize' => "N/A",
+				'label' => 'MODs',
+			],
+			'Rank Set' => [
+				'color' => '#8bc34a',
+				'highlight' => '#97c95d',
+				'value' => 0,
+				'prettySize' => "N/A",
+				'label' => 'Rank Sets',
+			],
+		];
+
+		foreach ($items as $item)
+		{
+			foreach ($item->files as $file)
+			{
+				if (array_key_exists('size', $report[$item->type->name]))
+				{
+					$report[$item->type->name]['size'] += (int) $file->size;
+				}
+				else
+				{
+					$report[$item->type->name]['size'] = (int) $file->size;
+				}
+
+				$report[$item->type->name]['prettySize'] = convertFileSize($report[$item->type->name]['size']);
+				$report[$item->type->name]['value'] = $report[$item->type->name]['size'];
+			}
+		}
+
+		return $report;
+	}
+
+	/**
 	 * Search for an item by its name and/or description and paginate the
 	 * results.
 	 *

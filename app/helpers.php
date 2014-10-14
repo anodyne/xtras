@@ -37,6 +37,14 @@ if ( ! function_exists('alert'))
 	}
 }
 
+if ( ! function_exists('flash'))
+{
+	function flash($level, $message)
+	{
+		return alert($level, $message);
+	}
+}
+
 if ( ! function_exists('label'))
 {
 	function label($level, $message)

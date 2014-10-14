@@ -269,7 +269,7 @@
 					<hr>
 				@endif
 			@else
-				<p class="alert alert-warning">In order to download Xtras, you must have an AnodyneID. You can <a href="{{ route('login') }}">log in</a> or <a href="http://anodyne-productions.com/register">register</a> your AnodyneID.</p>
+				{{ alert('warning', "In order to download Xtras, you must have an AnodyneID. You can ".link_to_route('login', 'log in')." or <a href='http://anodyne-productions.com/register'>register</a> your AnodyneID.") }}
 			@endif
 
 			<h2 class="text-right">Details</h2>

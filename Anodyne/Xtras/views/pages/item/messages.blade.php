@@ -24,7 +24,7 @@
 		@foreach ($messages as $message)
 			<div class="row">
 				<div class="col-md-10">
-					<p class="alert alert-{{ $message->type }}">{{ $message->present()->content }}</p>
+					{{ alert($message->type, $message->present()->content) }}
 				</div>
 				<div class="col-md-2">
 					<div class="btn-toolbar pull-right">

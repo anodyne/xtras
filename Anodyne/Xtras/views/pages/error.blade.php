@@ -7,5 +7,5 @@
 @section('content')
 	<h1 class="text-{{ $type }}">Error!</h1>
 
-	<p class="alert alert-{{ $type }}">{{ $error }}</p>
+	{{ alert($type, $error) }}
 @stop

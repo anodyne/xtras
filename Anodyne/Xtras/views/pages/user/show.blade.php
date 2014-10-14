@@ -43,7 +43,7 @@
 					@endforeach
 					</div>
 				@else
-					<p class="alert alert-warning">{{ $user->present()->name }} doesn't have any skins.</p>
+					{{ alert('warning', $user->present()->name." doesn't have any skins.") }}
 				@endif
 			</div>
 
@@ -57,7 +57,7 @@
 					@endforeach
 					</div>
 				@else
-					<p class="alert alert-warning">{{ $user->present()->name }} doesn't have any MODs.</p>
+					{{ alert('warning', $user->present()->name." doesn't have any MODs.") }}
 				@endif
 			</div>
 
@@ -71,7 +71,7 @@
 					@endforeach
 					</div>
 				@else
-					<p class="alert alert-warning">{{ $user->present()->name }} doesn't have any rank sets.</p>
+					{{ alert('warning', $user->present()->name." doesn't have any rank sets.") }}
 				@endif
 			</div>
 		</div>

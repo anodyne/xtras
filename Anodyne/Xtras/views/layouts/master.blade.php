@@ -130,7 +130,7 @@
 				<section>
 					<div class="container">
 						@if (Session::has('flash.message'))
-							@include('partials.alert')
+							@include('partials.flash')
 						@endif
 
 						@yield('content')

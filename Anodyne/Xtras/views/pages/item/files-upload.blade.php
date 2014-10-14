@@ -26,7 +26,7 @@
 			<li>Drag-and-drop your zip file to the area below.</li>
 		</ol>
 
-		<p class="alert alert-warning"><strong>Please note:</strong> While there are no file size limitations imposed, please try to keep your files to a reasonable size. If you're found to be uploading abnormally large files, limits could be imposed on your account or even suspended. If you have questions about acceptable file sizes and if your files meet that definition, contact us first.</p>
+		{{ alert('warning', "<strong>Please note:</strong> While there are no file size limitations imposed, please try to keep your files to a reasonable size. If you're found to be uploading abnormally large files, limits could be imposed on your account or even suspended. If you have questions about acceptable file sizes and if your files meet that definition, contact us first.</p>") }}
 
 		<p><div id="dzZip" class="dropzone"></div></p>
 

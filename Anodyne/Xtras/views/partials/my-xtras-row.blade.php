@@ -1,12 +1,12 @@
 <div class="data-table data-table-striped data-table-bordered">
 @foreach ($items as $item)
 	<div class="row {{ $item->product->present()->nameAsSlug }}">
-		<div class="col-md-6">
+		<div class="col-md-8">
 			<p class="lead">{{ $item->present()->nameWithVersion }}</p>
 			{{ $item->present()->disabledLabel }}
 			{{ $item->present()->adminDisabledLabel }}
 		</div>
-		<div class="col-md-6">
+		<div class="col-md-4">
 			<div class="btn-toolbar pull-right">
 				<div class="btn-group">
 					<a href="{{ route('item.show', [$item->user->username, $item->slug]) }}" class="btn btn-default">View</a>

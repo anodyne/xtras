@@ -33,8 +33,10 @@
 			<div class="row">
 				<div class="col-md-9">
 					<p class="lead">{{ $item->present()->name }}</p>
-					{{ $item->present()->productAsLabel }}
-					{{ $item->present()->typeAsLabel }}
+					<p>
+						{{ $item->present()->productAsLabel }}
+						{{ $item->present()->typeAsLabel }}
+					</p>
 					<div class="text-sm text-muted">{{ $item->present()->description }}</div>
 				</div>
 				<div class="col-md-3">

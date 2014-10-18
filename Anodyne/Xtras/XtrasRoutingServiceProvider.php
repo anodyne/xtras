@@ -214,6 +214,10 @@ class XtrasRoutingServiceProvider extends ServiceProvider {
 				'before'	=> 'auth',
 				'as'		=> 'item.destroy',
 				'uses'		=> 'AdminController@destroy']);
+			Route::get('{author}/{slug}/quick-update', [
+				'before'	=> 'auth',
+				'as'		=> 'item.quick-update',
+				'uses'		=> 'AdminController@quickUpdate']);
 
 			Route::get('{author}/{slug}/download/{fileId}', [
 				'before'	=> 'auth',
@@ -237,6 +241,10 @@ class XtrasRoutingServiceProvider extends ServiceProvider {
 				'before'	=> 'auth',
 				'as'		=> 'item.ajax.rate',
 				'uses'		=> 'ItemController@ajaxStoreRating']);
+			Route::post('ajax/update-field', [
+				'before'	=> 'auth',
+				'as'		=> 'item.ajax.updateField',
+				'uses'		=> 'AdminController@ajaxUpdateField']);
 
 			Route::post('comments/{itemId}', [
 				'as'		=> 'item.comment.store',

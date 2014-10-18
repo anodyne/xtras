@@ -1,6 +1,7 @@
 <?php namespace Xtras\Controllers\Items;
 
-use View,
+use Str,
+	View,
 	Event,
 	Flash,
 	Input,
@@ -238,6 +239,31 @@ class AdminController extends BaseController {
 		return $this->errorUnauthorized("You do not have permissions to remove Xtras!");
 	}
 
+	public function quickUpdate($author, $slug)
+	{
+		if ($this->currentUser->can('xtras.item.edit') or $this->currentUser->can('xtras.admin'))
+		{
+			// Get the item
+			$item = $this->items->findByAuthorAndSlug($author, $slug);
+
+			if ($item)
+			{
+				if ($item->isOwner($this->currentUser) or $this->currentUser->can('xtras.admin'))
+				{
+					return View::make('pages.item.quick-update')
+						->withItem($item)
+						->withMetadata($item->metadata);
+				}
+
+				return $this->errorUnauthorized("You do not have permissions to edit Xtras other than your own!");
+			}
+
+			return $this->errorNotFound("We couldn't find the Xtra you're looking for.");
+		}
+
+		return $this->errorUnauthorized("You do not have permission to edit Xtras!");
+	}
+
 	public function ajaxCheckName($name)
 	{
 		// Try to find any items
@@ -250,6 +276,34 @@ class AdminController extends BaseController {
 		}
 
 		return json_encode(['code' => 1]);
+	}
+
+	public function ajaxUpdateField()
+	{
+		// Get the item
+		$item = $this->items->find(Input::get('item'));
+
+		if ($item)
+		{
+			$field = Input::get('field');
+			$value = Input::get('value');
+
+			if ($item->isOwner($this->currentUser) or $this->currentUser->can('xtras.admin'))
+			{
+				if ( ! Str::contains($field, '.'))
+				{
+					$this->items->update($item->id, [$field => $value]);
+				}
+				else
+				{
+					if (Str::contains($field, 'metadata.'))
+					{
+						$newField = str_replace('metadata.', '', $field);
+						$this->items->updateMetadata($item->id, [$newField => $value]);
+					}
+				}
+			}
+		}
 	}
 
 }

@@ -14,12 +14,16 @@
 
 				@if ($_currentUser->can('xtras.item.edit') or $_currentUser->can('xtras.admin'))
 					<div class="btn-group">
-						<a href="{{ route('item.edit', [$item->user->username, $item->slug]) }}" class="btn btn-default">Edit</a>
-					</div>
-					<div class="btn-group">
-						<a href="{{ route('item.messages.index', [$item->user->username, $item->slug]) }}" class="btn btn-default">Messages</a>
-						<a href="{{ route('item.files.index', [$item->user->username, $item->slug]) }}" class="btn btn-default">Files</a>
-						<a href="{{ route('item.images.index', [$item->user->username, $item->slug]) }}" class="btn btn-default">Images</a>
+						<a href="#" data-toggle="dropdown" class="dropdown-toggle btn btn-default">Edit <span class="caret"></span></a>
+						<ul class="dropdown-menu dropdown-menu-right">
+							<li><a href="{{ route('item.edit', [$item->user->username, $item->slug]) }}">Edit Xtra</a></li>
+							<li class="divider"></li>
+							<li><a href="{{ route('item.quick-update', [$item->user->username, $item->slug]) }}">Quick Update</a></li>
+							<li class="divider"></li>
+							<li><a href="{{ route('item.messages.index', [$item->user->username, $item->slug]) }}">Manage Messages</a></li>
+							<li><a href="{{ route('item.files.index', [$item->user->username, $item->slug]) }}">Manage Files</a></li>
+							<li><a href="{{ route('item.images.index', [$item->user->username, $item->slug]) }}">Manage Images</a></li>
+						</ul>
 					</div>
 				@endif
 

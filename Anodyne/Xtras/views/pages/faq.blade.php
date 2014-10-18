@@ -49,10 +49,12 @@
 			<h3>How do I update one of my Xtras with a new version?</h3>
 			<p>If you want to add a new version to one of your Xtras, it's as simple as editing the Xtra. You'll update the basic information (including the version number) and then use the File Management page to add a new file for the version. If you need to update the preview images, you can do that as well from the Image Management page.</p>
 
+			<p>Alternatively, you can use the Quick Update page which will allow you to update the version number, version history, then drag-and-drop your new zip archive to upload it.</p>
+
 			<hr class="partial-split">
 
 			<h3>I tried to upload a new file for a new version of my Xtra, but it tells me there&rsquo;s already a file associated with that version. What&rsquo;s going on?</h3>
-			<p>Order matters! When updating your Xtra with a new version, you need to <em>first</em> update the Xtra with the new version <em>then</em> upload the zip archive.</p>
+			<p>Order matters! When updating your Xtra with a new version, you need to <em>first</em> update the Xtra with the new version <em>then</em> upload the zip archive. This also applies to the Quick Update page. You need to change the version number <em>then</em> upload the zip archive.</p>
 
 			<hr class="partial-split">
 

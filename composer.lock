@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "9d67f58a815fbe3e580f6effe7258efe",
+    "hash": "c51b416a75fbf68e25305f4a6f8fa960",
     "packages": [
         {
             "name": "classpreloader/classpreloader",
@@ -754,16 +754,16 @@
         },
         {
             "name": "league/flysystem",
-            "version": "0.5.7",
+            "version": "0.5.8",
             "source": {
                 "type": "git",
                 "url": "https://github.com/thephpleague/flysystem.git",
-                "reference": "63759ca1f3bb25d52946f684b54fe3821d084215"
+                "reference": "2b8e053fb4ce1aa9146dfcb36002c378be29b03c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/thephpleague/flysystem/zipball/63759ca1f3bb25d52946f684b54fe3821d084215",
-                "reference": "63759ca1f3bb25d52946f684b54fe3821d084215",
+                "url": "https://api.github.com/repos/thephpleague/flysystem/zipball/2b8e053fb4ce1aa9146dfcb36002c378be29b03c",
+                "reference": "2b8e053fb4ce1aa9146dfcb36002c378be29b03c",
                 "shasum": ""
             },
             "require": {
@@ -773,6 +773,7 @@
                 "aws/aws-sdk-php": "~2.4",
                 "barracuda/copy": "~1.1.4",
                 "dropbox/dropbox-sdk": "~1.1.1",
+                "ext-fileinfo": "*",
                 "guzzlehttp/guzzle": "~4.0",
                 "league/event": "~1.0",
                 "league/phpunit-coverage-listener": "~1.1",
@@ -782,18 +783,21 @@
                 "phpunit/phpunit": "~4.0",
                 "predis/predis": "~1.0",
                 "rackspace/php-opencloud": "~1.10.0",
-                "sabre/dav": "~2.0.2"
+                "sabre/dav": "~2.0.2",
+                "tedivm/stash": "~0.12.0"
             },
             "suggest": {
                 "aws/aws-sdk-php": "Allows you to use AWS S3 storage",
                 "barracuda/copy": "Allows you to use Copy.com storage",
                 "dropbox/dropbox-sdk": "Allows you to use Dropbox storage",
+                "ext-fileinfo": "Required for MimeType",
                 "guzzlehttp/guzzle": "Allows you to use http files (reading only)",
                 "league/event": "Required for EventableFilesystem",
                 "phpseclib/phpseclib": "Allows SFTP server storage",
                 "predis/predis": "Allows you to use Predis for caching",
                 "rackspace/php-opencloud": "Allows you to use Rackspace Cloud Files",
-                "sabre/dav": "Enables WebDav support"
+                "sabre/dav": "Enables WebDav support",
+                "tedivm/stash": "Allows you to use Stash as cache implementation"
             },
             "type": "library",
             "extra": {
@@ -830,7 +834,7 @@
                 "sftp",
                 "storage"
             ],
-            "time": "2014-09-16 06:55:04"
+            "time": "2014-10-17 14:21:58"
         },
         {
             "name": "league/fractal",

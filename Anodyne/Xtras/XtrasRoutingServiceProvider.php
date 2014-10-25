@@ -63,6 +63,9 @@ class XtrasRoutingServiceProvider extends ServiceProvider {
 			Route::get('faq', [
 				'as'	=> 'faq',
 				'uses'	=> 'MainController@faq']);
+			Route::get('markdown', [
+				'as'	=> 'markdown',
+				'uses'	=> 'MainController@markdown']);
 		});
 	}
 

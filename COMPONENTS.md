@@ -5,7 +5,7 @@
 - [Laravel](http://laravel.com)
 	- Version: 4.2.11
 - [Flysystem](http://flysystem.thephpleague.com/)
-	- Version: 0.5.8
+	- Version: 0.5.9
 - [Fractal](http://fractal.thephpleague.com/)
 	- Version: 0.8.3
 - [Parsedown](http://parsedown.org/)
@@ -21,7 +21,7 @@
 - [Gravatar](https://github.com/forxer/gravatar)
 	- Version: 1.2.0
 - [Image](http://image.intervention.io/)
-	- Version: 2.0.11
+	- Version: 2.0.12
 
 ## Javascript
 

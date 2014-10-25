@@ -31,6 +31,7 @@ return [
 	//'logout' => '<span class="icn" data-icon="("></span>',
 
 	'markdown' => '<span class="octicon octicon-markdown"></span>',
+	'markdown-lg' => '<span class="octicon octicon-size-lg octicon-markdown"></span>',
 
 	//'next' => '<span class="icn" data-icon=">"></span>',
 	//'notify' => '<span class="icn" data-icon="n"></span>',

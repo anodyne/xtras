@@ -28,6 +28,11 @@
 
 			<h3>I think an Xtra is doing something malicious or wrong that Anodyne Productions should be aware of, how do I report that?</h3>
 			<p>On the Xtra's page, there's a button to <strong>Report Abuse</strong>. That message will come straight to us and we'll look into the abuse immediately. Abuse reports are anonymous to the author of the Xtra and your information will never be shared with the author.</p>
+
+			<hr class="partial-split">
+
+			<h3>What the heck is Markdown and how do I use it?</h3>
+			<p>Markdown is a plain-text formatting syntax that's converted into HTML. In several places throughout AnodyneXtras, we allow you to use Markdown to quickly and easily style your content instead of using HTML. You can view the {{ link_to_route('markdown', 'Markdown Guide') }} for examples of how to use Markdown.</p>
 		</div>
 
 		<div id="creating" class="tab-pane">

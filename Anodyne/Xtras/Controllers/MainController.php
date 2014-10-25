@@ -52,4 +52,9 @@ class MainController extends BaseController {
 		return View::make('pages.faq');
 	}
 
+	public function markdown()
+	{
+		return View::make('pages.markdown');
+	}
+
 }

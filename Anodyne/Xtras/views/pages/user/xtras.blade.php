@@ -16,7 +16,7 @@
 	@endif
 
 	@if (count($xtras) == 0)
-		@if ($_currentUser->can('xtras.items.create') or $_currentUser->can('xtras.admin'))
+		@if ($_currentUser->can('xtras.item.create') or $_currentUser->can('xtras.admin'))
 			{{ alert('warning', "It looks like you don't have any Xtras. Go ahead and change that, ".link_to_route('item.create', 'create your first')."!") }}
 		@else
 			{{ alert('warning', "You don't have any Xtras. Your account currently doesn't allow you to create Xtras. If you believe this was done in error, please <a href='#' class='js-contact'>contact</a> Anodyne Productions.") }}

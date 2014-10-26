@@ -7,21 +7,31 @@
 @section('content')
 	<h1>My Xtras</h1>
 
-	@if ($_currentUser->can('xtras.item.create') or $_currentUser->can('xtras.admin'))
-		<div class="btn-toolbar">
-			<div class="btn-group">
-				<a href="{{ route('item.create') }}" class="btn btn-primary">Create New Xtra</a>
-			</div>
-		</div>
-	@endif
-
 	@if (count($xtras) == 0)
 		@if ($_currentUser->can('xtras.item.create') or $_currentUser->can('xtras.admin'))
-			{{ alert('warning', "It looks like you don't have any Xtras. Go ahead and change that, ".link_to_route('item.create', 'create your first')."!") }}
+			<div class="row">
+				<div class="col-md-4">
+					<p><a href="#" class="btn btn-block btn-lg btn-primary">Create Your First Xtra</a></p>
+				</div>
+				<div class="col-md-4">
+					<p><a href="#" class="btn btn-block btn-lg btn-primary">Getting Started</a></p>
+				</div>
+				<div class="col-md-4">
+					<p><a href="#" class="btn btn-block btn-lg btn-primary">Get Help</a></p>
+				</div>
+			</div>
 		@else
 			{{ alert('warning', "You don't have any Xtras. Your account currently doesn't allow you to create Xtras. If you believe this was done in error, please <a href='#' class='js-contact'>contact</a> Anodyne Productions.") }}
 		@endif
 	@else
+		@if ($_currentUser->can('xtras.item.create') or $_currentUser->can('xtras.admin'))
+			<div class="btn-toolbar">
+				<div class="btn-group">
+					<a href="{{ route('item.create') }}" class="btn btn-primary">Create New Xtra</a>
+				</div>
+			</div>
+		@endif
+
 		<ul class="nav nav-tabs">
 			<li class="active"><a href="#skins" data-toggle="tab">Skins</a></li>
 			<li><a href="#mods" data-toggle="tab">MODs</a></li>

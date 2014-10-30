@@ -11,13 +11,13 @@
 		@if ($_currentUser->can('xtras.item.create') or $_currentUser->can('xtras.admin'))
 			<div class="row">
 				<div class="col-md-4">
-					<p><a href="#" class="btn btn-block btn-lg btn-primary">Create Your First Xtra</a></p>
+					<p><a href="{{ route('item.create') }}" class="btn btn-block btn-lg btn-primary">Create Your First Xtra</a></p>
 				</div>
 				<div class="col-md-4">
-					<p><a href="#" class="btn btn-block btn-lg btn-primary">Getting Started</a></p>
+					<p><a href="{{ route('getting-started') }}" class="btn btn-block btn-lg btn-primary">Getting Started</a></p>
 				</div>
 				<div class="col-md-4">
-					<p><a href="#" class="btn btn-block btn-lg btn-primary">Get Help</a></p>
+					<p><a href="#" class="btn btn-block btn-lg btn-primary js-contact">Get Help</a></p>
 				</div>
 			</div>
 		@else

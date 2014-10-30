@@ -57,4 +57,9 @@ class MainController extends BaseController {
 		return View::make('pages.markdown');
 	}
 
+	public function gettingStarted()
+	{
+		return View::make('pages.start');
+	}
+
 }

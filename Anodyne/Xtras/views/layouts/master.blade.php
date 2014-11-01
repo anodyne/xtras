@@ -17,9 +17,9 @@
 			<link href="//fonts.googleapis.com/css?family=Open+Sans:400,600" rel="stylesheet">
 			<link href="//fonts.googleapis.com/css?family=Bitter:400,700" rel="stylesheet">
 			<link href="//fonts.googleapis.com/css?family=Exo+2:500,500italic,600,600italic" rel="stylesheet">
-			<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
+			<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet">
 		@else
-			<link href="//localhost/global/bootstrap/3.2/css/bootstrap.min.css" rel="stylesheet">
+			<link href="//localhost/global/bootstrap/3.3/css/bootstrap.min.css" rel="stylesheet">
 		@endif
 		{{ HTML::style('css/style.css') }}
 		{{ HTML::style('css/fonts.css') }}
@@ -77,7 +77,6 @@
 							<li><a href="http://anodyne-productions.com/nova">Nova<div class="arrow"></div></a></li>
 							<li><a href="{{ route('home') }}" class="active">Xtras<div class="arrow"></div></a></li>
 							<li><a href="http://forums.anodyne-productions.com">Forums<div class="arrow"></div></a></li>
-							<li><a href="http://docs.anodyne-productions.com">Docs<div class="arrow"></div></a></li>
 							<!--<li><a href="http://help.anodyne-productions.com">Help<div class="arrow"></div></a></li>
 							<li><a href="http://learn.anodyne-productions.com">Learn<div class="arrow"></div></a></li>-->
 						</ul>
@@ -188,7 +187,7 @@
 				<script src="//code.jquery.com/jquery-2.1.1.min.js"></script>
 			<!--<![endif]-->
 
-			<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+			<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
 			<script src="//ajax.aspnetcdn.com/ajax/jquery.validate/1.13.0/jquery.validate.min.js"></script>
 			<script src="//ajax.aspnetcdn.com/ajax/jquery.validate/1.13.0/additional-methods.min.js"></script>
 		@else
@@ -199,7 +198,7 @@
 				<script src="//localhost/global/jquery/jquery-2.1.1.min.js"></script>
 			<!--<![endif]-->
 
-			<script src="//localhost/global/bootstrap/3.2/js/bootstrap.min.js"></script>
+			<script src="//localhost/global/bootstrap/3.3/js/bootstrap.min.js"></script>
 			<script src="//localhost/global/jquery.validate/1.13/jquery.validate.min.js"></script>
 			<script src="//localhost/global/jquery.validate/1.13/additional-methods.min.js"></script>
 		@endif

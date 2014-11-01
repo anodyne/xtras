@@ -27,18 +27,20 @@
 	font-size: 20px;
 
 	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
 	font-smoothing: antialiased;
 }
 .octicon {
-	line-height: 1;
+	font: normal normal normal 16px/1 octicons;
 	display: inline-block;
-
-	font: normal normal 16px octicons;
 	text-decoration: none;
-
+	text-rendering: auto;
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
-	font-smoothing: antialiased;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
 }
 
 .icn-size-sm {
@@ -52,16 +54,6 @@
 }
 .octicon-size-lg {
 	font-size: 32px !important;
-}
-
-.icn-opacity-25 {
-	opacity: 0.25;
-}
-.icn-opacity-50 {
-	opacity: 0.5;
-}
-.icn-opacity-75 {
-	opacity: 0.75;
 }
 
 [data-icon]:before {

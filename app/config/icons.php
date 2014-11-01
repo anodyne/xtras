@@ -2,7 +2,7 @@
 
 return [
 
-	//'add' => '<span class="icn" data-icon="+"></span>',
+	'add' => '<span class="icn" data-icon="+"></span>',
 
 	//'back' => '<span class="icn" data-icon="<"></span>',
 	//'bug' => '<span class="octicon octicon-bug"></span>',
@@ -15,7 +15,7 @@ return [
 
 	'download' => '<span class="icn" data-icon="d"></span>',
 
-	//'edit' => '<span class="icn" data-icon="e"></span>',
+	'edit' => '<span class="icn" data-icon="e"></span>',
 	//'email' => '<span class="icn" data-icon="m"></span>',
 	//'external' => '<span class="octicon octicon-link-external"></span>',
 
@@ -31,14 +31,15 @@ return [
 	//'logout' => '<span class="icn" data-icon="("></span>',
 
 	'markdown' => '<span class="octicon octicon-markdown"></span>',
+	'markdown-lg' => '<span class="octicon octicon-size-lg octicon-markdown"></span>',
 
 	//'next' => '<span class="icn" data-icon=">"></span>',
 	//'notify' => '<span class="icn" data-icon="n"></span>',
 	'new' => '<span class="icn" data-icon="w"></span>',
 
-	//'question' => '<span class="icn" data-icon="?"></span>',
+	'question' => '<span class="icn" data-icon="?"></span>',
 
-	//'remove' => '<span class="icn" data-icon="-"></span>',
+	'remove' => '<span class="icn" data-icon="-"></span>',
 
 	'star' => '<span class="octicon octicon-star"></span>',
 	'starFull' => '<span class="icn" data-icon="s"></span>',

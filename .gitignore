@@ -9,7 +9,7 @@ vendor
 *.sublime-workspace
 config.codekit
 
-public/assets/*
+public/assets/*/
 
 app/config/packages/barryvdh/*
 app/storage/debugbar/

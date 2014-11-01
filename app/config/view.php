@@ -15,8 +15,8 @@ return array(
 
 	'paths' => array(
 
-		__DIR__.'/../views',
-		__DIR__.'/../../Anodyne/Xtras/Web/views'
+		//__DIR__.'/../views',
+		__DIR__.'/../../Anodyne/Xtras/views',
 
 	),
 

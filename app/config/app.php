@@ -111,7 +111,6 @@ return array(
 
 		'Zizaco\Entrust\EntrustServiceProvider',
 		'Intervention\Image\ImageServiceProvider',
-		'Rees\Sanitizer\SanitizerServiceProvider',
 		'Xtras\XtrasServiceProvider',
 		'Xtras\XtrasRoutingServiceProvider',
 
@@ -188,47 +187,48 @@ return array(
 		'Browser'			=> 'Ikimea\Browser\Browser',
 		'Date'				=> 'Carbon\Carbon',
 		'Entrust'			=> 'Zizaco\Entrust\EntrustFacade',
-		'Flash'				=> 'Xtras\Foundation\Facades\FlashFacade',
+		'Flash'				=> 'Xtras\Facades\FlashFacade',
 		'Gravatar'			=> 'forxer\Gravatar\Gravatar',
 		'Image'				=> 'Intervention\Image\Facades\Image',
-		'Markdown'			=> 'Xtras\Foundation\Facades\MarkdownFacade',
-		'Model'				=> 'Xtras\Extensions\Laravel\Database\Eloquent\Model',
-		'Sanitizer'			=> 'Rees\Sanitizer\Facade',
+		'Markdown'			=> 'Xtras\Facades\MarkdownFacade',
+		'Model'				=> 'Xtras\Services\Model',
+		'Sanitize'			=> 'Xtras\Facades\SanitizerFacade',
+		'SoftDeletingTrait'	=> 'Illuminate\Database\Eloquent\SoftDeletingTrait',
 		
 		/**
 		 * Models
 		 */
-		'Comment'		=> 'Xtras\Foundation\Data\Models\Comment',
-		'Item'			=> 'Xtras\Foundation\Data\Models\Item',
-		'ItemFile'		=> 'Xtras\Foundation\Data\Models\ItemFile',
-		'ItemMessage'	=> 'Xtras\Foundation\Data\Models\ItemMessage',
-		'ItemMetadata'	=> 'Xtras\Foundation\Data\Models\ItemMetadata',
-		'ItemRating'	=> 'Xtras\Foundation\Data\Models\ItemRating',
-		'Notification'	=> 'Xtras\Foundation\Data\Models\Notification',
-		'Order'			=> 'Xtras\Foundation\Data\Models\Order',
-		'Permission'	=> 'Xtras\Foundation\Data\Models\Permission',
-		'Product'		=> 'Xtras\Foundation\Data\Models\Product',
-		'Role'			=> 'Xtras\Foundation\Data\Models\Role',
-		'Type'			=> 'Xtras\Foundation\Data\Models\Type',
-		'User'			=> 'Xtras\Foundation\Data\Models\User',
+		'Comment'		=> 'Xtras\Data\Models\Comment',
+		'Item'			=> 'Xtras\Data\Models\Item',
+		'ItemFile'		=> 'Xtras\Data\Models\ItemFile',
+		'ItemMessage'	=> 'Xtras\Data\Models\ItemMessage',
+		'ItemMetadata'	=> 'Xtras\Data\Models\ItemMetadata',
+		'ItemRating'	=> 'Xtras\Data\Models\ItemRating',
+		'Notification'	=> 'Xtras\Data\Models\Notification',
+		'Order'			=> 'Xtras\Data\Models\Order',
+		'Permission'	=> 'Xtras\Data\Models\Permission',
+		'Product'		=> 'Xtras\Data\Models\Product',
+		'Role'			=> 'Xtras\Data\Models\Role',
+		'Type'			=> 'Xtras\Data\Models\Type',
+		'User'			=> 'Xtras\Data\Models\User',
 
 		/**
 		 * Repository Interfaces
 		 */
-		'ItemRepositoryInterface'		=> 'Xtras\Foundation\Data\Interfaces\ItemRepositoryInterface',
-		'OrderRepositoryInterface'		=> 'Xtras\Foundation\Data\Interfaces\OrderRepositoryInterface',
-		'ProductRepositoryInterface'	=> 'Xtras\Foundation\Data\Interfaces\ProductRepositoryInterface',
-		'TypeRepositoryInterface'		=> 'Xtras\Foundation\Data\Interfaces\TypeRepositoryInterface',
-		'UserRepositoryInterface'		=> 'Xtras\Foundation\Data\Interfaces\UserRepositoryInterface',
+		'ItemRepositoryInterface'		=> 'Xtras\Data\Interfaces\ItemRepositoryInterface',
+		'OrderRepositoryInterface'		=> 'Xtras\Data\Interfaces\OrderRepositoryInterface',
+		'ProductRepositoryInterface'	=> 'Xtras\Data\Interfaces\ProductRepositoryInterface',
+		'TypeRepositoryInterface'		=> 'Xtras\Data\Interfaces\TypeRepositoryInterface',
+		'UserRepositoryInterface'		=> 'Xtras\Data\Interfaces\UserRepositoryInterface',
 
 		/**
 		 * Repositories
 		 */
-		'ItemRepository'	=> 'Xtras\Foundation\Data\Repositories\ItemRepository',
-		'OrderRepository'	=> 'Xtras\Foundation\Data\Repositories\OrderRepository',
-		'ProductRepository'	=> 'Xtras\Foundation\Data\Repositories\ProductRepository',
-		'TypeRepository'	=> 'Xtras\Foundation\Data\Repositories\TypeRepository',
-		'UserRepository'	=> 'Xtras\Foundation\Data\Repositories\UserRepository',
+		'ItemRepository'	=> 'Xtras\Data\Repositories\ItemRepository',
+		'OrderRepository'	=> 'Xtras\Data\Repositories\OrderRepository',
+		'ProductRepository'	=> 'Xtras\Data\Repositories\ProductRepository',
+		'TypeRepository'	=> 'Xtras\Data\Repositories\TypeRepository',
+		'UserRepository'	=> 'Xtras\Data\Repositories\UserRepository',
 
 		/**
 		 * Mailers
@@ -238,12 +238,13 @@ return array(
 		/**
 		 * Transformers
 		 */
-		'CommentTransformer'	=> 'Xtras\Foundation\Data\Transformers\CommentTransformer',
+		'CommentTransformer'	=> 'Xtras\Data\Transformers\CommentTransformer',
 
 		/**
 		 * Validators
 		 */
 		'ItemCreationValidator'	=> 'Xtras\Validators\ItemCreationValidator',
+		'ItemMessageValidator'	=> 'Xtras\Validators\ItemMessageValidator',
 		'ItemUpdateValidator'	=> 'Xtras\Validators\ItemUpdateValidator',
 		'ProductValidator'		=> 'Xtras\Validators\ProductValidator',
 		'TypeValidator'			=> 'Xtras\Validators\TypeValidator',

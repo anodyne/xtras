@@ -159,7 +159,7 @@ header {
 				padding: 0;
 
 				a {
-					line-height: 84px;
+					line-height: 86px;
 
 					color: rgba(255, 255, 255, .6);
 					font-weight: 500;
@@ -175,7 +175,7 @@ header {
 	}
 
 	.header-search {
-		padding-top: 28px;
+		padding-top: 27px;
 
 		.btn {
 			.border-radius(0, @border-radius-lg, @border-radius-lg, 0);
@@ -210,6 +210,10 @@ section {
 			color: @color-primary;
 			outline: none;
 		}
+
+		&.btn .caret {
+			margin-top: -1px;
+		}
 	}
 
 	h1 {
@@ -227,6 +231,10 @@ section {
 		font-weight: 500;
 		font-style: italic;
 		color: @color-primary-light;
+	}
+
+	h3 {
+		line-height: 1.5;
 	}
 
 	ul, ol {
@@ -490,6 +498,10 @@ form {
 
 	&.label-primary {
 		background-color: @color-primary-bright;
+	}
+
+	&.label-muted {
+		background-color: fadeout(@color-gray-blue, 45%);
 	}
 
 	&.label-lg {
@@ -969,6 +981,10 @@ blockquote {
 	&.preview-image-primary {
 		border-color: @color-primary-light;
 	}
+
+	&.preview-image-subtle {
+		border-color: @color-subtle;
+	}
 }
 
 .no-xtras {
@@ -997,4 +1013,9 @@ blockquote {
 			outline: none;
 		}
 	}
+}
+
+hr.partial-split {
+	width: 70%;
+	margin: @spacing-lg auto;
 }

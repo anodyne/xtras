@@ -40,7 +40,7 @@
 										@endif
 										<li class="divider"></li>
 										<li><a href="{{ route('account.profile', [$_currentUser->username]) }}">My Profile</a></li>
-										<li><a href="http://anodyne-productions.com/admin/users/{{ $_currentUser->username }}/edit">Edit My Profile</a></li>
+										<li><a href="{{ Config::get('anodyne.links.www') }}admin/users/{{ $_currentUser->username }}/edit">Edit My Profile</a></li>
 										<li class="divider"></li>
 										<li><a href="{{ route('account.downloads') }}">My Downloads</a></li>
 										<li><a href="{{ route('account.notifications') }}">My Notifications</a></li>
@@ -60,18 +60,16 @@
 									</ul>
 								</li>
 							@else
-								<li><a href="http://anodyne-productions.com/register">Register</a></li>
+								<li><a href="{{ Config::get('anodyne.links.www') }}register">Register</a></li>
 								<li><a href="{{ route('login') }}">Log In</a></li>
 							@endif
 						</ul>
 
 						<ul>
-							<li><a href="http://anodyne-productions.com">Anodyne<div class="arrow"></div></a></li>
-							<li><a href="http://anodyne-productions.com/nova">Nova<div class="arrow"></div></a></li>
+							<li><a href="{{ Config::get('anodyne.links.www') }}">Anodyne<div class="arrow"></div></a></li>
+							<li><a href="{{ Config::get('anodyne.links.nova') }}">Nova<div class="arrow"></div></a></li>
 							<li><a href="{{ route('home') }}" class="active">Xtras<div class="arrow"></div></a></li>
-							<li><a href="http://forums.anodyne-productions.com">Forums<div class="arrow"></div></a></li>
-							<!--<li><a href="http://help.anodyne-productions.com">Help<div class="arrow"></div></a></li>
-							<li><a href="http://learn.anodyne-productions.com">Learn<div class="arrow"></div></a></li>-->
+							<li><a href="{{ Config::get('anodyne.links.forums') }}">Forums<div class="arrow"></div></a></li>
 						</ul>
 					</div>
 				</nav>
@@ -162,7 +160,7 @@
 							<li><a href="{{ route('policies') }}">Site Policies</a></li>
 							<li><a href="{{ route('faq') }}">FAQs</a></li>
 							<li><a href="#" class="js-contact">Contact</a></li>
-							<li><a href="http://anodyne-productions.com">Anodyne</a></li>
+							<li><a href="{{ Config::get('anodyne.links.www') }}">Anodyne</a></li>
 						</ul>
 					</div>
 				</div>
@@ -184,11 +182,7 @@
 			{
 				e.preventDefault();
 
-				var contactUrl = "http://localhost/anodyne/www/public/contact";
-
-				@if (App::environment() == 'production')
-					contactUrl = "http://anodyne-productions.com/contact";
-				@endif
+				var contactUrl = "{{ Config::get('anodyne.links.www') }}contact";
 
 				$('#contactModal').modal({
 					remote: contactUrl

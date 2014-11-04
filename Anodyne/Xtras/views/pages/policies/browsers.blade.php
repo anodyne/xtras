@@ -28,7 +28,7 @@
 	<h3>IE 9</h3>
 
 	<ol>
-		<li>Visit <a href="http://xtras.anodyne-productions.com">xtras.anodyne-productions.com</a></li>
+		<li>Visit <a href="{{ Config::get('anodyne.links.xtras') }}">xtras.anodyne-productions.com</a></li>
 		<li>
 			Click the "Compatibility View" button in the address bar<br>
 			<img src="{{ URL::asset('images/ie9-compat-mode.jpeg') }}">

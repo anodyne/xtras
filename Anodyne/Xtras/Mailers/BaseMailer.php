@@ -31,7 +31,7 @@ abstract class BaseMailer {
 			}
 
 			// Set the subject
-			$msg->subject(\Config::get('xtras.email.subject')." {$data['subject']}");
+			$msg->subject(\Config::get('anodyne.email.subject')." {$data['subject']}");
 
 			// Set who it's coming from
 			if (array_key_exists('from', $data))

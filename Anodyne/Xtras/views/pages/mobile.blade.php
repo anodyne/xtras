@@ -13,23 +13,17 @@
 
 		<div class="row">
 			<div class="col-xs-12 col-sm-6">
-				<p><a href="http://anodyne-productions.com" class="btn btn-lg btn-block btn-default">Anodyne Productions</a></p>
+				<p><a href="{{ Config::get('anodyne.links.www') }}" class="btn btn-lg btn-block btn-default">Anodyne Productions</a></p>
 			</div>
 			<div class="col-xs-12 col-sm-6">
-				<p><a href="http://anodyne-productions.com/nova" class="btn btn-lg btn-block btn-default">Nova</a></p>
+				<p><a href="{{ Config::get('anodyne.links.nova') }}" class="btn btn-lg btn-block btn-default">Nova</a></p>
 			</div>
 			<div class="col-xs-12 col-sm-6">
-				<p><a href="http://forums.anodyne-productions.com" class="btn btn-lg btn-block btn-default">Anodyne Forums</a></p>
+				<p><a href="{{ Config::get('anodyne.links.forums') }}" class="btn btn-lg btn-block btn-default">Anodyne Forums</a></p>
 			</div>
 			<div class="col-xs-12 col-sm-6">
 				<p><a href="http://docs.anodyne-productions.com" class="btn btn-lg btn-block btn-default">AnodyneDocs</a></p>
 			</div>
-			<!--<div class="col-xs-12 col-sm-6">
-				<p><a href="#" class="btn btn-lg btn-block btn-default">Help Center</a></p>
-			</div>
-			<div class="col-xs-12 col-sm-6">
-				<p><a href="#" class="btn btn-lg btn-block btn-default">Learning Center</a></p>
-			</div>-->
 		</div>
 	</div>
 </section>

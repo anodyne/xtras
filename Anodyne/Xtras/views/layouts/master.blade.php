@@ -13,14 +13,7 @@
 		{{ HTML::script('js/html5shiv.js') }}
 		<![endif]-->
 
-		@if (App::environment() == 'production')
-			<link href="//fonts.googleapis.com/css?family=Open+Sans:400,600" rel="stylesheet">
-			<link href="//fonts.googleapis.com/css?family=Bitter:400,700" rel="stylesheet">
-			<link href="//fonts.googleapis.com/css?family=Exo+2:500,500italic,600,600italic" rel="stylesheet">
-			<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet">
-		@else
-			<link href="//localhost/global/bootstrap/3.3/css/bootstrap.min.css" rel="stylesheet">
-		@endif
+		{{ partial('global_styles') }}
 		{{ HTML::style('css/style.css') }}
 		{{ HTML::style('css/fonts.css') }}
 		@yield('styles')
@@ -179,29 +172,7 @@
 		{{ modal(['id' => 'contactModal', 'header' => "Contact Anodyne"]) }}
 		@yield('modals')
 
-		@if (App::environment() == 'production')
-			<!--[if lt IE 9]>
-				<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-			<![endif]-->
-			<!--[if gte IE 9]><!-->
-				<script src="//code.jquery.com/jquery-2.1.1.min.js"></script>
-			<!--<![endif]-->
-
-			<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
-			<script src="//ajax.aspnetcdn.com/ajax/jquery.validate/1.13.0/jquery.validate.min.js"></script>
-			<script src="//ajax.aspnetcdn.com/ajax/jquery.validate/1.13.0/additional-methods.min.js"></script>
-		@else
-			<!--[if lt IE 9]>
-				<script src="//localhost/global/jquery/jquery-1.11.1.min.js"></script>
-			<![endif]-->
-			<!--[if gte IE 9]><!-->
-				<script src="//localhost/global/jquery/jquery-2.1.1.min.js"></script>
-			<!--<![endif]-->
-
-			<script src="//localhost/global/bootstrap/3.3/js/bootstrap.min.js"></script>
-			<script src="//localhost/global/jquery.validate/1.13/jquery.validate.min.js"></script>
-			<script src="//localhost/global/jquery.validate/1.13/additional-methods.min.js"></script>
-		@endif
+		{{ partial('global_scripts') }}
 		<script>
 			// Destroy all modals when they're hidden
 			$('.modal').on('hidden.bs.modal', function()

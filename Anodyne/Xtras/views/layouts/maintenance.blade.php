@@ -13,10 +13,7 @@
 		{{ HTML::script('js/html5shiv.js') }}
 		<![endif]-->
 
-		<link href="//fonts.googleapis.com/css?family=Open+Sans:400,600" rel="stylesheet">
-		<link href="//fonts.googleapis.com/css?family=Bitter:400,700" rel="stylesheet">
-		<link href="//fonts.googleapis.com/css?family=Exo+2:500,500italic,600,600italic" rel="stylesheet">
-		<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
+		{{ partial('global_styles') }}
 		{{ HTML::style('css/style.css') }}
 		{{ HTML::style('css/fonts.css') }}
 	</head>

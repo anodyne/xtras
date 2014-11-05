@@ -85,7 +85,7 @@
 						<p>{{ label('danger label-lg', $usage['MOD']['label'].': '.$usage['MOD']['prettySize']) }}</p>
 						<p>{{ label('success label-lg', $usage['Rank Set']['label'].': '.$usage['Rank Set']['prettySize']) }}</p>
 
-						@if ($usage['Skin']['value'] + $usage['MOD']['value'] + $usage['Rank Set']['value'] > Config::get('xtras.usageWarning'))
+						@if ($usage['Skin']['value'] + $usage['MOD']['value'] + $usage['Rank Set']['value'] > Config::get('anodyne.usageWarning'))
 							{{ alert('warning', "You're currently using over 250mb of space on the server and are in danger of having your account suspended. Please contact Anodyne Productions to correct this issue.") }}
 						@endif
 					</div>

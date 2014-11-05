@@ -51,5 +51,5 @@
 
 	<h2>Questions</h2>
 
-	<p>Any questions about this Privacy Policy should be addressed to admin@anodyne-productions.com.</p>
+	<p>Any questions about this Privacy Policy should be addressed to contact@anodyne-productions.com.</p>
 @stop

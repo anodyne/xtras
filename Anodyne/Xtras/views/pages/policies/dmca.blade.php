@@ -47,7 +47,7 @@
 		<li>Your physical or electronic signature.</li>
 	</ol>
 
-	<p>Send email notification to admin@anodyne-productions.com.</p>
+	<p>Send email notification to contact@anodyne-productions.com.</p>
 
 	<h2>Counter-Notification Policy</h2>
 

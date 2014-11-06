@@ -28,10 +28,10 @@
 	<h3>IE 9</h3>
 
 	<ol>
-		<li>Visit <a href="{{ Config::get('anodyne.links.xtras') }}">xtras.anodyne-productions.com</a></li>
+		<li>Visit <a href="{{ config('anodyne.links.xtras') }}">xtras.anodyne-productions.com</a></li>
 		<li>
 			Click the "Compatibility View" button in the address bar<br>
-			<img src="{{ URL::asset('images/ie9-compat-mode.jpeg') }}">
+			<img src="{{ asset('images/ie9-compat-mode.jpeg') }}">
 		</li>
 		<li>Refresh the page</li>
 	</ol>
@@ -44,11 +44,11 @@
 		<li>Open F12 developer tools by pressing the F12 key</li>
 		<li>
 			Set Browser Mode to "Internet Explorer 10"<br>
-			<img src="{{ URL::asset('images/IE10_browser_mode.png') }}">
+			<img src="{{ asset('images/IE10_browser_mode.png') }}">
 		</li>
 		<li>
 			Set Document Mode to "Standards"<br>
-			<img src="{{ URL::asset('images/IE10_document_mode.png') }}">
+			<img src="{{ asset('images/IE10_document_mode.png') }}">
 		</li>
 	</ol>
 @stop

@@ -1,5 +1,13 @@
 <?php
 
+if ( ! function_exists('config'))
+{
+	function config($key)
+	{
+		return Config::get($key);
+	}
+}
+
 if ( ! function_exists('partial'))
 {
 	function partial($view, $data = false)

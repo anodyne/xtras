@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "c51b416a75fbf68e25305f4a6f8fa960",
+    "hash": "ad2f49404c844f8676ed41f1743ba023",
     "packages": [
         {
             "name": "classpreloader/classpreloader",
@@ -754,16 +754,16 @@
         },
         {
             "name": "league/flysystem",
-            "version": "0.5.10",
+            "version": "0.5.12",
             "source": {
                 "type": "git",
                 "url": "https://github.com/thephpleague/flysystem.git",
-                "reference": "96fe7ec1ebed35e3dc1e1dce4bbdab2eca0140a2"
+                "reference": "e046fe60d761e30691c642c9cc6a4089f724e805"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/thephpleague/flysystem/zipball/96fe7ec1ebed35e3dc1e1dce4bbdab2eca0140a2",
-                "reference": "96fe7ec1ebed35e3dc1e1dce4bbdab2eca0140a2",
+                "url": "https://api.github.com/repos/thephpleague/flysystem/zipball/e046fe60d761e30691c642c9cc6a4089f724e805",
+                "reference": "e046fe60d761e30691c642c9cc6a4089f724e805",
                 "shasum": ""
             },
             "require": {
@@ -838,7 +838,7 @@
                 "sftp",
                 "storage"
             ],
-            "time": "2014-10-28 11:35:42"
+            "time": "2014-11-05 13:39:29"
         },
         {
             "name": "league/fractal",

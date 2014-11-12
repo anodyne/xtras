@@ -17,16 +17,11 @@ class UserPresenter extends Presenter {
 		// Build the URL for the avatar
 		$url = Gravatar::image($this->entity->email, 500);
 
-		var_dump($url);
-		var_dump(App::environment());
-
 		if (App::environment() != 'local')
 		{
 			$url.= '&d='.urlencode(asset('images/avatars/no-avatar.jpg'));
 			$url.= '&r=pg';
 		}
-
-		var_dump($url);
 
 		// Merge all the options to pass them to the partial
 		$mergedOptions = $options + ['url' => $url];

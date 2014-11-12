@@ -17,7 +17,7 @@ class UserPresenter extends Presenter {
 		// Build the URL for the avatar
 		$url = Gravatar::image($this->entity->email, 500);
 
-		if ( ! App::environment() == 'local')
+		if (App::environment() != 'local')
 		{
 			$url.= '&d='.urlencode(asset('images/avatars/no-avatar.jpg'));
 			$url.= '&r=pg';

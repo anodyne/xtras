@@ -27,9 +27,21 @@
 		<h2>Xtras</h2>
 
 		<ul class="nav nav-pills">
-			<li class="active"><a href="#skins" data-toggle="pill">Skins</a></li>
-			<li><a href="#mods" data-toggle="pill">MODs</a></li>
-			<li><a href="#ranks" data-toggle="pill">Rank Sets</a></li>
+			<li class="active"><a href="#skins" data-toggle="pill">Skins
+				@if ($user->present()->itemsSkins->count() > 0)
+					({{ $user->present()->itemsSkins->count() }})
+				@endif
+			</a></li>
+			<li><a href="#mods" data-toggle="pill">MODs
+				@if ($user->present()->itemsMods->count() > 0)
+					({{ $user->present()->itemsMods->count() }})
+				@endif
+			</a></li>
+			<li><a href="#ranks" data-toggle="pill">Rank Sets
+				@if ($user->present()->itemsRanks->count() > 0)
+					({{ $user->present()->itemsRanks->count() }})
+				@endif
+			</a></li>
 		</ul>
 
 		<div class="tab-content">

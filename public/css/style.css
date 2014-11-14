@@ -883,7 +883,6 @@ fieldset[disabled] .btn.btn-warning.active {
   background-repeat: no-repeat;
   background-size: cover;
   background-position: top center;
-  border: 1px solid #bdbdbd;
   -webkit-border-radius: 5px 5px 0 0;
   -moz-border-radius: 5px 5px 0 0;
   border-radius: 5px 5px 0 0;

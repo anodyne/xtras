@@ -11,11 +11,8 @@ class UserPresenter extends Presenter {
 
 	public function avatar(array $options)
 	{
-		// Figure out the fallback image
-		$defaultImg = (App::environment() == 'local') ? 'retro' : asset('images/avatars/no-avatar.jpg');
-
 		// Build the URL for the avatar
-		$url = Gravatar::image($this->entity->email, 500);
+		$url = Gravatar::image($this->entity->email, 500)."&d=retro&r=pg";
 
 		if (App::environment() != 'local')
 		{

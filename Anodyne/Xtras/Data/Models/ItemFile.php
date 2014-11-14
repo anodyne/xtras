@@ -16,6 +16,8 @@ class ItemFile extends Model {
 
 	protected $presenter = 'Xtras\Data\Presenters\ItemFilePresenter';
 
+	protected $touches = ['item'];
+
 	public static $sanitizeRules = [
 		'item_id'	=> 'integer',
 		'filename'	=> 'string',

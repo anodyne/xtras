@@ -41,7 +41,7 @@
 					<div class="panel-body">
 						<p>Found an issue with this Xtra? Let the developer know by sending them a message. Make sure to be specific about what's wrong, how to reproduce the issue, and any other information you think is pertinent (MODs you have installed, what skin you're using, what browser(s) you've run across the issue in, etc.).</p>
 
-						{{ Form::open(['route' => ['item.reportIssue', $item->id]]) }}
+						{{ Form::open(['route' => ['item.reportIssue', $item->user->username, $item->slug]]) }}
 							<div class="row">
 								<div class="col-md-10">
 									<div class="form-group">
@@ -68,7 +68,7 @@
 					<div class="panel-body">
 						<p>If you think this Xtra is doing something malicious, has a virus attached to it, or is doing something that violates the Terms of Use, let Anodyne know and we'll look in to the issue further. Please include all relevant information about the abuse and any information you think is pertinent for Anodyne to know.</p>
 
-						{{ Form::open(['route' => ['item.reportAbuse', $item->id]]) }}
+						{{ Form::open(['route' => ['item.reportAbuse', $item->user->username, $item->slug]]) }}
 							<div class="row">
 								<div class="col-md-10">
 									<div class="form-group">
@@ -241,7 +241,7 @@
 
 				<p>
 					@if ( ! empty($item->support) and ! $item->supportIsEmail())
-						<a href="{{ $item->support }}" class="btn btn-block btn-default">Get Help</a>
+						<a href="{{ $item->support }}" target="_blank" class="btn btn-block btn-default">Get Help</a>
 					@else
 						<a href="#" rel="issue" class="btn btn-block btn-default">Report an Issue</a>
 					@endif

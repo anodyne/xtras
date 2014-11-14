@@ -17,6 +17,8 @@ class ItemMetadata extends Model {
 
 	protected $presenter = 'Xtras\Data\Presenters\ItemMetadataPresenter';
 
+	protected $touches = ['item'];
+
 	public static $sanitizeRules = [
 		'item_id'		=> 'integer',
 		'installation'	=> 'string',

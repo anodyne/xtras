@@ -1,5 +1,5 @@
 @if ($type == 'link')
-	<a href="{{ $link }}" class="{{ $class }}" style="background-image:url({{ $url }});background-position:top center;"></a>
+	<a href="{{ $link }}" class="{{ $class }}" style="background-image:url({{ $url }})"></a>
 @else
-	<div class="{{ $class }}" style="background-image:url({{ $url }});background-position:top center;"></div>
+	<div class="{{ $class }}" style="background-image:url({{ $url }})"></div>
 @endif

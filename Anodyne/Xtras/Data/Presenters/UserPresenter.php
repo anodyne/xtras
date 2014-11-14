@@ -11,14 +11,13 @@ class UserPresenter extends Presenter {
 
 	public function avatar(array $options)
 	{
-		// Build the URL for the avatar
-		$url = Gravatar::image($this->entity->email, 500)."&d=retro&r=pg";
+		// Figure out the default image
+		$defaultImage = (App::environment() != 'local') 
+			? urlencode(asset('images/avatars/no-avatar.jpg')) 
+			: 'retro' ;
 
-		if (App::environment() != 'local')
-		{
-			$url.= '&d='.urlencode(asset('images/avatars/no-avatar.jpg'));
-			$url.= '&r=pg';
-		}
+		// Build the URL for the avatar
+		$url = Gravatar::image($this->entity->email, 500)."&r=pg&d={$defaultImage}";
 
 		// Merge all the options to pass them to the partial
 		$mergedOptions = $options + ['url' => $url];

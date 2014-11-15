@@ -278,6 +278,20 @@ class AdminController extends BaseController {
 		return json_encode(['code' => 1]);
 	}
 
+	public function ajaxCheckSlug($slug)
+	{
+		// Try to find any items
+		$items = $this->users->findItemsBySlug($this->currentUser, $slug);
+
+		// If we already have something, no dice...
+		if ($items->count() > 0)
+		{
+			return json_encode(['code' => 0]);
+		}
+
+		return json_encode(['code' => 1]);
+	}
+
 	public function ajaxUpdateField()
 	{
 		// Get the item

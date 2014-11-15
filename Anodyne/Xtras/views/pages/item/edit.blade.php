@@ -131,3 +131,23 @@
 		</div>
 	{{ Form::close() }}
 @stop
+
+@section('scripts')
+	<script>
+		$('[name="slug"]').on('change', function()
+		{
+			$.ajax({
+				url: "{{ URL::to('item/ajax/checkSlug') }}/" + $(this).val(),
+				dataType: "json",
+				success: function(data)
+				{
+					if (data.code == 0)
+					{
+						alert("You already have an Xtra with that slug. Please choose a different slug!");
+						$('[name="slug"]').val('');
+					}
+				}
+			});
+		});
+	</script>
+@stop

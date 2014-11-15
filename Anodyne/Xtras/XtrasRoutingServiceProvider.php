@@ -243,6 +243,10 @@ class XtrasRoutingServiceProvider extends ServiceProvider {
 				'before'	=> 'auth',
 				'as'		=> 'item.ajax.checkName',
 				'uses'		=> 'AdminController@ajaxCheckName']);
+			Route::get('ajax/checkSlug/{slug}', [
+				'before'	=> 'auth',
+				'as'		=> 'item.ajax.checkSlug',
+				'uses'		=> 'AdminController@ajaxCheckSlug']);
 			Route::post('ajax/rate', [
 				'before'	=> 'auth',
 				'as'		=> 'item.ajax.rate',

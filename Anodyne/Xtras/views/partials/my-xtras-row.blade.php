@@ -2,7 +2,7 @@
 @foreach ($items as $item)
 	<div class="row {{ $item->product->present()->nameAsSlug }}">
 		<div class="col-md-8">
-			<p class="lead">{{ $item->present()->nameWithVersion }}</p>
+			<p class="lead">{{ $item->present()->name }}</p>
 			<p>{{ $item->present()->ratingAsLabel }}</p>
 			{{ $item->present()->disabledLabel }}
 			{{ $item->present()->adminDisabledLabel }}

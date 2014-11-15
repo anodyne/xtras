@@ -27,6 +27,15 @@
 		</div>
 
 		<div class="row">
+			<div class="col-md-4">
+				<div class="form-group">
+					<label class="control-label">Slug</label>
+					{{ Form::text('slug', null, ['class' => 'form-control']) }}
+				</div>
+			</div>
+		</div>
+
+		<div class="row">
 			<div class="col-md-2">
 				<div class="form-group{{ ($errors->has('version')) ? ' has-error' : '' }}">
 					<label class="control-label">Version</label>

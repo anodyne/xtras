@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset
+      xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
+            http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+
+	<url>
+		<loc>http://xtras.anodyne-productions.com/</loc>
+		<changefreq>daily</changefreq>
+	</url>
+	<url>
+		<loc>http://xtras.anodyne-productions.com/login</loc>
+		<changefreq>monthly</changefreq>
+	</url>
+	<url>
+		<loc>http://xtras.anodyne-productions.com/skins</loc>
+		<changefreq>daily</changefreq>
+	</url>
+	<url>
+		<loc>http://xtras.anodyne-productions.com/mods</loc>
+		<changefreq>daily</changefreq>
+	</url>
+	<url>
+		<loc>http://xtras.anodyne-productions.com/ranks</loc>
+		<changefreq>daily</changefreq>
+	</url>
+	<url>
+		<loc>http://xtras.anodyne-productions.com/search/advanced</loc>
+		<changefreq>monthly</changefreq>
+	</url>
+	<url>
+		<loc>http://xtras.anodyne-productions.com/faq</loc>
+		<changefreq>monthly</changefreq>
+	</url>
+	<url>
+		<loc>http://xtras.anodyne-productions.com/policies</loc>
+		<changefreq>monthly</changefreq>
+	</url>
+	<url>
+		<loc>http://xtras.anodyne-productions.com/policies/terms</loc>
+		<changefreq>monthly</changefreq>
+	</url>
+	<url>
+		<loc>http://xtras.anodyne-productions.com/policies/privacy</loc>
+		<changefreq>monthly</changefreq>
+	</url>
+	<url>
+		<loc>http://xtras.anodyne-productions.com/policies/browsers</loc>
+		<changefreq>monthly</changefreq>
+	</url>
+	<url>
+		<loc>http://xtras.anodyne-productions.com/markdown</loc>
+		<changefreq>monthly</changefreq>
+	</url>
+</urlset>

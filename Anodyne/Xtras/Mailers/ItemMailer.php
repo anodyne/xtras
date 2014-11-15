@@ -84,11 +84,11 @@ class ItemMailer extends BaseMailer {
 			$user = $this->users->find($data['user_id']);
 
 			$emailData = [
-				'subject' => "[Abuse] Xtra Abuse Report - ".$item->present()->name,
+				'subject' => "Xtra Abuse Report - ".$item->present()->name,
 				'content' => $data['content'],
 				'from' => $user->present()->email,
 				'replyTo' => $user->present()->email,
-				'to' => config('anodyne.email.abuse'),
+				'to' => config('anodyne.email.general'),
 				'name' => HTML::link(route('item.show', [$item->user->username, $item->slug]), $item->present()->name),
 				'type' => $item->present()->type,
 				'userName' => $user->present()->name,

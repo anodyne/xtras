@@ -3,7 +3,7 @@
 @section('content')
 	<h1>Abuse Report</h1>
 
-	<p>A user has reported an Xtra of abuse. The information about the Xtra is below as well as comments from the reporting user.</p>
+	<p>A user has reported some form of abuse with an Xtra. The information about the Xtra is below as well as comments from the reporting user.</p>
 
 	<hr>
 		

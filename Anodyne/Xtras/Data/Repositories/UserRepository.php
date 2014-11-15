@@ -103,7 +103,7 @@ class UserRepository implements UserRepositoryInterface {
 		{
 			$itemsArr[$item->type->name][$item->product->name][] = $item;
 
-			ksort($itemsArr[$item->type->name]);
+			krsort($itemsArr[$item->type->name]);
 		}
 
 		return $itemsArr;

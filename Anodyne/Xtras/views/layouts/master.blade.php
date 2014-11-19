@@ -159,6 +159,7 @@
 						<ul class="list-unstyled">
 							<li><a href="{{ route('policies') }}">Site Policies</a></li>
 							<li><a href="{{ route('faq') }}">FAQs</a></li>
+							<li><a href="{{ route('markdown') }}">Markdown Guide</a></li>
 							<li><a href="#" class="js-contact">Contact</a></li>
 							<li><a href="{{ config('anodyne.links.www') }}">Anodyne</a></li>
 						</ul>

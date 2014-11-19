@@ -48,6 +48,13 @@
 
 			<h3>Why can&rsquo;t I create a rank set Xtra?</h3>
 			<p>Because of how complicated the rank system is in Nova 1 and 2, there are a limited number of users with access to create rank set Xtras. In the future, when Nova 3 is released, we'll open it up to more people. If you have a rank set you'd like to share, contact us and we'll consider providing you access to create a new rank set Xtra.</p>
+
+			<hr class="partial-split">
+
+			<h3>I have an Xtra that I'm releasing for multiple versions of Nova, but when I try to create the second version, it tells me I already have an Xtra with that name. Help!</h3>
+			<p>We use slugs for identifying specific Xtras. What that means is that we take the name of an Xtra and replace spaces with dashes (-) and strip special characters. So if you have an Xtra name "My Awesome Xtra", it's slug will be "my-awesome-xtra". If you try to create "My Awesome Xtra" for Nova 1 and then "My Awesome Xtra" for Nova 2, it won't let you create the second version because you already have an Xtra with the slug of "my-awesome-xtra".</p>
+
+			<p>To get around this limitation (something we had to figure out for all of our own Xtras), name your Xtras with a Nova version number: "My Awesome Xtra Nova 1". After you've created the Xtra, upload the file, and uploaded your preview images, go back and edit the Xtra and remove the "Nova 1" piece of the name. The slug won't change, so the slug will remain "my-awesome-xtra-nova-1", but you'll have a cleaner name.</p>
 		</div>
 
 		<div id="updating" class="tab-pane">

@@ -1,2 +1,18 @@
 User-agent: *
-Disallow: 
+Disallow: /login
+Disallow: /logout
+Disallow: /item/messages/*
+Disallow: /item/files/*
+Disallow: /item/images/*
+Disallow: /item/admin/*
+Disallow: /item/ajax/*
+Disallow: /item/create
+Disallow: /item/*/*/edit
+Disallow: /item/*/*/quick-update
+Disallow: /item/*/*/download
+Disallow: /my-xtras
+Disallow: /my-downloads
+Disallow: /notifications
+Disallow: /notifications/add
+Disallow: /notifications/remove
+Disallow: /admin/*

@@ -159,6 +159,7 @@
 						<ul class="list-unstyled">
 							<li><a href="{{ route('policies') }}">Site Policies</a></li>
 							<li><a href="{{ route('faq') }}">FAQs</a></li>
+							<li><a href="{{ route('markdown') }}">Markdown Guide</a></li>
 							<li><a href="#" class="js-contact">Contact</a></li>
 							<li><a href="{{ config('anodyne.links.www') }}">Anodyne</a></li>
 						</ul>
@@ -196,5 +197,16 @@
 			});
 		</script>
 		@yield('scripts')
+		@if (App::environment() == 'production')
+			<script>
+				(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+				(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+				m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+				})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+				ga('create', 'UA-36909106-3', 'auto');
+				ga('send', 'pageview');
+			</script>
+		@endif
 	</body>
 </html>

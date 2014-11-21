@@ -5,7 +5,7 @@ use App,
 	View,
 	Event,
 	Config;
-use Parsedown;
+use ParsedownExtra;
 use Ikimea\Browser\Browser;
 use League\Flysystem\Filesystem,
 	League\Flysystem\Adapter\Local;
@@ -89,7 +89,7 @@ class XtrasServiceProvider extends ServiceProvider {
 	{
 		$this->app['markdown'] = $this->app->share(function($app)
 		{
-			return new Services\MarkdownService(new Parsedown);
+			return new Services\MarkdownService(new ParsedownExtra);
 		});
 	}
 

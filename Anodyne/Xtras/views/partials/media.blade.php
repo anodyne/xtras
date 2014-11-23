@@ -1,6 +1,6 @@
 <div class="xtra">
 	@if ( ! empty($item->metadata->image1))
-		<?php $preview = 'assets/'.$item->metadata->image1;?>
+		<?php $preview = '/assets/'.$item->metadata->image1;?>
 	@else
 		<?php $preview = asset('images/previews/space'.rand(1, 13).'.jpg');?>
 	@endif

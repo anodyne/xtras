@@ -235,7 +235,7 @@
 
 		<div class="col-md-3">
 			@if (Auth::check())
-				@if ($item->present()->active)
+				@if ($item->present()->active and $item->getLatestVersion()['files'] !== null)
 					<p>{{ $item->present()->downloadBtn }}</p>
 				@endif
 

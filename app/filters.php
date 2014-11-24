@@ -80,6 +80,14 @@ Route::filter('csrf', function()
 {
 	if ( ! StringUtils::equals(Session::token(), Input::get('_token')))
 	{
+		$user = (Auth::user()) ? Auth::user()->name : false;
+
+		$browser = App::make('xtras.browser');
+
+		Log::error("Token Mismatch (User): {$user}");
+		Log::error("Token Mismatch (Request): {Request::url()}");
+		Log::error("Token Mismatch (Browser): ".$browser->getBrowser()." ".$browser->getVersion());
+
 		throw new Illuminate\Session\TokenMismatchException;
 	}
 });

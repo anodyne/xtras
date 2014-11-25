@@ -82,7 +82,7 @@ Route::filter('csrf', function()
 	{
 		$user = (Auth::user()) ? Auth::user()->name : false;
 
-		$browser = App::make('xtras.browser');
+		$browser = App::make('browser');
 
 		Log::error("Token Mismatch (User): {$user}");
 		Log::error("Token Mismatch (Request): {Request::instance()->fullUrl()}");

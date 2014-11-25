@@ -85,7 +85,7 @@ Route::filter('csrf', function()
 		$browser = App::make('browser');
 
 		Log::error("Token Mismatch (User): {$user}");
-		Log::error("Token Mismatch (Request): {Request::instance()->fullUrl()}");
+		Log::error("Token Mismatch (Request): ".Request::instance()->fullUrl());
 		Log::error("Token Mismatch (Browser): ".$browser->getBrowser()." ".$browser->getVersion());
 
 		throw new Illuminate\Session\TokenMismatchException;

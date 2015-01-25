@@ -41,9 +41,20 @@ Log::useDailyFiles(storage_path().'/logs/'.$logFile);
 |
 */
 
+App::missing(function($exception)
+{
+	return Response::view('errors.missing', [], 404);
+});
+
 App::error(function(Exception $exception, $code)
 {
 	Log::error("URL: ".Request::instance()->fullUrl());
+
+	if (Auth::check())
+	{
+		Log::error("USER: ".Auth::user()->name);
+	}
+
 	Log::error($exception);
 });
 

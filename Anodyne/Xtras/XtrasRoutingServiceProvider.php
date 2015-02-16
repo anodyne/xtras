@@ -17,6 +17,7 @@ class XtrasRoutingServiceProvider extends ServiceProvider {
 		$this->searchRoutes();
 		$this->accountRoutes();
 		$this->adminRoutes();
+		//$this->redirectedRoutes();
 	}
 
 	protected function routeProtections()
@@ -320,6 +321,28 @@ class XtrasRoutingServiceProvider extends ServiceProvider {
 				'as'	=> 'admin.report.users',
 				'uses'	=> 'ReportController@users']);
 		});
+	}
+
+	public function redirectedRoutes()
+	{
+		Route::get('nova1', 'Xtras\Controllers\RedirectController@nova1');
+		Route::get('nova2', 'Xtras\Controllers\RedirectController@nova2');
+		Route::get('index.php/nova/languages', 'Xtras\Controllers\RedirectController@search');
+		Route::get('main', 'Xtras\Controllers\RedirectController@home');
+		Route::get('index.php/sms/utilities', 'Xtras\Controllers\RedirectController@search');
+		Route::get('index.php/checkout/cart', 'Xtras\Controllers\RedirectController@home');
+		Route::get('index.php/notifications/add', 'Xtras\Controllers\RedirectController@home');
+		Route::get('index.php/nova/ranks', 'Xtras\Controllers\RedirectController@ranks');
+		Route::get('index.php/sms/mods', 'Xtras\Controllers\RedirectController@home');
+		Route::get('index.php/sms/index', 'Xtras\Controllers\RedirectController@home');
+		Route::get('index.php/sms/ranks', 'Xtras\Controllers\RedirectController@home');
+		
+		Route::get('wp-admin', 'Xtras\Controllers\RedirectController@home');
+		Route::get('test/wp-admin', 'Xtras\Controllers\RedirectController@home');
+		Route::get('wordpress/wp-admin', 'Xtras\Controllers\RedirectController@home');
+		Route::get('blog/wp-admin', 'Xtras\Controllers\RedirectController@home');
+		Route::get('old/wp-admin', 'Xtras\Controllers\RedirectController@home');
+		Route::get('wp/wp-admin', 'Xtras\Controllers\RedirectController@home');
 	}
 
 }

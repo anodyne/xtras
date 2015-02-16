@@ -48,14 +48,24 @@ App::missing(function($exception)
 
 App::error(function(Exception $exception, $code)
 {
-	Log::error("URL: ".Request::instance()->fullUrl());
-
-	if (Auth::check())
+	if ($code == 404)
 	{
-		Log::error("USER: ".Auth::user()->name);
-	}
+		Log::notice("404 Not Found");
+		Log::notice("URL: ".Request::instance()->fullUrl());
+		Log::notice("Referrer: ".@$_SERVER['HTTP_REFERER']);
 
-	Log::error($exception);
+		if (Auth::check())
+			Log::notice("USER: ".Auth::user()->name);
+	}
+	else
+	{
+		Log::error("URL: ".Request::instance()->fullUrl());
+
+		if (Auth::check())
+			Log::error("USER: ".Auth::user()->name);
+
+		Log::error($exception);
+	}
 });
 
 App::error(function(Xtras\Exceptions\FormValidationException $exception, $code)

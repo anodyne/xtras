@@ -214,6 +214,7 @@
 											{{ Form::button('Submit', ['type' => 'submit', 'id' => 'commentSubmit', 'class' => 'btn btn-default', 'disabled' => 'disabled']) }}
 										</div>
 									</div>
+									{{ Form::hidden('_token', csrf_token()) }}
 								{{ Form::close() }}
 							</div>
 						</div>

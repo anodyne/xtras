@@ -70,6 +70,7 @@
 							<li><a href="{{ config('anodyne.links.nova') }}">Nova<div class="arrow"></div></a></li>
 							<li><a href="{{ route('home') }}" class="active">Xtras<div class="arrow"></div></a></li>
 							<li><a href="{{ config('anodyne.links.forums') }}">Forums<div class="arrow"></div></a></li>
+							<li><a href="{{ config('anodyne.links.help') }}">Help<div class="arrow"></div></a></li>
 						</ul>
 					</div>
 				</nav>
@@ -158,8 +159,8 @@
 					<div class="col-md-2">
 						<ul class="list-unstyled">
 							<li><a href="{{ route('policies') }}">Site Policies</a></li>
-							<li><a href="{{ route('faq') }}">FAQs</a></li>
-							<li><a href="{{ route('markdown') }}">Markdown Guide</a></li>
+							<li><a href="{{ config('anodyne.links.help') }}product/xtras">FAQs</a></li>
+							<li><a href="{{ config('anodyne.links.help') }}article/anodyne/markdown-guide">Markdown Guide</a></li>
 							<li><a href="#" class="js-contact">Contact</a></li>
 							<li><a href="{{ config('anodyne.links.www') }}">Anodyne</a></li>
 						</ul>

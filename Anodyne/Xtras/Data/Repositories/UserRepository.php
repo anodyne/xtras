@@ -189,23 +189,26 @@ class UserRepository implements UserRepositoryInterface {
 
 		foreach ($users as $user)
 		{
-			$report[$user->id]['user'] = $user;
-			$report[$user->id]['prettySize'] = "N/A";
-
-			foreach ($user->items as $item)
+			if ($user->items->count() > 0)
 			{
-				foreach ($item->files as $file)
-				{
-					if (array_key_exists('size', $report[$user->id]))
-					{
-						$report[$user->id]['size'] += (int) $file->size;
-					}
-					else
-					{
-						$report[$user->id]['size'] = (int) $file->size;
-					}
+				$report[$user->id]['user'] = $user;
+				$report[$user->id]['prettySize'] = "N/A";
 
-					$report[$user->id]['prettySize'] = convertFileSize($report[$user->id]['size']);
+				foreach ($user->items as $item)
+				{
+					foreach ($item->files as $file)
+					{
+						if (array_key_exists('size', $report[$user->id]))
+						{
+							$report[$user->id]['size'] += (int) $file->size;
+						}
+						else
+						{
+							$report[$user->id]['size'] = (int) $file->size;
+						}
+
+						$report[$user->id]['prettySize'] = convertFileSize($report[$user->id]['size']);
+					}
 				}
 			}
 		}

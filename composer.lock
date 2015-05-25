@@ -2476,21 +2476,21 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/raveren/kint.git",
-                "reference": "a3bf96302b49d2d0a98964d44a3a43b14a7ee4e9"
+                "reference": "539bee2ca139b45916ea9e6c4ede6c5d82db7ff7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/raveren/kint/zipball/a3bf96302b49d2d0a98964d44a3a43b14a7ee4e9",
-                "reference": "a3bf96302b49d2d0a98964d44a3a43b14a7ee4e9",
+                "url": "https://api.github.com/repos/raveren/kint/zipball/539bee2ca139b45916ea9e6c4ede6c5d82db7ff7",
+                "reference": "539bee2ca139b45916ea9e6c4ede6c5d82db7ff7",
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.2.0"
+                "php": ">=5.1.0"
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "0.9-dev"
+                    "dev-master": "1.0.x-dev"
                 }
             },
             "autoload": {
@@ -2519,7 +2519,7 @@
                 "kint",
                 "php"
             ],
-            "time": "2015-02-03 12:50:22"
+            "time": "2015-05-21 14:57:15"
         },
         {
             "name": "symfony/var-dumper",

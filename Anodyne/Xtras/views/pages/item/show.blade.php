@@ -199,8 +199,8 @@
 							</div>
 							<div class="panel-body">
 								<p>If you have an issue with this Xtra, please use the Report Issue button at the top of the page. Comments should be used to ask questions or commend the author on their work.</p>
-								
-								{{ Form::open(['id' => 'commentsModal', 'route' => ['item.comment.store', $item->id]]) }}
+
+								<form action="{{ route('item.comment.store', [$item->id]) }}" id="commentsModal" method="POST">
 									<div class="row">
 										<div class="col-md-10">
 											<div class="form-group">
@@ -214,8 +214,8 @@
 											{{ Form::button('Submit', ['type' => 'submit', 'id' => 'commentSubmit', 'class' => 'btn btn-default', 'disabled' => 'disabled']) }}
 										</div>
 									</div>
-									{{ Form::hidden('_token', csrf_token()) }}
-								{{ Form::close() }}
+									{{ Form::token() }}
+								</form>
 							</div>
 						</div>
 

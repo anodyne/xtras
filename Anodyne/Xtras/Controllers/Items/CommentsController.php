@@ -1,6 +1,7 @@
 <?php namespace Xtras\Controllers\Items;
 
-use Event,
+use View,
+	Event,
 	Flash,
 	Input,
 	Redirect,
@@ -14,8 +15,18 @@ class CommentsController extends BaseController {
 	public function __construct(ItemRepositoryInterface $items)
 	{
 		parent::__construct();
-		
+
 		$this->items = $items;
+	}
+
+	public function create($itemId)
+	{
+		// Get the item
+		$item = $this->items->find($itemId);
+
+		return View::make('pages.item.comment-create')
+			->withItem($item)
+			->withComments($item->comments->sortByDesc('created_at'));
 	}
 
 	public function store($itemId)

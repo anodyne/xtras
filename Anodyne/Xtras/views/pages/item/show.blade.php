@@ -188,34 +188,7 @@
 					<div id="comments" class="tab-pane">
 						<div class="btn-toolbar">
 							<div class="btn-group">
-								<a href="#" rel="comment" class="btn btn-default">Add a Comment</a>
-							</div>
-						</div>
-
-						<div class="panel panel-default hide" id="commentPanel">
-							<div class="panel-heading">
-								<button type="button" class="close">&times;</button>
-								<h2 class="panel-title"><span class="tab-icon tab-icon-up1">{{ $_icons['comment'] }}</span>Add a Comment</h2>
-							</div>
-							<div class="panel-body">
-								<p>If you have an issue with this Xtra, please use the Report Issue button at the top of the page. Comments should be used to ask questions or commend the author on their work.</p>
-
-								<form action="{{ route('item.comment.store', [$item->id]) }}" id="commentsModal" method="POST">
-									<div class="row">
-										<div class="col-md-10">
-											<div class="form-group">
-												{{ Form::textarea('content', null, ['class' => 'form-control', 'rows' => 5]) }}
-												<p class="help-block text-sm">{{ $_icons['markdown'] }} Parsed as Markdown</p>
-											</div>
-										</div>
-									</div>
-									<div class="row">
-										<div class="col-md-12">
-											{{ Form::button('Submit', ['type' => 'submit', 'id' => 'commentSubmit', 'class' => 'btn btn-default', 'disabled' => 'disabled']) }}
-										</div>
-									</div>
-									{{ Form::token() }}
-								</form>
+								<a href="{{ route('item.comment.create', [$item->id]) }}" class="btn btn-default">Add a Comment</a>
 							</div>
 						</div>
 
@@ -324,12 +297,6 @@
 			$('#abusePanel').removeClass('hide');
 		});
 
-		$('[rel="comment"]').on('click', function(e)
-		{
-			e.preventDefault();
-			$('#commentPanel').removeClass('hide');
-		});
-
 		$('.js-notification').on('change', function(e)
 		{
 			var send = {
@@ -354,14 +321,6 @@
 					data: send
 				});
 			}
-		});
-
-		$('#commentsModal [name="content"]').on('keyup', function(e)
-		{
-			if ($('#commentsModal [name="content"]').val() != "")
-				$('#commentSubmit').prop('disabled', '');
-			else
-				$('#commentSubmit').prop('disabled', 'disabled');
 		});
 
 		$(document).ready(function()

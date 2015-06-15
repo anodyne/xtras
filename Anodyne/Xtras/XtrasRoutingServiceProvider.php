@@ -126,7 +126,7 @@ class XtrasRoutingServiceProvider extends ServiceProvider {
 				'as'	=> 'item.messages.index',
 				'uses'	=> 'MessagesController@index']);
 		});
-		
+
 		$filesOptions = [
 			'before'	=> 'auth',
 			'prefix'	=> 'item/files',
@@ -230,7 +230,7 @@ class XtrasRoutingServiceProvider extends ServiceProvider {
 				'before'	=> 'auth',
 				'as'		=> 'item.download',
 				'uses'		=> 'ItemController@download']);
-			
+
 			Route::post('{author}/{slug}/report-issue', [
 				'before'	=> 'auth',
 				'as'		=> 'item.reportIssue',
@@ -239,7 +239,7 @@ class XtrasRoutingServiceProvider extends ServiceProvider {
 				'before'	=> 'auth',
 				'as'		=> 'item.reportAbuse',
 				'uses'		=> 'ItemController@reportAbuse']);
-			
+
 			Route::get('ajax/checkName/{name}', [
 				'before'	=> 'auth',
 				'as'		=> 'item.ajax.checkName',
@@ -257,6 +257,10 @@ class XtrasRoutingServiceProvider extends ServiceProvider {
 				'as'		=> 'item.ajax.updateField',
 				'uses'		=> 'AdminController@ajaxUpdateField']);
 
+			Route::get('comments/{itemId}/create', [
+				'as'		=> 'item.comment.create',
+				'before'	=> 'auth',
+				'uses'		=> 'CommentsController@create']);
 			Route::post('comments/{itemId}', [
 				'as'		=> 'item.comment.store',
 				'before'	=> 'auth',
@@ -336,7 +340,7 @@ class XtrasRoutingServiceProvider extends ServiceProvider {
 		Route::get('index.php/sms/mods', 'Xtras\Controllers\RedirectController@home');
 		Route::get('index.php/sms/index', 'Xtras\Controllers\RedirectController@home');
 		Route::get('index.php/sms/ranks', 'Xtras\Controllers\RedirectController@home');
-		
+
 		Route::get('wp-admin', 'Xtras\Controllers\RedirectController@home');
 		Route::get('test/wp-admin', 'Xtras\Controllers\RedirectController@home');
 		Route::get('wordpress/wp-admin', 'Xtras\Controllers\RedirectController@home');

@@ -44,14 +44,14 @@ class ItemMailer extends BaseMailer {
 	public function notifyForNewVersion($item)
 	{
 		// Get the people who want to be notified
-		$users = $item->notifications;
+		$notifications = $item->notifications;
 
-		if ($users->count() > 0)
+		if ($notifications->count() > 0)
 		{
 			// Get the users' email addresses
-			foreach ($users as $user)
+			foreach ($notifications as $notify)
 			{
-				$emails[$user->id] = $user->email;
+				$emails[$notify->user->id] = $notify->user->email;
 			}
 
 			// Make sure we only have the values

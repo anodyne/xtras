@@ -60,7 +60,7 @@ class ItemMailer extends BaseMailer {
 			$emailData = [
 				'subject' => "Xtra Updated - ".$item->present()->name,
 				'from' => config('anodyne.email.general'),
-				'replyTo' => $user->present()->email,
+				'replyTo' => $item->user->present()->email,
 				'bcc' => $emailsArr,
 				'name' => HTML::link(route('item.show', [$item->user->username, $item->slug]), $item->present()->name),
 				'type' => $item->present()->type,

@@ -36,6 +36,50 @@ class ItemPresenter extends Presenter {
 		return HTML::link("profile/{$this->entity->user->username}", $this->entity->user->present()->name);
 	}
 
+	public function awards()
+	{
+		$output = "";
+
+		if ((bool) $this->entity->award_creativity)
+		{
+			$output.= '<span class="award award-creativity"></span>';
+		}
+
+		if ((bool) $this->entity->award_presentation)
+		{
+			$output.= '<span class="award award-presentation"></span>';
+		}
+
+		if ((bool) $this->entity->award_technical)
+		{
+			$output.= '<span class="award award-technical"></span>';
+		}
+
+		return $output;
+	}
+
+	public function awardIcons()
+	{
+		$output = "";
+
+		if ((bool) $this->entity->award_creativity)
+		{
+			$output.= '<span class="text-award-creativity">'.Config::get('icons.award').'</span> ';
+		}
+
+		if ((bool) $this->entity->award_presentation)
+		{
+			$output.= '<span class="text-award-presentation">'.Config::get('icons.award').'</span> ';
+		}
+
+		if ((bool) $this->entity->award_technical)
+		{
+			$output.= '<span class="text-award-technical">'.Config::get('icons.award').'</span> ';
+		}
+
+		return $output;
+	}
+
 	public function commentsCount()
 	{
 		return "({$this->entity->comments->count()})";

@@ -4,8 +4,12 @@
 	@else
 		<?php $preview = asset('images/previews/space'.rand(1, 13).'.jpg');?>
 	@endif
-	
+
 	{{ View::make('partials.image')->withType(false)->withUrl($preview)->withClass('item-preview') }}
+
+	<div class="xtra-awards">
+		{{ $item->present()->awardIcons }}
+	</div>
 
 	{{ $item->user->present()->avatar(['type' => 'link', 'link' => route('account.profile', [$item->user->username]), 'class' => 'avatar xtra-avatar img-circle']) }}
 

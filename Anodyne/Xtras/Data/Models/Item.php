@@ -13,24 +13,28 @@ class Item extends Model {
 	protected $table = 'items';
 
 	protected $fillable = ['user_id', 'type_id', 'product_id', 'name', 'slug',
-		'desc', 'support', 'version', 'rating', 'status', 'admin_status'];
+		'desc', 'support', 'version', 'rating', 'status', 'admin_status',
+		'award_creativity', 'award_presentation', 'award_technical'];
 
 	protected $dates = ['created_at', 'updated_at', 'deleted_at'];
 
 	protected $presenter = 'Xtras\Data\Presenters\ItemPresenter';
 
 	public static $sanitizeRules = [
-		'user_id'		=> 'integer',
-		'type_id'		=> 'integer',
-		'product_id'	=> 'integer',
-		'name'			=> 'string',
-		'slug'			=> 'string',
-		'desc'			=> 'string',
-		'support'		=> 'string',
-		'version'		=> 'string',
-		'rating'		=> 'float',
-		'status'		=> 'integer',
-		'admin_status'	=> 'integer',
+		'user_id'				=> 'integer',
+		'type_id'				=> 'integer',
+		'product_id'			=> 'integer',
+		'name'					=> 'string',
+		'slug'					=> 'string',
+		'desc'					=> 'string',
+		'support'				=> 'string',
+		'version'				=> 'string',
+		'rating'				=> 'float',
+		'status'				=> 'integer',
+		'admin_status'			=> 'integer',
+		'award_creativity'		=> 'integer',
+		'award_presentation'	=> 'integer',
+		'award_technical'		=> 'integer',
 	];
 
 	/*

@@ -32,6 +32,8 @@
 
 			<div>{{ $item->present()->description }}</div>
 
+			<p>{{ $item->present()->awards }}</p>
+
 			@if (Auth::check())
 				<div class="panel panel-warning hide" id="issuePanel">
 					<div class="panel-heading">

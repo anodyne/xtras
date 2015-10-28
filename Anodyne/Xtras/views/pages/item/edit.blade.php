@@ -121,6 +121,19 @@
 					</div>
 				</div>
 			</div>
+
+			<div class="row">
+				<div class="col-xs-12">
+					<div class="form-group">
+						<label class="control-label">Awards</label>
+						<div>
+							<label class="checkbox-inline">{{ Form::checkbox('award_creativity', (int) true) }} Outstanding Creativity</label>
+							<label class="checkbox-inline">{{ Form::checkbox('award_presentation', (int) true) }} Outstanding Presentation</label>
+							<label class="checkbox-inline">{{ Form::checkbox('award_technical', (int) true) }} Technical Achievement</label>
+						</div>
+					</div>
+				</div>
+			</div>
 		@endif
 
 		<div class="btn-toolbar">

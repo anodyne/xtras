@@ -3,6 +3,7 @@
 return [
 
 	'add' => '<span class="icn" data-icon="+"></span>',
+	'award' => '<span class="icn" data-icon="a"></span>',
 
 	//'back' => '<span class="icn" data-icon="<"></span>',
 	//'bug' => '<span class="octicon octicon-bug"></span>',

@@ -16,6 +16,10 @@
 		{{ partial('global_styles') }}
 		{{ HTML::style('css/style.css') }}
 		{{ HTML::style('css/fonts.css') }}
+
+		<!-- High pixel density displays -->
+		<link rel='stylesheet' href='{{ URL::asset('css/hidpi2x.css') }}' media='only screen and (-moz-min-device-pixel-ratio: 2), only screen and (-o-min-device-pixel-ratio: 2/1), only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (min-device-pixel-ratio: 2)'>
+
 		@yield('styles')
 	</head>
 	<body>

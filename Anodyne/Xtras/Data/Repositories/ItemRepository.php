@@ -801,6 +801,36 @@ class ItemRepository implements ItemRepositoryInterface {
 				unset($data['admin_status']);
 			}
 
+			if (array_key_exists('award_creativity', $data) and ! Auth::user()->can('xtras.admin'))
+			{
+				unset($data['award_creativity']);
+			}
+			
+			if (array_key_exists('award_presentation', $data) and ! Auth::user()->can('xtras.admin'))
+			{
+				unset($data['award_presentation']);
+			}
+			
+			if (array_key_exists('award_technical', $data) and ! Auth::user()->can('xtras.admin'))
+			{
+				unset($data['award_technical']);
+			}
+
+			if ( ! array_key_exists('award_creativity', $data))
+			{
+				$data['award_creativity'] = 0;
+			}
+
+			if ( ! array_key_exists('award_presentation', $data))
+			{
+				$data['award_presentation'] = 0;
+			}
+
+			if ( ! array_key_exists('award_technical', $data))
+			{
+				$data['award_technical'] = 0;
+			}
+
 			// Fill and save the item
 			$item->fill($data)->save();
 

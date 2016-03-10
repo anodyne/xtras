@@ -16,6 +16,7 @@
 		{{ partial('global_styles') }}
 		{{ HTML::style('css/style.css') }}
 		{{ HTML::style('css/fonts.css') }}
+		{{ HTML::style('css/responsive.css') }}
 
 		<!-- High pixel density displays -->
 		<link rel='stylesheet' href='{{ URL::asset('css/hidpi2x.css') }}' media='only screen and (-moz-min-device-pixel-ratio: 2), only screen and (-o-min-device-pixel-ratio: 2/1), only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (min-device-pixel-ratio: 2)'>
@@ -24,115 +25,65 @@
 	</head>
 	<body>
 		<div class="wrapper">
-			<div class="visible-xs visible-sm">
-				{{ View::make('pages.mobile') }}
-			</div>
-			<div class="visible-md visible-lg">
-				<nav class="nav-main">
-					<div class="container">
-						<ul class="pull-right">
-							<li><a href="#" class="js-contact">Contact</a></li>
+			{{ partial('nav-main') }}
 
-							@if (Auth::check())
-								<li class="dropdown">
-									<a href="#" data-toggle="dropdown" class="dropdown-toggle"><span class="user-icon">{{ $_icons['user'] }}</span> {{ $_currentUser->present()->name }} <span class="caret"></span></a>
-									<ul class="dropdown-menu dropdown-menu-right dd">
+			<header>
+				<div class="container">
+					<div class="row">
+						<div class="col-md-4">
+							<a href="{{ route('home') }}" class="brand">AnodyneXtras</a>
+						</div>
+
+						<div class="col-md-8">
+							<nav class="nav-sub">
+								<ul>
+									<li><a href="{{ route('skins') }}">Skins</a></li>
+									<li><a href="{{ route('mods') }}">MODs</a></li>
+									<li><a href="{{ route('ranks') }}">Ranks</a></li>
+									<li><a href="{{ route('search.advanced') }}">Advanced Search</a></li>
+
+									@if (Auth::check())
 										<li><a href="{{ route('account.xtras') }}">My Xtras</a></li>
-										
-										@if ($_currentUser->can('xtras.item.create') or $_currentUser->can('xtras.admin'))
-											<li><a href="{{ route('item.create') }}">Create New Xtra</a></li>
-										@endif
-										<li class="divider"></li>
-										<li><a href="{{ route('account.profile', [$_currentUser->username]) }}">My Profile</a></li>
-										<li><a href="{{ config('anodyne.links.www') }}admin/users/{{ $_currentUser->username }}/edit">Edit My Profile</a></li>
-										<li class="divider"></li>
-										<li><a href="{{ route('account.downloads') }}">My Downloads</a></li>
-										<li><a href="{{ route('account.notifications') }}">My Notifications</a></li>
-
-										@if ($_currentUser->can('xtras.admin'))
-											<li class="divider"></li>
-											<li><a href="{{ route('item.admin') }}">Manage Items</a></li>
-											<li><a href="{{ route('admin.products.index') }}">Manage Products</a></li>
-											<li><a href="{{ route('admin.types.index') }}">Manage Item Types</a></li>
-											<li class="divider"></li>
-											<li><a href="{{ route('admin.report.items') }}">Item Size Report</a></li>
-											<li><a href="{{ route('admin.report.users') }}">User Size Report</a></li>
-										@endif
-
-										<li class="divider"></li>
-										<li><a href="{{ route('logout') }}">Logout</a></li>
-									</ul>
-								</li>
-							@else
-								<li><a href="{{ config('anodyne.links.www') }}register">Register</a></li>
-								<li><a href="{{ route('login') }}">Log In</a></li>
-							@endif
-						</ul>
-
-						<ul>
-							<li><a href="{{ config('anodyne.links.www') }}">Anodyne<div class="arrow"></div></a></li>
-							<li><a href="{{ config('anodyne.links.nova') }}">Nova<div class="arrow"></div></a></li>
-							<li><a href="{{ route('home') }}" class="active">Xtras<div class="arrow"></div></a></li>
-							<li><a href="{{ config('anodyne.links.forums') }}">Forums<div class="arrow"></div></a></li>
-							<li><a href="{{ config('anodyne.links.help') }}">Help<div class="arrow"></div></a></li>
-						</ul>
+									@endif
+								</ul>
+							</nav>
+						</div>
 					</div>
-				</nav>
+				</div>
+			</header>
 
-				<header>
-					<div class="container">
-						<div class="row">
-							<div class="col-md-3">
-								<a href="{{ route('home') }}" class="brand">AnodyneXtras</a>
-							</div>
-
-							<div class="col-md-5">
-								<nav class="nav-sub">
-									<ul>
-										<li><a href="{{ route('skins') }}">Skins</a></li>
-										<li><a href="{{ route('mods') }}">MODs</a></li>
-										<li><a href="{{ route('ranks') }}">Ranks</a></li>
-
-										@if (Auth::check())
-											<li><a href="{{ route('account.xtras') }}">My Xtras</a></li>
-										@endif
-									</ul>
-								</nav>
-							</div>
-
-							<div class="col-md-4">
-								{{ Form::open(['route' => 'search.do', 'method' => 'GET']) }}
-									<div class="header-search">
-										<div class="input-group">
-											{{ Form::text('q', null, array('placeholder' => 'Search Xtras', 'class' => 'input-sm form-control search-field')) }}
-											<span class="input-group-btn">{{ Form::button('Search', array('class' => 'btn btn-default btn-sm', 'type' => 'submit')) }}</span>
-										</div>
-										<a href="{{ route('search.advanced') }}" class="search-advanced">Advanced Search</a>
-									</div>
-								{{ Form::close() }}
+			<div class="search-help">
+				<div class="container">
+					{{ Form::open(['route' => 'search.do', 'method' => 'get']) }}
+					<div class="row">
+						<div class="col-xs-12">
+							<div class="input-group">
+								<span class="input-group-addon">{{ $_icons['search-lg'] }}</span>
+								{{ Form::text('q', null, ['placeholder' => 'Search Xtras', 'class' => 'input-lg form-control search-field']) }}
 							</div>
 						</div>
 					</div>
-				</header>
-
-				@if ($_currentUser and $_currentUser->daysSinceRegistration() <= 7)
-					<div class="no-xtras">
-						<div class="container">
-							Welcome to AnodyneXtras! Be sure to check out <a href="{{ route('account.xtras') }}">My Xtras</a> to create and manage your Xtras.
-						</div>
-					</div>
-				@endif
-
-				<section>
-					<div class="container">
-						@if (Session::has('flash.message'))
-							@include('partials.flash')
-						@endif
-
-						@yield('content')
-					</div>
-				</section>
+					{{ Form::close() }}
+				</div>
 			</div>
+
+			@if ($_currentUser and $_currentUser->daysSinceRegistration() <= 7)
+				<div class="no-xtras">
+					<div class="container">
+						Welcome to AnodyneXtras! Be sure to check out <a href="{{ route('account.xtras') }}">My Xtras</a> to create and manage your Xtras.
+					</div>
+				</div>
+			@endif
+
+			<section>
+				<div class="container">
+					@if (Session::has('flash.message'))
+						{{ partial('flash') }}
+					@endif
+
+					@yield('content')
+				</div>
+			</section>
 
 			<div class="push"></div>
 		</div>

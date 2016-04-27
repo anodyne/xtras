@@ -6,7 +6,12 @@
 
 @section('content')
 	<div id="newest">
-		<a href="#" data-target="updated" class="btn btn-sm btn-primary-alt pull-right xtra-toggle">See Recently Updated Xtras</a>
+		<div class="visible-xs visible-sm">
+			<a href="#" data-target="updated" class="btn btn-lg btn-block btn-primary-alt xtra-toggle">See Recently Updated Xtras</a>
+		</div>
+		<div class="pull-right visible-md visible-lg">
+			<a href="#" data-target="updated" class="btn btn-sm btn-primary-alt xtra-toggle">See Recently Updated Xtras</a>
+		</div>
 
 		<h1>Newest Xtras</h1>
 
@@ -24,7 +29,12 @@
 	</div>
 		
 	<div id="updated" class="hide">
-		<a href="#" data-target="newest" class="btn btn-sm btn-primary-alt pull-right xtra-toggle">See Newest Xtras</a>
+		<div class="visible-xs visible-sm">
+			<a href="#" data-target="newest" class="btn btn-lg btn-block btn-primary-alt xtra-toggle">See Newest Xtras</a>
+		</div>
+		<div class="pull-right visible-md visible-lg">
+			<a href="#" data-target="newest" class="btn btn-sm btn-primary-alt xtra-toggle">See Newest Xtras</a>
+		</div>
 
 		<h1>Recently Updated Xtras</h1>
 

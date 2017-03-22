@@ -22,7 +22,7 @@
 			"publisher": {
 				"@type": "Organization",
 				"name": "AnodyneXtras",
-				"url": "http://xtras.anodyne-productions.com"
+				"url": "https://xtras.anodyne-productions.com"
 			}
 		}
 	</script>

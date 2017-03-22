@@ -3,9 +3,9 @@
 	<head>
 		<meta charset="utf-8">
 		<style>
-			@import(http://fonts.googleapis.com/css?family=Open+Sans:400,600);
-			@import(http://fonts.googleapis.com/css?family=Bitter:700);
-			@import(http://fonts.googleapis.com/css?family=Exo+2:500italic,600italic);
+			@import(https://fonts.googleapis.com/css?family=Open+Sans:400,600);
+			@import(https://fonts.googleapis.com/css?family=Bitter:700);
+			@import(https://fonts.googleapis.com/css?family=Exo+2:500italic,600italic);
 
 			body {
 				font-family: "Open Sans", helvetica, arial, sans-serif;

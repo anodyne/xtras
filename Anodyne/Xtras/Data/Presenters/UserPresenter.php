@@ -13,11 +13,19 @@ class UserPresenter extends Presenter {
 	{
 		// Figure out the default image
 		$defaultImage = (App::environment() != 'local') 
-			? urlencode(asset('images/avatars/no-avatar.jpg')) 
+			? asset('images/avatars/no-avatar.jpg') 
 			: 'retro' ;
 
 		// Build the URL for the avatar
-		$url = Gravatar::image($this->entity->email, 500)."&r=pg&d={$defaultImage}";
+		$url = Gravatar::image(
+			$this->entity->email,
+			500,
+			'retro',
+			'pg',
+			null,
+			true
+		);
+		//$url = Gravatar::image($this->entity->email, 500)."&r=pg&d={$defaultImage}";
 
 		// Merge all the options to pass them to the partial
 		$mergedOptions = $options + ['url' => $url];
@@ -119,7 +127,7 @@ class UserPresenter extends Presenter {
 	{
 		if ( ! empty($this->entity->twitter))
 		{
-			return HTML::link('http://twitter.com/'.str_replace('@', '', $this->entity->twitter), 'Twitter', ['class' => $classes, 'target' => '_blank']);
+			return HTML::link('https://twitter.com/'.str_replace('@', '', $this->entity->twitter), 'Twitter', ['class' => $classes, 'target' => '_blank']);
 		}
 
 		return false;

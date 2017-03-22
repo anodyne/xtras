@@ -50,12 +50,12 @@ __Bolded text__
 
 	<div class="row">
 		<div class="col-md-6">
-			<pre>[Google](http://google.com)
+			<pre>[Google](https://google.com)
 
 [Local link](skins)</pre>
 		</div>
 		<div class="col-md-6">
-			{{ Markdown::parse("[Google](http://google.com)") }}
+			{{ Markdown::parse("[Google](https://google.com)") }}
 
 			{{ Markdown::parse("[Local link](skins)") }}
 		</div>

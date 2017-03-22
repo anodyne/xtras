@@ -13,14 +13,14 @@ class UserPresenter extends Presenter {
 	{
 		// Figure out the default image
 		$defaultImage = (App::environment() != 'local') 
-			? urlencode(asset('images/avatars/no-avatar.jpg')) 
+			? asset('images/avatars/no-avatar.jpg') 
 			: 'retro' ;
 
 		// Build the URL for the avatar
 		$url = Gravatar::image(
 			$this->entity->email,
 			500,
-			$defaultImage,
+			'retro',
 			'pg',
 			null,
 			true
@@ -127,7 +127,7 @@ class UserPresenter extends Presenter {
 	{
 		if ( ! empty($this->entity->twitter))
 		{
-			return HTML::link('http://twitter.com/'.str_replace('@', '', $this->entity->twitter), 'Twitter', ['class' => $classes, 'target' => '_blank']);
+			return HTML::link('https://twitter.com/'.str_replace('@', '', $this->entity->twitter), 'Twitter', ['class' => $classes, 'target' => '_blank']);
 		}
 
 		return false;

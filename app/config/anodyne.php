@@ -16,7 +16,7 @@ return [
 		'www'		=> 'http://anodyne-productions.com/',
 		'nova'		=> 'http://anodyne-productions.com/nova/',
 		'forums'	=> 'https://forums.anodyne-productions.com/',
-		'help'		=> 'http://help.anodyne-productions.com/',
+		'help'		=> 'https://help.anodyne-productions.com/',
 
 	],
 

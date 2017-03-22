@@ -3,7 +3,7 @@
 use Redirect,
 	BaseController;
 
-class MainController extends BaseController {
+class RedirectController extends BaseController {
 
 	public function nova1()
 	{

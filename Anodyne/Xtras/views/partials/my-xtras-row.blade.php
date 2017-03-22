@@ -8,31 +8,62 @@
 			{{ $item->present()->adminDisabledLabel }}
 		</div>
 		<div class="col-md-4">
-			<div class="btn-toolbar pull-right">
-				<div class="btn-group">
-					<a href="{{ route('item.show', [$item->user->username, $item->slug]) }}" class="btn btn-default">View</a>
+			<div class="visible-xs visible-sm">
+				<div class="row">
+					<div class="col-xs-12">
+						<p><a href="{{ route('item.show', [$item->user->username, $item->slug]) }}" class="btn btn-default btn-lg btn-block">View</a></p>
+					</div>
+
+					@if ($_currentUser->can('xtras.item.edit') or $_currentUser->can('xtras.admin'))
+						<div class="col-xs-12">
+							<p><a href="#" data-toggle="dropdown" class="dropdown-toggle btn btn-lg btn-block btn-default">Edit <span class="caret"></span></a>
+							<ul class="dropdown-menu dropdown-menu-right">
+								<li><a href="{{ route('item.edit', [$item->user->username, $item->slug]) }}">Edit Xtra</a></li>
+								<li class="divider"></li>
+								<li><a href="{{ route('item.quick-update', [$item->user->username, $item->slug]) }}">Quick Update</a></li>
+								<li class="divider"></li>
+								<li><a href="{{ route('item.messages.index', [$item->user->username, $item->slug]) }}">Manage Messages</a></li>
+								<li><a href="{{ route('item.files.index', [$item->user->username, $item->slug]) }}">Manage Files</a></li>
+								<li><a href="{{ route('item.images.index', [$item->user->username, $item->slug]) }}">Manage Images</a></li>
+							</ul></p>
+						</div>
+					@endif
+
+					@if ($_currentUser->can('xtras.item.delete') or $_currentUser->can('xtras.admin'))
+						<div class="col-xs-12">
+							<p><a href="#" class="btn btn-lg btn-block btn-danger js-remove-item" data-id="{{ $item->id }}">Remove</a></p>
+						</div>
+					@endif
 				</div>
+			</div>
 
-				@if ($_currentUser->can('xtras.item.edit') or $_currentUser->can('xtras.admin'))
+			<div class="visible-md visible-lg">
+				<div class="btn-toolbar pull-right">
 					<div class="btn-group">
-						<a href="#" data-toggle="dropdown" class="dropdown-toggle btn btn-default">Edit <span class="caret"></span></a>
-						<ul class="dropdown-menu dropdown-menu-right">
-							<li><a href="{{ route('item.edit', [$item->user->username, $item->slug]) }}">Edit Xtra</a></li>
-							<li class="divider"></li>
-							<li><a href="{{ route('item.quick-update', [$item->user->username, $item->slug]) }}">Quick Update</a></li>
-							<li class="divider"></li>
-							<li><a href="{{ route('item.messages.index', [$item->user->username, $item->slug]) }}">Manage Messages</a></li>
-							<li><a href="{{ route('item.files.index', [$item->user->username, $item->slug]) }}">Manage Files</a></li>
-							<li><a href="{{ route('item.images.index', [$item->user->username, $item->slug]) }}">Manage Images</a></li>
-						</ul>
+						<a href="{{ route('item.show', [$item->user->username, $item->slug]) }}" class="btn btn-default">View</a>
 					</div>
-				@endif
 
-				@if ($_currentUser->can('xtras.item.delete') or $_currentUser->can('xtras.admin'))
-					<div class="btn-group">
-						<a href="#" class="btn btn-danger js-remove-item" data-id="{{ $item->id }}">Remove</a>
-					</div>
-				@endif
+					@if ($_currentUser->can('xtras.item.edit') or $_currentUser->can('xtras.admin'))
+						<div class="btn-group">
+							<a href="#" data-toggle="dropdown" class="dropdown-toggle btn btn-default">Edit <span class="caret"></span></a>
+							<ul class="dropdown-menu dropdown-menu-right">
+								<li><a href="{{ route('item.edit', [$item->user->username, $item->slug]) }}">Edit Xtra</a></li>
+								<li class="divider"></li>
+								<li><a href="{{ route('item.quick-update', [$item->user->username, $item->slug]) }}">Quick Update</a></li>
+								<li class="divider"></li>
+								<li><a href="{{ route('item.messages.index', [$item->user->username, $item->slug]) }}">Manage Messages</a></li>
+								<li><a href="{{ route('item.files.index', [$item->user->username, $item->slug]) }}">Manage Files</a></li>
+								<li><a href="{{ route('item.images.index', [$item->user->username, $item->slug]) }}">Manage Images</a></li>
+							</ul>
+						</div>
+					@endif
+
+					@if ($_currentUser->can('xtras.item.delete') or $_currentUser->can('xtras.admin'))
+						<div class="btn-group">
+							<a href="#" class="btn btn-danger js-remove-item" data-id="{{ $item->id }}">Remove</a>
+						</div>
+					@endif
+				</div>
 			</div>
 		</div>
 	</div>

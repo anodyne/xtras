@@ -10,7 +10,7 @@
 	@if (count($xtras) == 0)
 		@if ($_currentUser->can('xtras.item.create') or $_currentUser->can('xtras.admin'))
 			<div class="row">
-				<div class="col-md-4">
+				<div class="col-md-4 visible-md visible-lg">
 					<p><a href="{{ route('item.create') }}" class="btn btn-block btn-lg btn-primary">Create Your First Xtra</a></p>
 				</div>
 				<div class="col-md-4">
@@ -25,7 +25,7 @@
 		@endif
 	@else
 		@if ($_currentUser->can('xtras.item.create') or $_currentUser->can('xtras.admin'))
-			<div class="btn-toolbar">
+			<div class="btn-toolbar visible-md visible-lg">
 				<div class="btn-group">
 					<a href="{{ route('item.create') }}" class="btn btn-primary">Create New Xtra</a>
 				</div>

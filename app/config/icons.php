@@ -42,6 +42,7 @@ return [
 
 	'remove' => '<span class="icn" data-icon="-"></span>',
 
+	'search-lg' => '<span class="octicon octicon-search octicon-size-lg"></span>',
 	'star' => '<span class="octicon octicon-star"></span>',
 	'starFull' => '<span class="icn" data-icon="s"></span>',
 	//'starEmpty' => '<span class="icn" data-icon="r"></span>',

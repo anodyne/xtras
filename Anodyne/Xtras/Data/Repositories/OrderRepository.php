@@ -11,8 +11,9 @@ class OrderRepository implements OrderRepositoryInterface {
 	{
 		// Create a new order
 		$order = Order::create([
-			'item_id'	=> (int) $file->item->id,
-			'file_id'	=> (int) $file->id,
+			'item_id' => (int) $file->item->id,
+			'file_id' => (int) $file->id,
+			'user_id' => (int) $user->id,
 		]);
 
 		// Attach it to the user

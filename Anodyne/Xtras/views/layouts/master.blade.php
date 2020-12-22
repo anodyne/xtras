@@ -38,7 +38,7 @@
 									<a href="#" data-toggle="dropdown" class="dropdown-toggle"><span class="user-icon">{{ $_icons['user'] }}</span> {{ $_currentUser->present()->name }} <span class="caret"></span></a>
 									<ul class="dropdown-menu dropdown-menu-right dd">
 										<li><a href="{{ route('account.xtras') }}">My Xtras</a></li>
-										
+
 										@if ($_currentUser->can('xtras.item.create') or $_currentUser->can('xtras.admin'))
 											<li><a href="{{ route('item.create') }}">Create New Xtra</a></li>
 										@endif
@@ -75,6 +75,7 @@
 							<li><a href="{{ route('home') }}" class="active">Xtras<div class="arrow"></div></a></li>
 							<li><a href="{{ config('anodyne.links.forums') }}">Forums<div class="arrow"></div></a></li>
 							<li><a href="{{ config('anodyne.links.help') }}">Help<div class="arrow"></div></a></li>
+							<li><a href="https://discord.gg/7WmKUks" target="_blank">Discord<div class="arrow"></div></a></li>
 						</ul>
 					</div>
 				</nav>
